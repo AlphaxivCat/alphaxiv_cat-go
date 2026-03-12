@@ -6,7 +6,7 @@
 
 <!-- x-release-please-end -->
 
-The Alphaxiv Cat Go library provides convenient access to the Alphaxiv Cat REST API
+The Alphaxiv Cat Go library provides convenient access to the [Alphaxiv Cat REST API](https://api-dev.alphaxiv.org)
 from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
