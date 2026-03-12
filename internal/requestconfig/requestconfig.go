@@ -18,10 +18,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apierror"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apiform"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apiquery"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apierror"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apiform"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apiquery"
 )
 
 func getDefaultHeaders() map[string]string {

@@ -3,8 +3,8 @@
 package alphaxivcat
 
 import (
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apierror"
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/param"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apierror"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/param"
 )
 
 // aliased to make [param.APIUnion] private when embedding

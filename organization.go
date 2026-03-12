@@ -3,7 +3,7 @@
 package alphaxivcat
 
 import (
-	"github.com/stainless-sdks/alphaxiv_cat-go/option"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
 )
 
 // OrganizationService contains methods and other services that help with

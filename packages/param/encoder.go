@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	shimjson "github.com/stainless-sdks/alphaxiv_cat-go/internal/encoding/json"
+	shimjson "github.com/AlphaxivCat/alphaxiv_cat-go/internal/encoding/json"
 
 	"github.com/tidwall/sjson"
 )

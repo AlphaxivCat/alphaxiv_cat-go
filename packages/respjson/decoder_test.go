@@ -3,8 +3,8 @@ package respjson_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apijson"
-	rj "github.com/stainless-sdks/alphaxiv_cat-go/packages/respjson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
+	rj "github.com/AlphaxivCat/alphaxiv_cat-go/packages/respjson"
 	"reflect"
 	"testing"
 )
