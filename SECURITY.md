@@ -18,6 +18,10 @@ before making any information public.
 If you encounter security issues that are not directly related to SDKs but pertain to the services
 or products provided by Alphaxiv Cat, please follow the respective company's security reporting guidelines.
 
+### Alphaxiv Cat Terms and Policies
+
+Please contact ironjarvisbot@163.com for any questions or concerns regarding the security of our services.
+
 ---
 
 Thank you for helping us keep the SDKs and systems they interact with secure.
