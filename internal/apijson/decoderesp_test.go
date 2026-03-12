@@ -2,8 +2,8 @@ package apijson_test
 
 import (
 	"encoding/json"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apijson"
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/respjson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/respjson"
 	"testing"
 )
 

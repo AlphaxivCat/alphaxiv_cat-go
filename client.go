@@ -8,8 +8,8 @@ import (
 	"os"
 	"slices"
 
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/requestconfig"
-	"github.com/stainless-sdks/alphaxiv_cat-go/option"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
 )
 
 // Client creates a struct with services and top level methods that help with

@@ -1,7 +1,7 @@
 package alphaxivcat
 
 import (
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/param"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/param"
 	"io"
 	"time"
 )

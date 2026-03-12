@@ -3,7 +3,7 @@ package param
 import (
 	"encoding/json"
 	"fmt"
-	shimjson "github.com/stainless-sdks/alphaxiv_cat-go/internal/encoding/json"
+	shimjson "github.com/AlphaxivCat/alphaxiv_cat-go/internal/encoding/json"
 	"time"
 )
 

@@ -1,7 +1,7 @@
 package apijson
 
 import (
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/respjson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/respjson"
 	"reflect"
 )
 

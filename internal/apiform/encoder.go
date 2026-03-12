@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/param"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/param"
 )
 
 var encoders sync.Map // map[encoderEntry]encoderFunc

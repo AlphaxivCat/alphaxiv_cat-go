@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"slices"
 
-	shimjson "github.com/stainless-sdks/alphaxiv_cat-go/internal/encoding/json"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/requestconfig"
-	"github.com/stainless-sdks/alphaxiv_cat-go/option"
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/ssestream"
+	shimjson "github.com/AlphaxivCat/alphaxiv_cat-go/internal/encoding/json"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/ssestream"
 )
 
 // McpV1Service contains methods and other services that help with interacting with

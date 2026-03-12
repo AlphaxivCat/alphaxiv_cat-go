@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stainless-sdks/alphaxiv_cat-go"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/testutil"
-	"github.com/stainless-sdks/alphaxiv_cat-go/option"
+	"github.com/AlphaxivCat/alphaxiv_cat-go"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/testutil"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
 )
 
 func TestSearchV2PaperFastSearch(t *testing.T) {
