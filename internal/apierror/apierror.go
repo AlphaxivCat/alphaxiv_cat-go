@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apijson"
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/respjson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/respjson"
 )
 
 // Error represents an error that originates from the API, i.e. when a request is

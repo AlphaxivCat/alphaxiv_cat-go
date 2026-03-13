@@ -9,10 +9,10 @@ import (
 	"net/http"
 	"slices"
 
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apijson"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/requestconfig"
-	"github.com/stainless-sdks/alphaxiv_cat-go/option"
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/param"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/param"
 )
 
 // CommentV2Service contains methods and other services that help with interacting

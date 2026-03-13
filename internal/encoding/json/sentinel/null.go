@@ -1,7 +1,7 @@
 package sentinel
 
 import (
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/encoding/json/shims"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/encoding/json/shims"
 	"reflect"
 	"sync"
 )

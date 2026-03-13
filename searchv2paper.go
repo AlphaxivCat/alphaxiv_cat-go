@@ -8,11 +8,11 @@ import (
 	"net/url"
 	"slices"
 
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apijson"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/apiquery"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/requestconfig"
-	"github.com/stainless-sdks/alphaxiv_cat-go/option"
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/respjson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apiquery"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/respjson"
 )
 
 // SearchV2PaperService contains methods and other services that help with

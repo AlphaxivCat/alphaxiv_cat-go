@@ -1,8 +1,8 @@
 package sentinel_test
 
 import (
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/encoding/json/sentinel"
-	"github.com/stainless-sdks/alphaxiv_cat-go/packages/param"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/encoding/json/sentinel"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/param"
 	"reflect"
 	"slices"
 	"testing"

@@ -2,7 +2,7 @@ package param
 
 import (
 	"encoding/json"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal/encoding/json/sentinel"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/encoding/json/sentinel"
 	"reflect"
 )
 

@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/alphaxiv_cat-go"
-	"github.com/stainless-sdks/alphaxiv_cat-go/internal"
-	"github.com/stainless-sdks/alphaxiv_cat-go/option"
+	"github.com/AlphaxivCat/alphaxiv_cat-go"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
 )
 
 type closureTransport struct {
