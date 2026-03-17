@@ -50,6 +50,8 @@ func NewUserV3Service(opts ...option.RequestOption) (r UserV3Service) {
 //
 // Source file:
 // `api-server/src/controllers/users/v3/autocomplete-profile.controller.ts`
+//
+// Deprecated: deprecated
 func (r *UserV3Service) AutocompleteProfile(ctx context.Context, body UserV3AutocompleteProfileParams, opts ...option.RequestOption) (res *UserV3AutocompleteProfileResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/autocomplete-profile"
