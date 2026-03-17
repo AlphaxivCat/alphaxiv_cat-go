@@ -100,7 +100,8 @@ type AssistantV2MessageListResponse struct {
 	ToolUseID       string                                     `json:"toolUseId" api:"required"`
 	// Any of "tool_use", "tool_result_text", "tool_result_file", "input_file",
 	// "input_text", "output_reasoning", "output_text".
-	Type AssistantV2MessageListResponseType `json:"type" api:"required"`
+	Type  AssistantV2MessageListResponseType `json:"type" api:"required"`
+	Trace string                             `json:"trace" api:"nullable" format:"uuid"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID               respjson.Field
@@ -114,6 +115,7 @@ type AssistantV2MessageListResponse struct {
 		SelectedAt       respjson.Field
 		ToolUseID        respjson.Field
 		Type             respjson.Field
+		Trace            respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`

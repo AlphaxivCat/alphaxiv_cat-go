@@ -109,6 +109,8 @@ func (r *EmailService) ProcessBouncedEmail(ctx context.Context, body EmailProces
 //
 // Source file:
 // `api-server/src/controllers/v1/emails/process-user-comment-update.controller.ts`
+//
+// Deprecated: deprecated
 func (r *EmailService) ProcessCommentUpdate(ctx context.Context, body EmailProcessCommentUpdateParams, opts ...option.RequestOption) (res *EmailProcessCommentUpdateResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/emails/process-comment-update"
@@ -120,6 +122,8 @@ func (r *EmailService) ProcessCommentUpdate(ctx context.Context, body EmailProce
 //
 // Source file:
 // `api-server/src/controllers/v1/emails/process-user-general-update.controller.ts`
+//
+// Deprecated: deprecated
 func (r *EmailService) ProcessGeneralUpdate(ctx context.Context, body EmailProcessGeneralUpdateParams, opts ...option.RequestOption) (res *EmailProcessGeneralUpdateResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/emails/process-general-update"

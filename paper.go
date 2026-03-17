@@ -290,6 +290,8 @@ func (r *PaperService) ProcessAbstractEmbed(ctx context.Context, body PaperProce
 //
 // Source file:
 // `api-server/src/controllers/v2/papers/process-metadata.controller.ts`
+//
+// Deprecated: deprecated
 func (r *PaperService) ProcessMetadata(ctx context.Context, body PaperProcessMetadataParams, opts ...option.RequestOption) (res *PaperProcessMetadataResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/papers/process-metadata"

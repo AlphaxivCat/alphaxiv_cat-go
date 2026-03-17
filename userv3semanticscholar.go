@@ -38,6 +38,8 @@ func NewUserV3SemanticScholarService(opts ...option.RequestOption) (r UserV3Sema
 //
 // Source file:
 // `api-server/src/controllers/users/v3/link-semantic-scholar.controller.ts`
+//
+// Deprecated: deprecated
 func (r *UserV3SemanticScholarService) Link(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3SemanticScholarLinkResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -53,6 +55,8 @@ func (r *UserV3SemanticScholarService) Link(ctx context.Context, id string, opts
 //
 // Source file:
 // `api-server/src/controllers/users/v3/scrape-semantic-scholar.controller.ts`
+//
+// Deprecated: deprecated
 func (r *UserV3SemanticScholarService) Scrape(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3SemanticScholarScrapeResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
