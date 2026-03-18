@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.0 (2026-03-18)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** api update ([8e744ea](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/8e744ea222886cc7443a8ac49f898c82b09d7e61))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([0c10ef3](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/0c10ef37e94bf3a5e1ffb40e68ba23ce2b12d62f))
+
 ## 0.1.0 (2026-03-12)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.0.1...v0.1.0)
