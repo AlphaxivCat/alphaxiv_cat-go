@@ -180,6 +180,8 @@ func (r *PaperV3Service) Like(ctx context.Context, group string, opts ...option.
 //
 // Source file:
 // `api-server/src/controllers/papers/v3/generate-paper-podcast.controller.ts`
+//
+// Deprecated: deprecated
 func (r *PaperV3Service) Podcast(ctx context.Context, paperGroupID string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -195,6 +197,8 @@ func (r *PaperV3Service) Podcast(ctx context.Context, paperGroupID string, opts 
 // Generates AI overviews for a paper version
 //
 // Source file: `api-server/src/controllers/papers/v3/process-ai.controller.ts`
+//
+// Deprecated: deprecated
 func (r *PaperV3Service) ProcessAI(ctx context.Context, paperVersionID string, body PaperV3ProcessAIParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -212,6 +216,8 @@ func (r *PaperV3Service) ProcessAI(ctx context.Context, paperVersionID string, b
 //
 // Source file:
 // `api-server/src/controllers/papers/v3/process-countries.controller.ts`
+//
+// Deprecated: deprecated
 func (r *PaperV3Service) ProcessCountries(ctx context.Context, body PaperV3ProcessCountriesParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -224,6 +230,8 @@ func (r *PaperV3Service) ProcessCountries(ctx context.Context, body PaperV3Proce
 //
 // Source file:
 // `api-server/src/controllers/papers/v3/process-full-text.controller.ts`
+//
+// Deprecated: deprecated
 func (r *PaperV3Service) ProcessFullText(ctx context.Context, body PaperV3ProcessFullTextParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

@@ -61,6 +61,8 @@ func (r *AnalyticsPaperViewCountService) KickoffJob(ctx context.Context, body An
 //
 // Source file:
 // `api-server/src/controllers/v1/analytics/process-paper-view-count-aggregation-job.controller.ts`
+//
+// Deprecated: deprecated
 func (r *AnalyticsPaperViewCountService) ProcessJob(ctx context.Context, body AnalyticsPaperViewCountProcessJobParams, opts ...option.RequestOption) (res *AnalyticsPaperViewCountProcessJobResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/analytics/paper-view-count/process-job"
