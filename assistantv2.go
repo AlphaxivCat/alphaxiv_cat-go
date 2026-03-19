@@ -165,8 +165,8 @@ type AssistantV2ChatParams struct {
 	// Any of "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-flash", "gemini-3-pro",
 	// "gemini-3.1-pro", "claude-4.5-sonnet", "claude-4.6-sonnet", "grok-4", "qwen-3",
 	// "qwen-3-next", "qwen-3.5", "gpt-5", "gpt-5.2", "gpt-5.4", "gpt-oss-120b",
-	// "llama-4-maverick", "kimi-k2", "kimi-k2.5", "glm-5", "minimax-m2.5",
-	// "aurelle-1".
+	// "llama-4-maverick", "kimi-k2", "kimi-k2.5", "glm-5", "glm-5-turbo",
+	// "minimax-m2.5", "minimax-m2.7", "aurelle-1".
 	Model AssistantV2ChatParamsModel `json:"model,omitzero"`
 	paramObj
 }
@@ -233,7 +233,9 @@ const (
 	AssistantV2ChatParamsModelKimiK2          AssistantV2ChatParamsModel = "kimi-k2"
 	AssistantV2ChatParamsModelKimiK2_5        AssistantV2ChatParamsModel = "kimi-k2.5"
 	AssistantV2ChatParamsModelGlm5            AssistantV2ChatParamsModel = "glm-5"
+	AssistantV2ChatParamsModelGlm5Turbo       AssistantV2ChatParamsModel = "glm-5-turbo"
 	AssistantV2ChatParamsModelMinimaxM2_5     AssistantV2ChatParamsModel = "minimax-m2.5"
+	AssistantV2ChatParamsModelMinimaxM2_7     AssistantV2ChatParamsModel = "minimax-m2.7"
 	AssistantV2ChatParamsModelAurelle1        AssistantV2ChatParamsModel = "aurelle-1"
 )
 
