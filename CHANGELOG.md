@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2026-03-19)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([75ce56f](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/75ce56fa3a039985cc1516dd65ba54be2406a105))
+
 ## 0.2.0 (2026-03-18)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.1.0...v0.2.0)
