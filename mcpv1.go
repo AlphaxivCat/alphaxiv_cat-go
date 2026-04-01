@@ -4,10 +4,10 @@ package alphaxivcat
 
 import (
 	"context"
-	"encoding/json"
 	"net/http"
 	"slices"
 
+	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
 	shimjson "github.com/AlphaxivCat/alphaxiv_cat-go/internal/encoding/json"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
@@ -82,5 +82,5 @@ func (r McpV1SendMessageParams) MarshalJSON() (data []byte, err error) {
 	return shimjson.Marshal(r.Body)
 }
 func (r *McpV1SendMessageParams) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, &r.Body)
+	return apijson.UnmarshalRoot(data, r)
 }
