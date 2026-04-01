@@ -4,7 +4,6 @@ package alphaxivcat
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
@@ -2121,7 +2120,7 @@ func (r PaperV3DeleteVotesParams) MarshalJSON() (data []byte, err error) {
 	return shimjson.Marshal(r.Body)
 }
 func (r *PaperV3DeleteVotesParams) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, &r.Body)
+	return apijson.UnmarshalRoot(data, r)
 }
 
 type PaperV3ImplementationParams struct {
