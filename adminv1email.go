@@ -32,7 +32,7 @@ func NewAdminV1EmailService(opts ...option.RequestOption) (r AdminV1EmailService
 	return
 }
 
-// Queue monthly digest emails to users via Upstash
+// Queue monthly digest emails to users
 //
 // Source file:
 // `api-server/src/controllers/admin/v1/emails/send-monthly-digest.controller.ts`
@@ -44,7 +44,7 @@ func (r *AdminV1EmailService) SendMonthlyDigest(ctx context.Context, body AdminV
 	return err
 }
 
-// Queue weekly digest emails to users via Upstash
+// Queue weekly digest emails to users
 //
 // Source file:
 // `api-server/src/controllers/admin/v1/emails/send-weekly-digest.controller.ts`

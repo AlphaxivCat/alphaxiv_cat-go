@@ -101,7 +101,7 @@ func (r *PaperV3Service) Implementation(ctx context.Context, paperGroupID string
 	return res, err
 }
 
-// Kickoff paper countries processing on Upstash for hot papers
+// Kickoff paper countries processing for hot papers
 //
 // Source file:
 // `api-server/src/controllers/papers/v3/kickoff-paper-countries.controller.ts`
@@ -113,7 +113,7 @@ func (r *PaperV3Service) KickoffPaperCountries(ctx context.Context, body PaperV3
 	return err
 }
 
-// Kickoff paper full text processing on Upstash for recent papers
+// Kickoff paper full text processing for recent papers
 //
 // Source file:
 // `api-server/src/controllers/papers/v3/kickoff-paper-full-text.controller.ts`

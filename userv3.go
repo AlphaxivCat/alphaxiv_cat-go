@@ -695,31 +695,35 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
 	// "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th",
 	// "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh".
-	PreferredLanguage  string  `json:"preferredLanguage" api:"required"`
-	PreferredLlmModel  string  `json:"preferredLlmModel" api:"required"`
-	ReadingModeEnabled bool    `json:"readingModeEnabled" api:"required"`
-	ShowModelThinking  bool    `json:"showModelThinking" api:"required"`
-	ToolingPaneWidth   float64 `json:"toolingPaneWidth" api:"required"`
+	PreferredLanguage                string  `json:"preferredLanguage" api:"required"`
+	PreferredLlmFollowLatestCategory string  `json:"preferredLlmFollowLatestCategory" api:"required"`
+	PreferredLlmModel                string  `json:"preferredLlmModel" api:"required"`
+	PreferredLlmThinking             string  `json:"preferredLlmThinking" api:"required"`
+	ReadingModeEnabled               bool    `json:"readingModeEnabled" api:"required"`
+	ShowModelThinking                bool    `json:"showModelThinking" api:"required"`
+	ToolingPaneWidth                 float64 `json:"toolingPaneWidth" api:"required"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		AssistantCustomStyles         respjson.Field
-		AssistantStyleSelection       respjson.Field
-		DefaultPrivatePaperSidebarTab respjson.Field
-		DefaultPublicPaperSidebarTab  respjson.Field
-		FeedSort                      respjson.Field
-		IsDarkModeEnabled             respjson.Field
-		IsDebugModeEnabled            respjson.Field
-		IsMembersSidebarVisible       respjson.Field
-		PreferredLanguage             respjson.Field
-		PreferredLlmModel             respjson.Field
-		ReadingModeEnabled            respjson.Field
-		ShowModelThinking             respjson.Field
-		ToolingPaneWidth              respjson.Field
-		WebSearch                     respjson.Field
-		ExtraFields                   map[string]respjson.Field
-		raw                           string
+		AssistantCustomStyles            respjson.Field
+		AssistantStyleSelection          respjson.Field
+		DefaultPrivatePaperSidebarTab    respjson.Field
+		DefaultPublicPaperSidebarTab     respjson.Field
+		FeedSort                         respjson.Field
+		IsDarkModeEnabled                respjson.Field
+		IsDebugModeEnabled               respjson.Field
+		IsMembersSidebarVisible          respjson.Field
+		PreferredLanguage                respjson.Field
+		PreferredLlmFollowLatestCategory respjson.Field
+		PreferredLlmModel                respjson.Field
+		PreferredLlmThinking             respjson.Field
+		ReadingModeEnabled               respjson.Field
+		ShowModelThinking                respjson.Field
+		ToolingPaneWidth                 respjson.Field
+		WebSearch                        respjson.Field
+		ExtraFields                      map[string]respjson.Field
+		raw                              string
 	} `json:"-"`
 }
 
@@ -948,31 +952,35 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
 	// "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th",
 	// "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh".
-	PreferredLanguage  string  `json:"preferredLanguage" api:"required"`
-	PreferredLlmModel  string  `json:"preferredLlmModel" api:"required"`
-	ReadingModeEnabled bool    `json:"readingModeEnabled" api:"required"`
-	ShowModelThinking  bool    `json:"showModelThinking" api:"required"`
-	ToolingPaneWidth   float64 `json:"toolingPaneWidth" api:"required"`
+	PreferredLanguage                string  `json:"preferredLanguage" api:"required"`
+	PreferredLlmFollowLatestCategory string  `json:"preferredLlmFollowLatestCategory" api:"required"`
+	PreferredLlmModel                string  `json:"preferredLlmModel" api:"required"`
+	PreferredLlmThinking             string  `json:"preferredLlmThinking" api:"required"`
+	ReadingModeEnabled               bool    `json:"readingModeEnabled" api:"required"`
+	ShowModelThinking                bool    `json:"showModelThinking" api:"required"`
+	ToolingPaneWidth                 float64 `json:"toolingPaneWidth" api:"required"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		AssistantCustomStyles         respjson.Field
-		AssistantStyleSelection       respjson.Field
-		DefaultPrivatePaperSidebarTab respjson.Field
-		DefaultPublicPaperSidebarTab  respjson.Field
-		FeedSort                      respjson.Field
-		IsDarkModeEnabled             respjson.Field
-		IsDebugModeEnabled            respjson.Field
-		IsMembersSidebarVisible       respjson.Field
-		PreferredLanguage             respjson.Field
-		PreferredLlmModel             respjson.Field
-		ReadingModeEnabled            respjson.Field
-		ShowModelThinking             respjson.Field
-		ToolingPaneWidth              respjson.Field
-		WebSearch                     respjson.Field
-		ExtraFields                   map[string]respjson.Field
-		raw                           string
+		AssistantCustomStyles            respjson.Field
+		AssistantStyleSelection          respjson.Field
+		DefaultPrivatePaperSidebarTab    respjson.Field
+		DefaultPublicPaperSidebarTab     respjson.Field
+		FeedSort                         respjson.Field
+		IsDarkModeEnabled                respjson.Field
+		IsDebugModeEnabled               respjson.Field
+		IsMembersSidebarVisible          respjson.Field
+		PreferredLanguage                respjson.Field
+		PreferredLlmFollowLatestCategory respjson.Field
+		PreferredLlmModel                respjson.Field
+		PreferredLlmThinking             respjson.Field
+		ReadingModeEnabled               respjson.Field
+		ShowModelThinking                respjson.Field
+		ToolingPaneWidth                 respjson.Field
+		WebSearch                        respjson.Field
+		ExtraFields                      map[string]respjson.Field
+		raw                              string
 	} `json:"-"`
 }
 
@@ -1708,31 +1716,35 @@ type UserV3UpdatePreferencesResponseBase struct {
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
 	// "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th",
 	// "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh".
-	PreferredLanguage  string  `json:"preferredLanguage" api:"required"`
-	PreferredLlmModel  string  `json:"preferredLlmModel" api:"required"`
-	ReadingModeEnabled bool    `json:"readingModeEnabled" api:"required"`
-	ShowModelThinking  bool    `json:"showModelThinking" api:"required"`
-	ToolingPaneWidth   float64 `json:"toolingPaneWidth" api:"required"`
+	PreferredLanguage                string  `json:"preferredLanguage" api:"required"`
+	PreferredLlmFollowLatestCategory string  `json:"preferredLlmFollowLatestCategory" api:"required"`
+	PreferredLlmModel                string  `json:"preferredLlmModel" api:"required"`
+	PreferredLlmThinking             string  `json:"preferredLlmThinking" api:"required"`
+	ReadingModeEnabled               bool    `json:"readingModeEnabled" api:"required"`
+	ShowModelThinking                bool    `json:"showModelThinking" api:"required"`
+	ToolingPaneWidth                 float64 `json:"toolingPaneWidth" api:"required"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		AssistantCustomStyles         respjson.Field
-		AssistantStyleSelection       respjson.Field
-		DefaultPrivatePaperSidebarTab respjson.Field
-		DefaultPublicPaperSidebarTab  respjson.Field
-		FeedSort                      respjson.Field
-		IsDarkModeEnabled             respjson.Field
-		IsDebugModeEnabled            respjson.Field
-		IsMembersSidebarVisible       respjson.Field
-		PreferredLanguage             respjson.Field
-		PreferredLlmModel             respjson.Field
-		ReadingModeEnabled            respjson.Field
-		ShowModelThinking             respjson.Field
-		ToolingPaneWidth              respjson.Field
-		WebSearch                     respjson.Field
-		ExtraFields                   map[string]respjson.Field
-		raw                           string
+		AssistantCustomStyles            respjson.Field
+		AssistantStyleSelection          respjson.Field
+		DefaultPrivatePaperSidebarTab    respjson.Field
+		DefaultPublicPaperSidebarTab     respjson.Field
+		FeedSort                         respjson.Field
+		IsDarkModeEnabled                respjson.Field
+		IsDebugModeEnabled               respjson.Field
+		IsMembersSidebarVisible          respjson.Field
+		PreferredLanguage                respjson.Field
+		PreferredLlmFollowLatestCategory respjson.Field
+		PreferredLlmModel                respjson.Field
+		PreferredLlmThinking             respjson.Field
+		ReadingModeEnabled               respjson.Field
+		ShowModelThinking                respjson.Field
+		ToolingPaneWidth                 respjson.Field
+		WebSearch                        respjson.Field
+		ExtraFields                      map[string]respjson.Field
+		raw                              string
 	} `json:"-"`
 }
 
@@ -2102,13 +2114,15 @@ func init() {
 }
 
 type UserV3UpdatePreferencesParamsBase struct {
-	PreferredLlmModel       param.Opt[string]  `json:"preferredLlmModel,omitzero"`
-	ToolingPaneWidth        param.Opt[float64] `json:"toolingPaneWidth,omitzero"`
-	IsDarkModeEnabled       param.Opt[bool]    `json:"isDarkModeEnabled,omitzero"`
-	IsDebugModeEnabled      param.Opt[bool]    `json:"isDebugModeEnabled,omitzero"`
-	IsMembersSidebarVisible param.Opt[bool]    `json:"isMembersSidebarVisible,omitzero"`
-	ReadingModeEnabled      param.Opt[bool]    `json:"readingModeEnabled,omitzero"`
-	ShowModelThinking       param.Opt[bool]    `json:"showModelThinking,omitzero"`
+	PreferredLlmFollowLatestCategory param.Opt[string]  `json:"preferredLlmFollowLatestCategory,omitzero"`
+	PreferredLlmModel                param.Opt[string]  `json:"preferredLlmModel,omitzero"`
+	PreferredLlmThinking             param.Opt[string]  `json:"preferredLlmThinking,omitzero"`
+	ToolingPaneWidth                 param.Opt[float64] `json:"toolingPaneWidth,omitzero"`
+	IsDarkModeEnabled                param.Opt[bool]    `json:"isDarkModeEnabled,omitzero"`
+	IsDebugModeEnabled               param.Opt[bool]    `json:"isDebugModeEnabled,omitzero"`
+	IsMembersSidebarVisible          param.Opt[bool]    `json:"isMembersSidebarVisible,omitzero"`
+	ReadingModeEnabled               param.Opt[bool]    `json:"readingModeEnabled,omitzero"`
+	ShowModelThinking                param.Opt[bool]    `json:"showModelThinking,omitzero"`
 	// Any of "assistant", "notes", "similar".
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab,omitzero"`
 	// Any of "comments", "assistant", "similar", "notes", "social".
