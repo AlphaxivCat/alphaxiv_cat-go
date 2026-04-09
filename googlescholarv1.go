@@ -162,17 +162,15 @@ func (r *GoogleScholarV1ConnectResponse) UnmarshalJSON(data []byte) error {
 
 // GoogleScholarV1GetReportResponseUnion contains all possible properties and
 // values from [GoogleScholarV1GetReportResponseObject],
-// [GoogleScholarV1GetReportResponseObject].
+// [GoogleScholarV1GetReportResponseObject2].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type GoogleScholarV1GetReportResponseUnion struct {
-	// This field is from variant [GoogleScholarV1GetReportResponseObject].
 	Status string `json:"status"`
-	// This field is from variant [GoogleScholarV1GetReportResponseObject].
-	Title string `json:"title"`
+	Title  string `json:"title"`
 	// This field is from variant [GoogleScholarV1GetReportResponseObject].
 	UniversalID string `json:"universalId"`
-	// This field is from variant [GoogleScholarV1GetReportResponseObject].
+	// This field is from variant [GoogleScholarV1GetReportResponseObject2].
 	GoogleCitationID string `json:"googleCitationId"`
 	JSON             struct {
 		Status           respjson.Field
@@ -188,7 +186,7 @@ func (u GoogleScholarV1GetReportResponseUnion) AsGoogleScholarV1GetReportRespons
 	return
 }
 
-func (u GoogleScholarV1GetReportResponseUnion) AsVariant2() (v GoogleScholarV1GetReportResponseObject) {
+func (u GoogleScholarV1GetReportResponseUnion) AsGoogleScholarV1GetReportResponseObject2() (v GoogleScholarV1GetReportResponseObject2) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -219,6 +217,27 @@ type GoogleScholarV1GetReportResponseObject struct {
 // Returns the unmodified JSON received from the API
 func (r GoogleScholarV1GetReportResponseObject) RawJSON() string { return r.JSON.raw }
 func (r *GoogleScholarV1GetReportResponseObject) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type GoogleScholarV1GetReportResponseObject2 struct {
+	GoogleCitationID string `json:"googleCitationId" api:"required"`
+	// Any of "error", "not-found".
+	Status string `json:"status" api:"required"`
+	Title  string `json:"title" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		GoogleCitationID respjson.Field
+		Status           respjson.Field
+		Title            respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r GoogleScholarV1GetReportResponseObject2) RawJSON() string { return r.JSON.raw }
+func (r *GoogleScholarV1GetReportResponseObject2) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -343,17 +362,15 @@ func (r *GoogleScholarV1SyncResponse) UnmarshalJSON(data []byte) error {
 
 // GoogleScholarV1SyncResponseNewPaperUnion contains all possible properties and
 // values from [GoogleScholarV1SyncResponseNewPaperObject],
-// [GoogleScholarV1SyncResponseNewPaperObject].
+// [GoogleScholarV1SyncResponseNewPaperObject2].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type GoogleScholarV1SyncResponseNewPaperUnion struct {
-	// This field is from variant [GoogleScholarV1SyncResponseNewPaperObject].
 	Status string `json:"status"`
-	// This field is from variant [GoogleScholarV1SyncResponseNewPaperObject].
-	Title string `json:"title"`
+	Title  string `json:"title"`
 	// This field is from variant [GoogleScholarV1SyncResponseNewPaperObject].
 	UniversalID string `json:"universalId"`
-	// This field is from variant [GoogleScholarV1SyncResponseNewPaperObject].
+	// This field is from variant [GoogleScholarV1SyncResponseNewPaperObject2].
 	GoogleCitationID string `json:"googleCitationId"`
 	JSON             struct {
 		Status           respjson.Field
@@ -369,7 +386,7 @@ func (u GoogleScholarV1SyncResponseNewPaperUnion) AsGoogleScholarV1SyncResponseN
 	return
 }
 
-func (u GoogleScholarV1SyncResponseNewPaperUnion) AsVariant2() (v GoogleScholarV1SyncResponseNewPaperObject) {
+func (u GoogleScholarV1SyncResponseNewPaperUnion) AsGoogleScholarV1SyncResponseNewPaperObject2() (v GoogleScholarV1SyncResponseNewPaperObject2) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -400,6 +417,27 @@ type GoogleScholarV1SyncResponseNewPaperObject struct {
 // Returns the unmodified JSON received from the API
 func (r GoogleScholarV1SyncResponseNewPaperObject) RawJSON() string { return r.JSON.raw }
 func (r *GoogleScholarV1SyncResponseNewPaperObject) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type GoogleScholarV1SyncResponseNewPaperObject2 struct {
+	GoogleCitationID string `json:"googleCitationId" api:"required"`
+	// Any of "error", "not-found".
+	Status string `json:"status" api:"required"`
+	Title  string `json:"title" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		GoogleCitationID respjson.Field
+		Status           respjson.Field
+		Title            respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r GoogleScholarV1SyncResponseNewPaperObject2) RawJSON() string { return r.JSON.raw }
+func (r *GoogleScholarV1SyncResponseNewPaperObject2) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
