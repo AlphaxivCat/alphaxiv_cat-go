@@ -149,25 +149,29 @@ func (r *AssistantV2GetURLMetadataResponse) UnmarshalJSON(data []byte) error {
 }
 
 type AssistantV2ChatParams struct {
-	LlmChatID          param.Opt[string]           `json:"llmChatId,omitzero" api:"required" format:"uuid"`
-	PaperVersionID     param.Opt[string]           `json:"paperVersionId,omitzero" api:"required" format:"uuid"`
-	ParentMessageID    param.Opt[string]           `json:"parentMessageId,omitzero" api:"required" format:"uuid"`
-	SelectionPageRange []int64                     `json:"selectionPageRange,omitzero" api:"required"`
-	Files              []AssistantV2ChatParamsFile `json:"files,omitzero" api:"required"`
-	Message            string                      `json:"message" api:"required"`
-	Thinking           bool                        `json:"thinking" api:"required"`
+	LlmChatID          param.Opt[string]                  `json:"llmChatId,omitzero" api:"required" format:"uuid"`
+	PaperVersionID     param.Opt[string]                  `json:"paperVersionId,omitzero" api:"required" format:"uuid"`
+	ParentMessageID    param.Opt[string]                  `json:"parentMessageId,omitzero" api:"required" format:"uuid"`
+	SelectionPageRange []int64                            `json:"selectionPageRange,omitzero" api:"required"`
+	Thinking           AssistantV2ChatParamsThinkingUnion `json:"thinking,omitzero" api:"required"`
+	Files              []AssistantV2ChatParamsFile        `json:"files,omitzero" api:"required"`
+	Message            string                             `json:"message" api:"required"`
 	// Any of "off", "full".
 	WebSearch       AssistantV2ChatParamsWebSearch `json:"webSearch,omitzero" api:"required"`
 	FolderAddPapers param.Opt[bool]                `json:"folderAddPapers,omitzero"`
 	FolderID        param.Opt[string]              `json:"folderId,omitzero" format:"uuid"`
+	Signature       param.Opt[string]              `json:"signature,omitzero"`
 	// Any of "homepage", "paper", "folder", "landing", "folder-add-papers".
 	AssistantVariant AssistantV2ChatParamsAssistantVariant `json:"assistantVariant,omitzero"`
-	// Any of "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-flash", "gemini-3-pro",
-	// "gemini-3.1-pro", "claude-4.5-sonnet", "claude-4.6-sonnet", "grok-4", "qwen-3",
-	// "qwen-3-next", "qwen-3.5", "gpt-5", "gpt-5.2", "gpt-5.4", "gpt-oss-120b",
-	// "llama-4-maverick", "kimi-k2", "kimi-k2.5", "glm-5", "glm-5-turbo",
-	// "minimax-m2.5", "minimax-m2.7", "aurelle-1".
+	// Any of "claude-opus-4.5", "claude-opus-4.6", "claude-sonnet-4.5",
+	// "claude-sonnet-4.6", "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-flash",
+	// "gemini-3-pro", "gemini-3.1-pro", "glm-5-turbo", "glm-5.1", "gpt-5", "gpt-5.1",
+	// "gpt-5.2", "gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "kimi-k2.5", "mercury-2",
+	// "minimax-m2.5", "minimax-m2.7", "qwen-3.5", "aurelle-1", "fast", "smart", "pro",
+	// "claude-4.5-sonnet", "claude-4.6-sonnet".
 	Model AssistantV2ChatParamsModel `json:"model,omitzero"`
+	// Any of "free", "pro".
+	Plan AssistantV2ChatParamsPlan `json:"plan,omitzero"`
 	paramObj
 }
 
@@ -194,6 +198,22 @@ func (r *AssistantV2ChatParamsFile) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Only one field can be non-zero.
+//
+// Use [param.IsOmitted] to confirm if a field is set.
+type AssistantV2ChatParamsThinkingUnion struct {
+	OfBool   param.Opt[bool]   `json:",omitzero,inline"`
+	OfString param.Opt[string] `json:",omitzero,inline"`
+	paramUnion
+}
+
+func (u AssistantV2ChatParamsThinkingUnion) MarshalJSON() ([]byte, error) {
+	return param.MarshalUnion(u, u.OfBool, u.OfString)
+}
+func (u *AssistantV2ChatParamsThinkingUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, u)
+}
+
 type AssistantV2ChatParamsWebSearch string
 
 const (
@@ -214,29 +234,41 @@ const (
 type AssistantV2ChatParamsModel string
 
 const (
+	AssistantV2ChatParamsModelClaudeOpus4_5   AssistantV2ChatParamsModel = "claude-opus-4.5"
+	AssistantV2ChatParamsModelClaudeOpus4_6   AssistantV2ChatParamsModel = "claude-opus-4.6"
+	AssistantV2ChatParamsModelClaudeSonnet4_5 AssistantV2ChatParamsModel = "claude-sonnet-4.5"
+	AssistantV2ChatParamsModelClaudeSonnet4_6 AssistantV2ChatParamsModel = "claude-sonnet-4.6"
 	AssistantV2ChatParamsModelGemini2_5Flash  AssistantV2ChatParamsModel = "gemini-2.5-flash"
 	AssistantV2ChatParamsModelGemini2_5Pro    AssistantV2ChatParamsModel = "gemini-2.5-pro"
 	AssistantV2ChatParamsModelGemini3Flash    AssistantV2ChatParamsModel = "gemini-3-flash"
 	AssistantV2ChatParamsModelGemini3Pro      AssistantV2ChatParamsModel = "gemini-3-pro"
 	AssistantV2ChatParamsModelGemini3_1Pro    AssistantV2ChatParamsModel = "gemini-3.1-pro"
-	AssistantV2ChatParamsModelClaude4_5Sonnet AssistantV2ChatParamsModel = "claude-4.5-sonnet"
-	AssistantV2ChatParamsModelClaude4_6Sonnet AssistantV2ChatParamsModel = "claude-4.6-sonnet"
-	AssistantV2ChatParamsModelGrok4           AssistantV2ChatParamsModel = "grok-4"
-	AssistantV2ChatParamsModelQwen3           AssistantV2ChatParamsModel = "qwen-3"
-	AssistantV2ChatParamsModelQwen3Next       AssistantV2ChatParamsModel = "qwen-3-next"
-	AssistantV2ChatParamsModelQwen3_5         AssistantV2ChatParamsModel = "qwen-3.5"
+	AssistantV2ChatParamsModelGlm5Turbo       AssistantV2ChatParamsModel = "glm-5-turbo"
+	AssistantV2ChatParamsModelGlm5_1          AssistantV2ChatParamsModel = "glm-5.1"
 	AssistantV2ChatParamsModelGpt5            AssistantV2ChatParamsModel = "gpt-5"
+	AssistantV2ChatParamsModelGpt5_1          AssistantV2ChatParamsModel = "gpt-5.1"
 	AssistantV2ChatParamsModelGpt5_2          AssistantV2ChatParamsModel = "gpt-5.2"
 	AssistantV2ChatParamsModelGpt5_4          AssistantV2ChatParamsModel = "gpt-5.4"
-	AssistantV2ChatParamsModelGptOss120b      AssistantV2ChatParamsModel = "gpt-oss-120b"
-	AssistantV2ChatParamsModelLlama4Maverick  AssistantV2ChatParamsModel = "llama-4-maverick"
-	AssistantV2ChatParamsModelKimiK2          AssistantV2ChatParamsModel = "kimi-k2"
+	AssistantV2ChatParamsModelGpt5_4Mini      AssistantV2ChatParamsModel = "gpt-5.4-mini"
+	AssistantV2ChatParamsModelGpt5_4Nano      AssistantV2ChatParamsModel = "gpt-5.4-nano"
 	AssistantV2ChatParamsModelKimiK2_5        AssistantV2ChatParamsModel = "kimi-k2.5"
-	AssistantV2ChatParamsModelGlm5            AssistantV2ChatParamsModel = "glm-5"
-	AssistantV2ChatParamsModelGlm5Turbo       AssistantV2ChatParamsModel = "glm-5-turbo"
+	AssistantV2ChatParamsModelMercury2        AssistantV2ChatParamsModel = "mercury-2"
 	AssistantV2ChatParamsModelMinimaxM2_5     AssistantV2ChatParamsModel = "minimax-m2.5"
 	AssistantV2ChatParamsModelMinimaxM2_7     AssistantV2ChatParamsModel = "minimax-m2.7"
+	AssistantV2ChatParamsModelQwen3_5         AssistantV2ChatParamsModel = "qwen-3.5"
 	AssistantV2ChatParamsModelAurelle1        AssistantV2ChatParamsModel = "aurelle-1"
+	AssistantV2ChatParamsModelFast            AssistantV2ChatParamsModel = "fast"
+	AssistantV2ChatParamsModelSmart           AssistantV2ChatParamsModel = "smart"
+	AssistantV2ChatParamsModelPro             AssistantV2ChatParamsModel = "pro"
+	AssistantV2ChatParamsModelClaude4_5Sonnet AssistantV2ChatParamsModel = "claude-4.5-sonnet"
+	AssistantV2ChatParamsModelClaude4_6Sonnet AssistantV2ChatParamsModel = "claude-4.6-sonnet"
+)
+
+type AssistantV2ChatParamsPlan string
+
+const (
+	AssistantV2ChatParamsPlanFree AssistantV2ChatParamsPlan = "free"
+	AssistantV2ChatParamsPlanPro  AssistantV2ChatParamsPlan = "pro"
 )
 
 type AssistantV2EditChatParams struct {

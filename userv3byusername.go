@@ -414,16 +414,15 @@ func (r *UserV3ByUsernameGetProfilePageResponseClaimedPaper) UnmarshalJSON(data 
 // UserV3ByUsernameGetProfilePageResponseFeaturedUnion contains all possible
 // properties and values from
 // [UserV3ByUsernameGetProfilePageResponseFeaturedObject],
-// [UserV3ByUsernameGetProfilePageResponseFeaturedObject].
+// [UserV3ByUsernameGetProfilePageResponseFeaturedObject2].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type UserV3ByUsernameGetProfilePageResponseFeaturedUnion struct {
-	// This field is from variant
-	// [UserV3ByUsernameGetProfilePageResponseFeaturedObject].
-	Data UserV3ByUsernameGetProfilePageResponseFeaturedObjectData `json:"data"`
-	// This field is from variant
-	// [UserV3ByUsernameGetProfilePageResponseFeaturedObject].
-	Type string `json:"type"`
+	// This field is a union of
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObjectData],
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObject2Data]
+	Data UserV3ByUsernameGetProfilePageResponseFeaturedUnionData `json:"data"`
+	Type string                                                  `json:"type"`
 	JSON struct {
 		Data respjson.Field
 		Type respjson.Field
@@ -436,7 +435,7 @@ func (u UserV3ByUsernameGetProfilePageResponseFeaturedUnion) AsUserV3ByUsernameG
 	return
 }
 
-func (u UserV3ByUsernameGetProfilePageResponseFeaturedUnion) AsVariant2() (v UserV3ByUsernameGetProfilePageResponseFeaturedObject) {
+func (u UserV3ByUsernameGetProfilePageResponseFeaturedUnion) AsUserV3ByUsernameGetProfilePageResponseFeaturedObject2() (v UserV3ByUsernameGetProfilePageResponseFeaturedObject2) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -445,6 +444,61 @@ func (u UserV3ByUsernameGetProfilePageResponseFeaturedUnion) AsVariant2() (v Use
 func (u UserV3ByUsernameGetProfilePageResponseFeaturedUnion) RawJSON() string { return u.JSON.raw }
 
 func (r *UserV3ByUsernameGetProfilePageResponseFeaturedUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// UserV3ByUsernameGetProfilePageResponseFeaturedUnionData is an implicit subunion
+// of [UserV3ByUsernameGetProfilePageResponseFeaturedUnion].
+// UserV3ByUsernameGetProfilePageResponseFeaturedUnionData provides convenient
+// access to the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [UserV3ByUsernameGetProfilePageResponseFeaturedUnion].
+type UserV3ByUsernameGetProfilePageResponseFeaturedUnionData struct {
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObjectData].
+	ID string `json:"id"`
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObjectData].
+	Date string `json:"date"`
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObjectData].
+	Link string `json:"link"`
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObjectData].
+	Organization string `json:"organization"`
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObjectData].
+	Recording string `json:"recording"`
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObjectData].
+	Speaker string `json:"speaker"`
+	Title   string `json:"title"`
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObject2Data].
+	Abstract string `json:"abstract"`
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObject2Data].
+	PublicationDate string `json:"publication_date"`
+	// This field is from variant
+	// [UserV3ByUsernameGetProfilePageResponseFeaturedObject2Data].
+	UniversalPaperID string `json:"universal_paper_id"`
+	JSON             struct {
+		ID               respjson.Field
+		Date             respjson.Field
+		Link             respjson.Field
+		Organization     respjson.Field
+		Recording        respjson.Field
+		Speaker          respjson.Field
+		Title            respjson.Field
+		Abstract         respjson.Field
+		PublicationDate  respjson.Field
+		UniversalPaperID respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+func (r *UserV3ByUsernameGetProfilePageResponseFeaturedUnionData) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -492,6 +546,49 @@ type UserV3ByUsernameGetProfilePageResponseFeaturedObjectData struct {
 // Returns the unmodified JSON received from the API
 func (r UserV3ByUsernameGetProfilePageResponseFeaturedObjectData) RawJSON() string { return r.JSON.raw }
 func (r *UserV3ByUsernameGetProfilePageResponseFeaturedObjectData) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type UserV3ByUsernameGetProfilePageResponseFeaturedObject2 struct {
+	Data UserV3ByUsernameGetProfilePageResponseFeaturedObject2Data `json:"data" api:"required"`
+	// Any of "paper".
+	Type string `json:"type" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Data        respjson.Field
+		Type        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r UserV3ByUsernameGetProfilePageResponseFeaturedObject2) RawJSON() string { return r.JSON.raw }
+func (r *UserV3ByUsernameGetProfilePageResponseFeaturedObject2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type UserV3ByUsernameGetProfilePageResponseFeaturedObject2Data struct {
+	Abstract         string `json:"abstract" api:"required"`
+	PublicationDate  string `json:"publication_date" api:"required"`
+	Title            string `json:"title" api:"required"`
+	UniversalPaperID string `json:"universal_paper_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Abstract         respjson.Field
+		PublicationDate  respjson.Field
+		Title            respjson.Field
+		UniversalPaperID respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r UserV3ByUsernameGetProfilePageResponseFeaturedObject2Data) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *UserV3ByUsernameGetProfilePageResponseFeaturedObject2Data) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
