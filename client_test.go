@@ -337,8 +337,10 @@ func TestContextDeadlineStreaming(t *testing.T) {
 			PaperVersionID:     alphaxivcat.String("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"),
 			ParentMessageID:    alphaxivcat.String("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"),
 			SelectionPageRange: []int64{0, 0},
-			Thinking:           true,
-			WebSearch:          alphaxivcat.AssistantV2ChatParamsWebSearchOff,
+			Thinking: alphaxivcat.AssistantV2ChatParamsThinkingUnion{
+				OfBool: alphaxivcat.Bool(true),
+			},
+			WebSearch: alphaxivcat.AssistantV2ChatParamsWebSearchOff,
 		})
 		for stream.Next() {
 			_ = stream.Current()
@@ -396,8 +398,10 @@ func TestContextDeadlineStreamingWithRequestTimeout(t *testing.T) {
 				PaperVersionID:     alphaxivcat.String("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"),
 				ParentMessageID:    alphaxivcat.String("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"),
 				SelectionPageRange: []int64{0, 0},
-				Thinking:           true,
-				WebSearch:          alphaxivcat.AssistantV2ChatParamsWebSearchOff,
+				Thinking: alphaxivcat.AssistantV2ChatParamsThinkingUnion{
+					OfBool: alphaxivcat.Bool(true),
+				},
+				WebSearch: alphaxivcat.AssistantV2ChatParamsWebSearchOff,
 			},
 			option.WithRequestTimeout((100 * time.Millisecond)),
 		)
