@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 (2026-04-23)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([f88a793](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/f88a793960ffe98878126338264d4b7933ced7e8))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([f4cf051](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/f4cf051ad8c122a2cef98b708c753774c1f7ccf4))
+
 ## 0.4.0 (2026-04-09)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.3.0...v0.4.0)
