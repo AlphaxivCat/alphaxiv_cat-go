@@ -3,16 +3,7 @@
 package alphaxivcat
 
 import (
-	"context"
-	"errors"
-	"fmt"
-	"net/http"
-	"slices"
-
-	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
-	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
-	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/respjson"
 )
 
 // WrappedService contains methods and other services that help with interacting
@@ -32,43 +23,4 @@ func NewWrappedService(opts ...option.RequestOption) (r WrappedService) {
 	r = WrappedService{}
 	r.options = opts
 	return
-}
-
-// Get all wrapped data for a specific user across all years
-//
-// Source file:
-// `api-server/src/controllers/wrapped/v1/get-wrapped-by-user.controller.ts`
-func (r *WrappedService) GetByUser(ctx context.Context, userID string, opts ...option.RequestOption) (res *[]WrappedGetByUserResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	if userID == "" {
-		err = errors.New("missing required userId parameter")
-		return nil, err
-	}
-	path := fmt.Sprintf("wrapped/v1/%s", userID)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return res, err
-}
-
-type WrappedGetByUserResponse struct {
-	ID    string  `json:"id" api:"required"`
-	Order float64 `json:"order" api:"required"`
-	Type  string  `json:"type" api:"required"`
-	Year  float64 `json:"year" api:"required"`
-	Data  any     `json:"data"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		Order       respjson.Field
-		Type        respjson.Field
-		Year        respjson.Field
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r WrappedGetByUserResponse) RawJSON() string { return r.JSON.raw }
-func (r *WrappedGetByUserResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
 }

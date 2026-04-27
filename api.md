@@ -586,14 +586,6 @@ Methods:
 
 ### Labs
 
-Response Types:
-
-- <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#ArxivV1LabGetResponse">ArxivV1LabGetResponse</a>
-
-Methods:
-
-- <code title="get /arxiv/v1/{unresolved}/labs">client.Arxiv.V1.Labs.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#ArxivV1LabService.Get">Get</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, unresolved <a href="https://pkg.go.dev/builtin#string">string</a>) (\*<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#ArxivV1LabGetResponse">ArxivV1LabGetResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
-
 # APIKeys
 
 ## V1
@@ -634,14 +626,6 @@ Methods:
 - <code title="post /admin/v1/emails/send-weekly-digest">client.Admin.V1.Emails.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#AdminV1EmailService.SendWeeklyDigest">SendWeeklyDigest</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, body <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#AdminV1EmailSendWeeklyDigestParams">AdminV1EmailSendWeeklyDigestParams</a>) <a href="https://pkg.go.dev/builtin#error">error</a></code>
 
 # Wrapped
-
-Response Types:
-
-- <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#WrappedGetByUserResponse">WrappedGetByUserResponse</a>
-
-Methods:
-
-- <code title="get /wrapped/v1/{userId}">client.Wrapped.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#WrappedService.GetByUser">GetByUser</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, userID <a href="https://pkg.go.dev/builtin#string">string</a>) (\*[]<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#WrappedGetByUserResponse">WrappedGetByUserResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
 
 # Notifications
 
@@ -735,24 +719,7 @@ Methods:
 
 ## V1
 
-Response Types:
-
-- <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1GenerateSpeechResponse">BriefV1GenerateSpeechResponse</a>
-
-Methods:
-
-- <code title="post /briefs/v1/speech">client.Briefs.V1.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1Service.GenerateSpeech">GenerateSpeech</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, body <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1GenerateSpeechParams">BriefV1GenerateSpeechParams</a>) (\*<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1GenerateSpeechResponse">BriefV1GenerateSpeechResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
-
 ### Seen
-
-Response Types:
-
-- <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1SeenGetSeenResponse">BriefV1SeenGetSeenResponse</a>
-
-Methods:
-
-- <code title="get /briefs/v1/seen">client.Briefs.V1.Seen.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1SeenService.GetSeen">GetSeen</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>) (\*<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1SeenGetSeenResponse">BriefV1SeenGetSeenResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
-- <code title="post /briefs/v1/seen">client.Briefs.V1.Seen.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1SeenService.MarkSeen">MarkSeen</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, body <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#BriefV1SeenMarkSeenParams">BriefV1SeenMarkSeenParams</a>) <a href="https://pkg.go.dev/builtin#error">error</a></code>
 
 # Research
 
