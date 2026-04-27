@@ -168,7 +168,7 @@ type AssistantV2ChatParams struct {
 	// "gemini-3-flash", "gemini-3.1-pro", "glm-5-turbo", "glm-5.1", "gpt-5",
 	// "gpt-5.1", "gpt-5.2", "gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "kimi-k2.5",
 	// "kimi-k2.6", "mercury-2", "minimax-m2.5", "minimax-m2.7", "qwen-3.5", "fast",
-	// "smart", "pro", "gemini-3-pro", "claude-4.5-sonnet", "claude-4.6-sonnet".
+	// "smart", "pro".
 	Model AssistantV2ChatParamsModel `json:"model,omitzero"`
 	// Any of "free", "pro".
 	Plan AssistantV2ChatParamsPlan `json:"plan,omitzero"`
@@ -260,9 +260,6 @@ const (
 	AssistantV2ChatParamsModelFast            AssistantV2ChatParamsModel = "fast"
 	AssistantV2ChatParamsModelSmart           AssistantV2ChatParamsModel = "smart"
 	AssistantV2ChatParamsModelPro             AssistantV2ChatParamsModel = "pro"
-	AssistantV2ChatParamsModelGemini3Pro      AssistantV2ChatParamsModel = "gemini-3-pro"
-	AssistantV2ChatParamsModelClaude4_5Sonnet AssistantV2ChatParamsModel = "claude-4.5-sonnet"
-	AssistantV2ChatParamsModelClaude4_6Sonnet AssistantV2ChatParamsModel = "claude-4.6-sonnet"
 )
 
 type AssistantV2ChatParamsPlan string

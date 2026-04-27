@@ -3,17 +3,7 @@
 package alphaxivcat
 
 import (
-	"context"
-	"errors"
-	"fmt"
-	"net/http"
-	"net/url"
-	"slices"
-
-	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
-	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
-	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/respjson"
 )
 
 // ArxivV1LabService contains methods and other services that help with interacting
@@ -33,35 +23,4 @@ func NewArxivV1LabService(opts ...option.RequestOption) (r ArxivV1LabService) {
 	r = ArxivV1LabService{}
 	r.options = opts
 	return
-}
-
-// Gets data necessary to render arXiv labs.
-//
-// Source file:
-// `api-server/src/controllers/arxiv/v1/get-arxiv-labs-data.controller.ts`
-func (r *ArxivV1LabService) Get(ctx context.Context, unresolved string, opts ...option.RequestOption) (res *ArxivV1LabGetResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	if unresolved == "" {
-		err = errors.New("missing required unresolved parameter")
-		return nil, err
-	}
-	path := fmt.Sprintf("arxiv/v1/%s/labs", url.PathEscape(unresolved))
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return res, err
-}
-
-type ArxivV1LabGetResponse struct {
-	Summary string `json:"summary" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Summary     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r ArxivV1LabGetResponse) RawJSON() string { return r.JSON.raw }
-func (r *ArxivV1LabGetResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
 }
