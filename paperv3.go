@@ -2349,10 +2349,6 @@ type PaperV3GetFeedParams struct {
 	Topics        param.Opt[string]        `query:"topics,omitzero" json:"-"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	UniversalID param.Opt[string] `query:"universalId,omitzero" json:"-"`
-	// Any of "true", "false".
-	ExcludeSeenBriefs PaperV3GetFeedParamsExcludeSeenBriefs `query:"excludeSeenBriefs,omitzero" json:"-"`
-	// Any of "true", "false".
-	RequireSummary PaperV3GetFeedParamsRequireSummary `query:"requireSummary,omitzero" json:"-"`
 	// Any of "GitHub", "Twitter (X)".
 	Source PaperV3GetFeedParamsSource `query:"source,omitzero" json:"-"`
 	paramObj
@@ -2386,20 +2382,6 @@ const (
 	PaperV3GetFeedParamsSortGitHub      PaperV3GetFeedParamsSort = "GitHub"
 	PaperV3GetFeedParamsSortTwitterX    PaperV3GetFeedParamsSort = "Twitter (X)"
 	PaperV3GetFeedParamsSortRecommended PaperV3GetFeedParamsSort = "Recommended"
-)
-
-type PaperV3GetFeedParamsExcludeSeenBriefs string
-
-const (
-	PaperV3GetFeedParamsExcludeSeenBriefsTrue  PaperV3GetFeedParamsExcludeSeenBriefs = "true"
-	PaperV3GetFeedParamsExcludeSeenBriefsFalse PaperV3GetFeedParamsExcludeSeenBriefs = "false"
-)
-
-type PaperV3GetFeedParamsRequireSummary string
-
-const (
-	PaperV3GetFeedParamsRequireSummaryTrue  PaperV3GetFeedParamsRequireSummary = "true"
-	PaperV3GetFeedParamsRequireSummaryFalse PaperV3GetFeedParamsRequireSummary = "false"
 )
 
 type PaperV3GetFeedParamsSource string

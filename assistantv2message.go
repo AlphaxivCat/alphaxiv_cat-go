@@ -99,7 +99,7 @@ type AssistantV2MessageListResponse struct {
 	SelectedAt      string                                     `json:"selectedAt" api:"required"`
 	ToolUseID       string                                     `json:"toolUseId" api:"required"`
 	// Any of "tool_use", "tool_result_text", "tool_result_file", "input_file",
-	// "input_text", "output_reasoning", "output_text".
+	// "input_text", "output_reasoning", "output_text", "context_summary".
 	Type  AssistantV2MessageListResponseType `json:"type" api:"required"`
 	Trace string                             `json:"trace" api:"nullable" format:"uuid"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -144,6 +144,7 @@ const (
 	AssistantV2MessageListResponseTypeInputText       AssistantV2MessageListResponseType = "input_text"
 	AssistantV2MessageListResponseTypeOutputReasoning AssistantV2MessageListResponseType = "output_reasoning"
 	AssistantV2MessageListResponseTypeOutputText      AssistantV2MessageListResponseType = "output_text"
+	AssistantV2MessageListResponseTypeContextSummary  AssistantV2MessageListResponseType = "context_summary"
 )
 
 type AssistantV2MessageSelectParams struct {

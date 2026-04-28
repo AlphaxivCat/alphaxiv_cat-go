@@ -513,16 +513,14 @@ func TestPaperV3GetFeedWithOptionalParams(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Papers.V3.GetFeed(context.TODO(), alphaxivcat.PaperV3GetFeedParams{
-		Interval:          alphaxivcat.PaperV3GetFeedParamsInterval3Days,
-		PageNum:           "pageNum",
-		PageSize:          "pageSize",
-		Sort:              alphaxivcat.PaperV3GetFeedParamsSortHot,
-		ExcludeSeenBriefs: alphaxivcat.PaperV3GetFeedParamsExcludeSeenBriefsTrue,
-		Organizations:     alphaxivcat.String("organizations"),
-		RequireSummary:    alphaxivcat.PaperV3GetFeedParamsRequireSummaryTrue,
-		Source:            alphaxivcat.PaperV3GetFeedParamsSourceGitHub,
-		Topics:            alphaxivcat.String("topics"),
-		UniversalID:       alphaxivcat.String("universalId"),
+		Interval:      alphaxivcat.PaperV3GetFeedParamsInterval3Days,
+		PageNum:       "pageNum",
+		PageSize:      "pageSize",
+		Sort:          alphaxivcat.PaperV3GetFeedParamsSortHot,
+		Organizations: alphaxivcat.String("organizations"),
+		Source:        alphaxivcat.PaperV3GetFeedParamsSourceGitHub,
+		Topics:        alphaxivcat.String("topics"),
+		UniversalID:   alphaxivcat.String("universalId"),
 	})
 	if err != nil {
 		var apierr *alphaxivcat.Error
