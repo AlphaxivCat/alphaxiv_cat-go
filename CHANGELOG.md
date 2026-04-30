@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.0 (2026-04-30)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* support setting headers via env ([74022f8](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/74022f86e0f8b2736caca065d083d59ca866f93b))
+
 ## 0.5.0 (2026-04-27)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.4.0...v0.5.0)
