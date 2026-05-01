@@ -79,7 +79,6 @@ func TestAssistantV2GetChatsWithOptionalParams(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Assistant.V2.GetChats(context.TODO(), alphaxivcat.AssistantV2GetChatsParams{
-		Folder:       alphaxivcat.String("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"),
 		PaperVersion: alphaxivcat.String("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"),
 		Variant:      alphaxivcat.AssistantV2GetChatsParamsVariantHomepage,
 	})
