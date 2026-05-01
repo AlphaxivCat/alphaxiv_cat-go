@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.0 (2026-05-01)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** api update ([57bba1e](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/57bba1ea3410d17e2aa2e4d52dd7d559387859e3))
+
+
+### Chores
+
+* avoid embedding reflect.Type for dead code elimination ([357536d](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/357536db167dba40302c9ee04865a4787131e976))
+
 ## 0.6.0 (2026-04-30)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.5.0...v0.6.0)
