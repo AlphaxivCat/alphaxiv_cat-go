@@ -723,10 +723,6 @@ Methods:
 
 # Research
 
-Methods:
-
-- <code title="post /research/v1">client.Research.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#ResearchService.NewProject">NewProject</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, body <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#ResearchNewProjectParams">ResearchNewProjectParams</a>) (\*<a href="https://pkg.go.dev/builtin#string">string</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
-
 # Mcp
 
 ## V1
