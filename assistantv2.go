@@ -157,11 +157,9 @@ type AssistantV2ChatParams struct {
 	Files              []AssistantV2ChatParamsFile        `json:"files,omitzero" api:"required"`
 	Message            string                             `json:"message" api:"required"`
 	// Any of "off", "full".
-	WebSearch       AssistantV2ChatParamsWebSearch `json:"webSearch,omitzero" api:"required"`
-	FolderAddPapers param.Opt[bool]                `json:"folderAddPapers,omitzero"`
-	FolderID        param.Opt[string]              `json:"folderId,omitzero" format:"uuid"`
-	Signature       param.Opt[string]              `json:"signature,omitzero"`
-	// Any of "homepage", "paper", "folder", "landing", "folder-add-papers".
+	WebSearch AssistantV2ChatParamsWebSearch `json:"webSearch,omitzero" api:"required"`
+	Signature param.Opt[string]              `json:"signature,omitzero"`
+	// Any of "homepage", "paper", "landing".
 	AssistantVariant AssistantV2ChatParamsAssistantVariant `json:"assistantVariant,omitzero"`
 	// Any of "claude-opus-4.5", "claude-opus-4.6", "claude-opus-4.7",
 	// "claude-sonnet-4.5", "claude-sonnet-4.6", "gemini-2.5-flash", "gemini-2.5-pro",
@@ -224,11 +222,9 @@ const (
 type AssistantV2ChatParamsAssistantVariant string
 
 const (
-	AssistantV2ChatParamsAssistantVariantHomepage        AssistantV2ChatParamsAssistantVariant = "homepage"
-	AssistantV2ChatParamsAssistantVariantPaper           AssistantV2ChatParamsAssistantVariant = "paper"
-	AssistantV2ChatParamsAssistantVariantFolder          AssistantV2ChatParamsAssistantVariant = "folder"
-	AssistantV2ChatParamsAssistantVariantLanding         AssistantV2ChatParamsAssistantVariant = "landing"
-	AssistantV2ChatParamsAssistantVariantFolderAddPapers AssistantV2ChatParamsAssistantVariant = "folder-add-papers"
+	AssistantV2ChatParamsAssistantVariantHomepage AssistantV2ChatParamsAssistantVariant = "homepage"
+	AssistantV2ChatParamsAssistantVariantPaper    AssistantV2ChatParamsAssistantVariant = "paper"
+	AssistantV2ChatParamsAssistantVariantLanding  AssistantV2ChatParamsAssistantVariant = "landing"
 )
 
 type AssistantV2ChatParamsModel string
@@ -283,9 +279,8 @@ func (r *AssistantV2EditChatParams) UnmarshalJSON(data []byte) error {
 }
 
 type AssistantV2GetChatsParams struct {
-	Folder       param.Opt[string] `query:"folder,omitzero" format:"uuid" json:"-"`
 	PaperVersion param.Opt[string] `query:"paperVersion,omitzero" format:"uuid" json:"-"`
-	// Any of "homepage", "paper", "folder".
+	// Any of "homepage", "paper".
 	Variant AssistantV2GetChatsParamsVariant `query:"variant,omitzero" json:"-"`
 	paramObj
 }
@@ -304,7 +299,6 @@ type AssistantV2GetChatsParamsVariant string
 const (
 	AssistantV2GetChatsParamsVariantHomepage AssistantV2GetChatsParamsVariant = "homepage"
 	AssistantV2GetChatsParamsVariantPaper    AssistantV2GetChatsParamsVariant = "paper"
-	AssistantV2GetChatsParamsVariantFolder   AssistantV2GetChatsParamsVariant = "folder"
 )
 
 type AssistantV2GetURLMetadataParams struct {

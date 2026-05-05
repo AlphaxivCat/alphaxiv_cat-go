@@ -175,7 +175,7 @@ func (r *RetoolV1GetCumulativeUsersResponse) UnmarshalJSON(data []byte) error {
 type RetoolV1GetDailyConversationsResponse struct {
 	Count float64 `json:"count" api:"required"`
 	Date  string  `json:"date" api:"required"`
-	// Any of "homepage", "paper", "folder".
+	// Any of "homepage", "paper".
 	Variant RetoolV1GetDailyConversationsResponseVariant `json:"variant" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -198,7 +198,6 @@ type RetoolV1GetDailyConversationsResponseVariant string
 const (
 	RetoolV1GetDailyConversationsResponseVariantHomepage RetoolV1GetDailyConversationsResponseVariant = "homepage"
 	RetoolV1GetDailyConversationsResponseVariantPaper    RetoolV1GetDailyConversationsResponseVariant = "paper"
-	RetoolV1GetDailyConversationsResponseVariantFolder   RetoolV1GetDailyConversationsResponseVariant = "folder"
 )
 
 type RetoolV1GetDailyNewAccountsResponse struct {
@@ -222,7 +221,7 @@ func (r *RetoolV1GetDailyNewAccountsResponse) UnmarshalJSON(data []byte) error {
 type RetoolV1GetDailyUserChatMessagesResponse struct {
 	Count float64 `json:"count" api:"required"`
 	Date  string  `json:"date" api:"required"`
-	// Any of "homepage", "paper", "folder".
+	// Any of "homepage", "paper".
 	Variant RetoolV1GetDailyUserChatMessagesResponseVariant `json:"variant" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -245,7 +244,6 @@ type RetoolV1GetDailyUserChatMessagesResponseVariant string
 const (
 	RetoolV1GetDailyUserChatMessagesResponseVariantHomepage RetoolV1GetDailyUserChatMessagesResponseVariant = "homepage"
 	RetoolV1GetDailyUserChatMessagesResponseVariantPaper    RetoolV1GetDailyUserChatMessagesResponseVariant = "paper"
-	RetoolV1GetDailyUserChatMessagesResponseVariantFolder   RetoolV1GetDailyUserChatMessagesResponseVariant = "folder"
 )
 
 type RetoolV1GetWeeklyMessageCountsByUserResponse struct {
