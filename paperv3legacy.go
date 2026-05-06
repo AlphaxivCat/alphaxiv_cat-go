@@ -146,8 +146,8 @@ type PaperV3LegacyGetResponseCommentAnnotation struct {
 	HighlightRects []PaperV3LegacyGetResponseCommentAnnotationHighlightRect `json:"highlightRects" api:"required"`
 	SelectedText   string                                                   `json:"selectedText" api:"required"`
 	// Any of "highlight".
-	Type  string `json:"type" api:"required"`
-	Color string `json:"color" api:"nullable"`
+	Type           string `json:"type" api:"required"`
+	HighlightColor string `json:"highlightColor" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AnchorPosition respjson.Field
@@ -155,7 +155,7 @@ type PaperV3LegacyGetResponseCommentAnnotation struct {
 		HighlightRects respjson.Field
 		SelectedText   respjson.Field
 		Type           respjson.Field
-		Color          respjson.Field
+		HighlightColor respjson.Field
 		ExtraFields    map[string]respjson.Field
 		raw            string
 	} `json:"-"`
@@ -391,8 +391,8 @@ type PaperV3LegacyGetResponseCommentResponseAnnotation struct {
 	HighlightRects []PaperV3LegacyGetResponseCommentResponseAnnotationHighlightRect `json:"highlightRects" api:"required"`
 	SelectedText   string                                                           `json:"selectedText" api:"required"`
 	// Any of "highlight".
-	Type  string `json:"type" api:"required"`
-	Color string `json:"color" api:"nullable"`
+	Type           string `json:"type" api:"required"`
+	HighlightColor string `json:"highlightColor" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AnchorPosition respjson.Field
@@ -400,7 +400,7 @@ type PaperV3LegacyGetResponseCommentResponseAnnotation struct {
 		HighlightRects respjson.Field
 		SelectedText   respjson.Field
 		Type           respjson.Field
-		Color          respjson.Field
+		HighlightColor respjson.Field
 		ExtraFields    map[string]respjson.Field
 		raw            string
 	} `json:"-"`
@@ -644,8 +644,8 @@ type PaperV3LegacyGetCommentsResponseAnnotation struct {
 	HighlightRects []PaperV3LegacyGetCommentsResponseAnnotationHighlightRect `json:"highlightRects" api:"required"`
 	SelectedText   string                                                    `json:"selectedText" api:"required"`
 	// Any of "highlight".
-	Type  string `json:"type" api:"required"`
-	Color string `json:"color" api:"nullable"`
+	Type           string `json:"type" api:"required"`
+	HighlightColor string `json:"highlightColor" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AnchorPosition respjson.Field
@@ -653,7 +653,7 @@ type PaperV3LegacyGetCommentsResponseAnnotation struct {
 		HighlightRects respjson.Field
 		SelectedText   respjson.Field
 		Type           respjson.Field
-		Color          respjson.Field
+		HighlightColor respjson.Field
 		ExtraFields    map[string]respjson.Field
 		raw            string
 	} `json:"-"`
@@ -889,8 +889,8 @@ type PaperV3LegacyGetCommentsResponseResponseAnnotation struct {
 	HighlightRects []PaperV3LegacyGetCommentsResponseResponseAnnotationHighlightRect `json:"highlightRects" api:"required"`
 	SelectedText   string                                                            `json:"selectedText" api:"required"`
 	// Any of "highlight".
-	Type  string `json:"type" api:"required"`
-	Color string `json:"color" api:"nullable"`
+	Type           string `json:"type" api:"required"`
+	HighlightColor string `json:"highlightColor" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AnchorPosition respjson.Field
@@ -898,7 +898,7 @@ type PaperV3LegacyGetCommentsResponseResponseAnnotation struct {
 		HighlightRects respjson.Field
 		SelectedText   respjson.Field
 		Type           respjson.Field
-		Color          respjson.Field
+		HighlightColor respjson.Field
 		ExtraFields    map[string]respjson.Field
 		raw            string
 	} `json:"-"`

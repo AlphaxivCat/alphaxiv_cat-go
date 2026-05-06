@@ -368,8 +368,8 @@ type UserV3GetActivityResponseItemAnnotation struct {
 	HighlightRects []UserV3GetActivityResponseItemAnnotationHighlightRect `json:"highlightRects" api:"required"`
 	SelectedText   string                                                 `json:"selectedText" api:"required"`
 	// Any of "highlight".
-	Type  string `json:"type" api:"required"`
-	Color string `json:"color" api:"nullable"`
+	Type           string `json:"type" api:"required"`
+	HighlightColor string `json:"highlightColor" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AnchorPosition respjson.Field
@@ -377,7 +377,7 @@ type UserV3GetActivityResponseItemAnnotation struct {
 		HighlightRects respjson.Field
 		SelectedText   respjson.Field
 		Type           respjson.Field
-		Color          respjson.Field
+		HighlightColor respjson.Field
 		ExtraFields    map[string]respjson.Field
 		raw            string
 	} `json:"-"`
