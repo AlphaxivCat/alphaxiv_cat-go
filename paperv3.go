@@ -148,19 +148,6 @@ func (r *PaperV3Service) KickoffThumbnailsTrendingPapers(ctx context.Context, op
 	return res, err
 }
 
-// Kickoff X mentions sync for hot papers. Uses x-mentions-sync-queue with
-// parallelism=1 and built-in delays.
-//
-// Source file:
-// `api-server/src/controllers/papers/v3/kickoff-x-mentions-sync.controller.ts`
-func (r *PaperV3Service) KickoffXMentionsSync(ctx context.Context, body PaperV3KickoffXMentionsSyncParams, opts ...option.RequestOption) (err error) {
-	opts = slices.Concat(r.options, opts)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
-	path := "papers/v3/kickoff-x-mentions-sync"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, nil, opts...)
-	return err
-}
-
 // Toggle your like status on a paper group
 //
 // Source file: `api-server/src/controllers/papers/v3/like-paper.controller.ts`
@@ -860,13 +847,11 @@ type PaperV3GetDiversePapersResponseMetrics struct {
 	PublicTotalVotes float64                                           `json:"public_total_votes" api:"required"`
 	TotalVotes       float64                                           `json:"total_votes" api:"required"`
 	VisitsCount      PaperV3GetDiversePapersResponseMetricsVisitsCount `json:"visits_count" api:"required"`
-	XLikes           float64                                           `json:"x_likes" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		PublicTotalVotes respjson.Field
 		TotalVotes       respjson.Field
 		VisitsCount      respjson.Field
-		XLikes           respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`
@@ -1104,13 +1089,11 @@ type PaperV3GetFeedResponsePaperMetrics struct {
 	PublicTotalVotes float64                                       `json:"public_total_votes" api:"required"`
 	TotalVotes       float64                                       `json:"total_votes" api:"required"`
 	VisitsCount      PaperV3GetFeedResponsePaperMetricsVisitsCount `json:"visits_count" api:"required"`
-	XLikes           float64                                       `json:"x_likes" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		PublicTotalVotes respjson.Field
 		TotalVotes       respjson.Field
 		VisitsCount      respjson.Field
-		XLikes           respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`
@@ -1554,13 +1537,11 @@ type PaperV3GetPreviewResponseMetrics struct {
 	PublicTotalVotes float64                                     `json:"public_total_votes" api:"required"`
 	TotalVotes       float64                                     `json:"total_votes" api:"required"`
 	VisitsCount      PaperV3GetPreviewResponseMetricsVisitsCount `json:"visits_count" api:"required"`
-	XLikes           float64                                     `json:"x_likes" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		PublicTotalVotes respjson.Field
 		TotalVotes       respjson.Field
 		VisitsCount      respjson.Field
-		XLikes           respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`
@@ -1780,13 +1761,11 @@ type PaperV3GetSimilarPapersResponseMetrics struct {
 	PublicTotalVotes float64                                           `json:"public_total_votes" api:"required"`
 	TotalVotes       float64                                           `json:"total_votes" api:"required"`
 	VisitsCount      PaperV3GetSimilarPapersResponseMetricsVisitsCount `json:"visits_count" api:"required"`
-	XLikes           float64                                           `json:"x_likes" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		PublicTotalVotes respjson.Field
 		TotalVotes       respjson.Field
 		VisitsCount      respjson.Field
-		XLikes           respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`
@@ -2006,13 +1985,11 @@ type PaperV3GetUnrelatedResponseMetrics struct {
 	PublicTotalVotes float64                                       `json:"public_total_votes" api:"required"`
 	TotalVotes       float64                                       `json:"total_votes" api:"required"`
 	VisitsCount      PaperV3GetUnrelatedResponseMetricsVisitsCount `json:"visits_count" api:"required"`
-	XLikes           float64                                       `json:"x_likes" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		PublicTotalVotes respjson.Field
 		TotalVotes       respjson.Field
 		VisitsCount      respjson.Field
-		XLikes           respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`
@@ -2165,22 +2142,6 @@ func (r PaperV3KickoffPaperFullTextParams) MarshalJSON() (data []byte, err error
 	return param.MarshalObject(r, (*shadow)(&r))
 }
 func (r *PaperV3KickoffPaperFullTextParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3KickoffXMentionsSyncParams struct {
-	// If true, only logs papers without queuing
-	DryRun param.Opt[bool] `json:"dryRun,omitzero"`
-	// Number of hot papers to sync (default: 500)
-	Limit param.Opt[int64] `json:"limit,omitzero"`
-	paramObj
-}
-
-func (r PaperV3KickoffXMentionsSyncParams) MarshalJSON() (data []byte, err error) {
-	type shadow PaperV3KickoffXMentionsSyncParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *PaperV3KickoffXMentionsSyncParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -2342,14 +2303,13 @@ type PaperV3GetFeedParams struct {
 	Interval PaperV3GetFeedParamsInterval `query:"interval,omitzero" api:"required" json:"-"`
 	PageNum  string                       `query:"pageNum" api:"required" json:"-"`
 	PageSize string                       `query:"pageSize" api:"required" json:"-"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Twitter (X)",
-	// "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
 	Sort          PaperV3GetFeedParamsSort `query:"sort,omitzero" api:"required" json:"-"`
 	Organizations param.Opt[string]        `query:"organizations,omitzero" json:"-"`
 	Topics        param.Opt[string]        `query:"topics,omitzero" json:"-"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	UniversalID param.Opt[string] `query:"universalId,omitzero" json:"-"`
-	// Any of "GitHub", "Twitter (X)".
+	// Any of "GitHub".
 	Source PaperV3GetFeedParamsSource `query:"source,omitzero" json:"-"`
 	paramObj
 }
@@ -2380,15 +2340,13 @@ const (
 	PaperV3GetFeedParamsSortViews       PaperV3GetFeedParamsSort = "Views"
 	PaperV3GetFeedParamsSortLikes       PaperV3GetFeedParamsSort = "Likes"
 	PaperV3GetFeedParamsSortGitHub      PaperV3GetFeedParamsSort = "GitHub"
-	PaperV3GetFeedParamsSortTwitterX    PaperV3GetFeedParamsSort = "Twitter (X)"
 	PaperV3GetFeedParamsSortRecommended PaperV3GetFeedParamsSort = "Recommended"
 )
 
 type PaperV3GetFeedParamsSource string
 
 const (
-	PaperV3GetFeedParamsSourceGitHub   PaperV3GetFeedParamsSource = "GitHub"
-	PaperV3GetFeedParamsSourceTwitterX PaperV3GetFeedParamsSource = "Twitter (X)"
+	PaperV3GetFeedParamsSourceGitHub PaperV3GetFeedParamsSource = "GitHub"
 )
 
 type PaperV3GetGeoTrendsParams struct {
