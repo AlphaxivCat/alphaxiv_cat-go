@@ -551,35 +551,6 @@ func TestPaperV3GetFullText(t *testing.T) {
 	}
 }
 
-func TestPaperV3GetGeoTrendsWithOptionalParams(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Papers.V3.GetGeoTrends(context.TODO(), alphaxivcat.PaperV3GetGeoTrendsParams{
-		CollaborationLimit: alphaxivcat.String("collaborationLimit"),
-		PaperLimit:         alphaxivcat.String("paperLimit"),
-		PastMonths:         alphaxivcat.String("pastMonths"),
-		RepoLimit:          alphaxivcat.String("repoLimit"),
-		TopCountries:       alphaxivcat.String("topCountries"),
-	})
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
 func TestPaperV3GetMetrics(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
@@ -594,32 +565,6 @@ func TestPaperV3GetMetrics(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Papers.V3.GetMetrics(context.TODO(), "unresolved")
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
-func TestPaperV3GetPapersByCountryWithOptionalParams(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Papers.V3.GetPapersByCountry(context.TODO(), alphaxivcat.PaperV3GetPapersByCountryParams{
-		Country: alphaxivcat.String("country"),
-		Limit:   alphaxivcat.String("limit"),
-	})
 	if err != nil {
 		var apierr *alphaxivcat.Error
 		if errors.As(err, &apierr) {
