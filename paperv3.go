@@ -328,16 +328,6 @@ func (r *PaperV3Service) GetFullText(ctx context.Context, paperVersion string, o
 	return res, err
 }
 
-// Retrieve geographical trends and analytics data for papers
-//
-// Source file: `api-server/src/controllers/papers/v3/get-geo-trends.controller.ts`
-func (r *PaperV3Service) GetGeoTrends(ctx context.Context, query PaperV3GetGeoTrendsParams, opts ...option.RequestOption) (res *PaperV3GetGeoTrendsResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "papers/v3/geo-trends"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return res, err
-}
-
 // Retrieve metrics for a paper (comments count, upvotes, views)
 //
 // Source file: `api-server/src/controllers/papers/v3/get-metrics.controller.ts`
@@ -349,17 +339,6 @@ func (r *PaperV3Service) GetMetrics(ctx context.Context, unresolved string, opts
 	}
 	path := fmt.Sprintf("papers/v3/%s/metrics", url.PathEscape(unresolved))
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return res, err
-}
-
-// Retrieve top papers by country with optional country filter
-//
-// Source file:
-// `api-server/src/controllers/papers/v3/get-papers-by-country.controller.ts`
-func (r *PaperV3Service) GetPapersByCountry(ctx context.Context, query PaperV3GetPapersByCountryParams, opts ...option.RequestOption) (res *[]PaperV3GetPapersByCountryResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "papers/v3/papers-by-country"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return res, err
 }
 
@@ -1215,122 +1194,6 @@ func (r *PaperV3GetFullTextResponsePage) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3GetGeoTrendsResponse struct {
-	FrequentCollaborations   []PaperV3GetGeoTrendsResponseFrequentCollaboration    `json:"frequentCollaborations" api:"required"`
-	PaperCountGraph          map[string][]float64                                  `json:"paperCountGraph" api:"required"`
-	PaperStarsGraph          map[string][]float64                                  `json:"paperStarsGraph" api:"required"`
-	TopCountriesByPaperCount []PaperV3GetGeoTrendsResponseTopCountriesByPaperCount `json:"topCountriesByPaperCount" api:"required"`
-	TopCountriesByStars      []PaperV3GetGeoTrendsResponseTopCountriesByStar       `json:"topCountriesByStars" api:"required"`
-	TopGitHubRepos           []PaperV3GetGeoTrendsResponseTopGitHubRepo            `json:"topGitHubRepos" api:"required"`
-	TotalPapersCount         float64                                               `json:"totalPapersCount" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		FrequentCollaborations   respjson.Field
-		PaperCountGraph          respjson.Field
-		PaperStarsGraph          respjson.Field
-		TopCountriesByPaperCount respjson.Field
-		TopCountriesByStars      respjson.Field
-		TopGitHubRepos           respjson.Field
-		TotalPapersCount         respjson.Field
-		ExtraFields              map[string]respjson.Field
-		raw                      string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3GetGeoTrendsResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3GetGeoTrendsResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3GetGeoTrendsResponseFrequentCollaboration struct {
-	CollaborationCount float64  `json:"collaborationCount" api:"required"`
-	Countries          []string `json:"countries" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		CollaborationCount respjson.Field
-		Countries          respjson.Field
-		ExtraFields        map[string]respjson.Field
-		raw                string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3GetGeoTrendsResponseFrequentCollaboration) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3GetGeoTrendsResponseFrequentCollaboration) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3GetGeoTrendsResponseTopCountriesByPaperCount struct {
-	Count   float64 `json:"count" api:"required"`
-	Country string  `json:"country" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Count       respjson.Field
-		Country     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3GetGeoTrendsResponseTopCountriesByPaperCount) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3GetGeoTrendsResponseTopCountriesByPaperCount) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3GetGeoTrendsResponseTopCountriesByStar struct {
-	Country    string  `json:"country" api:"required"`
-	TotalStars float64 `json:"totalStars" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Country     respjson.Field
-		TotalStars  respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3GetGeoTrendsResponseTopCountriesByStar) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3GetGeoTrendsResponseTopCountriesByStar) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3GetGeoTrendsResponseTopGitHubRepo struct {
-	Countries            []string `json:"countries" api:"required"`
-	Description          string   `json:"description" api:"required"`
-	FirstPublicationDate string   `json:"firstPublicationDate" api:"required"`
-	Language             string   `json:"language" api:"required"`
-	PaperGroupID         string   `json:"paperGroupId" api:"required"`
-	Stars                float64  `json:"stars" api:"required"`
-	StarsDaily           float64  `json:"starsDaily" api:"required"`
-	Title                string   `json:"title" api:"required"`
-	UniversalID          string   `json:"universalId" api:"required"`
-	URL                  string   `json:"url" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Countries            respjson.Field
-		Description          respjson.Field
-		FirstPublicationDate respjson.Field
-		Language             respjson.Field
-		PaperGroupID         respjson.Field
-		Stars                respjson.Field
-		StarsDaily           respjson.Field
-		Title                respjson.Field
-		UniversalID          respjson.Field
-		URL                  respjson.Field
-		ExtraFields          map[string]respjson.Field
-		raw                  string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3GetGeoTrendsResponseTopGitHubRepo) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3GetGeoTrendsResponseTopGitHubRepo) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type PaperV3GetMetricsResponse struct {
 	CommentsCount    float64 `json:"commentsCount" api:"required"`
 	PublicTotalVotes float64 `json:"publicTotalVotes" api:"required"`
@@ -1348,44 +1211,6 @@ type PaperV3GetMetricsResponse struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetMetricsResponse) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetMetricsResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3GetPapersByCountryResponse struct {
-	Abstract             string   `json:"abstract" api:"required"`
-	CitationsCount       float64  `json:"citationsCount" api:"required"`
-	CommentsCount        float64  `json:"commentsCount" api:"required"`
-	Countries            []string `json:"countries" api:"required"`
-	FirstPublicationDate string   `json:"firstPublicationDate" api:"required"`
-	PaperGroupID         string   `json:"paperGroupId" api:"required"`
-	PublicationDate      string   `json:"publicationDate" api:"required"`
-	PublicTotalVotes     float64  `json:"publicTotalVotes" api:"required"`
-	Title                string   `json:"title" api:"required"`
-	TotalVotes           float64  `json:"totalVotes" api:"required"`
-	UniversalID          string   `json:"universalId" api:"required"`
-	VisitsAll            float64  `json:"visitsAll" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Abstract             respjson.Field
-		CitationsCount       respjson.Field
-		CommentsCount        respjson.Field
-		Countries            respjson.Field
-		FirstPublicationDate respjson.Field
-		PaperGroupID         respjson.Field
-		PublicationDate      respjson.Field
-		PublicTotalVotes     respjson.Field
-		Title                respjson.Field
-		TotalVotes           respjson.Field
-		UniversalID          respjson.Field
-		VisitsAll            respjson.Field
-		ExtraFields          map[string]respjson.Field
-		raw                  string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3GetPapersByCountryResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3GetPapersByCountryResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -2348,39 +2173,6 @@ type PaperV3GetFeedParamsSource string
 const (
 	PaperV3GetFeedParamsSourceGitHub PaperV3GetFeedParamsSource = "GitHub"
 )
-
-type PaperV3GetGeoTrendsParams struct {
-	CollaborationLimit param.Opt[string] `query:"collaborationLimit,omitzero" json:"-"`
-	PaperLimit         param.Opt[string] `query:"paperLimit,omitzero" json:"-"`
-	PastMonths         param.Opt[string] `query:"pastMonths,omitzero" json:"-"`
-	RepoLimit          param.Opt[string] `query:"repoLimit,omitzero" json:"-"`
-	TopCountries       param.Opt[string] `query:"topCountries,omitzero" json:"-"`
-	paramObj
-}
-
-// URLQuery serializes [PaperV3GetGeoTrendsParams]'s query parameters as
-// `url.Values`.
-func (r PaperV3GetGeoTrendsParams) URLQuery() (v url.Values, err error) {
-	return apiquery.MarshalWithSettings(r, apiquery.QuerySettings{
-		ArrayFormat:  apiquery.ArrayQueryFormatComma,
-		NestedFormat: apiquery.NestedQueryFormatBrackets,
-	})
-}
-
-type PaperV3GetPapersByCountryParams struct {
-	Country param.Opt[string] `query:"country,omitzero" json:"-"`
-	Limit   param.Opt[string] `query:"limit,omitzero" json:"-"`
-	paramObj
-}
-
-// URLQuery serializes [PaperV3GetPapersByCountryParams]'s query parameters as
-// `url.Values`.
-func (r PaperV3GetPapersByCountryParams) URLQuery() (v url.Values, err error) {
-	return apiquery.MarshalWithSettings(r, apiquery.QuerySettings{
-		ArrayFormat:  apiquery.ArrayQueryFormatComma,
-		NestedFormat: apiquery.NestedQueryFormatBrackets,
-	})
-}
 
 type PaperV3GetSimilarPapersParams struct {
 	Exclude param.Opt[string] `query:"exclude,omitzero" json:"-"`
