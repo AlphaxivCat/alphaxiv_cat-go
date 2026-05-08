@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.8.0 (2026-05-08)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** api update ([960b8c7](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/960b8c760a645542eb22aa8b738e49fe2d7514f6))
+* **api:** api update ([d209688](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/d209688a497f6cabbe264e280ab01ade470f982d))
+* **api:** api update ([798be27](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/798be27e288c103b691368fd68e92a674db76d76))
+* **api:** api update ([603ffbe](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/603ffbec32931dccc88a8615c01a1baab39dd5d2))
+
+
+### Bug Fixes
+
+* **go:** avoid panic when http.DefaultTransport is wrapped ([513456a](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/513456a5456235900b9511a9bb69a67fdb8c3fa3))
+
+
+### Chores
+
+* redact api-key headers in debug logs ([652f4a8](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/652f4a8d2c4dd44fcaf7d31f81288ad915d329cb))
+
 ## 0.7.0 (2026-05-01)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.6.0...v0.7.0)
