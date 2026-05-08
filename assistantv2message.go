@@ -100,8 +100,9 @@ type AssistantV2MessageListResponse struct {
 	ToolUseID       string                                     `json:"toolUseId" api:"required"`
 	// Any of "tool_use", "tool_result_text", "tool_result_file", "input_file",
 	// "input_text", "output_reasoning", "output_text", "context_summary".
-	Type  AssistantV2MessageListResponseType `json:"type" api:"required"`
-	Trace string                             `json:"trace" api:"nullable" format:"uuid"`
+	Type            AssistantV2MessageListResponseType            `json:"type" api:"required"`
+	ToolUseActivity AssistantV2MessageListResponseToolUseActivity `json:"toolUseActivity" api:"nullable"`
+	Trace           string                                        `json:"trace" api:"nullable" format:"uuid"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID               respjson.Field
@@ -115,6 +116,7 @@ type AssistantV2MessageListResponse struct {
 		SelectedAt       respjson.Field
 		ToolUseID        respjson.Field
 		Type             respjson.Field
+		ToolUseActivity  respjson.Field
 		Trace            respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
@@ -146,6 +148,58 @@ const (
 	AssistantV2MessageListResponseTypeOutputText      AssistantV2MessageListResponseType = "output_text"
 	AssistantV2MessageListResponseTypeContextSummary  AssistantV2MessageListResponseType = "context_summary"
 )
+
+type AssistantV2MessageListResponseToolUseActivity struct {
+	// Any of "paper", "page", "webpage", "repository", "file", "organization",
+	// "source", "multi".
+	ReadKind       string                                                      `json:"readKind" api:"required"`
+	ReadSubjects   []string                                                    `json:"readSubjects" api:"required"`
+	SearchCounters AssistantV2MessageListResponseToolUseActivitySearchCounters `json:"searchCounters" api:"required"`
+	SearchQueries  int64                                                       `json:"searchQueries" api:"required"`
+	SearchResults  []string                                                    `json:"searchResults" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ReadKind       respjson.Field
+		ReadSubjects   respjson.Field
+		SearchCounters respjson.Field
+		SearchQueries  respjson.Field
+		SearchResults  respjson.Field
+		ExtraFields    map[string]respjson.Field
+		raw            string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r AssistantV2MessageListResponseToolUseActivity) RawJSON() string { return r.JSON.raw }
+func (r *AssistantV2MessageListResponseToolUseActivity) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type AssistantV2MessageListResponseToolUseActivitySearchCounters struct {
+	Files         int64 `json:"files"`
+	Organizations int64 `json:"organizations"`
+	Pages         int64 `json:"pages"`
+	Papers        int64 `json:"papers"`
+	Sources       int64 `json:"sources"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Files         respjson.Field
+		Organizations respjson.Field
+		Pages         respjson.Field
+		Papers        respjson.Field
+		Sources       respjson.Field
+		ExtraFields   map[string]respjson.Field
+		raw           string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r AssistantV2MessageListResponseToolUseActivitySearchCounters) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *AssistantV2MessageListResponseToolUseActivitySearchCounters) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
 
 type AssistantV2MessageSelectParams struct {
 	LlmChat string `path:"llmChat" api:"required" format:"uuid" json:"-"`
