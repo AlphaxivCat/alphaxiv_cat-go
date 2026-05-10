@@ -368,8 +368,8 @@ type UserV3GetActivityResponseItemAnnotation struct {
 	HighlightRects []UserV3GetActivityResponseItemAnnotationHighlightRect `json:"highlightRects" api:"required"`
 	SelectedText   string                                                 `json:"selectedText" api:"required"`
 	// Any of "highlight".
-	Type  string `json:"type" api:"required"`
-	Color string `json:"color" api:"nullable"`
+	Type           string `json:"type" api:"required"`
+	HighlightColor string `json:"highlightColor" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AnchorPosition respjson.Field
@@ -377,7 +377,7 @@ type UserV3GetActivityResponseItemAnnotation struct {
 		HighlightRects respjson.Field
 		SelectedText   respjson.Field
 		Type           respjson.Field
-		Color          respjson.Field
+		HighlightColor respjson.Field
 		ExtraFields    map[string]respjson.Field
 		raw            string
 	} `json:"-"`
@@ -597,12 +597,10 @@ func (r *UserV3GetClaimedPapersResponse) UnmarshalJSON(data []byte) error {
 }
 
 type UserV3GetCurrentUserResponse struct {
-	Badges      UserV3GetCurrentUserResponseBadges      `json:"badges" api:"required"`
 	Preferences UserV3GetCurrentUserResponsePreferences `json:"preferences" api:"required"`
 	User        UserV3GetCurrentUserResponseUser        `json:"user" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Badges      respjson.Field
 		Preferences respjson.Field
 		User        respjson.Field
 		ExtraFields map[string]respjson.Field
@@ -613,22 +611,6 @@ type UserV3GetCurrentUserResponse struct {
 // Returns the unmodified JSON received from the API
 func (r UserV3GetCurrentUserResponse) RawJSON() string { return r.JSON.raw }
 func (r *UserV3GetCurrentUserResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type UserV3GetCurrentUserResponseBadges struct {
-	Site int64 `json:"site" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Site        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r UserV3GetCurrentUserResponseBadges) RawJSON() string { return r.JSON.raw }
-func (r *UserV3GetCurrentUserResponseBadges) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -682,10 +664,9 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 	AssistantStyleSelection string                                                            `json:"assistantStyleSelection" api:"required"`
 	// Any of "assistant", "notes", "similar".
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
-	// Any of "comments", "assistant", "similar", "notes", "social".
+	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Twitter (X)",
-	// "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
 	FeedSort                string `json:"feedSort" api:"required"`
 	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
 	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
@@ -794,28 +775,27 @@ func (r *UserV3GetCurrentUserResponsePreferencesFolder) UnmarshalJSON(data []byt
 }
 
 type UserV3GetCurrentUserResponseUser struct {
-	ID                       string                                             `json:"id" api:"required" format:"uuid"`
-	Avatar                   []UserV3GetCurrentUserResponseUserAvatar           `json:"avatar" api:"required"`
-	Biography                string                                             `json:"biography" api:"required"`
-	BlueskyUsername          string                                             `json:"blueskyUsername" api:"required"`
-	Email                    string                                             `json:"email" api:"required"`
-	FirstLogin               bool                                               `json:"firstLogin" api:"required"`
-	FollowerCount            float64                                            `json:"followerCount" api:"required"`
-	FollowingCount           float64                                            `json:"followingCount" api:"required"`
-	FollowingTopics          []string                                           `json:"followingTopics" api:"required"`
-	FollowingTopicsCount     float64                                            `json:"followingTopicsCount" api:"required"`
-	GitHubUsername           string                                             `json:"githubUsername" api:"required"`
-	GoogleScholarID          string                                             `json:"googleScholarId" api:"required"`
-	Institution              string                                             `json:"institution" api:"required"`
-	LinkedinUsername         string                                             `json:"linkedinUsername" api:"required"`
-	Location                 string                                             `json:"location" api:"required"`
-	OrcidID                  string                                             `json:"orcidId" api:"required"`
-	Preferences              UserV3GetCurrentUserResponseUserPreferences        `json:"preferences" api:"required"`
-	PublicEmail              string                                             `json:"publicEmail" api:"required"`
-	PushSubscriptions        []UserV3GetCurrentUserResponseUserPushSubscription `json:"pushSubscriptions" api:"required"`
-	RealName                 string                                             `json:"realName" api:"required"`
-	Reputation               float64                                            `json:"reputation" api:"required"`
-	RequestedImplementations []string                                           `json:"requestedImplementations" api:"required" format:"uuid"`
+	ID                       string                                      `json:"id" api:"required" format:"uuid"`
+	Avatar                   []UserV3GetCurrentUserResponseUserAvatar    `json:"avatar" api:"required"`
+	Biography                string                                      `json:"biography" api:"required"`
+	BlueskyUsername          string                                      `json:"blueskyUsername" api:"required"`
+	Email                    string                                      `json:"email" api:"required"`
+	FirstLogin               bool                                        `json:"firstLogin" api:"required"`
+	FollowerCount            float64                                     `json:"followerCount" api:"required"`
+	FollowingCount           float64                                     `json:"followingCount" api:"required"`
+	FollowingTopics          []string                                    `json:"followingTopics" api:"required"`
+	FollowingTopicsCount     float64                                     `json:"followingTopicsCount" api:"required"`
+	GitHubUsername           string                                      `json:"githubUsername" api:"required"`
+	GoogleScholarID          string                                      `json:"googleScholarId" api:"required"`
+	Institution              string                                      `json:"institution" api:"required"`
+	LinkedinUsername         string                                      `json:"linkedinUsername" api:"required"`
+	Location                 string                                      `json:"location" api:"required"`
+	OrcidID                  string                                      `json:"orcidId" api:"required"`
+	Preferences              UserV3GetCurrentUserResponseUserPreferences `json:"preferences" api:"required"`
+	PublicEmail              string                                      `json:"publicEmail" api:"required"`
+	RealName                 string                                      `json:"realName" api:"required"`
+	Reputation               float64                                     `json:"reputation" api:"required"`
+	RequestedImplementations []string                                    `json:"requestedImplementations" api:"required" format:"uuid"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role                   string                                          `json:"role" api:"required"`
 	SemanticScholar        UserV3GetCurrentUserResponseUserSemanticScholar `json:"semanticScholar" api:"required"`
@@ -846,7 +826,6 @@ type UserV3GetCurrentUserResponseUser struct {
 		OrcidID                  respjson.Field
 		Preferences              respjson.Field
 		PublicEmail              respjson.Field
-		PushSubscriptions        respjson.Field
 		RealName                 respjson.Field
 		Reputation               respjson.Field
 		RequestedImplementations respjson.Field
@@ -939,10 +918,9 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 	AssistantStyleSelection string                                                                `json:"assistantStyleSelection" api:"required"`
 	// Any of "assistant", "notes", "similar".
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
-	// Any of "comments", "assistant", "similar", "notes", "social".
+	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Twitter (X)",
-	// "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
 	FeedSort                string `json:"feedSort" api:"required"`
 	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
 	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
@@ -1047,26 +1025,6 @@ type UserV3GetCurrentUserResponseUserPreferencesFolder struct {
 // Returns the unmodified JSON received from the API
 func (r UserV3GetCurrentUserResponseUserPreferencesFolder) RawJSON() string { return r.JSON.raw }
 func (r *UserV3GetCurrentUserResponseUserPreferencesFolder) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type UserV3GetCurrentUserResponseUserPushSubscription struct {
-	AuthKey   string `json:"authKey" api:"required"`
-	Endpoint  string `json:"endpoint" api:"required"`
-	P256dhKey string `json:"p256dhKey" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		AuthKey     respjson.Field
-		Endpoint    respjson.Field
-		P256dhKey   respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r UserV3GetCurrentUserResponseUserPushSubscription) RawJSON() string { return r.JSON.raw }
-func (r *UserV3GetCurrentUserResponseUserPushSubscription) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1790,10 +1748,9 @@ type UserV3UpdatePreferencesResponseBase struct {
 	AssistantStyleSelection string                                                    `json:"assistantStyleSelection" api:"required"`
 	// Any of "assistant", "notes", "similar".
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
-	// Any of "comments", "assistant", "similar", "notes", "social".
+	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Twitter (X)",
-	// "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
 	FeedSort                string `json:"feedSort" api:"required"`
 	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
 	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
@@ -2212,7 +2169,7 @@ type UserV3UpdatePreferencesParamsBase struct {
 	ShowModelThinking                param.Opt[bool]    `json:"showModelThinking,omitzero"`
 	// Any of "assistant", "notes", "similar".
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab,omitzero"`
-	// Any of "comments", "assistant", "similar", "notes", "social".
+	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab,omitzero"`
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
 	// "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja",
@@ -2222,8 +2179,7 @@ type UserV3UpdatePreferencesParamsBase struct {
 	PreferredLanguage       string                                                  `json:"preferredLanguage,omitzero"`
 	AssistantCustomStyles   []UserV3UpdatePreferencesParamsBaseAssistantCustomStyle `json:"assistantCustomStyles,omitzero"`
 	AssistantStyleSelection string                                                  `json:"assistantStyleSelection,omitzero"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Twitter (X)",
-	// "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
 	FeedSort string `json:"feedSort,omitzero"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch,omitzero"`
@@ -2243,10 +2199,10 @@ func init() {
 		"defaultPrivatePaperSidebarTab", "assistant", "notes", "similar",
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
-		"defaultPublicPaperSidebarTab", "comments", "assistant", "similar", "notes", "social",
+		"defaultPublicPaperSidebarTab", "comments", "assistant", "similar", "notes",
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
-		"feedSort", "Hot", "Comments", "Views", "Likes", "GitHub", "Twitter (X)", "Recommended",
+		"feedSort", "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended",
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
 		"preferredLanguage", "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es", "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja", "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa", "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh",
