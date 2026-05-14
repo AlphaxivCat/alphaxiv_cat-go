@@ -28,7 +28,7 @@ func TestPaperMetadataGetLatestMetadataWithOptionalParams(t *testing.T) {
 	)
 	_, err := client.Papers.Metadata.GetLatestMetadata(
 		context.TODO(),
-		"x",
+		"upid",
 		alphaxivcat.PaperMetadataGetLatestMetadataParams{
 			PreventTracking: alphaxivcat.String("preventTracking"),
 		},
@@ -57,9 +57,9 @@ func TestPaperMetadataGetVersionMetadataWithOptionalParams(t *testing.T) {
 	)
 	_, err := client.Papers.Metadata.GetVersionMetadata(
 		context.TODO(),
-		"x",
+		"469",
 		alphaxivcat.PaperMetadataGetVersionMetadataParams{
-			Upid:            "x",
+			Upid:            "upid",
 			PreventTracking: alphaxivcat.String("preventTracking"),
 		},
 	)

@@ -28,7 +28,7 @@ func TestPaperIngestIngestLatestWithOptionalParams(t *testing.T) {
 	)
 	_, err := client.Papers.Ingest.IngestLatest(
 		context.TODO(),
-		"x",
+		"upid",
 		alphaxivcat.PaperIngestIngestLatestParams{
 			PreventTracking: alphaxivcat.String("preventTracking"),
 		},
@@ -57,9 +57,9 @@ func TestPaperIngestIngestVersionWithOptionalParams(t *testing.T) {
 	)
 	_, err := client.Papers.Ingest.IngestVersion(
 		context.TODO(),
-		"x",
+		"v469",
 		alphaxivcat.PaperIngestIngestVersionParams{
-			Upid:            "x",
+			Upid:            "upid",
 			PreventTracking: alphaxivcat.String("preventTracking"),
 		},
 	)
