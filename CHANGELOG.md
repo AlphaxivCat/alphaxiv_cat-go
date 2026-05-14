@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0 (2026-05-14)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** api update ([dcdc10d](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/dcdc10d099fc0b53cc922bf5645a73944cc23684))
+* **client:** optimize json encoder for internal types ([6827e7e](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/6827e7e522918d8e922b94becdc84ab7dddce4f0))
+
 ## 0.8.0 (2026-05-08)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.7.0...v0.8.0)
