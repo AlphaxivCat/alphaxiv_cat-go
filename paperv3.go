@@ -48,7 +48,8 @@ func NewPaperV3Service(opts ...option.RequestOption) (r PaperV3Service) {
 
 // Retrieve paper version metadata. Fetches from ArXiv if needed.
 //
-// Source file: `api-server/src/controllers/papers/v3/get-paper.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-paper.controller.ts`
 func (r *PaperV3Service) Get(ctx context.Context, unresolved string, opts ...option.RequestOption) (res *PaperV3GetResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if unresolved == "" {
@@ -62,7 +63,8 @@ func (r *PaperV3Service) Get(ctx context.Context, unresolved string, opts ...opt
 
 // Create a public comment or private note on a paper.
 //
-// Source file: `api-server/src/controllers/papers/v3/post-comment.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/post-comment.controller.ts`
 func (r *PaperV3Service) Comment(ctx context.Context, version string, body PaperV3CommentParams, opts ...option.RequestOption) (res *PaperV3CommentResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if version == "" {
@@ -77,7 +79,7 @@ func (r *PaperV3Service) Comment(ctx context.Context, version string, body Paper
 // Remove votes from many papers at once
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/remove-vote-batch.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/remove-vote-batch.controller.ts`
 func (r *PaperV3Service) DeleteVotes(ctx context.Context, body PaperV3DeleteVotesParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -89,7 +91,7 @@ func (r *PaperV3Service) DeleteVotes(ctx context.Context, body PaperV3DeleteVote
 // Create or update an implementation for a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/create-or-update-implementation.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/create-or-update-implementation.controller.ts`
 func (r *PaperV3Service) Implementation(ctx context.Context, paperGroupID string, body PaperV3ImplementationParams, opts ...option.RequestOption) (res *PaperV3ImplementationResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperGroupID == "" {
@@ -104,7 +106,7 @@ func (r *PaperV3Service) Implementation(ctx context.Context, paperGroupID string
 // Kickoff paper countries processing for hot papers
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/kickoff-paper-countries.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/kickoff-paper-countries.controller.ts`
 func (r *PaperV3Service) KickoffPaperCountries(ctx context.Context, body PaperV3KickoffPaperCountriesParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -116,7 +118,7 @@ func (r *PaperV3Service) KickoffPaperCountries(ctx context.Context, body PaperV3
 // Kickoff paper full text processing for recent papers
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/kickoff-paper-full-text.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/kickoff-paper-full-text.controller.ts`
 func (r *PaperV3Service) KickoffPaperFullText(ctx context.Context, body PaperV3KickoffPaperFullTextParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -128,7 +130,7 @@ func (r *PaperV3Service) KickoffPaperFullText(ctx context.Context, body PaperV3K
 // Kickoff paper podcasts on Uptash for a subset of paper groups
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/kickoff-paper-podcasts.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/kickoff-paper-podcasts.controller.ts`
 func (r *PaperV3Service) KickoffPaperPodcasts(ctx context.Context, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -140,7 +142,7 @@ func (r *PaperV3Service) KickoffPaperPodcasts(ctx context.Context, opts ...optio
 // Kickoff background job to generate thumbnails for trending papers
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/kickoff-thumbnails-trending-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/kickoff-thumbnails-trending-papers.controller.ts`
 func (r *PaperV3Service) KickoffThumbnailsTrendingPapers(ctx context.Context, opts ...option.RequestOption) (res *PaperV3KickoffThumbnailsTrendingPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/kickoff-thumbnails-trending-papers"
@@ -150,7 +152,8 @@ func (r *PaperV3Service) KickoffThumbnailsTrendingPapers(ctx context.Context, op
 
 // Toggle your like status on a paper group
 //
-// Source file: `api-server/src/controllers/papers/v3/like-paper.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/like-paper.controller.ts`
 func (r *PaperV3Service) Like(ctx context.Context, group string, opts ...option.RequestOption) (res *PaperV3LikeResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if group == "" {
@@ -165,7 +168,7 @@ func (r *PaperV3Service) Like(ctx context.Context, group string, opts ...option.
 // Generates a podcast for a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/generate-paper-podcast.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/generate-paper-podcast.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperV3Service) Podcast(ctx context.Context, paperGroupID string, opts ...option.RequestOption) (err error) {
@@ -182,7 +185,8 @@ func (r *PaperV3Service) Podcast(ctx context.Context, paperGroupID string, opts 
 
 // Generates AI overviews for a paper version
 //
-// Source file: `api-server/src/controllers/papers/v3/process-ai.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/process-ai.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperV3Service) ProcessAI(ctx context.Context, paperVersionID string, body PaperV3ProcessAIParams, opts ...option.RequestOption) (err error) {
@@ -201,7 +205,7 @@ func (r *PaperV3Service) ProcessAI(ctx context.Context, paperVersionID string, b
 // affiliations
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/process-countries.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/process-countries.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperV3Service) ProcessCountries(ctx context.Context, body PaperV3ProcessCountriesParams, opts ...option.RequestOption) (err error) {
@@ -215,7 +219,7 @@ func (r *PaperV3Service) ProcessCountries(ctx context.Context, body PaperV3Proce
 // Processes and extracts full text from paper PDFs for indexing and search
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/process-full-text.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/process-full-text.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperV3Service) ProcessFullText(ctx context.Context, body PaperV3ProcessFullTextParams, opts ...option.RequestOption) (err error) {
@@ -229,7 +233,7 @@ func (r *PaperV3Service) ProcessFullText(ctx context.Context, body PaperV3Proces
 // Clear 'is_last_X_days' flags from paper embeddings that have become too old
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/prune-embeddings-by-date.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/prune-embeddings-by-date.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperV3Service) PruneEmbeddingsByDate(ctx context.Context, opts ...option.RequestOption) (res *PaperV3PruneEmbeddingsByDateResponse, err error) {
@@ -242,7 +246,7 @@ func (r *PaperV3Service) PruneEmbeddingsByDate(ctx context.Context, opts ...opti
 // Toggle your implementation request status on a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/request-paper-implementation.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/request-paper-implementation.controller.ts`
 func (r *PaperV3Service) RequestImplementation(ctx context.Context, group string, body PaperV3RequestImplementationParams, opts ...option.RequestOption) (res *PaperV3RequestImplementationResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if group == "" {
@@ -257,7 +261,7 @@ func (r *PaperV3Service) RequestImplementation(ctx context.Context, group string
 // Request podcast generation for a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/request-podcast.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/request-podcast.controller.ts`
 func (r *PaperV3Service) RequestPodcast(ctx context.Context, paperGroupID string, opts ...option.RequestOption) (res *PaperV3RequestPodcastResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperGroupID == "" {
@@ -271,7 +275,8 @@ func (r *PaperV3Service) RequestPodcast(ctx context.Context, paperGroupID string
 
 // Get all paper universal IDs sorted by most recent publication date
 //
-// Source file: `api-server/src/controllers/papers/v3/get-all-papers.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-all-papers.controller.ts`
 func (r *PaperV3Service) GetAll(ctx context.Context, query PaperV3GetAllParams, opts ...option.RequestOption) (res *PaperV3GetAllResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/all"
@@ -281,7 +286,8 @@ func (r *PaperV3Service) GetAll(ctx context.Context, query PaperV3GetAllParams, 
 
 // Get an initial batch of diverse papers on the given topics for recommendations
 //
-// Source file: `api-server/src/controllers/papers/v3/diverse-papers.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/diverse-papers.controller.ts`
 func (r *PaperV3Service) GetDiversePapers(ctx context.Context, query PaperV3GetDiversePapersParams, opts ...option.RequestOption) (res *[]PaperV3GetDiversePapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/diverse-papers"
@@ -291,7 +297,8 @@ func (r *PaperV3Service) GetDiversePapers(ctx context.Context, query PaperV3GetD
 
 // Get an optionally filtered list of papers for the main feed
 //
-// Source file: `api-server/src/controllers/papers/v3/feed.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/feed.controller.ts`
 func (r *PaperV3Service) GetFeed(ctx context.Context, query PaperV3GetFeedParams, opts ...option.RequestOption) (res *PaperV3GetFeedResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/feed"
@@ -302,7 +309,7 @@ func (r *PaperV3Service) GetFeed(ctx context.Context, query PaperV3GetFeedParams
 // Get list of figure URLs for a paper
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/get-paper-figures.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-paper-figures.controller.ts`
 func (r *PaperV3Service) GetFigures(ctx context.Context, paperGroupID string, opts ...option.RequestOption) (res *PaperV3GetFiguresResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperGroupID == "" {
@@ -316,7 +323,8 @@ func (r *PaperV3Service) GetFigures(ctx context.Context, paperGroupID string, op
 
 // Get the full extracted text of a paper, page by page
 //
-// Source file: `api-server/src/controllers/papers/v3/get-full-text.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-full-text.controller.ts`
 func (r *PaperV3Service) GetFullText(ctx context.Context, paperVersion string, opts ...option.RequestOption) (res *PaperV3GetFullTextResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperVersion == "" {
@@ -330,7 +338,8 @@ func (r *PaperV3Service) GetFullText(ctx context.Context, paperVersion string, o
 
 // Retrieve metrics for a paper (comments count, upvotes, views)
 //
-// Source file: `api-server/src/controllers/papers/v3/get-metrics.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-metrics.controller.ts`
 func (r *PaperV3Service) GetMetrics(ctx context.Context, unresolved string, opts ...option.RequestOption) (res *PaperV3GetMetricsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if unresolved == "" {
@@ -345,7 +354,7 @@ func (r *PaperV3Service) GetMetrics(ctx context.Context, unresolved string, opts
 // Retrieve paper data for paper preview cards
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/get-paper-preview.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-paper-preview.controller.ts`
 func (r *PaperV3Service) GetPreview(ctx context.Context, id string, opts ...option.RequestOption) (res *PaperV3GetPreviewResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -360,7 +369,7 @@ func (r *PaperV3Service) GetPreview(ctx context.Context, id string, opts ...opti
 // Get papers semantically similar to the selected one
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/get-similar-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-similar-papers.controller.ts`
 func (r *PaperV3Service) GetSimilarPapers(ctx context.Context, id string, query PaperV3GetSimilarPapersParams, opts ...option.RequestOption) (res *[]PaperV3GetSimilarPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -375,7 +384,7 @@ func (r *PaperV3Service) GetSimilarPapers(ctx context.Context, id string, query 
 // Get some papers on the provided topics that are unrelated to the provided papers
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/unrelated-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/unrelated-papers.controller.ts`
 func (r *PaperV3Service) GetUnrelated(ctx context.Context, query PaperV3GetUnrelatedParams, opts ...option.RequestOption) (res *[]PaperV3GetUnrelatedResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/unrelated"
@@ -386,7 +395,7 @@ func (r *PaperV3Service) GetUnrelated(ctx context.Context, query PaperV3GetUnrel
 // Track paper view event for analytics
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/mark-paper-view.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/mark-paper-view.controller.ts`
 func (r *PaperV3Service) View(ctx context.Context, group string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

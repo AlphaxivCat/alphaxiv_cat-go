@@ -38,7 +38,8 @@ func NewPaperVersionService(opts ...option.RequestOption) (r PaperVersionService
 
 // Request AI overview generation for a paper version
 //
-// Source file: `api-server/src/controllers/v2/papers/request-ai.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v2/papers/request-ai.controller.ts`
 func (r *PaperVersionService) RequestAIOverview(ctx context.Context, versionOrder string, params PaperVersionRequestAIOverviewParams, opts ...option.RequestOption) (res *PaperVersionRequestAIOverviewResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if params.Upid == "" {
@@ -57,7 +58,7 @@ func (r *PaperVersionService) RequestAIOverview(ctx context.Context, versionOrde
 // Request AI overview translation for a paper version
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/request-ai-translation.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/request-ai-translation.controller.ts`
 func (r *PaperVersionService) RequestAITranslation(ctx context.Context, language PaperVersionRequestAITranslationParamsLanguage, body PaperVersionRequestAITranslationParams, opts ...option.RequestOption) (res *PaperVersionRequestAITranslationResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if body.Upid == "" {

@@ -37,7 +37,7 @@ func NewUserV3SemanticScholarService(opts ...option.RequestOption) (r UserV3Sema
 // Link a user's account to a Semantic Scholar profile based on claimed papers
 //
 // Source file:
-// `api-server/src/controllers/users/v3/link-semantic-scholar.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/link-semantic-scholar.controller.ts`
 //
 // Deprecated: deprecated
 func (r *UserV3SemanticScholarService) Link(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3SemanticScholarLinkResponse, err error) {
@@ -54,7 +54,7 @@ func (r *UserV3SemanticScholarService) Link(ctx context.Context, id string, opts
 // Refresh Semantic Scholar data for a linked user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/scrape-semantic-scholar.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/scrape-semantic-scholar.controller.ts`
 //
 // Deprecated: deprecated
 func (r *UserV3SemanticScholarService) Scrape(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3SemanticScholarScrapeResponse, err error) {

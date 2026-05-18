@@ -36,7 +36,8 @@ func NewAssistantService(opts ...option.RequestOption) (r AssistantService) {
 
 // Upload a file for use with the assistant (max 30MB)
 //
-// Source file: `api-server/src/controllers/v1/assistant/upload-file.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v1/assistant/upload-file.controller.ts`
 func (r *AssistantService) UploadFile(ctx context.Context, opts ...option.RequestOption) (res *AssistantUploadFileResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/assistant/upload-file"

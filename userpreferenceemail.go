@@ -36,7 +36,7 @@ func NewUserPreferenceEmailService(opts ...option.RequestOption) (r UserPreferen
 // Update email preferences for the authenticated user
 //
 // Source file:
-// `api-server/src/controllers/v2/users/update-email-preferences.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/users/update-email-preferences.controller.ts`
 func (r *UserPreferenceEmailService) Update(ctx context.Context, body UserPreferenceEmailUpdateParams, opts ...option.RequestOption) (res *UserPreferenceEmailUpdateResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/users/preferences/email"
@@ -47,7 +47,7 @@ func (r *UserPreferenceEmailService) Update(ctx context.Context, body UserPrefer
 // Get email preferences for the authenticated user
 //
 // Source file:
-// `api-server/src/controllers/v2/users/get-email-preferences.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/users/get-email-preferences.controller.ts`
 func (r *UserPreferenceEmailService) Get(ctx context.Context, opts ...option.RequestOption) (res *UserPreferenceEmailGetResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/users/preferences/email"

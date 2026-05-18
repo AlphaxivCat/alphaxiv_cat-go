@@ -49,7 +49,7 @@ func NewUserV3Service(opts ...option.RequestOption) (r UserV3Service) {
 // Generate a biography and institution for a user using their claimed papers
 //
 // Source file:
-// `api-server/src/controllers/users/v3/autocomplete-profile.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/autocomplete-profile.controller.ts`
 //
 // Deprecated: deprecated
 func (r *UserV3Service) AutocompleteProfile(ctx context.Context, body UserV3AutocompleteProfileParams, opts ...option.RequestOption) (res *UserV3AutocompleteProfileResponse, err error) {
@@ -61,7 +61,8 @@ func (r *UserV3Service) AutocompleteProfile(ctx context.Context, body UserV3Auto
 
 // Delete the given banner
 //
-// Source file: `api-server/src/controllers/users/v3/delete-banner.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/delete-banner.controller.ts`
 func (r *UserV3Service) DeleteBanner(ctx context.Context, bannerID string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -76,7 +77,8 @@ func (r *UserV3Service) DeleteBanner(ctx context.Context, bannerID string, opts 
 
 // Deletes the user's account
 //
-// Source file: `api-server/src/controllers/users/v3/delete-own-user.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/delete-own-user.controller.ts`
 func (r *UserV3Service) DeleteOwnUser(ctx context.Context, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -87,7 +89,8 @@ func (r *UserV3Service) DeleteOwnUser(ctx context.Context, opts ...option.Reques
 
 // Retrieve public activity timeline for a user
 //
-// Source file: `api-server/src/controllers/users/v3/get-activity.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-activity.controller.ts`
 func (r *UserV3Service) GetActivity(ctx context.Context, id string, query UserV3GetActivityParams, opts ...option.RequestOption) (res *[]UserV3GetActivityResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -102,7 +105,7 @@ func (r *UserV3Service) GetActivity(ctx context.Context, id string, query UserV3
 // Retrieve the claimed papers for a user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-claimed-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-claimed-papers.controller.ts`
 func (r *UserV3Service) GetClaimedPapers(ctx context.Context, id string, query UserV3GetClaimedPapersParams, opts ...option.RequestOption) (res *[]UserV3GetClaimedPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -117,7 +120,7 @@ func (r *UserV3Service) GetClaimedPapers(ctx context.Context, id string, query U
 // Retrieve information about yourself
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-current-user.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-current-user.controller.ts`
 func (r *UserV3Service) GetCurrentUser(ctx context.Context, opts ...option.RequestOption) (res *UserV3GetCurrentUserResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3"
@@ -127,7 +130,8 @@ func (r *UserV3Service) GetCurrentUser(ctx context.Context, opts ...option.Reque
 
 // Retrieve highlighted activity for a user
 //
-// Source file: `api-server/src/controllers/users/v3/get-featured.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-featured.controller.ts`
 func (r *UserV3Service) GetFeaturedActivity(ctx context.Context, id string, opts ...option.RequestOption) (res *[]UserV3GetFeaturedActivityResponseUnion, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -141,7 +145,8 @@ func (r *UserV3Service) GetFeaturedActivity(ctx context.Context, id string, opts
 
 // List the users following the specified user
 //
-// Source file: `api-server/src/controllers/users/v3/get-followers.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-followers.controller.ts`
 func (r *UserV3Service) GetFollowers(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3GetFollowersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -155,7 +160,8 @@ func (r *UserV3Service) GetFollowers(ctx context.Context, id string, opts ...opt
 
 // Retrieve weekly and all-time leaderboards for users ranked by reputation
 //
-// Source file: `api-server/src/controllers/users/v3/get-leaderboard.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-leaderboard.controller.ts`
 func (r *UserV3Service) GetLeaderboard(ctx context.Context, opts ...option.RequestOption) (res *UserV3GetLeaderboardResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/leaderboard"
@@ -165,7 +171,8 @@ func (r *UserV3Service) GetLeaderboard(ctx context.Context, opts ...option.Reque
 
 // Retrieve a user's basic information given its UUID
 //
-// Source file: `api-server/src/controllers/users/v3/get-user.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-user.controller.ts`
 func (r *UserV3Service) GetUserByUuid(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3GetUserByUuidResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -180,7 +187,7 @@ func (r *UserV3Service) GetUserByUuid(ctx context.Context, id string, opts ...op
 // Retrieve the view history for the current user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-viewed-history.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-viewed-history.controller.ts`
 func (r *UserV3Service) GetViewedHistory(ctx context.Context, query UserV3GetViewedHistoryParams, opts ...option.RequestOption) (res *[]UserV3GetViewedHistoryResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/viewed-history"
@@ -191,7 +198,7 @@ func (r *UserV3Service) GetViewedHistory(ctx context.Context, query UserV3GetVie
 // Send a notification digest email for the given user when necessary.
 //
 // Source file:
-// `api-server/src/controllers/users/v3/process-notification-email.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/process-notification-email.controller.ts`
 //
 // Deprecated: deprecated
 func (r *UserV3Service) ProcessNotificationEmail(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3ProcessNotificationEmailResponse, err error) {
@@ -207,7 +214,8 @@ func (r *UserV3Service) ProcessNotificationEmail(ctx context.Context, id string,
 
 // Search for users by name, username, or institution
 //
-// Source file: `api-server/src/controllers/users/v3/search-users.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/search-users.controller.ts`
 func (r *UserV3Service) Search(ctx context.Context, query UserV3SearchParams, opts ...option.RequestOption) (res *UserV3SearchResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/search"
@@ -218,7 +226,7 @@ func (r *UserV3Service) Search(ctx context.Context, query UserV3SearchParams, op
 // Follow or unfollow another user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/toggle-follow-user.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/toggle-follow-user.controller.ts`
 func (r *UserV3Service) ToggleFollowUser(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3ToggleFollowUserResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -233,7 +241,7 @@ func (r *UserV3Service) ToggleFollowUser(ctx context.Context, id string, opts ..
 // Update base or banner preferences for the authenticated user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/update-preferences.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/update-preferences.controller.ts`
 func (r *UserV3Service) UpdatePreferences(ctx context.Context, body UserV3UpdatePreferencesParams, opts ...option.RequestOption) (res *UserV3UpdatePreferencesResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/preferences"
@@ -243,7 +251,8 @@ func (r *UserV3Service) UpdatePreferences(ctx context.Context, body UserV3Update
 
 // Update profile details for the authenticated user
 //
-// Source file: `api-server/src/controllers/users/v3/update-profile.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/update-profile.controller.ts`
 func (r *UserV3Service) UpdateProfile(ctx context.Context, body UserV3UpdateProfileParams, opts ...option.RequestOption) (res *UserV3UpdateProfileResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/profile"
@@ -253,7 +262,8 @@ func (r *UserV3Service) UpdateProfile(ctx context.Context, body UserV3UpdateProf
 
 // Upload or remove the authenticated user's avatar image.
 //
-// Source file: `api-server/src/controllers/users/v3/upload-avatar.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/upload-avatar.controller.ts`
 func (r *UserV3Service) UploadAvatar(ctx context.Context, opts ...option.RequestOption) (res *UserV3UploadAvatarResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/avatar"

@@ -41,7 +41,7 @@ func NewUserV3FollowingService(opts ...option.RequestOption) (r UserV3FollowingS
 // List the users that the given user is following
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-following-users.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-following-users.controller.ts`
 func (r *UserV3FollowingService) List(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3FollowingListResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {

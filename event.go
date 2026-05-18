@@ -34,7 +34,8 @@ func NewEventService(opts ...option.RequestOption) (r EventService) {
 
 // Retrieve events for the homepage
 //
-// Source file: `api-server/src/controllers/events/v1/get-events.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/events/v1/get-events.controller.ts`
 func (r *EventService) List(ctx context.Context, opts ...option.RequestOption) (res *[]EventListResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "events/v1"

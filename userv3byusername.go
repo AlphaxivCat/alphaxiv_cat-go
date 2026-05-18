@@ -39,7 +39,7 @@ func NewUserV3ByUsernameService(opts ...option.RequestOption) (r UserV3ByUsernam
 // This route is specifically for the Client's user page
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-profile-page-by-username.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-profile-page-by-username.controller.ts`
 func (r *UserV3ByUsernameService) GetProfilePage(ctx context.Context, username string, opts ...option.RequestOption) (res *UserV3ByUsernameGetProfilePageResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if username == "" {
@@ -54,7 +54,7 @@ func (r *UserV3ByUsernameService) GetProfilePage(ctx context.Context, username s
 // Retrieve a user's basic information given its username
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-user-by-username.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-user-by-username.controller.ts`
 func (r *UserV3ByUsernameService) GetUser(ctx context.Context, username string, opts ...option.RequestOption) (res *UserV3ByUsernameGetUserResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if username == "" {

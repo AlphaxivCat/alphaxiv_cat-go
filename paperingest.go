@@ -41,7 +41,7 @@ func NewPaperIngestService(opts ...option.RequestOption) (r PaperIngestService) 
 // extension)
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/ingest-paper-latest.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/ingest-paper-latest.controller.ts`
 func (r *PaperIngestService) IngestLatest(ctx context.Context, upid string, query PaperIngestIngestLatestParams, opts ...option.RequestOption) (res *PaperIngestIngestLatestResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if upid == "" {
@@ -56,7 +56,8 @@ func (r *PaperIngestService) IngestLatest(ctx context.Context, upid string, quer
 // Ingest a paper version if it doesn't exist (deprecated, used by browser
 // extension)
 //
-// Source file: `api-server/src/controllers/v2/papers/ingest-paper.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v2/papers/ingest-paper.controller.ts`
 func (r *PaperIngestService) IngestVersion(ctx context.Context, versionLabel string, params PaperIngestIngestVersionParams, opts ...option.RequestOption) (res *PaperIngestIngestVersionResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if params.Upid == "" {
@@ -89,17 +90,15 @@ func (r *PaperIngestIngestLatestResponse) UnmarshalJSON(data []byte) error {
 }
 
 type PaperIngestIngestLatestResponseData struct {
-	Authors         []any                                      `json:"authors" api:"required"`
-	MaxVersionOrder float64                                    `json:"max_version_order" api:"required"`
-	PdfInfo         PaperIngestIngestLatestResponseDataPdfInfo `json:"pdf_info" api:"required"`
-	VerifiedAuthors []any                                      `json:"verified_authors" api:"required"`
-	PaperGroup      any                                        `json:"paper_group"`
-	PaperVersion    any                                        `json:"paper_version"`
+	Authors         []any   `json:"authors" api:"required"`
+	MaxVersionOrder float64 `json:"max_version_order" api:"required"`
+	VerifiedAuthors []any   `json:"verified_authors" api:"required"`
+	PaperGroup      any     `json:"paper_group"`
+	PaperVersion    any     `json:"paper_version"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Authors         respjson.Field
 		MaxVersionOrder respjson.Field
-		PdfInfo         respjson.Field
 		VerifiedAuthors respjson.Field
 		PaperGroup      respjson.Field
 		PaperVersion    respjson.Field
@@ -111,22 +110,6 @@ type PaperIngestIngestLatestResponseData struct {
 // Returns the unmodified JSON received from the API
 func (r PaperIngestIngestLatestResponseData) RawJSON() string { return r.JSON.raw }
 func (r *PaperIngestIngestLatestResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperIngestIngestLatestResponseDataPdfInfo struct {
-	FetcherURL string `json:"fetcher_url" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		FetcherURL  respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperIngestIngestLatestResponseDataPdfInfo) RawJSON() string { return r.JSON.raw }
-func (r *PaperIngestIngestLatestResponseDataPdfInfo) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -147,17 +130,15 @@ func (r *PaperIngestIngestVersionResponse) UnmarshalJSON(data []byte) error {
 }
 
 type PaperIngestIngestVersionResponseData struct {
-	Authors         []any                                       `json:"authors" api:"required"`
-	MaxVersionOrder float64                                     `json:"max_version_order" api:"required"`
-	PdfInfo         PaperIngestIngestVersionResponseDataPdfInfo `json:"pdf_info" api:"required"`
-	VerifiedAuthors []any                                       `json:"verified_authors" api:"required"`
-	PaperGroup      any                                         `json:"paper_group"`
-	PaperVersion    any                                         `json:"paper_version"`
+	Authors         []any   `json:"authors" api:"required"`
+	MaxVersionOrder float64 `json:"max_version_order" api:"required"`
+	VerifiedAuthors []any   `json:"verified_authors" api:"required"`
+	PaperGroup      any     `json:"paper_group"`
+	PaperVersion    any     `json:"paper_version"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Authors         respjson.Field
 		MaxVersionOrder respjson.Field
-		PdfInfo         respjson.Field
 		VerifiedAuthors respjson.Field
 		PaperGroup      respjson.Field
 		PaperVersion    respjson.Field
@@ -169,22 +150,6 @@ type PaperIngestIngestVersionResponseData struct {
 // Returns the unmodified JSON received from the API
 func (r PaperIngestIngestVersionResponseData) RawJSON() string { return r.JSON.raw }
 func (r *PaperIngestIngestVersionResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperIngestIngestVersionResponseDataPdfInfo struct {
-	FetcherURL string `json:"fetcher_url" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		FetcherURL  respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperIngestIngestVersionResponseDataPdfInfo) RawJSON() string { return r.JSON.raw }
-func (r *PaperIngestIngestVersionResponseDataPdfInfo) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

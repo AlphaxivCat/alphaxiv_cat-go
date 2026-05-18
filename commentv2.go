@@ -39,7 +39,7 @@ func NewCommentV2Service(opts ...option.RequestOption) (r CommentV2Service) {
 // Delete a comment by UUID
 //
 // Source file:
-// `api-server/src/controllers/comments/v2/delete-comment.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/comments/v2/delete-comment.controller.ts`
 func (r *CommentV2Service) Delete(ctx context.Context, comment string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -55,7 +55,7 @@ func (r *CommentV2Service) Delete(ctx context.Context, comment string, opts ...o
 // Downvote a comment by UUID
 //
 // Source file:
-// `api-server/src/controllers/comments/v2/downvote-comment.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/comments/v2/downvote-comment.controller.ts`
 func (r *CommentV2Service) Downvote(ctx context.Context, comment string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -70,7 +70,8 @@ func (r *CommentV2Service) Downvote(ctx context.Context, comment string, opts ..
 
 // Flag a comment for moderator review
 //
-// Source file: `api-server/src/controllers/comments/v2/flag-comment.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/comments/v2/flag-comment.controller.ts`
 func (r *CommentV2Service) Flag(ctx context.Context, comment string, body CommentV2FlagParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -86,7 +87,7 @@ func (r *CommentV2Service) Flag(ctx context.Context, comment string, body Commen
 // Toggle author endorsement of a comment
 //
 // Source file:
-// `api-server/src/controllers/comments/v2/toggle-comment-endorse.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/comments/v2/toggle-comment-endorse.controller.ts`
 func (r *CommentV2Service) ToggleEndorse(ctx context.Context, comment string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -102,7 +103,7 @@ func (r *CommentV2Service) ToggleEndorse(ctx context.Context, comment string, op
 // Upvote a comment by UUID
 //
 // Source file:
-// `api-server/src/controllers/comments/v2/upvote-comment.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/comments/v2/upvote-comment.controller.ts`
 func (r *CommentV2Service) Upvote(ctx context.Context, comment string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

@@ -53,7 +53,8 @@ func NewPaperService(opts ...option.RequestOption) (r PaperService) {
 
 // Add a new author to a paper
 //
-// Source file: `api-server/src/controllers/v2/papers/add-new-author.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v2/papers/add-new-author.controller.ts`
 func (r *PaperService) AddAuthor(ctx context.Context, paperID string, body PaperAddAuthorParams, opts ...option.RequestOption) (res *PaperAddAuthorResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperID == "" {
@@ -68,7 +69,7 @@ func (r *PaperService) AddAuthor(ctx context.Context, paperID string, body Paper
 // Set paper vote count (admin only)
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/admin-vote-paper.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/admin-vote-paper.controller.ts`
 func (r *PaperService) AdminVote(ctx context.Context, paperID string, body PaperAdminVoteParams, opts ...option.RequestOption) (res *PaperAdminVoteResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperID == "" {
@@ -83,7 +84,7 @@ func (r *PaperService) AdminVote(ctx context.Context, paperID string, body Paper
 // Legacy route for v1 browser extensions to track abstract page clicks
 //
 // Source file:
-// `api-server/src/controllers/v1/papers/crxabstractclick.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/papers/crxabstractclick.controller.ts`
 func (r *PaperService) CrxAbstractClick(ctx context.Context, ref string, query PaperCrxAbstractClickParams, opts ...option.RequestOption) (res *PaperCrxAbstractClickResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if query.Pid == "" {
@@ -101,7 +102,8 @@ func (r *PaperService) CrxAbstractClick(ctx context.Context, ref string, query P
 
 // Legacy route for v1 browser extensions to track abstract page hits
 //
-// Source file: `api-server/src/controllers/v1/papers/crxabstracthit.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v1/papers/crxabstracthit.controller.ts`
 func (r *PaperService) CrxAbstractHit(ctx context.Context, pid string, opts ...option.RequestOption) (res *PaperCrxAbstractHitResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if pid == "" {
@@ -115,7 +117,8 @@ func (r *PaperService) CrxAbstractHit(ctx context.Context, pid string, opts ...o
 
 // Legacy route for v1 browser extensions to track PDF page clicks
 //
-// Source file: `api-server/src/controllers/v1/papers/crxpdfclick.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v1/papers/crxpdfclick.controller.ts`
 func (r *PaperService) CrxPdfClick(ctx context.Context, ref string, query PaperCrxPdfClickParams, opts ...option.RequestOption) (res *PaperCrxPdfClickResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if query.Pid == "" {
@@ -133,7 +136,8 @@ func (r *PaperService) CrxPdfClick(ctx context.Context, ref string, query PaperC
 
 // Legacy route for v1 browser extensions to track PDF page hits
 //
-// Source file: `api-server/src/controllers/v1/papers/crxpdfhit.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v1/papers/crxpdfhit.controller.ts`
 func (r *PaperService) CrxPdfHit(ctx context.Context, pid string, opts ...option.RequestOption) (res *PaperCrxPdfHitResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if pid == "" {
@@ -148,7 +152,7 @@ func (r *PaperService) CrxPdfHit(ctx context.Context, pid string, opts ...option
 // Send email to individual author about paper comments or trending
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/email-individual-author.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/email-individual-author.controller.ts`
 func (r *PaperService) EmailAuthor(ctx context.Context, paperID string, body PaperEmailAuthorParams, opts ...option.RequestOption) (res *PaperEmailAuthorResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperID == "" {
@@ -163,7 +167,7 @@ func (r *PaperService) EmailAuthor(ctx context.Context, paperID string, body Pap
 // Legacy route for v1 browser extensions to get paper information
 //
 // Source file:
-// `api-server/src/controllers/v1/papers/getcrxpaperinfo.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/papers/getcrxpaperinfo.controller.ts`
 func (r *PaperService) GetCrxPaperInfo(ctx context.Context, pid string, opts ...option.RequestOption) (res *PaperGetCrxPaperInfoResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if pid == "" {
@@ -177,7 +181,8 @@ func (r *PaperService) GetCrxPaperInfo(ctx context.Context, pid string, opts ...
 
 // Legacy route for getting paper information from arXiv abstract pages
 //
-// Source file: `api-server/src/controllers/v1/papers/getpaperinfo.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v1/papers/getpaperinfo.controller.ts`
 func (r *PaperService) GetPaperInfo(ctx context.Context, pid string, opts ...option.RequestOption) (res *PaperGetPaperInfoResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if pid == "" {
@@ -192,7 +197,7 @@ func (r *PaperService) GetPaperInfo(ctx context.Context, pid string, opts ...opt
 // Kickoff background job to generate abstract embeddings for paper versions
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/kickoff-paper-version-abstract-embed.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-paper-version-abstract-embed.controller.ts`
 func (r *PaperService) KickoffAbstractEmbed(ctx context.Context, opts ...option.RequestOption) (res *PaperKickoffAbstractEmbedResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/papers/kickoff-paper-version-abstract-embed"
@@ -203,7 +208,7 @@ func (r *PaperService) KickoffAbstractEmbed(ctx context.Context, opts ...option.
 // Kickoff background job to generate AI overviews for papers
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/kickoff-paper-ai.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-paper-ai.controller.ts`
 func (r *PaperService) KickoffAI(ctx context.Context, opts ...option.RequestOption) (res *PaperKickoffAIResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/papers/kickoff-paper-ai"
@@ -214,7 +219,7 @@ func (r *PaperService) KickoffAI(ctx context.Context, opts ...option.RequestOpti
 // Kickoff background job to generate bibtex for papers
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/kickoff-paper-bibtex.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-paper-bibtex.controller.ts`
 func (r *PaperService) KickoffBibtex(ctx context.Context, opts ...option.RequestOption) (res *PaperKickoffBibtexResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/papers/kickoff-paper-bibtex"
@@ -224,7 +229,8 @@ func (r *PaperService) KickoffBibtex(ctx context.Context, opts ...option.Request
 
 // Kickoff background job to link papers with GitHub repositories
 //
-// Source file: `api-server/src/controllers/v2/papers/kickoff-github.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-github.controller.ts`
 func (r *PaperService) KickoffGitHub(ctx context.Context, opts ...option.RequestOption) (res *PaperKickoffGitHubResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/papers/kickoff-github"
@@ -235,7 +241,7 @@ func (r *PaperService) KickoffGitHub(ctx context.Context, opts ...option.Request
 // Kickoff background job to categorize papers
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/kickoff-paper-categorization.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-paper-categorization.controller.ts`
 func (r *PaperService) KickoffPaperCategorization(ctx context.Context, all string, opts ...option.RequestOption) (res *PaperKickoffPaperCategorizationResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if all == "" {
@@ -250,7 +256,7 @@ func (r *PaperService) KickoffPaperCategorization(ctx context.Context, all strin
 // Kickoff background job to ingest recent papers from arXiv
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/kickoff-recent-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-recent-papers.controller.ts`
 func (r *PaperService) KickoffRecentPapers(ctx context.Context, opts ...option.RequestOption) (res *PaperKickoffRecentPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/papers/kickoff-recent-papers"
@@ -261,7 +267,7 @@ func (r *PaperService) KickoffRecentPapers(ctx context.Context, opts ...option.R
 // Track paper view event for analytics
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/mark-paper-view.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/mark-paper-view.controller.ts`
 func (r *PaperService) MarkViewed(ctx context.Context, upid string, opts ...option.RequestOption) (res *PaperMarkViewedResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if upid == "" {
@@ -276,7 +282,7 @@ func (r *PaperService) MarkViewed(ctx context.Context, upid string, opts ...opti
 // Process abstract embedding for a paper version
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/process-paper-version-abstract-embed.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/process-paper-version-abstract-embed.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperService) ProcessAbstractEmbed(ctx context.Context, body PaperProcessAbstractEmbedParams, opts ...option.RequestOption) (res *PaperProcessAbstractEmbedResponse, err error) {
@@ -289,7 +295,7 @@ func (r *PaperService) ProcessAbstractEmbed(ctx context.Context, body PaperProce
 // Process various metadata for a paper (thumbnail, github, bibtex, etc.)
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/process-metadata.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/process-metadata.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperService) ProcessMetadata(ctx context.Context, body PaperProcessMetadataParams, opts ...option.RequestOption) (res *PaperProcessMetadataResponse, err error) {
@@ -302,7 +308,7 @@ func (r *PaperService) ProcessMetadata(ctx context.Context, body PaperProcessMet
 // Request AI overview generation for the latest paper version
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/request-ai-latest.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/request-ai-latest.controller.ts`
 func (r *PaperService) RequestAILatest(ctx context.Context, upid string, body PaperRequestAILatestParams, opts ...option.RequestOption) (res *PaperRequestAILatestResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if upid == "" {
@@ -317,7 +323,7 @@ func (r *PaperService) RequestAILatest(ctx context.Context, upid string, body Pa
 // Request AI overview translation for the latest paper version
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/request-ai-translation-latest.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/request-ai-translation-latest.controller.ts`
 func (r *PaperService) RequestAITranslationLatest(ctx context.Context, language PaperRequestAITranslationLatestParamsLanguage, body PaperRequestAITranslationLatestParams, opts ...option.RequestOption) (res *PaperRequestAITranslationLatestResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if body.Upid == "" {
@@ -331,7 +337,8 @@ func (r *PaperService) RequestAITranslationLatest(ctx context.Context, language 
 
 // Set GitHub repository for a paper
 //
-// Source file: `api-server/src/controllers/v2/papers/set-github.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v2/papers/set-github.controller.ts`
 func (r *PaperService) SetGitHubRepository(ctx context.Context, paperID string, body PaperSetGitHubRepositoryParams, opts ...option.RequestOption) (res *PaperSetGitHubRepositoryResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperID == "" {
@@ -346,7 +353,8 @@ func (r *PaperService) SetGitHubRepository(ctx context.Context, paperID string, 
 // Toggle paper follow status (add to Want to read folder or remove from all
 // folders)
 //
-// Source file: `api-server/src/controllers/v2/papers/follow-paper.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v2/papers/follow-paper.controller.ts`
 func (r *PaperService) ToggleFollow(ctx context.Context, paperID string, opts ...option.RequestOption) (res *PaperToggleFollowResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperID == "" {
@@ -361,7 +369,7 @@ func (r *PaperService) ToggleFollow(ctx context.Context, paperID string, opts ..
 // Translate AI overview to specified language
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/translate-ai-overview.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/translate-ai-overview.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperService) TranslateAIOverview(ctx context.Context, language PaperTranslateAIOverviewParamsLanguage, body PaperTranslateAIOverviewParams, opts ...option.RequestOption) (res *PaperTranslateAIOverviewResponse, err error) {
@@ -377,7 +385,8 @@ func (r *PaperService) TranslateAIOverview(ctx context.Context, language PaperTr
 
 // Remove authorship claim from a paper
 //
-// Source file: `api-server/src/controllers/v2/papers/unclaim-paper.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v2/papers/unclaim-paper.controller.ts`
 func (r *PaperService) Unclaim(ctx context.Context, paperID string, opts ...option.RequestOption) (res *PaperUnclaimResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperID == "" {
@@ -391,7 +400,8 @@ func (r *PaperService) Unclaim(ctx context.Context, paperID string, opts ...opti
 
 // Toggle vote for a paper
 //
-// Source file: `api-server/src/controllers/v2/papers/vote-paper.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v2/papers/vote-paper.controller.ts`
 func (r *PaperService) Vote(ctx context.Context, paperID string, opts ...option.RequestOption) (res *PaperVoteResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperID == "" {

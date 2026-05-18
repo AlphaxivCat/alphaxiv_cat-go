@@ -37,7 +37,7 @@ func NewUserPreferenceService(opts ...option.RequestOption) (r UserPreferenceSer
 // Get folder preferences for the authenticated user
 //
 // Source file:
-// `api-server/src/controllers/v2/users/get-folders-preferences.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/users/get-folders-preferences.controller.ts`
 func (r *UserPreferenceService) GetFoldersPreferences(ctx context.Context, opts ...option.RequestOption) (res *UserPreferenceGetFoldersPreferencesResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/users/preferences/folders"

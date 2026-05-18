@@ -42,7 +42,8 @@ func NewAssistantV2Service(opts ...option.RequestOption) (r AssistantV2Service) 
 
 // Send a message to the AI assistant and receive streaming responses
 //
-// Source file: `api-server/src/controllers/assistant/v2/chat.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/assistant/v2/chat.controller.ts`
 func (r *AssistantV2Service) ChatStreaming(ctx context.Context, body AssistantV2ChatParams, opts ...option.RequestOption) (stream *ssestream.Stream[AssistantV2ChatResponse]) {
 	var (
 		raw *http.Response
@@ -57,7 +58,8 @@ func (r *AssistantV2Service) ChatStreaming(ctx context.Context, body AssistantV2
 
 // Delete an llm chat by id
 //
-// Source file: `api-server/src/controllers/assistant/v2/delete-chat.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/assistant/v2/delete-chat.controller.ts`
 func (r *AssistantV2Service) DeleteChat(ctx context.Context, llmChat string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -72,7 +74,8 @@ func (r *AssistantV2Service) DeleteChat(ctx context.Context, llmChat string, opt
 
 // Updates properties on an LlmChat. Currently only supports title
 //
-// Source file: `api-server/src/controllers/assistant/v2/edit-chat.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/assistant/v2/edit-chat.controller.ts`
 func (r *AssistantV2Service) EditChat(ctx context.Context, llmChat string, body AssistantV2EditChatParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -88,7 +91,8 @@ func (r *AssistantV2Service) EditChat(ctx context.Context, llmChat string, body 
 // Get llm chats for this user, filtered by variant, and optionally by paper
 // version
 //
-// Source file: `api-server/src/controllers/assistant/v2/get-chats.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/assistant/v2/get-chats.controller.ts`
 func (r *AssistantV2Service) GetChats(ctx context.Context, query AssistantV2GetChatsParams, opts ...option.RequestOption) (res *[]AssistantV2GetChatsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "assistant/v2"
@@ -99,7 +103,7 @@ func (r *AssistantV2Service) GetChats(ctx context.Context, query AssistantV2GetC
 // Fetch metadata (title and favicon) from a given URL
 //
 // Source file:
-// `api-server/src/controllers/assistant/v2/get-url-metadata.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/assistant/v2/get-url-metadata.controller.ts`
 func (r *AssistantV2Service) GetURLMetadata(ctx context.Context, query AssistantV2GetURLMetadataParams, opts ...option.RequestOption) (res *AssistantV2GetURLMetadataResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "assistant/v2/url-metadata"
@@ -161,6 +165,9 @@ type AssistantV2ChatParams struct {
 	Signature param.Opt[string]              `json:"signature,omitzero"`
 	// Any of "homepage", "paper", "landing".
 	AssistantVariant AssistantV2ChatParamsAssistantVariant `json:"assistantVariant,omitzero"`
+	CustomFilter     AssistantV2ChatParamsCustomFilter     `json:"customFilter,omitzero"`
+	// Any of "baseline", "v1-baseten".
+	FilterModel AssistantV2ChatParamsFilterModel `json:"filterModel,omitzero"`
 	// Any of "claude-opus-4.5", "claude-opus-4.6", "claude-opus-4.7",
 	// "claude-sonnet-4.5", "claude-sonnet-4.6", "gemini-2.5-flash", "gemini-2.5-pro",
 	// "gemini-3-flash", "gemini-3.1-pro", "glm-5-turbo", "glm-5.1", "gpt-5",
@@ -225,6 +232,28 @@ const (
 	AssistantV2ChatParamsAssistantVariantHomepage AssistantV2ChatParamsAssistantVariant = "homepage"
 	AssistantV2ChatParamsAssistantVariantPaper    AssistantV2ChatParamsAssistantVariant = "paper"
 	AssistantV2ChatParamsAssistantVariantLanding  AssistantV2ChatParamsAssistantVariant = "landing"
+)
+
+// The properties APIKey, URL are required.
+type AssistantV2ChatParamsCustomFilter struct {
+	APIKey string `json:"apiKey" api:"required"`
+	URL    string `json:"url" api:"required" format:"uri"`
+	paramObj
+}
+
+func (r AssistantV2ChatParamsCustomFilter) MarshalJSON() (data []byte, err error) {
+	type shadow AssistantV2ChatParamsCustomFilter
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *AssistantV2ChatParamsCustomFilter) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type AssistantV2ChatParamsFilterModel string
+
+const (
+	AssistantV2ChatParamsFilterModelBaseline  AssistantV2ChatParamsFilterModel = "baseline"
+	AssistantV2ChatParamsFilterModelV1Baseten AssistantV2ChatParamsFilterModel = "v1-baseten"
 )
 
 type AssistantV2ChatParamsModel string

@@ -38,7 +38,8 @@ func NewSearchService(opts ...option.RequestOption) (r SearchService) {
 
 // Find the closest matching topics/categories for a given input using AI
 //
-// Source file: `api-server/src/controllers/v1/search/closest-topic.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v1/search/closest-topic.controller.ts`
 func (r *SearchService) ClosestTopic(ctx context.Context, query SearchClosestTopicParams, opts ...option.RequestOption) (res *SearchClosestTopicResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/search/closest-topic"
@@ -48,7 +49,8 @@ func (r *SearchService) ClosestTopic(ctx context.Context, query SearchClosestTop
 
 // Search for papers using Google and enrich results
 //
-// Source file: `api-server/src/controllers/v1/search/search-google.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/v1/search/search-google.controller.ts`
 func (r *SearchService) GoogleSearch(ctx context.Context, query SearchGoogleSearchParams, opts ...option.RequestOption) (res *SearchGoogleSearchResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/search/paper"

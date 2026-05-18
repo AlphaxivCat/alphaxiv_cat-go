@@ -40,7 +40,7 @@ func NewAdminV1Service(opts ...option.RequestOption) (r AdminV1Service) {
 // Get page of comments for moderator feed
 //
 // Source file:
-// `api-server/src/controllers/admin/v1/get-moderator-feed.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/admin/v1/get-moderator-feed.controller.ts`
 func (r *AdminV1Service) GetModeratorFeed(ctx context.Context, query AdminV1GetModeratorFeedParams, opts ...option.RequestOption) (res *[]AdminV1GetModeratorFeedResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "admin/v1/moderator-feed"
@@ -51,7 +51,7 @@ func (r *AdminV1Service) GetModeratorFeed(ctx context.Context, query AdminV1GetM
 // Look up a user by email address (admin only)
 //
 // Source file:
-// `api-server/src/controllers/admin/v1/lookup-user-by-email.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/admin/v1/lookup-user-by-email.controller.ts`
 func (r *AdminV1Service) LookupUserByEmail(ctx context.Context, query AdminV1LookupUserByEmailParams, opts ...option.RequestOption) (res *AdminV1LookupUserByEmailResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "admin/v1/lookup-user-by-email"

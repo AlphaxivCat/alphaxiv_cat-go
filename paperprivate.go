@@ -39,7 +39,7 @@ func NewPaperPrivateService(opts ...option.RequestOption) (r PaperPrivateService
 // Upload a private PDF paper
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/upload-private-paper.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/upload-private-paper.controller.ts`
 func (r *PaperPrivateService) New(ctx context.Context, body PaperPrivateNewParams, opts ...option.RequestOption) (res *PaperPrivateNewResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/papers/private"
@@ -50,7 +50,7 @@ func (r *PaperPrivateService) New(ctx context.Context, body PaperPrivateNewParam
 // Update metadata for a private paper
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/update-private-paper.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/update-private-paper.controller.ts`
 func (r *PaperPrivateService) UpdateMetadata(ctx context.Context, paperID string, body PaperPrivateUpdateMetadataParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

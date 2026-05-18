@@ -40,7 +40,7 @@ func NewPaperV3LegacyService(opts ...option.RequestOption) (r PaperV3LegacyServi
 // format. Do not write new code with this please.
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/legacy/get-v2-paper-for-display.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/legacy/get-v2-paper-for-display.controller.ts`
 func (r *PaperV3LegacyService) Get(ctx context.Context, unresolved string, opts ...option.RequestOption) (res *PaperV3LegacyGetResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if unresolved == "" {
@@ -56,7 +56,7 @@ func (r *PaperV3LegacyService) Get(ctx context.Context, unresolved string, opts 
 // from "there are no comments"
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/legacy/get-v2-comments.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/legacy/get-v2-comments.controller.ts`
 func (r *PaperV3LegacyService) GetComments(ctx context.Context, group string, opts ...option.RequestOption) (res *[]PaperV3LegacyGetCommentsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if group == "" {
