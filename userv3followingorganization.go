@@ -38,7 +38,7 @@ func NewUserV3FollowingOrganizationService(opts ...option.RequestOption) (r User
 // List the organizations followed by a user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-following-organizations.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-following-organizations.controller.ts`
 func (r *UserV3FollowingOrganizationService) List(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3FollowingOrganizationListResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -53,7 +53,7 @@ func (r *UserV3FollowingOrganizationService) List(ctx context.Context, id string
 // Toggle following an organization for the current user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/toggle-following-organization.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/toggle-following-organization.controller.ts`
 func (r *UserV3FollowingOrganizationService) Toggle(ctx context.Context, id string, body UserV3FollowingOrganizationToggleParams, opts ...option.RequestOption) (res *UserV3FollowingOrganizationToggleResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {

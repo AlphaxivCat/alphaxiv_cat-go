@@ -37,7 +37,7 @@ func NewNotificationService(opts ...option.RequestOption) (r NotificationService
 // Queues notification emails for all users with unseen notifications
 //
 // Source file:
-// `api-server/src/controllers/v2/notifications/kickoff-notification-emails.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/notifications/kickoff-notification-emails.controller.ts`
 func (r *NotificationService) SendKickoffNotificationEmails(ctx context.Context, opts ...option.RequestOption) (res *NotificationSendKickoffNotificationEmailsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/notifications/kickoff-notification-emails"

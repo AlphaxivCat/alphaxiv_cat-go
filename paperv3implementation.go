@@ -40,7 +40,7 @@ func NewPaperV3ImplementationService(opts ...option.RequestOption) (r PaperV3Imp
 // Add an implementation (AlphaXiv, Marimo, Author, or Other)
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/add-implementation.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/add-implementation.controller.ts`
 func (r *PaperV3ImplementationService) New(ctx context.Context, paperGroupID string, body PaperV3ImplementationNewParams, opts ...option.RequestOption) (res *PaperV3ImplementationNewResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperGroupID == "" {
@@ -55,7 +55,7 @@ func (r *PaperV3ImplementationService) New(ctx context.Context, paperGroupID str
 // Get all implementations for a paper (AlphaXiv, Marimo, Author, and Other)
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/get-implementations.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-implementations.controller.ts`
 func (r *PaperV3ImplementationService) List(ctx context.Context, paperGroupID string, opts ...option.RequestOption) (res *PaperV3ImplementationListResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperGroupID == "" {
@@ -70,7 +70,7 @@ func (r *PaperV3ImplementationService) List(ctx context.Context, paperGroupID st
 // Delete an implementation (AlphaXiv, Marimo, Author, or Other)
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/delete-implementation.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/delete-implementation.controller.ts`
 func (r *PaperV3ImplementationService) Delete(ctx context.Context, implementationID string, params PaperV3ImplementationDeleteParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

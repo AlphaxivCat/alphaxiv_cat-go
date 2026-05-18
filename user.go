@@ -44,7 +44,7 @@ func NewUserService(opts ...option.RequestOption) (r UserService) {
 // Get private notes for a user with pagination
 //
 // Source file:
-// `api-server/src/controllers/v1/users/get-private-notes.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/users/get-private-notes.controller.ts`
 func (r *UserService) GetPrivateNotes(ctx context.Context, uid string, query UserGetPrivateNotesParams, opts ...option.RequestOption) (res *UserGetPrivateNotesResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if uid == "" {
@@ -59,7 +59,7 @@ func (r *UserService) GetPrivateNotes(ctx context.Context, uid string, query Use
 // Calculates and updates weekly reputation weights for users
 //
 // Source file:
-// `api-server/src/controllers/v1/users/weigh-weekly-reputation.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/users/weigh-weekly-reputation.controller.ts`
 func (r *UserService) WeighWeeklyReputation(ctx context.Context, opts ...option.RequestOption) (res *UserWeighWeeklyReputationResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/users/weigh-weekly-reputation"

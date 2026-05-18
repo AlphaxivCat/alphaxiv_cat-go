@@ -35,7 +35,7 @@ func NewAdminV1EmailService(opts ...option.RequestOption) (r AdminV1EmailService
 // Queue monthly digest emails to users
 //
 // Source file:
-// `api-server/src/controllers/admin/v1/emails/send-monthly-digest.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/admin/v1/emails/send-monthly-digest.controller.ts`
 func (r *AdminV1EmailService) SendMonthlyDigest(ctx context.Context, body AdminV1EmailSendMonthlyDigestParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -47,7 +47,7 @@ func (r *AdminV1EmailService) SendMonthlyDigest(ctx context.Context, body AdminV
 // Queue weekly digest emails to users
 //
 // Source file:
-// `api-server/src/controllers/admin/v1/emails/send-weekly-digest.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/admin/v1/emails/send-weekly-digest.controller.ts`
 func (r *AdminV1EmailService) SendWeeklyDigest(ctx context.Context, body AdminV1EmailSendWeeklyDigestParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

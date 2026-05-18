@@ -39,7 +39,7 @@ func NewGoogleScholarV1Service(opts ...option.RequestOption) (r GoogleScholarV1S
 // connection with a different profile
 //
 // Source file:
-// `api-server/src/controllers/google-scholar/v1/connect.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/google-scholar/v1/connect.controller.ts`
 func (r *GoogleScholarV1Service) Connect(ctx context.Context, body GoogleScholarV1ConnectParams, opts ...option.RequestOption) (res *GoogleScholarV1ConnectResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "google-scholar/v1"
@@ -49,7 +49,8 @@ func (r *GoogleScholarV1Service) Connect(ctx context.Context, body GoogleScholar
 
 // Remove Google Scholar ID and queued papers from a user
 //
-// Source file: `api-server/src/controllers/google-scholar/v1/delete.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/google-scholar/v1/delete.controller.ts`
 func (r *GoogleScholarV1Service) DeleteConnection(ctx context.Context, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -60,7 +61,8 @@ func (r *GoogleScholarV1Service) DeleteConnection(ctx context.Context, opts ...o
 
 // Get a full report of a user's Google Scholar sync (including lists of papers)
 //
-// Source file: `api-server/src/controllers/google-scholar/v1/report.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/google-scholar/v1/report.controller.ts`
 func (r *GoogleScholarV1Service) GetReport(ctx context.Context, opts ...option.RequestOption) (res *[]GoogleScholarV1GetReportResponseUnion, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "google-scholar/v1/report"
@@ -70,7 +72,8 @@ func (r *GoogleScholarV1Service) GetReport(ctx context.Context, opts ...option.R
 
 // Get status of user's Google Scholar sync
 //
-// Source file: `api-server/src/controllers/google-scholar/v1/status.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/google-scholar/v1/status.controller.ts`
 func (r *GoogleScholarV1Service) GetStatus(ctx context.Context, opts ...option.RequestOption) (res *GoogleScholarV1GetStatusResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "google-scholar/v1/status"
@@ -80,7 +83,8 @@ func (r *GoogleScholarV1Service) GetStatus(ctx context.Context, opts ...option.R
 
 // Start a new Google Scholar sync for this user
 //
-// Source file: `api-server/src/controllers/google-scholar/v1/resync.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/google-scholar/v1/resync.controller.ts`
 func (r *GoogleScholarV1Service) Resync(ctx context.Context, mode GoogleScholarV1ResyncParamsMode, opts ...option.RequestOption) (res *GoogleScholarV1ResyncResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := fmt.Sprintf("google-scholar/v1/resync/%v", mode)
@@ -92,7 +96,7 @@ func (r *GoogleScholarV1Service) Resync(ctx context.Context, mode GoogleScholarV
 // verification email to that address
 //
 // Source file:
-// `api-server/src/controllers/google-scholar/v1/set-email.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/google-scholar/v1/set-email.controller.ts`
 func (r *GoogleScholarV1Service) SetEmail(ctx context.Context, body GoogleScholarV1SetEmailParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -103,7 +107,8 @@ func (r *GoogleScholarV1Service) SetEmail(ctx context.Context, body GoogleSchola
 
 // Make some progress syncing a user's Google Scholar papers
 //
-// Source file: `api-server/src/controllers/google-scholar/v1/sync.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/google-scholar/v1/sync.controller.ts`
 func (r *GoogleScholarV1Service) Sync(ctx context.Context, opts ...option.RequestOption) (res *GoogleScholarV1SyncResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "google-scholar/v1/sync"
@@ -113,7 +118,8 @@ func (r *GoogleScholarV1Service) Sync(ctx context.Context, opts ...option.Reques
 
 // Verify a user's Google Scholar email by entering the code sent to that email
 //
-// Source file: `api-server/src/controllers/google-scholar/v1/verify.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/google-scholar/v1/verify.controller.ts`
 func (r *GoogleScholarV1Service) VerifyEmail(ctx context.Context, body GoogleScholarV1VerifyEmailParams, opts ...option.RequestOption) (res *GoogleScholarV1VerifyEmailResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "google-scholar/v1/verify"

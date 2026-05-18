@@ -32,7 +32,8 @@ func NewWellKnownService(opts ...option.RequestOption) (r WellKnownService) {
 
 // OAuth 2.0 Protected Resource Metadata (RFC 9728)
 //
-// Source file: `api-server/src/controllers/oauth-protected-resource.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/oauth-protected-resource.controller.ts`
 func (r *WellKnownService) GetOAuthProtectedResource(ctx context.Context, opts ...option.RequestOption) (res *WellKnownGetOAuthProtectedResourceResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := ".well-known/oauth-protected-resource"

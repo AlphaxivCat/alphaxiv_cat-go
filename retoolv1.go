@@ -35,7 +35,7 @@ func NewRetoolV1Service(opts ...option.RequestOption) (r RetoolV1Service) {
 // Get cumulative user count over time (all time)
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-cumulative-users.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-cumulative-users.controller.ts`
 func (r *RetoolV1Service) GetCumulativeUsers(ctx context.Context, opts ...option.RequestOption) (res *[]RetoolV1GetCumulativeUsersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/cumulative-users"
@@ -46,7 +46,7 @@ func (r *RetoolV1Service) GetCumulativeUsers(ctx context.Context, opts ...option
 // Get daily conversation counts by variant (all time)
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-daily-conversations.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-daily-conversations.controller.ts`
 func (r *RetoolV1Service) GetDailyConversations(ctx context.Context, opts ...option.RequestOption) (res *[]RetoolV1GetDailyConversationsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/daily-conversations"
@@ -57,7 +57,7 @@ func (r *RetoolV1Service) GetDailyConversations(ctx context.Context, opts ...opt
 // Get daily new account counts (all time)
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-daily-new-accounts.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-daily-new-accounts.controller.ts`
 func (r *RetoolV1Service) GetDailyNewAccounts(ctx context.Context, opts ...option.RequestOption) (res *[]RetoolV1GetDailyNewAccountsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/daily-new-accounts"
@@ -68,7 +68,7 @@ func (r *RetoolV1Service) GetDailyNewAccounts(ctx context.Context, opts ...optio
 // Get daily user chat message counts by variant (all time)
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-daily-user-chat-messages.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-daily-user-chat-messages.controller.ts`
 func (r *RetoolV1Service) GetDailyUserChatMessages(ctx context.Context, opts ...option.RequestOption) (res *[]RetoolV1GetDailyUserChatMessagesResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/daily-user-chat-messages"
@@ -79,7 +79,7 @@ func (r *RetoolV1Service) GetDailyUserChatMessages(ctx context.Context, opts ...
 // Get total count of all comments
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-total-comment-count.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-total-comment-count.controller.ts`
 func (r *RetoolV1Service) GetTotalCommentCount(ctx context.Context, opts ...option.RequestOption) (res *float64, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/total-comment-count"
@@ -90,7 +90,7 @@ func (r *RetoolV1Service) GetTotalCommentCount(ctx context.Context, opts ...opti
 // Get total count of public, non-blocked papers
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-total-paper-count.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-total-paper-count.controller.ts`
 func (r *RetoolV1Service) GetTotalPaperCount(ctx context.Context, opts ...option.RequestOption) (res *float64, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/total-paper-count"
@@ -101,7 +101,7 @@ func (r *RetoolV1Service) GetTotalPaperCount(ctx context.Context, opts ...option
 // Get total count of private notes (comments with tag=personal)
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-total-private-notes-count.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-total-private-notes-count.controller.ts`
 func (r *RetoolV1Service) GetTotalPrivateNotesCount(ctx context.Context, opts ...option.RequestOption) (res *float64, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/total-private-notes-count"
@@ -112,7 +112,7 @@ func (r *RetoolV1Service) GetTotalPrivateNotesCount(ctx context.Context, opts ..
 // Get total count of non-deleted users
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-total-user-count.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-total-user-count.controller.ts`
 func (r *RetoolV1Service) GetTotalUserCount(ctx context.Context, opts ...option.RequestOption) (res *float64, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/total-user-count"
@@ -124,7 +124,7 @@ func (r *RetoolV1Service) GetTotalUserCount(ctx context.Context, opts ...option.
 // descending
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-weekly-message-counts-by-user.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-weekly-message-counts-by-user.controller.ts`
 func (r *RetoolV1Service) GetWeeklyMessageCountsByUser(ctx context.Context, opts ...option.RequestOption) (res *[]RetoolV1GetWeeklyMessageCountsByUserResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/weekly-message-counts-by-user"
@@ -135,7 +135,7 @@ func (r *RetoolV1Service) GetWeeklyMessageCountsByUser(ctx context.Context, opts
 // Get weekly private note counts (all time)
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-weekly-private-notes.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-weekly-private-notes.controller.ts`
 func (r *RetoolV1Service) GetWeeklyPrivateNotes(ctx context.Context, opts ...option.RequestOption) (res *[]RetoolV1GetWeeklyPrivateNotesResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/weekly-private-notes"
@@ -146,7 +146,7 @@ func (r *RetoolV1Service) GetWeeklyPrivateNotes(ctx context.Context, opts ...opt
 // Get weekly public comment counts (all time)
 //
 // Source file:
-// `api-server/src/controllers/retool/v1/get-weekly-public-comments.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retool/v1/get-weekly-public-comments.controller.ts`
 func (r *RetoolV1Service) GetWeeklyPublicComments(ctx context.Context, opts ...option.RequestOption) (res *[]RetoolV1GetWeeklyPublicCommentsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retool/v1/weekly-public-comments"

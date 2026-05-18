@@ -37,7 +37,8 @@ func NewPaperV3OverviewService(opts ...option.RequestOption) (r PaperV3OverviewS
 // Retrieve paper version overview for given language. Does not create it if it
 // doesn't exist
 //
-// Source file: `api-server/src/controllers/papers/v3/get-overviews.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-overviews.controller.ts`
 func (r *PaperV3OverviewService) Get(ctx context.Context, language PaperV3OverviewGetParamsLanguage, query PaperV3OverviewGetParams, opts ...option.RequestOption) (res *PaperV3OverviewGetResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if query.PaperVersion == "" {
@@ -52,7 +53,7 @@ func (r *PaperV3OverviewService) Get(ctx context.Context, language PaperV3Overvi
 // Retrieve paper version status for overview generation and translations
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/get-overviews-status.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-overviews-status.controller.ts`
 func (r *PaperV3OverviewService) GetStatus(ctx context.Context, paperVersion string, opts ...option.RequestOption) (res *PaperV3OverviewGetStatusResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperVersion == "" {

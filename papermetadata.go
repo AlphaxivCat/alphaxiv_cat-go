@@ -40,7 +40,7 @@ func NewPaperMetadataService(opts ...option.RequestOption) (r PaperMetadataServi
 // Get metadata for latest paper version (deprecated, used by browser extension)
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/get-paper-metadata-latest.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/get-paper-metadata-latest.controller.ts`
 func (r *PaperMetadataService) GetLatestMetadata(ctx context.Context, upid string, query PaperMetadataGetLatestMetadataParams, opts ...option.RequestOption) (res *PaperMetadataGetLatestMetadataResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if upid == "" {
@@ -56,7 +56,7 @@ func (r *PaperMetadataService) GetLatestMetadata(ctx context.Context, upid strin
 // extension)
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/get-paper-metadata.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/get-paper-metadata.controller.ts`
 func (r *PaperMetadataService) GetVersionMetadata(ctx context.Context, versionOrder string, params PaperMetadataGetVersionMetadataParams, opts ...option.RequestOption) (res *PaperMetadataGetVersionMetadataResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if params.Upid == "" {

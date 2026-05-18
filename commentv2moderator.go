@@ -38,7 +38,7 @@ func NewCommentV2ModeratorService(opts ...option.RequestOption) (r CommentV2Mode
 // Send moderator feedback to comment author
 //
 // Source file:
-// `api-server/src/controllers/comments/v2/moderator-send-feedback.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/comments/v2/moderator-send-feedback.controller.ts`
 func (r *CommentV2ModeratorService) SendFeedback(ctx context.Context, comment string, body CommentV2ModeratorSendFeedbackParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -54,7 +54,7 @@ func (r *CommentV2ModeratorService) SendFeedback(ctx context.Context, comment st
 // Toggle one (or more) of a set of comment moderation flags
 //
 // Source file:
-// `api-server/src/controllers/comments/v2/toggle-comment-moderation-flag.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/comments/v2/toggle-comment-moderation-flag.controller.ts`
 func (r *CommentV2ModeratorService) ToggleFlags(ctx context.Context, comment string, body CommentV2ModeratorToggleFlagsParams, opts ...option.RequestOption) (res *CommentV2ModeratorToggleFlagsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if comment == "" {

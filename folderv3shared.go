@@ -37,7 +37,7 @@ func NewFolderV3SharedService(opts ...option.RequestOption) (r FolderV3SharedSer
 // Get a folder that has been shared publicly, including nested child folders
 //
 // Source file:
-// `api-server/src/controllers/folders/v3/get-shared-folder.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/folders/v3/get-shared-folder.controller.ts`
 func (r *FolderV3SharedService) Get(ctx context.Context, folderID string, opts ...option.RequestOption) (res *FolderV3SharedGetResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if folderID == "" {
@@ -52,7 +52,7 @@ func (r *FolderV3SharedService) Get(ctx context.Context, folderID string, opts .
 // Copy a shared folder and all nested folders to your own library
 //
 // Source file:
-// `api-server/src/controllers/folders/v3/copy-shared-folder.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/folders/v3/copy-shared-folder.controller.ts`
 func (r *FolderV3SharedService) Copy(ctx context.Context, folderID string, opts ...option.RequestOption) (res *FolderV3SharedCopyResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if folderID == "" {

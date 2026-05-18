@@ -37,7 +37,7 @@ func NewAPIKeyV1Service(opts ...option.RequestOption) (r APIKeyV1Service) {
 // Create a new API key for the current user.
 //
 // Source file:
-// `api-server/src/controllers/api-keys/v1/create-api-key.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/api-keys/v1/create-api-key.controller.ts`
 func (r *APIKeyV1Service) New(ctx context.Context, body APIKeyV1NewParams, opts ...option.RequestOption) (res *APIKeyV1NewResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "api-keys/v1"
@@ -47,7 +47,8 @@ func (r *APIKeyV1Service) New(ctx context.Context, body APIKeyV1NewParams, opts 
 
 // List API keys for the current user.
 //
-// Source file: `api-server/src/controllers/api-keys/v1/get-api-keys.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/api-keys/v1/get-api-keys.controller.ts`
 func (r *APIKeyV1Service) List(ctx context.Context, opts ...option.RequestOption) (res *[]APIKeyV1ListResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "api-keys/v1"
@@ -58,7 +59,7 @@ func (r *APIKeyV1Service) List(ctx context.Context, opts ...option.RequestOption
 // Create a new API key for the current user.
 //
 // Source file:
-// `api-server/src/controllers/api-keys/v1/create-impersonation-api-key.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/api-keys/v1/create-impersonation-api-key.controller.ts`
 func (r *APIKeyV1Service) NewImpersonation(ctx context.Context, body APIKeyV1NewImpersonationParams, opts ...option.RequestOption) (res *APIKeyV1NewImpersonationResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "api-keys/v1/impersonate"
@@ -69,7 +70,7 @@ func (r *APIKeyV1Service) NewImpersonation(ctx context.Context, body APIKeyV1New
 // Revoke an API key for the authenticated user. No-op if already revoked.
 //
 // Source file:
-// `api-server/src/controllers/api-keys/v1/revoke-api-key.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/api-keys/v1/revoke-api-key.controller.ts`
 func (r *APIKeyV1Service) Revoke(ctx context.Context, apiKeyID APIKeyV1RevokeParamsAPIKeyID, opts ...option.RequestOption) (res *APIKeyV1RevokeResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := fmt.Sprintf("api-keys/v1/%v/revoke", apiKeyID)

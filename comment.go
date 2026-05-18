@@ -38,7 +38,8 @@ func NewCommentService(opts ...option.RequestOption) (r CommentService) {
 
 // Edit a comment by UUID
 //
-// Source file: `api-server/src/controllers/comments/v1/edit-comment.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/comments/v1/edit-comment.controller.ts`
 func (r *CommentService) Edit(ctx context.Context, comment string, body CommentEditParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

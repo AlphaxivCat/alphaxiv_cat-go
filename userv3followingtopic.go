@@ -38,7 +38,7 @@ func NewUserV3FollowingTopicService(opts ...option.RequestOption) (r UserV3Follo
 // List the topics followed by a user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-following-topics.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-following-topics.controller.ts`
 func (r *UserV3FollowingTopicService) List(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3FollowingTopicListResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -53,7 +53,7 @@ func (r *UserV3FollowingTopicService) List(ctx context.Context, id string, opts 
 // Toggle following a topic for the current user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/toggle-following-topic.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/toggle-following-topic.controller.ts`
 func (r *UserV3FollowingTopicService) Toggle(ctx context.Context, id string, body UserV3FollowingTopicToggleParams, opts ...option.RequestOption) (res *UserV3FollowingTopicToggleResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
