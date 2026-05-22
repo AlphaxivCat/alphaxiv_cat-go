@@ -166,6 +166,7 @@ func TestEmailProcessCommentUpdateWithOptionalParams(t *testing.T) {
 				Description:  "description",
 				Link:         "link",
 				Title:        "title",
+				CtaText:      alphaxivcat.String("ctaText"),
 				EndTimeRaw:   alphaxivcat.String("endTimeRaw"),
 				StartTimeRaw: alphaxivcat.String("startTimeRaw"),
 			}},

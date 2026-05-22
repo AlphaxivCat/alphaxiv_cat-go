@@ -466,6 +466,7 @@ type EmailProcessCommentUpdateParamsCustomContentEvent struct {
 	Description  string            `json:"description" api:"required"`
 	Link         string            `json:"link" api:"required"`
 	Title        string            `json:"title" api:"required"`
+	CtaText      param.Opt[string] `json:"ctaText,omitzero"`
 	EndTimeRaw   param.Opt[string] `json:"endTimeRaw,omitzero"`
 	StartTimeRaw param.Opt[string] `json:"startTimeRaw,omitzero"`
 	paramObj

@@ -166,7 +166,7 @@ type AssistantV2ChatParams struct {
 	// Any of "homepage", "paper", "landing".
 	AssistantVariant AssistantV2ChatParamsAssistantVariant `json:"assistantVariant,omitzero"`
 	CustomFilter     AssistantV2ChatParamsCustomFilter     `json:"customFilter,omitzero"`
-	// Any of "baseline", "v1-baseten".
+	// Any of "baseline", "v1-baseten", "cohere".
 	FilterModel AssistantV2ChatParamsFilterModel `json:"filterModel,omitzero"`
 	// Any of "claude-opus-4.5", "claude-opus-4.6", "claude-opus-4.7",
 	// "claude-sonnet-4.5", "claude-sonnet-4.6", "gemini-2.5-flash", "gemini-2.5-pro",
@@ -254,6 +254,7 @@ type AssistantV2ChatParamsFilterModel string
 const (
 	AssistantV2ChatParamsFilterModelBaseline  AssistantV2ChatParamsFilterModel = "baseline"
 	AssistantV2ChatParamsFilterModelV1Baseten AssistantV2ChatParamsFilterModel = "v1-baseten"
+	AssistantV2ChatParamsFilterModelCohere    AssistantV2ChatParamsFilterModel = "cohere"
 )
 
 type AssistantV2ChatParamsModel string
