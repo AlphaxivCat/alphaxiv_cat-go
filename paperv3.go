@@ -12,6 +12,7 @@ import (
 
 	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apiquery"
+	shimjson "github.com/AlphaxivCat/alphaxiv_cat-go/internal/encoding/json"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/param"
@@ -73,6 +74,18 @@ func (r *PaperV3Service) Comment(ctx context.Context, version string, body Paper
 	path := fmt.Sprintf("papers/v3/%s/comment", version)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return res, err
+}
+
+// Remove votes from many papers at once
+//
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/remove-vote-batch.controller.ts`
+func (r *PaperV3Service) DeleteVotes(ctx context.Context, body PaperV3DeleteVotesParams, opts ...option.RequestOption) (err error) {
+	opts = slices.Concat(r.options, opts)
+	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
+	path := "papers/v3/votes"
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, body, nil, opts...)
+	return err
 }
 
 // Create or update an implementation for a paper group
@@ -591,12 +604,10 @@ func (r *PaperV3KickoffThumbnailsTrendingPapersResponseData) UnmarshalJSON(data 
 }
 
 type PaperV3LikeResponse struct {
-	Liked   bool                       `json:"liked" api:"required"`
-	Metrics PaperV3LikeResponseMetrics `json:"metrics" api:"required"`
+	Liked bool `json:"liked" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Liked       respjson.Field
-		Metrics     respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -605,24 +616,6 @@ type PaperV3LikeResponse struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3LikeResponse) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3LikeResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3LikeResponseMetrics struct {
-	PublicTotalVotes float64 `json:"public_total_votes" api:"required"`
-	TotalVotes       float64 `json:"total_votes" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		PublicTotalVotes respjson.Field
-		TotalVotes       respjson.Field
-		ExtraFields      map[string]respjson.Field
-		raw              string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3LikeResponseMetrics) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LikeResponseMetrics) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1929,6 +1922,18 @@ const (
 	PaperV3CommentParamsTagResources PaperV3CommentParamsTag = "resources"
 )
 
+type PaperV3DeleteVotesParams struct {
+	Body []string
+	paramObj
+}
+
+func (r PaperV3DeleteVotesParams) MarshalJSON() (data []byte, err error) {
+	return shimjson.Marshal(r.Body)
+}
+func (r *PaperV3DeleteVotesParams) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3ImplementationParams struct {
 	URL string `json:"url" api:"required"`
 	paramObj
@@ -1975,17 +1980,25 @@ func (r *PaperV3KickoffPaperFullTextParams) UnmarshalJSON(data []byte) error {
 }
 
 type PaperV3LikeParams struct {
-	Liked bool `json:"liked" api:"required"`
+	// Any of "true", "false".
+	Liked PaperV3LikeParamsLiked `query:"liked,omitzero" api:"required" json:"-"`
 	paramObj
 }
 
-func (r PaperV3LikeParams) MarshalJSON() (data []byte, err error) {
-	type shadow PaperV3LikeParams
-	return param.MarshalObject(r, (*shadow)(&r))
+// URLQuery serializes [PaperV3LikeParams]'s query parameters as `url.Values`.
+func (r PaperV3LikeParams) URLQuery() (v url.Values, err error) {
+	return apiquery.MarshalWithSettings(r, apiquery.QuerySettings{
+		ArrayFormat:  apiquery.ArrayQueryFormatComma,
+		NestedFormat: apiquery.NestedQueryFormatBrackets,
+	})
 }
-func (r *PaperV3LikeParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
+
+type PaperV3LikeParamsLiked string
+
+const (
+	PaperV3LikeParamsLikedTrue  PaperV3LikeParamsLiked = "true"
+	PaperV3LikeParamsLikedFalse PaperV3LikeParamsLiked = "false"
+)
 
 type PaperV3ProcessAIParams struct {
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
