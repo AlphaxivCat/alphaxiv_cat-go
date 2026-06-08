@@ -375,12 +375,13 @@ func (r *UserV3ByUsernameGetProfilePageResponseActivityItemEndorsement) Unmarsha
 }
 
 type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
-	ID               string   `json:"id" api:"required" format:"uuid"`
-	Abstract         string   `json:"abstract" api:"required"`
-	Authors          []string `json:"authors" api:"required"`
-	Citations        float64  `json:"citations" api:"required"`
-	GoogleCitationID string   `json:"google_citation_id" api:"required"`
-	ImageURL         string   `json:"imageURL" api:"required"`
+	ID       string   `json:"id" api:"required" format:"uuid"`
+	Abstract string   `json:"abstract" api:"required"`
+	Authors  []string `json:"authors" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID      string  `json:"canonicalId" api:"required"`
+	Citations        float64 `json:"citations" api:"required"`
+	GoogleCitationID string  `json:"google_citation_id" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paper_id" api:"required"`
 	PublicTotalVotes float64  `json:"public_total_votes" api:"required"`
@@ -392,9 +393,9 @@ type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
 		ID               respjson.Field
 		Abstract         respjson.Field
 		Authors          respjson.Field
+		CanonicalID      respjson.Field
 		Citations        respjson.Field
 		GoogleCitationID respjson.Field
-		ImageURL         respjson.Field
 		PaperID          respjson.Field
 		PublicTotalVotes respjson.Field
 		PublicationDate  respjson.Field

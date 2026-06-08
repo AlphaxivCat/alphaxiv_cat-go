@@ -115,18 +115,6 @@ func (r *PaperV3Service) KickoffPaperCountries(ctx context.Context, body PaperV3
 	return err
 }
 
-// Kickoff paper full text processing for recent papers
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/papers/v3/kickoff-paper-full-text.controller.ts`
-func (r *PaperV3Service) KickoffPaperFullText(ctx context.Context, body PaperV3KickoffPaperFullTextParams, opts ...option.RequestOption) (err error) {
-	opts = slices.Concat(r.options, opts)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
-	path := "papers/v3/kickoff-paper-full-text"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, nil, opts...)
-	return err
-}
-
 // Kickoff paper podcasts on Uptash for a subset of paper groups
 //
 // Source file:
@@ -137,17 +125,6 @@ func (r *PaperV3Service) KickoffPaperPodcasts(ctx context.Context, opts ...optio
 	path := "papers/v3/kickoff-paper-podcasts"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, nil, opts...)
 	return err
-}
-
-// Kickoff background job to generate thumbnails for trending papers
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/papers/v3/kickoff-thumbnails-trending-papers.controller.ts`
-func (r *PaperV3Service) KickoffThumbnailsTrendingPapers(ctx context.Context, opts ...option.RequestOption) (res *PaperV3KickoffThumbnailsTrendingPapersResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "papers/v3/kickoff-thumbnails-trending-papers"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return res, err
 }
 
 // Set your like status on a paper group
@@ -212,20 +189,6 @@ func (r *PaperV3Service) ProcessCountries(ctx context.Context, body PaperV3Proce
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
 	path := "papers/v3/process-countries"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, nil, opts...)
-	return err
-}
-
-// Processes and extracts full text from paper PDFs for indexing and search
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/papers/v3/process-full-text.controller.ts`
-//
-// Deprecated: deprecated
-func (r *PaperV3Service) ProcessFullText(ctx context.Context, body PaperV3ProcessFullTextParams, opts ...option.RequestOption) (err error) {
-	opts = slices.Concat(r.options, opts)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
-	path := "papers/v3/process-full-text"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, nil, opts...)
 	return err
 }
@@ -571,38 +534,6 @@ func (r *PaperV3ImplementationResponseImplementation) UnmarshalJSON(data []byte)
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3KickoffThumbnailsTrendingPapersResponse struct {
-	Data PaperV3KickoffThumbnailsTrendingPapersResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3KickoffThumbnailsTrendingPapersResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3KickoffThumbnailsTrendingPapersResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3KickoffThumbnailsTrendingPapersResponseData struct {
-	Message string `json:"message" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Message     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3KickoffThumbnailsTrendingPapersResponseData) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3KickoffThumbnailsTrendingPapersResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type PaperV3LikeResponse struct {
 	Liked bool `json:"liked" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -653,9 +584,12 @@ func (r *PaperV3RequestImplementationResponse) UnmarshalJSON(data []byte) error 
 
 type PaperV3RequestPodcastResponse struct {
 	Message string `json:"message" api:"required"`
+	// Any of "queued", "generating", "done", "errored".
+	State PaperV3RequestPodcastResponseState `json:"state" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Message     respjson.Field
+		State       respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -666,6 +600,15 @@ func (r PaperV3RequestPodcastResponse) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3RequestPodcastResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
+
+type PaperV3RequestPodcastResponseState string
+
+const (
+	PaperV3RequestPodcastResponseStateQueued     PaperV3RequestPodcastResponseState = "queued"
+	PaperV3RequestPodcastResponseStateGenerating PaperV3RequestPodcastResponseState = "generating"
+	PaperV3RequestPodcastResponseStateDone       PaperV3RequestPodcastResponseState = "done"
+	PaperV3RequestPodcastResponseStateErrored    PaperV3RequestPodcastResponseState = "errored"
+)
 
 type PaperV3GetAllResponse struct {
 	Limit        float64  `json:"limit" api:"required"`
@@ -1965,20 +1908,6 @@ func (r *PaperV3KickoffPaperCountriesParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3KickoffPaperFullTextParams struct {
-	// Maximum number of paper versions to process
-	MaxPapers param.Opt[float64] `json:"maxPapers,omitzero"`
-	paramObj
-}
-
-func (r PaperV3KickoffPaperFullTextParams) MarshalJSON() (data []byte, err error) {
-	type shadow PaperV3KickoffPaperFullTextParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *PaperV3KickoffPaperFullTextParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type PaperV3LikeParams struct {
 	// Any of "true", "false".
 	Liked PaperV3LikeParamsLiked `query:"liked,omitzero" api:"required" json:"-"`
@@ -2093,20 +2022,6 @@ func (r PaperV3ProcessCountriesParams) MarshalJSON() (data []byte, err error) {
 	return param.MarshalObject(r, (*shadow)(&r))
 }
 func (r *PaperV3ProcessCountriesParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3ProcessFullTextParams struct {
-	// Paper version ID to process for full text extraction
-	PaperVersionID string `json:"paperVersionId" api:"required"`
-	paramObj
-}
-
-func (r PaperV3ProcessFullTextParams) MarshalJSON() (data []byte, err error) {
-	type shadow PaperV3ProcessFullTextParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *PaperV3ProcessFullTextParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

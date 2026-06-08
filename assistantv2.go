@@ -166,14 +166,15 @@ type AssistantV2ChatParams struct {
 	// Any of "homepage", "paper", "landing".
 	AssistantVariant AssistantV2ChatParamsAssistantVariant `json:"assistantVariant,omitzero"`
 	CustomFilter     AssistantV2ChatParamsCustomFilter     `json:"customFilter,omitzero"`
-	// Any of "baseline", "v1-baseten", "cohere".
+	// Any of "cohere".
 	FilterModel AssistantV2ChatParamsFilterModel `json:"filterModel,omitzero"`
 	// Any of "claude-opus-4.5", "claude-opus-4.6", "claude-opus-4.7",
-	// "claude-sonnet-4.5", "claude-sonnet-4.6", "gemini-2.5-flash", "gemini-2.5-pro",
-	// "gemini-3-flash", "gemini-3.1-pro", "glm-5-turbo", "glm-5.1", "gpt-5",
-	// "gpt-5.1", "gpt-5.2", "gpt-5.4", "gpt-5.4-mini", "gpt-5.4-nano", "kimi-k2.5",
-	// "kimi-k2.6", "mercury-2", "minimax-m2.5", "minimax-m2.7", "qwen-3.5", "fast",
-	// "smart", "pro".
+	// "claude-sonnet-4.5", "claude-sonnet-4.6", "deepseek-v4-flash",
+	// "deepseek-v4-pro", "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-flash",
+	// "gemini-3.1-flash-lite", "gemini-3.1-pro", "gemini-3.5-flash", "glm-5-turbo",
+	// "glm-5.1", "gpt-5", "gpt-5.1", "gpt-5.2", "gpt-5.4", "gpt-5.5", "gpt-5.4-mini",
+	// "gpt-5.4-nano", "kimi-k2.5", "kimi-k2.6", "mercury-2", "minimax-m2.5",
+	// "minimax-m2.7", "qwen-3.5", "fast", "smart", "pro".
 	Model AssistantV2ChatParamsModel `json:"model,omitzero"`
 	// Any of "free", "pro".
 	Plan AssistantV2ChatParamsPlan `json:"plan,omitzero"`
@@ -252,40 +253,43 @@ func (r *AssistantV2ChatParamsCustomFilter) UnmarshalJSON(data []byte) error {
 type AssistantV2ChatParamsFilterModel string
 
 const (
-	AssistantV2ChatParamsFilterModelBaseline  AssistantV2ChatParamsFilterModel = "baseline"
-	AssistantV2ChatParamsFilterModelV1Baseten AssistantV2ChatParamsFilterModel = "v1-baseten"
-	AssistantV2ChatParamsFilterModelCohere    AssistantV2ChatParamsFilterModel = "cohere"
+	AssistantV2ChatParamsFilterModelCohere AssistantV2ChatParamsFilterModel = "cohere"
 )
 
 type AssistantV2ChatParamsModel string
 
 const (
-	AssistantV2ChatParamsModelClaudeOpus4_5   AssistantV2ChatParamsModel = "claude-opus-4.5"
-	AssistantV2ChatParamsModelClaudeOpus4_6   AssistantV2ChatParamsModel = "claude-opus-4.6"
-	AssistantV2ChatParamsModelClaudeOpus4_7   AssistantV2ChatParamsModel = "claude-opus-4.7"
-	AssistantV2ChatParamsModelClaudeSonnet4_5 AssistantV2ChatParamsModel = "claude-sonnet-4.5"
-	AssistantV2ChatParamsModelClaudeSonnet4_6 AssistantV2ChatParamsModel = "claude-sonnet-4.6"
-	AssistantV2ChatParamsModelGemini2_5Flash  AssistantV2ChatParamsModel = "gemini-2.5-flash"
-	AssistantV2ChatParamsModelGemini2_5Pro    AssistantV2ChatParamsModel = "gemini-2.5-pro"
-	AssistantV2ChatParamsModelGemini3Flash    AssistantV2ChatParamsModel = "gemini-3-flash"
-	AssistantV2ChatParamsModelGemini3_1Pro    AssistantV2ChatParamsModel = "gemini-3.1-pro"
-	AssistantV2ChatParamsModelGlm5Turbo       AssistantV2ChatParamsModel = "glm-5-turbo"
-	AssistantV2ChatParamsModelGlm5_1          AssistantV2ChatParamsModel = "glm-5.1"
-	AssistantV2ChatParamsModelGpt5            AssistantV2ChatParamsModel = "gpt-5"
-	AssistantV2ChatParamsModelGpt5_1          AssistantV2ChatParamsModel = "gpt-5.1"
-	AssistantV2ChatParamsModelGpt5_2          AssistantV2ChatParamsModel = "gpt-5.2"
-	AssistantV2ChatParamsModelGpt5_4          AssistantV2ChatParamsModel = "gpt-5.4"
-	AssistantV2ChatParamsModelGpt5_4Mini      AssistantV2ChatParamsModel = "gpt-5.4-mini"
-	AssistantV2ChatParamsModelGpt5_4Nano      AssistantV2ChatParamsModel = "gpt-5.4-nano"
-	AssistantV2ChatParamsModelKimiK2_5        AssistantV2ChatParamsModel = "kimi-k2.5"
-	AssistantV2ChatParamsModelKimiK2_6        AssistantV2ChatParamsModel = "kimi-k2.6"
-	AssistantV2ChatParamsModelMercury2        AssistantV2ChatParamsModel = "mercury-2"
-	AssistantV2ChatParamsModelMinimaxM2_5     AssistantV2ChatParamsModel = "minimax-m2.5"
-	AssistantV2ChatParamsModelMinimaxM2_7     AssistantV2ChatParamsModel = "minimax-m2.7"
-	AssistantV2ChatParamsModelQwen3_5         AssistantV2ChatParamsModel = "qwen-3.5"
-	AssistantV2ChatParamsModelFast            AssistantV2ChatParamsModel = "fast"
-	AssistantV2ChatParamsModelSmart           AssistantV2ChatParamsModel = "smart"
-	AssistantV2ChatParamsModelPro             AssistantV2ChatParamsModel = "pro"
+	AssistantV2ChatParamsModelClaudeOpus4_5      AssistantV2ChatParamsModel = "claude-opus-4.5"
+	AssistantV2ChatParamsModelClaudeOpus4_6      AssistantV2ChatParamsModel = "claude-opus-4.6"
+	AssistantV2ChatParamsModelClaudeOpus4_7      AssistantV2ChatParamsModel = "claude-opus-4.7"
+	AssistantV2ChatParamsModelClaudeSonnet4_5    AssistantV2ChatParamsModel = "claude-sonnet-4.5"
+	AssistantV2ChatParamsModelClaudeSonnet4_6    AssistantV2ChatParamsModel = "claude-sonnet-4.6"
+	AssistantV2ChatParamsModelDeepseekV4Flash    AssistantV2ChatParamsModel = "deepseek-v4-flash"
+	AssistantV2ChatParamsModelDeepseekV4Pro      AssistantV2ChatParamsModel = "deepseek-v4-pro"
+	AssistantV2ChatParamsModelGemini2_5Flash     AssistantV2ChatParamsModel = "gemini-2.5-flash"
+	AssistantV2ChatParamsModelGemini2_5Pro       AssistantV2ChatParamsModel = "gemini-2.5-pro"
+	AssistantV2ChatParamsModelGemini3Flash       AssistantV2ChatParamsModel = "gemini-3-flash"
+	AssistantV2ChatParamsModelGemini3_1FlashLite AssistantV2ChatParamsModel = "gemini-3.1-flash-lite"
+	AssistantV2ChatParamsModelGemini3_1Pro       AssistantV2ChatParamsModel = "gemini-3.1-pro"
+	AssistantV2ChatParamsModelGemini3_5Flash     AssistantV2ChatParamsModel = "gemini-3.5-flash"
+	AssistantV2ChatParamsModelGlm5Turbo          AssistantV2ChatParamsModel = "glm-5-turbo"
+	AssistantV2ChatParamsModelGlm5_1             AssistantV2ChatParamsModel = "glm-5.1"
+	AssistantV2ChatParamsModelGpt5               AssistantV2ChatParamsModel = "gpt-5"
+	AssistantV2ChatParamsModelGpt5_1             AssistantV2ChatParamsModel = "gpt-5.1"
+	AssistantV2ChatParamsModelGpt5_2             AssistantV2ChatParamsModel = "gpt-5.2"
+	AssistantV2ChatParamsModelGpt5_4             AssistantV2ChatParamsModel = "gpt-5.4"
+	AssistantV2ChatParamsModelGpt5_5             AssistantV2ChatParamsModel = "gpt-5.5"
+	AssistantV2ChatParamsModelGpt5_4Mini         AssistantV2ChatParamsModel = "gpt-5.4-mini"
+	AssistantV2ChatParamsModelGpt5_4Nano         AssistantV2ChatParamsModel = "gpt-5.4-nano"
+	AssistantV2ChatParamsModelKimiK2_5           AssistantV2ChatParamsModel = "kimi-k2.5"
+	AssistantV2ChatParamsModelKimiK2_6           AssistantV2ChatParamsModel = "kimi-k2.6"
+	AssistantV2ChatParamsModelMercury2           AssistantV2ChatParamsModel = "mercury-2"
+	AssistantV2ChatParamsModelMinimaxM2_5        AssistantV2ChatParamsModel = "minimax-m2.5"
+	AssistantV2ChatParamsModelMinimaxM2_7        AssistantV2ChatParamsModel = "minimax-m2.7"
+	AssistantV2ChatParamsModelQwen3_5            AssistantV2ChatParamsModel = "qwen-3.5"
+	AssistantV2ChatParamsModelFast               AssistantV2ChatParamsModel = "fast"
+	AssistantV2ChatParamsModelSmart              AssistantV2ChatParamsModel = "smart"
+	AssistantV2ChatParamsModelPro                AssistantV2ChatParamsModel = "pro"
 )
 
 type AssistantV2ChatParamsPlan string

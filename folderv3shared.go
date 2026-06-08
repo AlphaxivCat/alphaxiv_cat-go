@@ -114,11 +114,12 @@ func (r *FolderV3SharedGetResponseChildFolder) UnmarshalJSON(data []byte) error 
 }
 
 type FolderV3SharedGetResponseChildFolderPaper struct {
-	Abstract        string                                                  `json:"abstract" api:"required"`
-	AddedAt         string                                                  `json:"addedAt" api:"required"`
-	Authors         []FolderV3SharedGetResponseChildFolderPaperAuthor       `json:"authors" api:"required"`
+	Abstract string                                            `json:"abstract" api:"required"`
+	AddedAt  string                                            `json:"addedAt" api:"required"`
+	Authors  []FolderV3SharedGetResponseChildFolderPaperAuthor `json:"authors" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID     string                                                  `json:"canonicalId" api:"required"`
 	Citation        string                                                  `json:"citation" api:"required"`
-	ImageURL        string                                                  `json:"imageUrl" api:"required"`
 	Organizations   []FolderV3SharedGetResponseChildFolderPaperOrganization `json:"organizations" api:"required"`
 	PaperGroupID    string                                                  `json:"paperGroupId" api:"required" format:"uuid"`
 	PublicationDate string                                                  `json:"publicationDate" api:"required"`
@@ -133,8 +134,8 @@ type FolderV3SharedGetResponseChildFolderPaper struct {
 		Abstract         respjson.Field
 		AddedAt          respjson.Field
 		Authors          respjson.Field
+		CanonicalID      respjson.Field
 		Citation         respjson.Field
-		ImageURL         respjson.Field
 		Organizations    respjson.Field
 		PaperGroupID     respjson.Field
 		PublicationDate  respjson.Field
@@ -292,11 +293,12 @@ func (r *FolderV3SharedGetResponseFolder) UnmarshalJSON(data []byte) error {
 }
 
 type FolderV3SharedGetResponseFolderPaper struct {
-	Abstract        string                                             `json:"abstract" api:"required"`
-	AddedAt         string                                             `json:"addedAt" api:"required"`
-	Authors         []FolderV3SharedGetResponseFolderPaperAuthor       `json:"authors" api:"required"`
+	Abstract string                                       `json:"abstract" api:"required"`
+	AddedAt  string                                       `json:"addedAt" api:"required"`
+	Authors  []FolderV3SharedGetResponseFolderPaperAuthor `json:"authors" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID     string                                             `json:"canonicalId" api:"required"`
 	Citation        string                                             `json:"citation" api:"required"`
-	ImageURL        string                                             `json:"imageUrl" api:"required"`
 	Organizations   []FolderV3SharedGetResponseFolderPaperOrganization `json:"organizations" api:"required"`
 	PaperGroupID    string                                             `json:"paperGroupId" api:"required" format:"uuid"`
 	PublicationDate string                                             `json:"publicationDate" api:"required"`
@@ -311,8 +313,8 @@ type FolderV3SharedGetResponseFolderPaper struct {
 		Abstract         respjson.Field
 		AddedAt          respjson.Field
 		Authors          respjson.Field
+		CanonicalID      respjson.Field
 		Citation         respjson.Field
-		ImageURL         respjson.Field
 		Organizations    respjson.Field
 		PaperGroupID     respjson.Field
 		PublicationDate  respjson.Field
