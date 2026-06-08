@@ -214,11 +214,12 @@ func (r *FolderV3ListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type FolderV3ListResponsePaper struct {
-	Abstract        string                                  `json:"abstract" api:"required"`
-	AddedAt         string                                  `json:"addedAt" api:"required"`
-	Authors         []FolderV3ListResponsePaperAuthor       `json:"authors" api:"required"`
+	Abstract string                            `json:"abstract" api:"required"`
+	AddedAt  string                            `json:"addedAt" api:"required"`
+	Authors  []FolderV3ListResponsePaperAuthor `json:"authors" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID     string                                  `json:"canonicalId" api:"required"`
 	Citation        string                                  `json:"citation" api:"required"`
-	ImageURL        string                                  `json:"imageUrl" api:"required"`
 	Organizations   []FolderV3ListResponsePaperOrganization `json:"organizations" api:"required"`
 	PaperGroupID    string                                  `json:"paperGroupId" api:"required" format:"uuid"`
 	PublicationDate string                                  `json:"publicationDate" api:"required"`
@@ -233,8 +234,8 @@ type FolderV3ListResponsePaper struct {
 		Abstract         respjson.Field
 		AddedAt          respjson.Field
 		Authors          respjson.Field
+		CanonicalID      respjson.Field
 		Citation         respjson.Field
-		ImageURL         respjson.Field
 		Organizations    respjson.Field
 		PaperGroupID     respjson.Field
 		PublicationDate  respjson.Field

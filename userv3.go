@@ -46,19 +46,6 @@ func NewUserV3Service(opts ...option.RequestOption) (r UserV3Service) {
 	return
 }
 
-// Generate a biography and institution for a user using their claimed papers
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/users/v3/autocomplete-profile.controller.ts`
-//
-// Deprecated: deprecated
-func (r *UserV3Service) AutocompleteProfile(ctx context.Context, body UserV3AutocompleteProfileParams, opts ...option.RequestOption) (res *UserV3AutocompleteProfileResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "users/v3/autocomplete-profile"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return res, err
-}
-
 // Delete the given banner
 //
 // Source file:
@@ -269,26 +256,6 @@ func (r *UserV3Service) UploadAvatar(ctx context.Context, opts ...option.Request
 	path := "users/v3/avatar"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return res, err
-}
-
-type UserV3AutocompleteProfileResponse struct {
-	Bio         string `json:"bio" api:"required"`
-	Institution string `json:"institution" api:"required"`
-	Message     string `json:"message" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Bio         respjson.Field
-		Institution respjson.Field
-		Message     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r UserV3AutocompleteProfileResponse) RawJSON() string { return r.JSON.raw }
-func (r *UserV3AutocompleteProfileResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
 }
 
 type UserV3GetActivityResponse struct {
@@ -570,12 +537,13 @@ const (
 )
 
 type UserV3GetClaimedPapersResponse struct {
-	ID               string   `json:"id" api:"required" format:"uuid"`
-	Abstract         string   `json:"abstract" api:"required"`
-	Authors          []string `json:"authors" api:"required"`
-	Citations        float64  `json:"citations" api:"required"`
-	GoogleCitationID string   `json:"google_citation_id" api:"required"`
-	ImageURL         string   `json:"imageURL" api:"required"`
+	ID       string   `json:"id" api:"required" format:"uuid"`
+	Abstract string   `json:"abstract" api:"required"`
+	Authors  []string `json:"authors" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID      string  `json:"canonicalId" api:"required"`
+	Citations        float64 `json:"citations" api:"required"`
+	GoogleCitationID string  `json:"google_citation_id" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paper_id" api:"required"`
 	PublicTotalVotes float64  `json:"public_total_votes" api:"required"`
@@ -587,9 +555,9 @@ type UserV3GetClaimedPapersResponse struct {
 		ID               respjson.Field
 		Abstract         respjson.Field
 		Authors          respjson.Field
+		CanonicalID      respjson.Field
 		Citations        respjson.Field
 		GoogleCitationID respjson.Field
-		ImageURL         respjson.Field
 		PaperID          respjson.Field
 		PublicTotalVotes respjson.Field
 		PublicationDate  respjson.Field
@@ -1579,7 +1547,8 @@ func (r *UserV3GetUserByUuidResponseFeatured) UnmarshalJSON(data []byte) error {
 type UserV3GetViewedHistoryResponse struct {
 	ID       string `json:"id" api:"required" format:"uuid"`
 	Abstract string `json:"abstract" api:"required"`
-	ImageURL string `json:"imageUrl" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID string `json:"canonicalId" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paperId" api:"required"`
 	PublicationDate  string   `json:"publicationDate" api:"required"`
@@ -1591,7 +1560,7 @@ type UserV3GetViewedHistoryResponse struct {
 	JSON struct {
 		ID               respjson.Field
 		Abstract         respjson.Field
-		ImageURL         respjson.Field
+		CanonicalID      respjson.Field
 		PaperID          respjson.Field
 		PublicationDate  respjson.Field
 		PublicTotalVotes respjson.Field
@@ -2043,19 +2012,6 @@ func (r *UserV3UploadAvatarResponseData) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type UserV3AutocompleteProfileParams struct {
-	UserID string `json:"userId" api:"required" format:"uuid"`
-	paramObj
-}
-
-func (r UserV3AutocompleteProfileParams) MarshalJSON() (data []byte, err error) {
-	type shadow UserV3AutocompleteProfileParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *UserV3AutocompleteProfileParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type UserV3GetActivityParams struct {
 	// Any of "date", "liked".
 	Sort UserV3GetActivityParamsSort `query:"sort,omitzero" json:"-"`
@@ -2245,6 +2201,7 @@ type UserV3UpdateProfileParams struct {
 	Institution      param.Opt[string] `json:"institution,omitzero"`
 	LinkedinUsername param.Opt[string] `json:"linkedinUsername,omitzero"`
 	Location         param.Opt[string] `json:"location,omitzero"`
+	OrcidID          param.Opt[string] `json:"orcidId,omitzero"`
 	PublicEmail      param.Opt[string] `json:"publicEmail,omitzero" format:"email"`
 	XUsername        param.Opt[string] `json:"xUsername,omitzero"`
 	RealName         param.Opt[string] `json:"realName,omitzero"`
