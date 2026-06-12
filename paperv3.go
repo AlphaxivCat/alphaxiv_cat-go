@@ -193,19 +193,6 @@ func (r *PaperV3Service) ProcessCountries(ctx context.Context, body PaperV3Proce
 	return err
 }
 
-// Clear 'is_last_X_days' flags from paper embeddings that have become too old
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/papers/v3/prune-embeddings-by-date.controller.ts`
-//
-// Deprecated: deprecated
-func (r *PaperV3Service) PruneEmbeddingsByDate(ctx context.Context, opts ...option.RequestOption) (res *PaperV3PruneEmbeddingsByDateResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "papers/v3/prune-embeddings-by-date"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return res, err
-}
-
 // Toggle your implementation request status on a paper group
 //
 // Source file:
@@ -547,22 +534,6 @@ type PaperV3LikeResponse struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3LikeResponse) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3LikeResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3PruneEmbeddingsByDateResponse struct {
-	RowsUpdated []float64 `json:"rowsUpdated" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		RowsUpdated respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3PruneEmbeddingsByDateResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3PruneEmbeddingsByDateResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -2073,9 +2044,10 @@ type PaperV3GetFeedParams struct {
 	Interval PaperV3GetFeedParamsInterval `query:"interval,omitzero" api:"required" json:"-"`
 	PageNum  string                       `query:"pageNum" api:"required" json:"-"`
 	PageSize string                       `query:"pageSize" api:"required" json:"-"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
-	Sort   PaperV3GetFeedParamsSort `query:"sort,omitzero" api:"required" json:"-"`
-	Topics param.Opt[string]        `query:"topics,omitzero" json:"-"`
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
+	Sort                 PaperV3GetFeedParamsSort `query:"sort,omitzero" api:"required" json:"-"`
+	IncludeExternalBlogs param.Opt[string]        `query:"includeExternalBlogs,omitzero" json:"-"`
+	Topics               param.Opt[string]        `query:"topics,omitzero" json:"-"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	UniversalID param.Opt[string] `query:"universalId,omitzero" json:"-"`
 	// Any of "GitHub".
@@ -2110,6 +2082,7 @@ const (
 	PaperV3GetFeedParamsSortLikes       PaperV3GetFeedParamsSort = "Likes"
 	PaperV3GetFeedParamsSortGitHub      PaperV3GetFeedParamsSort = "GitHub"
 	PaperV3GetFeedParamsSortRecommended PaperV3GetFeedParamsSort = "Recommended"
+	PaperV3GetFeedParamsSortRecent      PaperV3GetFeedParamsSort = "Recent"
 )
 
 type PaperV3GetFeedParamsSource string

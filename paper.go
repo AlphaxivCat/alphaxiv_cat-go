@@ -66,21 +66,6 @@ func (r *PaperService) AddAuthor(ctx context.Context, paperID string, body Paper
 	return res, err
 }
 
-// Set paper vote count (admin only)
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v2/papers/admin-vote-paper.controller.ts`
-func (r *PaperService) AdminVote(ctx context.Context, paperID string, body PaperAdminVoteParams, opts ...option.RequestOption) (res *PaperAdminVoteResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	if paperID == "" {
-		err = errors.New("missing required paperId parameter")
-		return nil, err
-	}
-	path := fmt.Sprintf("v2/papers/%s/admin-vote", url.PathEscape(paperID))
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return res, err
-}
-
 // Legacy route for v1 browser extensions to track abstract page clicks
 //
 // Source file:
@@ -194,17 +179,6 @@ func (r *PaperService) GetPaperInfo(ctx context.Context, pid string, opts ...opt
 	return res, err
 }
 
-// Kickoff background job to generate abstract embeddings for paper versions
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-paper-version-abstract-embed.controller.ts`
-func (r *PaperService) KickoffAbstractEmbed(ctx context.Context, opts ...option.RequestOption) (res *PaperKickoffAbstractEmbedResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "v2/papers/kickoff-paper-version-abstract-embed"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return res, err
-}
-
 // Kickoff background job to generate AI overviews for papers
 //
 // Source file:
@@ -276,19 +250,6 @@ func (r *PaperService) MarkViewed(ctx context.Context, upid string, opts ...opti
 	}
 	path := fmt.Sprintf("v2/papers/%s/view", url.PathEscape(upid))
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return res, err
-}
-
-// Process abstract embedding for a paper version
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v2/papers/process-paper-version-abstract-embed.controller.ts`
-//
-// Deprecated: deprecated
-func (r *PaperService) ProcessAbstractEmbed(ctx context.Context, body PaperProcessAbstractEmbedParams, opts ...option.RequestOption) (res *PaperProcessAbstractEmbedResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "v2/papers/process-paper-version-abstract-embed"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return res, err
 }
 
@@ -448,38 +409,6 @@ func (r *PaperAddAuthorResponseData) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperAdminVoteResponse struct {
-	Data PaperAdminVoteResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperAdminVoteResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperAdminVoteResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperAdminVoteResponseData struct {
-	Success bool `json:"success" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Success     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperAdminVoteResponseData) RawJSON() string { return r.JSON.raw }
-func (r *PaperAdminVoteResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type PaperCrxAbstractClickResponse struct {
 	Message float64 `json:"message" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -597,38 +526,6 @@ type PaperGetPaperInfoResponse struct {
 // Returns the unmodified JSON received from the API
 func (r PaperGetPaperInfoResponse) RawJSON() string { return r.JSON.raw }
 func (r *PaperGetPaperInfoResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperKickoffAbstractEmbedResponse struct {
-	Data PaperKickoffAbstractEmbedResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperKickoffAbstractEmbedResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperKickoffAbstractEmbedResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperKickoffAbstractEmbedResponseData struct {
-	Message string `json:"message" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Message     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperKickoffAbstractEmbedResponseData) RawJSON() string { return r.JSON.raw }
-func (r *PaperKickoffAbstractEmbedResponseData) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -793,38 +690,6 @@ func (r *PaperKickoffRecentPapersResponseData) UnmarshalJSON(data []byte) error 
 }
 
 type PaperMarkViewedResponse = any
-
-type PaperProcessAbstractEmbedResponse struct {
-	Data PaperProcessAbstractEmbedResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperProcessAbstractEmbedResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperProcessAbstractEmbedResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperProcessAbstractEmbedResponseData struct {
-	Status string `json:"status" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Status      respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperProcessAbstractEmbedResponseData) RawJSON() string { return r.JSON.raw }
-func (r *PaperProcessAbstractEmbedResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
 
 type PaperProcessMetadataResponse struct {
 	Data  PaperProcessMetadataResponseData `json:"data"`
@@ -1082,19 +947,6 @@ func (r *PaperAddAuthorParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperAdminVoteParams struct {
-	Entry float64 `json:"entry" api:"required"`
-	paramObj
-}
-
-func (r PaperAdminVoteParams) MarshalJSON() (data []byte, err error) {
-	type shadow PaperAdminVoteParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *PaperAdminVoteParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type PaperCrxAbstractClickParams struct {
 	// Paper ID
 	Pid string `path:"pid" api:"required" json:"-"`
@@ -1132,19 +984,6 @@ const (
 	PaperEmailAuthorParamsTypeTrending PaperEmailAuthorParamsType = "trending"
 )
 
-type PaperProcessAbstractEmbedParams struct {
-	PaperVersionID string `json:"paperVersionId" api:"required" format:"uuid"`
-	paramObj
-}
-
-func (r PaperProcessAbstractEmbedParams) MarshalJSON() (data []byte, err error) {
-	type shadow PaperProcessAbstractEmbedParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *PaperProcessAbstractEmbedParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type PaperProcessMetadataParams struct {
 	Metadata         PaperProcessMetadataParamsMetadata `json:"metadata,omitzero" api:"required"`
 	UniversalPaperID string                             `json:"universalPaperId" api:"required"`
@@ -1162,7 +1001,6 @@ func (r *PaperProcessMetadataParams) UnmarshalJSON(data []byte) error {
 type PaperProcessMetadataParamsMetadata struct {
 	Bibtex           param.Opt[bool] `json:"bibtex,omitzero"`
 	CustomCategories param.Opt[bool] `json:"custom_categories,omitzero"`
-	Embedding        param.Opt[bool] `json:"embedding,omitzero"`
 	GitHub           param.Opt[bool] `json:"github,omitzero"`
 	Organizations    param.Opt[bool] `json:"organizations,omitzero"`
 	Overview         param.Opt[bool] `json:"overview,omitzero"`
