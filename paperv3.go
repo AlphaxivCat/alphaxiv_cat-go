@@ -608,6 +608,7 @@ type PaperV3GetDiversePapersResponse struct {
 	Authors    []string                                    `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                            `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetDiversePapersResponseExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                            `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetDiversePapersResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                           `json:"github_stars" api:"required"`
@@ -631,6 +632,7 @@ type PaperV3GetDiversePapersResponse struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
@@ -720,6 +722,22 @@ type PaperV3GetDiversePapersResponseAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetDiversePapersResponseAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetDiversePapersResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetDiversePapersResponseExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetDiversePapersResponseExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetDiversePapersResponseExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -850,6 +868,7 @@ type PaperV3GetFeedResponsePaper struct {
 	Authors    []string                                `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                        `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetFeedResponsePaperExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                        `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetFeedResponsePaperFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                       `json:"github_stars" api:"required"`
@@ -873,6 +892,7 @@ type PaperV3GetFeedResponsePaper struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
@@ -962,6 +982,22 @@ type PaperV3GetFeedResponsePaperAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetFeedResponsePaperAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetFeedResponsePaperAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetFeedResponsePaperExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetFeedResponsePaperExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetFeedResponsePaperExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1144,6 +1180,7 @@ type PaperV3GetPreviewResponse struct {
 	Authors    []string                              `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                      `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetPreviewResponseExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                      `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetPreviewResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                     `json:"github_stars" api:"required"`
@@ -1167,6 +1204,7 @@ type PaperV3GetPreviewResponse struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
@@ -1256,6 +1294,22 @@ type PaperV3GetPreviewResponseAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetPreviewResponseAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetPreviewResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetPreviewResponseExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetPreviewResponseExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetPreviewResponseExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1368,6 +1422,7 @@ type PaperV3GetSimilarPapersResponse struct {
 	Authors    []string                                    `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                            `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetSimilarPapersResponseExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                            `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetSimilarPapersResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                           `json:"github_stars" api:"required"`
@@ -1391,6 +1446,7 @@ type PaperV3GetSimilarPapersResponse struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
@@ -1480,6 +1536,22 @@ type PaperV3GetSimilarPapersResponseAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetSimilarPapersResponseAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetSimilarPapersResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetSimilarPapersResponseExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetSimilarPapersResponseExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetSimilarPapersResponseExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1592,6 +1664,7 @@ type PaperV3GetUnrelatedResponse struct {
 	Authors    []string                                `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                        `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetUnrelatedResponseExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                        `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetUnrelatedResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                       `json:"github_stars" api:"required"`
@@ -1615,6 +1688,7 @@ type PaperV3GetUnrelatedResponse struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
@@ -1704,6 +1778,22 @@ type PaperV3GetUnrelatedResponseAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetUnrelatedResponseAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetUnrelatedResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetUnrelatedResponseExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetUnrelatedResponseExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetUnrelatedResponseExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
