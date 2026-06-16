@@ -613,6 +613,7 @@ type PaperV3GetDiversePapersResponse struct {
 	FullAuthors          []PaperV3GetDiversePapersResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                           `json:"github_stars" api:"required"`
 	GitHubURL            string                                            `json:"github_url" api:"required"`
+	HasRunReport         bool                                              `json:"has_run_report" api:"required"`
 	ImageURL             string                                            `json:"image_url" api:"required"`
 	Metrics              PaperV3GetDiversePapersResponseMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetDiversePapersResponseOrganizationInfo `json:"organization_info" api:"required"`
@@ -637,6 +638,7 @@ type PaperV3GetDiversePapersResponse struct {
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -873,6 +875,7 @@ type PaperV3GetFeedResponsePaper struct {
 	FullAuthors          []PaperV3GetFeedResponsePaperFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                       `json:"github_stars" api:"required"`
 	GitHubURL            string                                        `json:"github_url" api:"required"`
+	HasRunReport         bool                                          `json:"has_run_report" api:"required"`
 	ImageURL             string                                        `json:"image_url" api:"required"`
 	Metrics              PaperV3GetFeedResponsePaperMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetFeedResponsePaperOrganizationInfo `json:"organization_info" api:"required"`
@@ -897,6 +900,7 @@ type PaperV3GetFeedResponsePaper struct {
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -1185,6 +1189,7 @@ type PaperV3GetPreviewResponse struct {
 	FullAuthors          []PaperV3GetPreviewResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                     `json:"github_stars" api:"required"`
 	GitHubURL            string                                      `json:"github_url" api:"required"`
+	HasRunReport         bool                                        `json:"has_run_report" api:"required"`
 	ImageURL             string                                      `json:"image_url" api:"required"`
 	Metrics              PaperV3GetPreviewResponseMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetPreviewResponseOrganizationInfo `json:"organization_info" api:"required"`
@@ -1209,6 +1214,7 @@ type PaperV3GetPreviewResponse struct {
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -1427,6 +1433,7 @@ type PaperV3GetSimilarPapersResponse struct {
 	FullAuthors          []PaperV3GetSimilarPapersResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                           `json:"github_stars" api:"required"`
 	GitHubURL            string                                            `json:"github_url" api:"required"`
+	HasRunReport         bool                                              `json:"has_run_report" api:"required"`
 	ImageURL             string                                            `json:"image_url" api:"required"`
 	Metrics              PaperV3GetSimilarPapersResponseMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetSimilarPapersResponseOrganizationInfo `json:"organization_info" api:"required"`
@@ -1451,6 +1458,7 @@ type PaperV3GetSimilarPapersResponse struct {
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -1669,6 +1677,7 @@ type PaperV3GetUnrelatedResponse struct {
 	FullAuthors          []PaperV3GetUnrelatedResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                       `json:"github_stars" api:"required"`
 	GitHubURL            string                                        `json:"github_url" api:"required"`
+	HasRunReport         bool                                          `json:"has_run_report" api:"required"`
 	ImageURL             string                                        `json:"image_url" api:"required"`
 	Metrics              PaperV3GetUnrelatedResponseMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetUnrelatedResponseOrganizationInfo `json:"organization_info" api:"required"`
@@ -1693,6 +1702,7 @@ type PaperV3GetUnrelatedResponse struct {
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
