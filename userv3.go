@@ -942,6 +942,7 @@ type UserV3GetCurrentUserResponseUser struct {
 	Biography                string                                      `json:"biography" api:"required"`
 	BlueskyUsername          string                                      `json:"blueskyUsername" api:"required"`
 	Email                    string                                      `json:"email" api:"required"`
+	FirstLogin               bool                                        `json:"firstLogin" api:"required"`
 	FollowerCount            float64                                     `json:"followerCount" api:"required"`
 	FollowingCount           float64                                     `json:"followingCount" api:"required"`
 	FollowingTopics          []string                                    `json:"followingTopics" api:"required"`
@@ -974,6 +975,7 @@ type UserV3GetCurrentUserResponseUser struct {
 		Biography                respjson.Field
 		BlueskyUsername          respjson.Field
 		Email                    respjson.Field
+		FirstLogin               respjson.Field
 		FollowerCount            respjson.Field
 		FollowingCount           respjson.Field
 		FollowingTopics          respjson.Field
@@ -1589,6 +1591,8 @@ type UserV3GetUserByUuidResponse struct {
 	Avatar               []UserV3GetUserByUuidResponseAvatar `json:"avatar" api:"required"`
 	Biography            string                              `json:"biography" api:"required"`
 	BlueskyUsername      string                              `json:"blueskyUsername" api:"required"`
+	Email                string                              `json:"email" api:"required"`
+	FirstLogin           bool                                `json:"firstLogin" api:"required"`
 	FollowerCount        float64                             `json:"followerCount" api:"required"`
 	FollowingCount       float64                             `json:"followingCount" api:"required"`
 	FollowingTopicsCount float64                             `json:"followingTopicsCount" api:"required"`
@@ -1616,6 +1620,8 @@ type UserV3GetUserByUuidResponse struct {
 		Avatar                 respjson.Field
 		Biography              respjson.Field
 		BlueskyUsername        respjson.Field
+		Email                  respjson.Field
+		FirstLogin             respjson.Field
 		FollowerCount          respjson.Field
 		FollowingCount         respjson.Field
 		FollowingTopicsCount   respjson.Field
@@ -2018,6 +2024,8 @@ type UserV3UpdateProfileResponse struct {
 	Avatar               []UserV3UpdateProfileResponseAvatar `json:"avatar" api:"required"`
 	Biography            string                              `json:"biography" api:"required"`
 	BlueskyUsername      string                              `json:"blueskyUsername" api:"required"`
+	Email                string                              `json:"email" api:"required"`
+	FirstLogin           bool                                `json:"firstLogin" api:"required"`
 	FollowerCount        float64                             `json:"followerCount" api:"required"`
 	FollowingCount       float64                             `json:"followingCount" api:"required"`
 	FollowingTopicsCount float64                             `json:"followingTopicsCount" api:"required"`
@@ -2045,6 +2053,8 @@ type UserV3UpdateProfileResponse struct {
 		Avatar                 respjson.Field
 		Biography              respjson.Field
 		BlueskyUsername        respjson.Field
+		Email                  respjson.Field
+		FirstLogin             respjson.Field
 		FollowerCount          respjson.Field
 		FollowingCount         respjson.Field
 		FollowingTopicsCount   respjson.Field
