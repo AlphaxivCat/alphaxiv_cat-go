@@ -37,7 +37,7 @@ func NewUserV3CitationService(opts ...option.RequestOption) (r UserV3CitationSer
 // Retrieve citation counts by year for a user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-citation-graph.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-citation-graph.controller.ts`
 func (r *UserV3CitationService) GetGraph(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3CitationGetGraphResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -52,7 +52,7 @@ func (r *UserV3CitationService) GetGraph(ctx context.Context, id string, opts ..
 // Retrieve aggregated citation metrics for a user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-citation-summary.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-citation-summary.controller.ts`
 func (r *UserV3CitationService) GetSummary(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3CitationGetSummaryResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {

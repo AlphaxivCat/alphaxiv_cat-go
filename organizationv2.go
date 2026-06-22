@@ -39,7 +39,7 @@ func NewOrganizationV2Service(opts ...option.RequestOption) (r OrganizationV2Ser
 // Retrieve the top 20 organizations with images by paper count
 //
 // Source file:
-// `api-server/src/controllers/organizations/v2/get-top-orgs.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/organizations/v2/get-top-orgs.controller.ts`
 func (r *OrganizationV2Service) ListTop(ctx context.Context, opts ...option.RequestOption) (res *[]OrganizationV2ListTopResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "organizations/v2/top"
@@ -50,7 +50,7 @@ func (r *OrganizationV2Service) ListTop(ctx context.Context, opts ...option.Requ
 // Retrieve an organization's basic information given its ID.
 //
 // Source file:
-// `api-server/src/controllers/organizations/v2/get-organization-by-id.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/organizations/v2/get-organization-by-id.controller.ts`
 func (r *OrganizationV2Service) GetByID(ctx context.Context, id string, opts ...option.RequestOption) (res *OrganizationV2GetByIDResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -66,7 +66,7 @@ func (r *OrganizationV2Service) GetByID(ctx context.Context, id string, opts ...
 // matter (i.e. google and GOOGLE return the same results).
 //
 // Source file:
-// `api-server/src/controllers/organizations/v2/get-organization-by-name.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/organizations/v2/get-organization-by-name.controller.ts`
 func (r *OrganizationV2Service) GetByName(ctx context.Context, name string, opts ...option.RequestOption) (res *OrganizationV2GetByNameResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if name == "" {
@@ -80,7 +80,8 @@ func (r *OrganizationV2Service) GetByName(ctx context.Context, name string, opts
 
 // Search organizations by name
 //
-// Source file: `api-server/src/controllers/organizations/v2/search.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/organizations/v2/search.controller.ts`
 func (r *OrganizationV2Service) Search(ctx context.Context, query OrganizationV2SearchParams, opts ...option.RequestOption) (res *[]OrganizationV2SearchResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "organizations/v2/search"
@@ -91,7 +92,7 @@ func (r *OrganizationV2Service) Search(ctx context.Context, query OrganizationV2
 // Toggle following an organization, affects the current user's profile
 //
 // Source file:
-// `api-server/src/controllers/organizations/v2/toggle-follow-org.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/organizations/v2/toggle-follow-org.controller.ts`
 func (r *OrganizationV2Service) ToggleFollow(ctx context.Context, id string, opts ...option.RequestOption) (res *OrganizationV2ToggleFollowResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {

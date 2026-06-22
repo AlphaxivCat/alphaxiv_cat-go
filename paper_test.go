@@ -43,35 +43,6 @@ func TestPaperAddAuthorWithOptionalParams(t *testing.T) {
 	}
 }
 
-func TestPaperAdminVote(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Papers.AdminVote(
-		context.TODO(),
-		"x",
-		alphaxivcat.PaperAdminVoteParams{
-			Entry: 0,
-		},
-	)
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
 func TestPaperCrxAbstractClick(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
@@ -255,29 +226,6 @@ func TestPaperGetPaperInfo(t *testing.T) {
 	}
 }
 
-func TestPaperKickoffAbstractEmbed(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Papers.KickoffAbstractEmbed(context.TODO())
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
 func TestPaperKickoffAI(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
@@ -416,31 +364,6 @@ func TestPaperMarkViewed(t *testing.T) {
 	}
 }
 
-func TestPaperProcessAbstractEmbed(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Papers.ProcessAbstractEmbed(context.TODO(), alphaxivcat.PaperProcessAbstractEmbedParams{
-		PaperVersionID: "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-	})
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
 func TestPaperProcessMetadataWithOptionalParams(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
@@ -458,7 +381,6 @@ func TestPaperProcessMetadataWithOptionalParams(t *testing.T) {
 		Metadata: alphaxivcat.PaperProcessMetadataParamsMetadata{
 			Bibtex:           alphaxivcat.Bool(true),
 			CustomCategories: alphaxivcat.Bool(true),
-			Embedding:        alphaxivcat.Bool(true),
 			GitHub:           alphaxivcat.Bool(true),
 			Organizations:    alphaxivcat.Bool(true),
 			Overview:         alphaxivcat.Bool(true),

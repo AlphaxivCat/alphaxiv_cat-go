@@ -38,7 +38,7 @@ func NewAssistantV2MessageService(opts ...option.RequestOption) (r AssistantV2Me
 // Get all messages for an llm chat
 //
 // Source file:
-// `api-server/src/controllers/assistant/v2/get-chat-messages.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/assistant/v2/get-chat-messages.controller.ts`
 func (r *AssistantV2MessageService) List(ctx context.Context, llmChat string, opts ...option.RequestOption) (res *[]AssistantV2MessageListResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if llmChat == "" {
@@ -53,7 +53,7 @@ func (r *AssistantV2MessageService) List(ctx context.Context, llmChat string, op
 // Select an llm chat message by id
 //
 // Source file:
-// `api-server/src/controllers/assistant/v2/select-message.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/assistant/v2/select-message.controller.ts`
 func (r *AssistantV2MessageService) Select(ctx context.Context, message string, body AssistantV2MessageSelectParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -73,7 +73,7 @@ func (r *AssistantV2MessageService) Select(ctx context.Context, message string, 
 // Set or update feedback for a message
 //
 // Source file:
-// `api-server/src/controllers/assistant/v2/set-message-feedback.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/assistant/v2/set-message-feedback.controller.ts`
 func (r *AssistantV2MessageService) SetFeedback(ctx context.Context, messageID string, body AssistantV2MessageSetFeedbackParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

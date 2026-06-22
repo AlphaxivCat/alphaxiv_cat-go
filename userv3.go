@@ -46,22 +46,10 @@ func NewUserV3Service(opts ...option.RequestOption) (r UserV3Service) {
 	return
 }
 
-// Generate a biography and institution for a user using their claimed papers
-//
-// Source file:
-// `api-server/src/controllers/users/v3/autocomplete-profile.controller.ts`
-//
-// Deprecated: deprecated
-func (r *UserV3Service) AutocompleteProfile(ctx context.Context, body UserV3AutocompleteProfileParams, opts ...option.RequestOption) (res *UserV3AutocompleteProfileResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "users/v3/autocomplete-profile"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return res, err
-}
-
 // Delete the given banner
 //
-// Source file: `api-server/src/controllers/users/v3/delete-banner.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/delete-banner.controller.ts`
 func (r *UserV3Service) DeleteBanner(ctx context.Context, bannerID string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -76,7 +64,8 @@ func (r *UserV3Service) DeleteBanner(ctx context.Context, bannerID string, opts 
 
 // Deletes the user's account
 //
-// Source file: `api-server/src/controllers/users/v3/delete-own-user.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/delete-own-user.controller.ts`
 func (r *UserV3Service) DeleteOwnUser(ctx context.Context, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -87,7 +76,8 @@ func (r *UserV3Service) DeleteOwnUser(ctx context.Context, opts ...option.Reques
 
 // Retrieve public activity timeline for a user
 //
-// Source file: `api-server/src/controllers/users/v3/get-activity.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-activity.controller.ts`
 func (r *UserV3Service) GetActivity(ctx context.Context, id string, query UserV3GetActivityParams, opts ...option.RequestOption) (res *[]UserV3GetActivityResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -102,7 +92,7 @@ func (r *UserV3Service) GetActivity(ctx context.Context, id string, query UserV3
 // Retrieve the claimed papers for a user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-claimed-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-claimed-papers.controller.ts`
 func (r *UserV3Service) GetClaimedPapers(ctx context.Context, id string, query UserV3GetClaimedPapersParams, opts ...option.RequestOption) (res *[]UserV3GetClaimedPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -117,7 +107,7 @@ func (r *UserV3Service) GetClaimedPapers(ctx context.Context, id string, query U
 // Retrieve information about yourself
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-current-user.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-current-user.controller.ts`
 func (r *UserV3Service) GetCurrentUser(ctx context.Context, opts ...option.RequestOption) (res *UserV3GetCurrentUserResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3"
@@ -127,7 +117,8 @@ func (r *UserV3Service) GetCurrentUser(ctx context.Context, opts ...option.Reque
 
 // Retrieve highlighted activity for a user
 //
-// Source file: `api-server/src/controllers/users/v3/get-featured.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-featured.controller.ts`
 func (r *UserV3Service) GetFeaturedActivity(ctx context.Context, id string, opts ...option.RequestOption) (res *[]UserV3GetFeaturedActivityResponseUnion, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -141,7 +132,8 @@ func (r *UserV3Service) GetFeaturedActivity(ctx context.Context, id string, opts
 
 // List the users following the specified user
 //
-// Source file: `api-server/src/controllers/users/v3/get-followers.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-followers.controller.ts`
 func (r *UserV3Service) GetFollowers(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3GetFollowersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -155,7 +147,8 @@ func (r *UserV3Service) GetFollowers(ctx context.Context, id string, opts ...opt
 
 // Retrieve weekly and all-time leaderboards for users ranked by reputation
 //
-// Source file: `api-server/src/controllers/users/v3/get-leaderboard.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-leaderboard.controller.ts`
 func (r *UserV3Service) GetLeaderboard(ctx context.Context, opts ...option.RequestOption) (res *UserV3GetLeaderboardResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/leaderboard"
@@ -165,7 +158,8 @@ func (r *UserV3Service) GetLeaderboard(ctx context.Context, opts ...option.Reque
 
 // Retrieve a user's basic information given its UUID
 //
-// Source file: `api-server/src/controllers/users/v3/get-user.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-user.controller.ts`
 func (r *UserV3Service) GetUserByUuid(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3GetUserByUuidResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -180,7 +174,7 @@ func (r *UserV3Service) GetUserByUuid(ctx context.Context, id string, opts ...op
 // Retrieve the view history for the current user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-viewed-history.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-viewed-history.controller.ts`
 func (r *UserV3Service) GetViewedHistory(ctx context.Context, query UserV3GetViewedHistoryParams, opts ...option.RequestOption) (res *[]UserV3GetViewedHistoryResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/viewed-history"
@@ -191,7 +185,7 @@ func (r *UserV3Service) GetViewedHistory(ctx context.Context, query UserV3GetVie
 // Send a notification digest email for the given user when necessary.
 //
 // Source file:
-// `api-server/src/controllers/users/v3/process-notification-email.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/process-notification-email.controller.ts`
 //
 // Deprecated: deprecated
 func (r *UserV3Service) ProcessNotificationEmail(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3ProcessNotificationEmailResponse, err error) {
@@ -207,7 +201,8 @@ func (r *UserV3Service) ProcessNotificationEmail(ctx context.Context, id string,
 
 // Search for users by name, username, or institution
 //
-// Source file: `api-server/src/controllers/users/v3/search-users.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/search-users.controller.ts`
 func (r *UserV3Service) Search(ctx context.Context, query UserV3SearchParams, opts ...option.RequestOption) (res *UserV3SearchResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/search"
@@ -218,7 +213,7 @@ func (r *UserV3Service) Search(ctx context.Context, query UserV3SearchParams, op
 // Follow or unfollow another user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/toggle-follow-user.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/toggle-follow-user.controller.ts`
 func (r *UserV3Service) ToggleFollowUser(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3ToggleFollowUserResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -233,7 +228,7 @@ func (r *UserV3Service) ToggleFollowUser(ctx context.Context, id string, opts ..
 // Update base or banner preferences for the authenticated user
 //
 // Source file:
-// `api-server/src/controllers/users/v3/update-preferences.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/update-preferences.controller.ts`
 func (r *UserV3Service) UpdatePreferences(ctx context.Context, body UserV3UpdatePreferencesParams, opts ...option.RequestOption) (res *UserV3UpdatePreferencesResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/preferences"
@@ -243,7 +238,8 @@ func (r *UserV3Service) UpdatePreferences(ctx context.Context, body UserV3Update
 
 // Update profile details for the authenticated user
 //
-// Source file: `api-server/src/controllers/users/v3/update-profile.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/update-profile.controller.ts`
 func (r *UserV3Service) UpdateProfile(ctx context.Context, body UserV3UpdateProfileParams, opts ...option.RequestOption) (res *UserV3UpdateProfileResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/profile"
@@ -253,32 +249,13 @@ func (r *UserV3Service) UpdateProfile(ctx context.Context, body UserV3UpdateProf
 
 // Upload or remove the authenticated user's avatar image.
 //
-// Source file: `api-server/src/controllers/users/v3/upload-avatar.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/users/v3/upload-avatar.controller.ts`
 func (r *UserV3Service) UploadAvatar(ctx context.Context, opts ...option.RequestOption) (res *UserV3UploadAvatarResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/avatar"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return res, err
-}
-
-type UserV3AutocompleteProfileResponse struct {
-	Bio         string `json:"bio" api:"required"`
-	Institution string `json:"institution" api:"required"`
-	Message     string `json:"message" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Bio         respjson.Field
-		Institution respjson.Field
-		Message     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r UserV3AutocompleteProfileResponse) RawJSON() string { return r.JSON.raw }
-func (r *UserV3AutocompleteProfileResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
 }
 
 type UserV3GetActivityResponse struct {
@@ -313,7 +290,7 @@ func (r *UserV3GetActivityResponse) UnmarshalJSON(data []byte) error {
 type UserV3GetActivityResponseItem struct {
 	ID              string                                     `json:"id" api:"required" format:"uuid"`
 	Annotation      UserV3GetActivityResponseItemAnnotation    `json:"annotation" api:"required"`
-	Author          UserV3GetActivityResponseItemAuthor        `json:"author" api:"required"`
+	Author          UserV3GetActivityResponseItemAuthorUnion   `json:"author" api:"required"`
 	Body            string                                     `json:"body" api:"required"`
 	Date            string                                     `json:"date" api:"required"`
 	Endorsements    []UserV3GetActivityResponseItemEndorsement `json:"endorsements" api:"required"`
@@ -469,18 +446,136 @@ func (r *UserV3GetActivityResponseItemAnnotationHighlightRectRect) UnmarshalJSON
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type UserV3GetActivityResponseItemAuthor struct {
-	ID               string                                      `json:"id" api:"required" format:"uuid"`
-	Avatar           []UserV3GetActivityResponseItemAuthorAvatar `json:"avatar" api:"required"`
-	BlueskyUsername  string                                      `json:"blueskyUsername" api:"required"`
-	GitHubUsername   string                                      `json:"githubUsername" api:"required"`
-	GoogleScholarID  string                                      `json:"googleScholarId" api:"required"`
-	Institution      string                                      `json:"institution" api:"required"`
-	LinkedinUsername string                                      `json:"linkedinUsername" api:"required"`
-	OrcidID          string                                      `json:"orcidId" api:"required"`
-	PublicEmail      string                                      `json:"publicEmail" api:"required"`
-	RealName         string                                      `json:"realName" api:"required"`
-	Reputation       float64                                     `json:"reputation" api:"required"`
+// UserV3GetActivityResponseItemAuthorUnion contains all possible properties and
+// values from [UserV3GetActivityResponseItemAuthorObject],
+// [UserV3GetActivityResponseItemAuthorObject2].
+//
+// Use the methods beginning with 'As' to cast the union to one of its variants.
+type UserV3GetActivityResponseItemAuthorUnion struct {
+	// This field is a union of [string], [any]
+	ID UserV3GetActivityResponseItemAuthorUnionID `json:"id"`
+	// This field is a union of [[]UserV3GetActivityResponseItemAuthorObjectAvatar],
+	// [[]UserV3GetActivityResponseItemAuthorObject2Avatar]
+	Avatar           UserV3GetActivityResponseItemAuthorUnionAvatar `json:"avatar"`
+	BlueskyUsername  string                                         `json:"blueskyUsername"`
+	GitHubUsername   string                                         `json:"githubUsername"`
+	GoogleScholarID  string                                         `json:"googleScholarId"`
+	Institution      string                                         `json:"institution"`
+	LinkedinUsername string                                         `json:"linkedinUsername"`
+	OrcidID          string                                         `json:"orcidId"`
+	PublicEmail      string                                         `json:"publicEmail"`
+	RealName         string                                         `json:"realName"`
+	Reputation       float64                                        `json:"reputation"`
+	Role             string                                         `json:"role"`
+	Username         string                                         `json:"username"`
+	Verified         bool                                           `json:"verified"`
+	WeeklyReputation float64                                        `json:"weeklyReputation"`
+	XUsername        string                                         `json:"xUsername"`
+	JSON             struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+func (u UserV3GetActivityResponseItemAuthorUnion) AsUserV3GetActivityResponseItemAuthorObject() (v UserV3GetActivityResponseItemAuthorObject) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u UserV3GetActivityResponseItemAuthorUnion) AsUserV3GetActivityResponseItemAuthorObject2() (v UserV3GetActivityResponseItemAuthorObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+// Returns the unmodified JSON received from the API
+func (u UserV3GetActivityResponseItemAuthorUnion) RawJSON() string { return u.JSON.raw }
+
+func (r *UserV3GetActivityResponseItemAuthorUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// UserV3GetActivityResponseItemAuthorUnionID is an implicit subunion of
+// [UserV3GetActivityResponseItemAuthorUnion].
+// UserV3GetActivityResponseItemAuthorUnionID provides convenient access to the
+// sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [UserV3GetActivityResponseItemAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfString OfUserV3GetActivityResponseItemAuthorObject2ID]
+type UserV3GetActivityResponseItemAuthorUnionID struct {
+	// This field will be present if the value is a [string] instead of an object.
+	OfString string `json:",inline"`
+	// This field will be present if the value is a [any] instead of an object.
+	OfUserV3GetActivityResponseItemAuthorObject2ID any `json:",inline"`
+	JSON                                           struct {
+		OfString                                       respjson.Field
+		OfUserV3GetActivityResponseItemAuthorObject2ID respjson.Field
+		raw                                            string
+	} `json:"-"`
+}
+
+func (r *UserV3GetActivityResponseItemAuthorUnionID) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// UserV3GetActivityResponseItemAuthorUnionAvatar is an implicit subunion of
+// [UserV3GetActivityResponseItemAuthorUnion].
+// UserV3GetActivityResponseItemAuthorUnionAvatar provides convenient access to the
+// sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [UserV3GetActivityResponseItemAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfUserV3GetActivityResponseItemAuthorObjectAvatarArray
+// OfUserV3GetActivityResponseItemAuthorObject2AvatarArray]
+type UserV3GetActivityResponseItemAuthorUnionAvatar struct {
+	// This field will be present if the value is a
+	// [[]UserV3GetActivityResponseItemAuthorObjectAvatar] instead of an object.
+	OfUserV3GetActivityResponseItemAuthorObjectAvatarArray []UserV3GetActivityResponseItemAuthorObjectAvatar `json:",inline"`
+	// This field will be present if the value is a
+	// [[]UserV3GetActivityResponseItemAuthorObject2Avatar] instead of an object.
+	OfUserV3GetActivityResponseItemAuthorObject2AvatarArray []UserV3GetActivityResponseItemAuthorObject2Avatar `json:",inline"`
+	JSON                                                    struct {
+		OfUserV3GetActivityResponseItemAuthorObjectAvatarArray  respjson.Field
+		OfUserV3GetActivityResponseItemAuthorObject2AvatarArray respjson.Field
+		raw                                                     string
+	} `json:"-"`
+}
+
+func (r *UserV3GetActivityResponseItemAuthorUnionAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type UserV3GetActivityResponseItemAuthorObject struct {
+	ID               string                                            `json:"id" api:"required" format:"uuid"`
+	Avatar           []UserV3GetActivityResponseItemAuthorObjectAvatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                            `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                            `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                            `json:"googleScholarId" api:"required"`
+	Institution      string                                            `json:"institution" api:"required"`
+	LinkedinUsername string                                            `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                            `json:"orcidId" api:"required"`
+	PublicEmail      string                                            `json:"publicEmail" api:"required"`
+	RealName         string                                            `json:"realName" api:"required"`
+	Reputation       float64                                           `json:"reputation" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -511,12 +606,12 @@ type UserV3GetActivityResponseItemAuthor struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r UserV3GetActivityResponseItemAuthor) RawJSON() string { return r.JSON.raw }
-func (r *UserV3GetActivityResponseItemAuthor) UnmarshalJSON(data []byte) error {
+func (r UserV3GetActivityResponseItemAuthorObject) RawJSON() string { return r.JSON.raw }
+func (r *UserV3GetActivityResponseItemAuthorObject) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type UserV3GetActivityResponseItemAuthorAvatar struct {
+type UserV3GetActivityResponseItemAuthorObjectAvatar struct {
 	// Any of "full_size", "thumbnail".
 	Type string `json:"type" api:"required"`
 	URL  string `json:"url" api:"required"`
@@ -530,8 +625,74 @@ type UserV3GetActivityResponseItemAuthorAvatar struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r UserV3GetActivityResponseItemAuthorAvatar) RawJSON() string { return r.JSON.raw }
-func (r *UserV3GetActivityResponseItemAuthorAvatar) UnmarshalJSON(data []byte) error {
+func (r UserV3GetActivityResponseItemAuthorObjectAvatar) RawJSON() string { return r.JSON.raw }
+func (r *UserV3GetActivityResponseItemAuthorObjectAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type UserV3GetActivityResponseItemAuthorObject2 struct {
+	ID               any                                                `json:"id" api:"required"`
+	Avatar           []UserV3GetActivityResponseItemAuthorObject2Avatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                             `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                             `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                             `json:"googleScholarId" api:"required"`
+	Institution      string                                             `json:"institution" api:"required"`
+	LinkedinUsername string                                             `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                             `json:"orcidId" api:"required"`
+	PublicEmail      string                                             `json:"publicEmail" api:"required"`
+	RealName         string                                             `json:"realName" api:"required"`
+	Reputation       float64                                            `json:"reputation" api:"required"`
+	// Any of "user", "reviewer", "admin", "bot".
+	Role             string  `json:"role" api:"required"`
+	Username         string  `json:"username" api:"required"`
+	Verified         bool    `json:"verified" api:"required"`
+	WeeklyReputation float64 `json:"weeklyReputation" api:"required"`
+	XUsername        string  `json:"xUsername" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r UserV3GetActivityResponseItemAuthorObject2) RawJSON() string { return r.JSON.raw }
+func (r *UserV3GetActivityResponseItemAuthorObject2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type UserV3GetActivityResponseItemAuthorObject2Avatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r UserV3GetActivityResponseItemAuthorObject2Avatar) RawJSON() string { return r.JSON.raw }
+func (r *UserV3GetActivityResponseItemAuthorObject2Avatar) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -560,12 +721,13 @@ const (
 )
 
 type UserV3GetClaimedPapersResponse struct {
-	ID               string   `json:"id" api:"required" format:"uuid"`
-	Abstract         string   `json:"abstract" api:"required"`
-	Authors          []string `json:"authors" api:"required"`
-	Citations        float64  `json:"citations" api:"required"`
-	GoogleCitationID string   `json:"google_citation_id" api:"required"`
-	ImageURL         string   `json:"imageURL" api:"required"`
+	ID       string   `json:"id" api:"required" format:"uuid"`
+	Abstract string   `json:"abstract" api:"required"`
+	Authors  []string `json:"authors" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID      string  `json:"canonicalId" api:"required"`
+	Citations        float64 `json:"citations" api:"required"`
+	GoogleCitationID string  `json:"google_citation_id" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paper_id" api:"required"`
 	PublicTotalVotes float64  `json:"public_total_votes" api:"required"`
@@ -577,9 +739,9 @@ type UserV3GetClaimedPapersResponse struct {
 		ID               respjson.Field
 		Abstract         respjson.Field
 		Authors          respjson.Field
+		CanonicalID      respjson.Field
 		Citations        respjson.Field
 		GoogleCitationID respjson.Field
-		ImageURL         respjson.Field
 		PaperID          respjson.Field
 		PublicTotalVotes respjson.Field
 		PublicationDate  respjson.Field
@@ -666,7 +828,7 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
 	FeedSort                string `json:"feedSort" api:"required"`
 	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
 	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
@@ -920,7 +1082,7 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
 	FeedSort                string `json:"feedSort" api:"required"`
 	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
 	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
@@ -1569,7 +1731,8 @@ func (r *UserV3GetUserByUuidResponseFeatured) UnmarshalJSON(data []byte) error {
 type UserV3GetViewedHistoryResponse struct {
 	ID       string `json:"id" api:"required" format:"uuid"`
 	Abstract string `json:"abstract" api:"required"`
-	ImageURL string `json:"imageUrl" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID string `json:"canonicalId" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paperId" api:"required"`
 	PublicationDate  string   `json:"publicationDate" api:"required"`
@@ -1581,7 +1744,7 @@ type UserV3GetViewedHistoryResponse struct {
 	JSON struct {
 		ID               respjson.Field
 		Abstract         respjson.Field
-		ImageURL         respjson.Field
+		CanonicalID      respjson.Field
 		PaperID          respjson.Field
 		PublicationDate  respjson.Field
 		PublicTotalVotes respjson.Field
@@ -1750,7 +1913,7 @@ type UserV3UpdatePreferencesResponseBase struct {
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
 	FeedSort                string `json:"feedSort" api:"required"`
 	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
 	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
@@ -2033,19 +2196,6 @@ func (r *UserV3UploadAvatarResponseData) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type UserV3AutocompleteProfileParams struct {
-	UserID string `json:"userId" api:"required" format:"uuid"`
-	paramObj
-}
-
-func (r UserV3AutocompleteProfileParams) MarshalJSON() (data []byte, err error) {
-	type shadow UserV3AutocompleteProfileParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *UserV3AutocompleteProfileParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type UserV3GetActivityParams struct {
 	// Any of "date", "liked".
 	Sort UserV3GetActivityParamsSort `query:"sort,omitzero" json:"-"`
@@ -2179,7 +2329,7 @@ type UserV3UpdatePreferencesParamsBase struct {
 	PreferredLanguage       string                                                  `json:"preferredLanguage,omitzero"`
 	AssistantCustomStyles   []UserV3UpdatePreferencesParamsBaseAssistantCustomStyle `json:"assistantCustomStyles,omitzero"`
 	AssistantStyleSelection string                                                  `json:"assistantStyleSelection,omitzero"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
 	FeedSort string `json:"feedSort,omitzero"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch,omitzero"`
@@ -2202,7 +2352,7 @@ func init() {
 		"defaultPublicPaperSidebarTab", "comments", "assistant", "similar", "notes",
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
-		"feedSort", "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended",
+		"feedSort", "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent",
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
 		"preferredLanguage", "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es", "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja", "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa", "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh",
@@ -2235,6 +2385,7 @@ type UserV3UpdateProfileParams struct {
 	Institution      param.Opt[string] `json:"institution,omitzero"`
 	LinkedinUsername param.Opt[string] `json:"linkedinUsername,omitzero"`
 	Location         param.Opt[string] `json:"location,omitzero"`
+	OrcidID          param.Opt[string] `json:"orcidId,omitzero"`
 	PublicEmail      param.Opt[string] `json:"publicEmail,omitzero" format:"email"`
 	XUsername        param.Opt[string] `json:"xUsername,omitzero"`
 	RealName         param.Opt[string] `json:"realName,omitzero"`

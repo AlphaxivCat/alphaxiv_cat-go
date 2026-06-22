@@ -36,7 +36,7 @@ func NewRetrieveV1Service(opts ...option.RequestOption) (r RetrieveV1Service) {
 // Get the top AI papers
 //
 // Source file:
-// `api-server/src/controllers/retrieve/v1/retrieve-top-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/retrieve/v1/retrieve-top-papers.controller.ts`
 func (r *RetrieveV1Service) GetTopPapers(ctx context.Context, query RetrieveV1GetTopPapersParams, opts ...option.RequestOption) (res *RetrieveV1GetTopPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "retrieve/v1/top-papers"

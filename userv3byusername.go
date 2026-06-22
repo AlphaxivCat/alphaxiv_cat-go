@@ -39,7 +39,7 @@ func NewUserV3ByUsernameService(opts ...option.RequestOption) (r UserV3ByUsernam
 // This route is specifically for the Client's user page
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-profile-page-by-username.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-profile-page-by-username.controller.ts`
 func (r *UserV3ByUsernameService) GetProfilePage(ctx context.Context, username string, opts ...option.RequestOption) (res *UserV3ByUsernameGetProfilePageResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if username == "" {
@@ -54,7 +54,7 @@ func (r *UserV3ByUsernameService) GetProfilePage(ctx context.Context, username s
 // Retrieve a user's basic information given its username
 //
 // Source file:
-// `api-server/src/controllers/users/v3/get-user-by-username.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/users/v3/get-user-by-username.controller.ts`
 func (r *UserV3ByUsernameService) GetUser(ctx context.Context, username string, opts ...option.RequestOption) (res *UserV3ByUsernameGetUserResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if username == "" {
@@ -120,7 +120,7 @@ func (r *UserV3ByUsernameGetProfilePageResponseActivity) UnmarshalJSON(data []by
 type UserV3ByUsernameGetProfilePageResponseActivityItem struct {
 	ID              string                                                          `json:"id" api:"required" format:"uuid"`
 	Annotation      UserV3ByUsernameGetProfilePageResponseActivityItemAnnotation    `json:"annotation" api:"required"`
-	Author          UserV3ByUsernameGetProfilePageResponseActivityItemAuthor        `json:"author" api:"required"`
+	Author          UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion   `json:"author" api:"required"`
 	Body            string                                                          `json:"body" api:"required"`
 	Date            string                                                          `json:"date" api:"required"`
 	Endorsements    []UserV3ByUsernameGetProfilePageResponseActivityItemEndorsement `json:"endorsements" api:"required"`
@@ -286,18 +286,145 @@ func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAnnotationHighlightRe
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type UserV3ByUsernameGetProfilePageResponseActivityItemAuthor struct {
-	ID               string                                                           `json:"id" api:"required" format:"uuid"`
-	Avatar           []UserV3ByUsernameGetProfilePageResponseActivityItemAuthorAvatar `json:"avatar" api:"required"`
-	BlueskyUsername  string                                                           `json:"blueskyUsername" api:"required"`
-	GitHubUsername   string                                                           `json:"githubUsername" api:"required"`
-	GoogleScholarID  string                                                           `json:"googleScholarId" api:"required"`
-	Institution      string                                                           `json:"institution" api:"required"`
-	LinkedinUsername string                                                           `json:"linkedinUsername" api:"required"`
-	OrcidID          string                                                           `json:"orcidId" api:"required"`
-	PublicEmail      string                                                           `json:"publicEmail" api:"required"`
-	RealName         string                                                           `json:"realName" api:"required"`
-	Reputation       float64                                                          `json:"reputation" api:"required"`
+// UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion contains all
+// possible properties and values from
+// [UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject],
+// [UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2].
+//
+// Use the methods beginning with 'As' to cast the union to one of its variants.
+type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion struct {
+	// This field is a union of [string], [any]
+	ID UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionID `json:"id"`
+	// This field is a union of
+	// [[]UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatar],
+	// [[]UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2Avatar]
+	Avatar           UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionAvatar `json:"avatar"`
+	BlueskyUsername  string                                                              `json:"blueskyUsername"`
+	GitHubUsername   string                                                              `json:"githubUsername"`
+	GoogleScholarID  string                                                              `json:"googleScholarId"`
+	Institution      string                                                              `json:"institution"`
+	LinkedinUsername string                                                              `json:"linkedinUsername"`
+	OrcidID          string                                                              `json:"orcidId"`
+	PublicEmail      string                                                              `json:"publicEmail"`
+	RealName         string                                                              `json:"realName"`
+	Reputation       float64                                                             `json:"reputation"`
+	Role             string                                                              `json:"role"`
+	Username         string                                                              `json:"username"`
+	Verified         bool                                                                `json:"verified"`
+	WeeklyReputation float64                                                             `json:"weeklyReputation"`
+	XUsername        string                                                              `json:"xUsername"`
+	JSON             struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+func (u UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion) AsUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject() (v UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion) AsUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2() (v UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+// Returns the unmodified JSON received from the API
+func (u UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion) RawJSON() string {
+	return u.JSON.raw
+}
+
+func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionID is an implicit
+// subunion of [UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion].
+// UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionID provides
+// convenient access to the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfString
+// OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2ID]
+type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionID struct {
+	// This field will be present if the value is a [string] instead of an object.
+	OfString string `json:",inline"`
+	// This field will be present if the value is a [any] instead of an object.
+	OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2ID any `json:",inline"`
+	JSON                                                                struct {
+		OfString                                                            respjson.Field
+		OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2ID respjson.Field
+		raw                                                                 string
+	} `json:"-"`
+}
+
+func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionID) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionAvatar is an
+// implicit subunion of
+// [UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion].
+// UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionAvatar provides
+// convenient access to the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid:
+// OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatarArray
+// OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2AvatarArray]
+type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionAvatar struct {
+	// This field will be present if the value is a
+	// [[]UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatar] instead
+	// of an object.
+	OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatarArray []UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatar `json:",inline"`
+	// This field will be present if the value is a
+	// [[]UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2Avatar]
+	// instead of an object.
+	OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2AvatarArray []UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2Avatar `json:",inline"`
+	JSON                                                                         struct {
+		OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatarArray  respjson.Field
+		OfUserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2AvatarArray respjson.Field
+		raw                                                                          string
+	} `json:"-"`
+}
+
+func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthorUnionAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject struct {
+	ID               string                                                                 `json:"id" api:"required" format:"uuid"`
+	Avatar           []UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                                                 `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                                                 `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                                                 `json:"googleScholarId" api:"required"`
+	Institution      string                                                                 `json:"institution" api:"required"`
+	LinkedinUsername string                                                                 `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                                                 `json:"orcidId" api:"required"`
+	PublicEmail      string                                                                 `json:"publicEmail" api:"required"`
+	RealName         string                                                                 `json:"realName" api:"required"`
+	Reputation       float64                                                                `json:"reputation" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -328,12 +455,14 @@ type UserV3ByUsernameGetProfilePageResponseActivityItemAuthor struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r UserV3ByUsernameGetProfilePageResponseActivityItemAuthor) RawJSON() string { return r.JSON.raw }
-func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthor) UnmarshalJSON(data []byte) error {
+func (r UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorAvatar struct {
+type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatar struct {
 	// Any of "full_size", "thumbnail".
 	Type string `json:"type" api:"required"`
 	URL  string `json:"url" api:"required"`
@@ -347,10 +476,80 @@ type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorAvatar struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r UserV3ByUsernameGetProfilePageResponseActivityItemAuthorAvatar) RawJSON() string {
+func (r UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatar) RawJSON() string {
 	return r.JSON.raw
 }
-func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthorAvatar) UnmarshalJSON(data []byte) error {
+func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObjectAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2 struct {
+	ID               any                                                                     `json:"id" api:"required"`
+	Avatar           []UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2Avatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                                                  `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                                                  `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                                                  `json:"googleScholarId" api:"required"`
+	Institution      string                                                                  `json:"institution" api:"required"`
+	LinkedinUsername string                                                                  `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                                                  `json:"orcidId" api:"required"`
+	PublicEmail      string                                                                  `json:"publicEmail" api:"required"`
+	RealName         string                                                                  `json:"realName" api:"required"`
+	Reputation       float64                                                                 `json:"reputation" api:"required"`
+	// Any of "user", "reviewer", "admin", "bot".
+	Role             string  `json:"role" api:"required"`
+	Username         string  `json:"username" api:"required"`
+	Verified         bool    `json:"verified" api:"required"`
+	WeeklyReputation float64 `json:"weeklyReputation" api:"required"`
+	XUsername        string  `json:"xUsername" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2Avatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2Avatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *UserV3ByUsernameGetProfilePageResponseActivityItemAuthorObject2Avatar) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -375,12 +574,13 @@ func (r *UserV3ByUsernameGetProfilePageResponseActivityItemEndorsement) Unmarsha
 }
 
 type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
-	ID               string   `json:"id" api:"required" format:"uuid"`
-	Abstract         string   `json:"abstract" api:"required"`
-	Authors          []string `json:"authors" api:"required"`
-	Citations        float64  `json:"citations" api:"required"`
-	GoogleCitationID string   `json:"google_citation_id" api:"required"`
-	ImageURL         string   `json:"imageURL" api:"required"`
+	ID       string   `json:"id" api:"required" format:"uuid"`
+	Abstract string   `json:"abstract" api:"required"`
+	Authors  []string `json:"authors" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID      string  `json:"canonicalId" api:"required"`
+	Citations        float64 `json:"citations" api:"required"`
+	GoogleCitationID string  `json:"google_citation_id" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paper_id" api:"required"`
 	PublicTotalVotes float64  `json:"public_total_votes" api:"required"`
@@ -392,9 +592,9 @@ type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
 		ID               respjson.Field
 		Abstract         respjson.Field
 		Authors          respjson.Field
+		CanonicalID      respjson.Field
 		Citations        respjson.Field
 		GoogleCitationID respjson.Field
-		ImageURL         respjson.Field
 		PaperID          respjson.Field
 		PublicTotalVotes respjson.Field
 		PublicationDate  respjson.Field

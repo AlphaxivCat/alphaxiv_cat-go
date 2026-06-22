@@ -4,6 +4,7 @@ package alphaxivcat
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
@@ -40,7 +41,7 @@ func NewPaperV3LegacyService(opts ...option.RequestOption) (r PaperV3LegacyServi
 // format. Do not write new code with this please.
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/legacy/get-v2-paper-for-display.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/legacy/get-v2-paper-for-display.controller.ts`
 func (r *PaperV3LegacyService) Get(ctx context.Context, unresolved string, opts ...option.RequestOption) (res *PaperV3LegacyGetResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if unresolved == "" {
@@ -56,7 +57,7 @@ func (r *PaperV3LegacyService) Get(ctx context.Context, unresolved string, opts 
 // from "there are no comments"
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/legacy/get-v2-comments.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/legacy/get-v2-comments.controller.ts`
 func (r *PaperV3LegacyService) GetComments(ctx context.Context, group string, opts ...option.RequestOption) (res *[]PaperV3LegacyGetCommentsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if group == "" {
@@ -89,7 +90,7 @@ func (r *PaperV3LegacyGetResponse) UnmarshalJSON(data []byte) error {
 type PaperV3LegacyGetResponseComment struct {
 	ID              string                                       `json:"id" api:"required" format:"uuid"`
 	Annotation      PaperV3LegacyGetResponseCommentAnnotation    `json:"annotation" api:"required"`
-	Author          PaperV3LegacyGetResponseCommentAuthor        `json:"author" api:"required"`
+	Author          PaperV3LegacyGetResponseCommentAuthorUnion   `json:"author" api:"required"`
 	AuthorResponded bool                                         `json:"authorResponded" api:"required"`
 	Body            string                                       `json:"body" api:"required"`
 	Date            string                                       `json:"date" api:"required"`
@@ -249,18 +250,136 @@ func (r *PaperV3LegacyGetResponseCommentAnnotationHighlightRectRect) UnmarshalJS
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3LegacyGetResponseCommentAuthor struct {
-	ID               string                                        `json:"id" api:"required" format:"uuid"`
-	Avatar           []PaperV3LegacyGetResponseCommentAuthorAvatar `json:"avatar" api:"required"`
-	BlueskyUsername  string                                        `json:"blueskyUsername" api:"required"`
-	GitHubUsername   string                                        `json:"githubUsername" api:"required"`
-	GoogleScholarID  string                                        `json:"googleScholarId" api:"required"`
-	Institution      string                                        `json:"institution" api:"required"`
-	LinkedinUsername string                                        `json:"linkedinUsername" api:"required"`
-	OrcidID          string                                        `json:"orcidId" api:"required"`
-	PublicEmail      string                                        `json:"publicEmail" api:"required"`
-	RealName         string                                        `json:"realName" api:"required"`
-	Reputation       float64                                       `json:"reputation" api:"required"`
+// PaperV3LegacyGetResponseCommentAuthorUnion contains all possible properties and
+// values from [PaperV3LegacyGetResponseCommentAuthorObject],
+// [PaperV3LegacyGetResponseCommentAuthorObject2].
+//
+// Use the methods beginning with 'As' to cast the union to one of its variants.
+type PaperV3LegacyGetResponseCommentAuthorUnion struct {
+	// This field is a union of [string], [any]
+	ID PaperV3LegacyGetResponseCommentAuthorUnionID `json:"id"`
+	// This field is a union of [[]PaperV3LegacyGetResponseCommentAuthorObjectAvatar],
+	// [[]PaperV3LegacyGetResponseCommentAuthorObject2Avatar]
+	Avatar           PaperV3LegacyGetResponseCommentAuthorUnionAvatar `json:"avatar"`
+	BlueskyUsername  string                                           `json:"blueskyUsername"`
+	GitHubUsername   string                                           `json:"githubUsername"`
+	GoogleScholarID  string                                           `json:"googleScholarId"`
+	Institution      string                                           `json:"institution"`
+	LinkedinUsername string                                           `json:"linkedinUsername"`
+	OrcidID          string                                           `json:"orcidId"`
+	PublicEmail      string                                           `json:"publicEmail"`
+	RealName         string                                           `json:"realName"`
+	Reputation       float64                                          `json:"reputation"`
+	Role             string                                           `json:"role"`
+	Username         string                                           `json:"username"`
+	Verified         bool                                             `json:"verified"`
+	WeeklyReputation float64                                          `json:"weeklyReputation"`
+	XUsername        string                                           `json:"xUsername"`
+	JSON             struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+func (u PaperV3LegacyGetResponseCommentAuthorUnion) AsPaperV3LegacyGetResponseCommentAuthorObject() (v PaperV3LegacyGetResponseCommentAuthorObject) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3LegacyGetResponseCommentAuthorUnion) AsPaperV3LegacyGetResponseCommentAuthorObject2() (v PaperV3LegacyGetResponseCommentAuthorObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+// Returns the unmodified JSON received from the API
+func (u PaperV3LegacyGetResponseCommentAuthorUnion) RawJSON() string { return u.JSON.raw }
+
+func (r *PaperV3LegacyGetResponseCommentAuthorUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// PaperV3LegacyGetResponseCommentAuthorUnionID is an implicit subunion of
+// [PaperV3LegacyGetResponseCommentAuthorUnion].
+// PaperV3LegacyGetResponseCommentAuthorUnionID provides convenient access to the
+// sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [PaperV3LegacyGetResponseCommentAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfString OfPaperV3LegacyGetResponseCommentAuthorObject2ID]
+type PaperV3LegacyGetResponseCommentAuthorUnionID struct {
+	// This field will be present if the value is a [string] instead of an object.
+	OfString string `json:",inline"`
+	// This field will be present if the value is a [any] instead of an object.
+	OfPaperV3LegacyGetResponseCommentAuthorObject2ID any `json:",inline"`
+	JSON                                             struct {
+		OfString                                         respjson.Field
+		OfPaperV3LegacyGetResponseCommentAuthorObject2ID respjson.Field
+		raw                                              string
+	} `json:"-"`
+}
+
+func (r *PaperV3LegacyGetResponseCommentAuthorUnionID) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// PaperV3LegacyGetResponseCommentAuthorUnionAvatar is an implicit subunion of
+// [PaperV3LegacyGetResponseCommentAuthorUnion].
+// PaperV3LegacyGetResponseCommentAuthorUnionAvatar provides convenient access to
+// the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [PaperV3LegacyGetResponseCommentAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfPaperV3LegacyGetResponseCommentAuthorObjectAvatarArray
+// OfPaperV3LegacyGetResponseCommentAuthorObject2AvatarArray]
+type PaperV3LegacyGetResponseCommentAuthorUnionAvatar struct {
+	// This field will be present if the value is a
+	// [[]PaperV3LegacyGetResponseCommentAuthorObjectAvatar] instead of an object.
+	OfPaperV3LegacyGetResponseCommentAuthorObjectAvatarArray []PaperV3LegacyGetResponseCommentAuthorObjectAvatar `json:",inline"`
+	// This field will be present if the value is a
+	// [[]PaperV3LegacyGetResponseCommentAuthorObject2Avatar] instead of an object.
+	OfPaperV3LegacyGetResponseCommentAuthorObject2AvatarArray []PaperV3LegacyGetResponseCommentAuthorObject2Avatar `json:",inline"`
+	JSON                                                      struct {
+		OfPaperV3LegacyGetResponseCommentAuthorObjectAvatarArray  respjson.Field
+		OfPaperV3LegacyGetResponseCommentAuthorObject2AvatarArray respjson.Field
+		raw                                                       string
+	} `json:"-"`
+}
+
+func (r *PaperV3LegacyGetResponseCommentAuthorUnionAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetResponseCommentAuthorObject struct {
+	ID               string                                              `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3LegacyGetResponseCommentAuthorObjectAvatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                              `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                              `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                              `json:"googleScholarId" api:"required"`
+	Institution      string                                              `json:"institution" api:"required"`
+	LinkedinUsername string                                              `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                              `json:"orcidId" api:"required"`
+	PublicEmail      string                                              `json:"publicEmail" api:"required"`
+	RealName         string                                              `json:"realName" api:"required"`
+	Reputation       float64                                             `json:"reputation" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -291,12 +410,12 @@ type PaperV3LegacyGetResponseCommentAuthor struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r PaperV3LegacyGetResponseCommentAuthor) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LegacyGetResponseCommentAuthor) UnmarshalJSON(data []byte) error {
+func (r PaperV3LegacyGetResponseCommentAuthorObject) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetResponseCommentAuthorObject) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3LegacyGetResponseCommentAuthorAvatar struct {
+type PaperV3LegacyGetResponseCommentAuthorObjectAvatar struct {
 	// Any of "full_size", "thumbnail".
 	Type string `json:"type" api:"required"`
 	URL  string `json:"url" api:"required"`
@@ -310,8 +429,74 @@ type PaperV3LegacyGetResponseCommentAuthorAvatar struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r PaperV3LegacyGetResponseCommentAuthorAvatar) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LegacyGetResponseCommentAuthorAvatar) UnmarshalJSON(data []byte) error {
+func (r PaperV3LegacyGetResponseCommentAuthorObjectAvatar) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetResponseCommentAuthorObjectAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetResponseCommentAuthorObject2 struct {
+	ID               any                                                  `json:"id" api:"required"`
+	Avatar           []PaperV3LegacyGetResponseCommentAuthorObject2Avatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                               `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                               `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                               `json:"googleScholarId" api:"required"`
+	Institution      string                                               `json:"institution" api:"required"`
+	LinkedinUsername string                                               `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                               `json:"orcidId" api:"required"`
+	PublicEmail      string                                               `json:"publicEmail" api:"required"`
+	RealName         string                                               `json:"realName" api:"required"`
+	Reputation       float64                                              `json:"reputation" api:"required"`
+	// Any of "user", "reviewer", "admin", "bot".
+	Role             string  `json:"role" api:"required"`
+	Username         string  `json:"username" api:"required"`
+	Verified         bool    `json:"verified" api:"required"`
+	WeeklyReputation float64 `json:"weeklyReputation" api:"required"`
+	XUsername        string  `json:"xUsername" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3LegacyGetResponseCommentAuthorObject2) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetResponseCommentAuthorObject2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetResponseCommentAuthorObject2Avatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3LegacyGetResponseCommentAuthorObject2Avatar) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetResponseCommentAuthorObject2Avatar) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -336,7 +521,7 @@ func (r *PaperV3LegacyGetResponseCommentEndorsement) UnmarshalJSON(data []byte) 
 type PaperV3LegacyGetResponseCommentResponse struct {
 	ID              string                                               `json:"id" api:"required" format:"uuid"`
 	Annotation      PaperV3LegacyGetResponseCommentResponseAnnotation    `json:"annotation" api:"required"`
-	Author          PaperV3LegacyGetResponseCommentResponseAuthor        `json:"author" api:"required"`
+	Author          PaperV3LegacyGetResponseCommentResponseAuthorUnion   `json:"author" api:"required"`
 	AuthorResponded bool                                                 `json:"authorResponded" api:"required"`
 	Body            string                                               `json:"body" api:"required"`
 	Date            string                                               `json:"date" api:"required"`
@@ -500,18 +685,141 @@ func (r *PaperV3LegacyGetResponseCommentResponseAnnotationHighlightRectRect) Unm
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3LegacyGetResponseCommentResponseAuthor struct {
-	ID               string                                                `json:"id" api:"required" format:"uuid"`
-	Avatar           []PaperV3LegacyGetResponseCommentResponseAuthorAvatar `json:"avatar" api:"required"`
-	BlueskyUsername  string                                                `json:"blueskyUsername" api:"required"`
-	GitHubUsername   string                                                `json:"githubUsername" api:"required"`
-	GoogleScholarID  string                                                `json:"googleScholarId" api:"required"`
-	Institution      string                                                `json:"institution" api:"required"`
-	LinkedinUsername string                                                `json:"linkedinUsername" api:"required"`
-	OrcidID          string                                                `json:"orcidId" api:"required"`
-	PublicEmail      string                                                `json:"publicEmail" api:"required"`
-	RealName         string                                                `json:"realName" api:"required"`
-	Reputation       float64                                               `json:"reputation" api:"required"`
+// PaperV3LegacyGetResponseCommentResponseAuthorUnion contains all possible
+// properties and values from
+// [PaperV3LegacyGetResponseCommentResponseAuthorObject],
+// [PaperV3LegacyGetResponseCommentResponseAuthorObject2].
+//
+// Use the methods beginning with 'As' to cast the union to one of its variants.
+type PaperV3LegacyGetResponseCommentResponseAuthorUnion struct {
+	// This field is a union of [string], [any]
+	ID PaperV3LegacyGetResponseCommentResponseAuthorUnionID `json:"id"`
+	// This field is a union of
+	// [[]PaperV3LegacyGetResponseCommentResponseAuthorObjectAvatar],
+	// [[]PaperV3LegacyGetResponseCommentResponseAuthorObject2Avatar]
+	Avatar           PaperV3LegacyGetResponseCommentResponseAuthorUnionAvatar `json:"avatar"`
+	BlueskyUsername  string                                                   `json:"blueskyUsername"`
+	GitHubUsername   string                                                   `json:"githubUsername"`
+	GoogleScholarID  string                                                   `json:"googleScholarId"`
+	Institution      string                                                   `json:"institution"`
+	LinkedinUsername string                                                   `json:"linkedinUsername"`
+	OrcidID          string                                                   `json:"orcidId"`
+	PublicEmail      string                                                   `json:"publicEmail"`
+	RealName         string                                                   `json:"realName"`
+	Reputation       float64                                                  `json:"reputation"`
+	Role             string                                                   `json:"role"`
+	Username         string                                                   `json:"username"`
+	Verified         bool                                                     `json:"verified"`
+	WeeklyReputation float64                                                  `json:"weeklyReputation"`
+	XUsername        string                                                   `json:"xUsername"`
+	JSON             struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+func (u PaperV3LegacyGetResponseCommentResponseAuthorUnion) AsPaperV3LegacyGetResponseCommentResponseAuthorObject() (v PaperV3LegacyGetResponseCommentResponseAuthorObject) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3LegacyGetResponseCommentResponseAuthorUnion) AsPaperV3LegacyGetResponseCommentResponseAuthorObject2() (v PaperV3LegacyGetResponseCommentResponseAuthorObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+// Returns the unmodified JSON received from the API
+func (u PaperV3LegacyGetResponseCommentResponseAuthorUnion) RawJSON() string { return u.JSON.raw }
+
+func (r *PaperV3LegacyGetResponseCommentResponseAuthorUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// PaperV3LegacyGetResponseCommentResponseAuthorUnionID is an implicit subunion of
+// [PaperV3LegacyGetResponseCommentResponseAuthorUnion].
+// PaperV3LegacyGetResponseCommentResponseAuthorUnionID provides convenient access
+// to the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [PaperV3LegacyGetResponseCommentResponseAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfString
+// OfPaperV3LegacyGetResponseCommentResponseAuthorObject2ID]
+type PaperV3LegacyGetResponseCommentResponseAuthorUnionID struct {
+	// This field will be present if the value is a [string] instead of an object.
+	OfString string `json:",inline"`
+	// This field will be present if the value is a [any] instead of an object.
+	OfPaperV3LegacyGetResponseCommentResponseAuthorObject2ID any `json:",inline"`
+	JSON                                                     struct {
+		OfString                                                 respjson.Field
+		OfPaperV3LegacyGetResponseCommentResponseAuthorObject2ID respjson.Field
+		raw                                                      string
+	} `json:"-"`
+}
+
+func (r *PaperV3LegacyGetResponseCommentResponseAuthorUnionID) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// PaperV3LegacyGetResponseCommentResponseAuthorUnionAvatar is an implicit subunion
+// of [PaperV3LegacyGetResponseCommentResponseAuthorUnion].
+// PaperV3LegacyGetResponseCommentResponseAuthorUnionAvatar provides convenient
+// access to the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [PaperV3LegacyGetResponseCommentResponseAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfPaperV3LegacyGetResponseCommentResponseAuthorObjectAvatarArray
+// OfPaperV3LegacyGetResponseCommentResponseAuthorObject2AvatarArray]
+type PaperV3LegacyGetResponseCommentResponseAuthorUnionAvatar struct {
+	// This field will be present if the value is a
+	// [[]PaperV3LegacyGetResponseCommentResponseAuthorObjectAvatar] instead of an
+	// object.
+	OfPaperV3LegacyGetResponseCommentResponseAuthorObjectAvatarArray []PaperV3LegacyGetResponseCommentResponseAuthorObjectAvatar `json:",inline"`
+	// This field will be present if the value is a
+	// [[]PaperV3LegacyGetResponseCommentResponseAuthorObject2Avatar] instead of an
+	// object.
+	OfPaperV3LegacyGetResponseCommentResponseAuthorObject2AvatarArray []PaperV3LegacyGetResponseCommentResponseAuthorObject2Avatar `json:",inline"`
+	JSON                                                              struct {
+		OfPaperV3LegacyGetResponseCommentResponseAuthorObjectAvatarArray  respjson.Field
+		OfPaperV3LegacyGetResponseCommentResponseAuthorObject2AvatarArray respjson.Field
+		raw                                                               string
+	} `json:"-"`
+}
+
+func (r *PaperV3LegacyGetResponseCommentResponseAuthorUnionAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetResponseCommentResponseAuthorObject struct {
+	ID               string                                                      `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3LegacyGetResponseCommentResponseAuthorObjectAvatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                                      `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                                      `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                                      `json:"googleScholarId" api:"required"`
+	Institution      string                                                      `json:"institution" api:"required"`
+	LinkedinUsername string                                                      `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                                      `json:"orcidId" api:"required"`
+	PublicEmail      string                                                      `json:"publicEmail" api:"required"`
+	RealName         string                                                      `json:"realName" api:"required"`
+	Reputation       float64                                                     `json:"reputation" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -542,12 +850,12 @@ type PaperV3LegacyGetResponseCommentResponseAuthor struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r PaperV3LegacyGetResponseCommentResponseAuthor) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LegacyGetResponseCommentResponseAuthor) UnmarshalJSON(data []byte) error {
+func (r PaperV3LegacyGetResponseCommentResponseAuthorObject) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetResponseCommentResponseAuthorObject) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3LegacyGetResponseCommentResponseAuthorAvatar struct {
+type PaperV3LegacyGetResponseCommentResponseAuthorObjectAvatar struct {
 	// Any of "full_size", "thumbnail".
 	Type string `json:"type" api:"required"`
 	URL  string `json:"url" api:"required"`
@@ -561,8 +869,78 @@ type PaperV3LegacyGetResponseCommentResponseAuthorAvatar struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r PaperV3LegacyGetResponseCommentResponseAuthorAvatar) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LegacyGetResponseCommentResponseAuthorAvatar) UnmarshalJSON(data []byte) error {
+func (r PaperV3LegacyGetResponseCommentResponseAuthorObjectAvatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3LegacyGetResponseCommentResponseAuthorObjectAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetResponseCommentResponseAuthorObject2 struct {
+	ID               any                                                          `json:"id" api:"required"`
+	Avatar           []PaperV3LegacyGetResponseCommentResponseAuthorObject2Avatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                                       `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                                       `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                                       `json:"googleScholarId" api:"required"`
+	Institution      string                                                       `json:"institution" api:"required"`
+	LinkedinUsername string                                                       `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                                       `json:"orcidId" api:"required"`
+	PublicEmail      string                                                       `json:"publicEmail" api:"required"`
+	RealName         string                                                       `json:"realName" api:"required"`
+	Reputation       float64                                                      `json:"reputation" api:"required"`
+	// Any of "user", "reviewer", "admin", "bot".
+	Role             string  `json:"role" api:"required"`
+	Username         string  `json:"username" api:"required"`
+	Verified         bool    `json:"verified" api:"required"`
+	WeeklyReputation float64 `json:"weeklyReputation" api:"required"`
+	XUsername        string  `json:"xUsername" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3LegacyGetResponseCommentResponseAuthorObject2) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetResponseCommentResponseAuthorObject2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetResponseCommentResponseAuthorObject2Avatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3LegacyGetResponseCommentResponseAuthorObject2Avatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3LegacyGetResponseCommentResponseAuthorObject2Avatar) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -587,7 +965,7 @@ func (r *PaperV3LegacyGetResponseCommentResponseEndorsement) UnmarshalJSON(data 
 type PaperV3LegacyGetCommentsResponse struct {
 	ID              string                                        `json:"id" api:"required" format:"uuid"`
 	Annotation      PaperV3LegacyGetCommentsResponseAnnotation    `json:"annotation" api:"required"`
-	Author          PaperV3LegacyGetCommentsResponseAuthor        `json:"author" api:"required"`
+	Author          PaperV3LegacyGetCommentsResponseAuthorUnion   `json:"author" api:"required"`
 	AuthorResponded bool                                          `json:"authorResponded" api:"required"`
 	Body            string                                        `json:"body" api:"required"`
 	Date            string                                        `json:"date" api:"required"`
@@ -747,18 +1125,136 @@ func (r *PaperV3LegacyGetCommentsResponseAnnotationHighlightRectRect) UnmarshalJ
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3LegacyGetCommentsResponseAuthor struct {
-	ID               string                                         `json:"id" api:"required" format:"uuid"`
-	Avatar           []PaperV3LegacyGetCommentsResponseAuthorAvatar `json:"avatar" api:"required"`
-	BlueskyUsername  string                                         `json:"blueskyUsername" api:"required"`
-	GitHubUsername   string                                         `json:"githubUsername" api:"required"`
-	GoogleScholarID  string                                         `json:"googleScholarId" api:"required"`
-	Institution      string                                         `json:"institution" api:"required"`
-	LinkedinUsername string                                         `json:"linkedinUsername" api:"required"`
-	OrcidID          string                                         `json:"orcidId" api:"required"`
-	PublicEmail      string                                         `json:"publicEmail" api:"required"`
-	RealName         string                                         `json:"realName" api:"required"`
-	Reputation       float64                                        `json:"reputation" api:"required"`
+// PaperV3LegacyGetCommentsResponseAuthorUnion contains all possible properties and
+// values from [PaperV3LegacyGetCommentsResponseAuthorObject],
+// [PaperV3LegacyGetCommentsResponseAuthorObject2].
+//
+// Use the methods beginning with 'As' to cast the union to one of its variants.
+type PaperV3LegacyGetCommentsResponseAuthorUnion struct {
+	// This field is a union of [string], [any]
+	ID PaperV3LegacyGetCommentsResponseAuthorUnionID `json:"id"`
+	// This field is a union of [[]PaperV3LegacyGetCommentsResponseAuthorObjectAvatar],
+	// [[]PaperV3LegacyGetCommentsResponseAuthorObject2Avatar]
+	Avatar           PaperV3LegacyGetCommentsResponseAuthorUnionAvatar `json:"avatar"`
+	BlueskyUsername  string                                            `json:"blueskyUsername"`
+	GitHubUsername   string                                            `json:"githubUsername"`
+	GoogleScholarID  string                                            `json:"googleScholarId"`
+	Institution      string                                            `json:"institution"`
+	LinkedinUsername string                                            `json:"linkedinUsername"`
+	OrcidID          string                                            `json:"orcidId"`
+	PublicEmail      string                                            `json:"publicEmail"`
+	RealName         string                                            `json:"realName"`
+	Reputation       float64                                           `json:"reputation"`
+	Role             string                                            `json:"role"`
+	Username         string                                            `json:"username"`
+	Verified         bool                                              `json:"verified"`
+	WeeklyReputation float64                                           `json:"weeklyReputation"`
+	XUsername        string                                            `json:"xUsername"`
+	JSON             struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+func (u PaperV3LegacyGetCommentsResponseAuthorUnion) AsPaperV3LegacyGetCommentsResponseAuthorObject() (v PaperV3LegacyGetCommentsResponseAuthorObject) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3LegacyGetCommentsResponseAuthorUnion) AsPaperV3LegacyGetCommentsResponseAuthorObject2() (v PaperV3LegacyGetCommentsResponseAuthorObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+// Returns the unmodified JSON received from the API
+func (u PaperV3LegacyGetCommentsResponseAuthorUnion) RawJSON() string { return u.JSON.raw }
+
+func (r *PaperV3LegacyGetCommentsResponseAuthorUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// PaperV3LegacyGetCommentsResponseAuthorUnionID is an implicit subunion of
+// [PaperV3LegacyGetCommentsResponseAuthorUnion].
+// PaperV3LegacyGetCommentsResponseAuthorUnionID provides convenient access to the
+// sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [PaperV3LegacyGetCommentsResponseAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfString OfPaperV3LegacyGetCommentsResponseAuthorObject2ID]
+type PaperV3LegacyGetCommentsResponseAuthorUnionID struct {
+	// This field will be present if the value is a [string] instead of an object.
+	OfString string `json:",inline"`
+	// This field will be present if the value is a [any] instead of an object.
+	OfPaperV3LegacyGetCommentsResponseAuthorObject2ID any `json:",inline"`
+	JSON                                              struct {
+		OfString                                          respjson.Field
+		OfPaperV3LegacyGetCommentsResponseAuthorObject2ID respjson.Field
+		raw                                               string
+	} `json:"-"`
+}
+
+func (r *PaperV3LegacyGetCommentsResponseAuthorUnionID) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// PaperV3LegacyGetCommentsResponseAuthorUnionAvatar is an implicit subunion of
+// [PaperV3LegacyGetCommentsResponseAuthorUnion].
+// PaperV3LegacyGetCommentsResponseAuthorUnionAvatar provides convenient access to
+// the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [PaperV3LegacyGetCommentsResponseAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfPaperV3LegacyGetCommentsResponseAuthorObjectAvatarArray
+// OfPaperV3LegacyGetCommentsResponseAuthorObject2AvatarArray]
+type PaperV3LegacyGetCommentsResponseAuthorUnionAvatar struct {
+	// This field will be present if the value is a
+	// [[]PaperV3LegacyGetCommentsResponseAuthorObjectAvatar] instead of an object.
+	OfPaperV3LegacyGetCommentsResponseAuthorObjectAvatarArray []PaperV3LegacyGetCommentsResponseAuthorObjectAvatar `json:",inline"`
+	// This field will be present if the value is a
+	// [[]PaperV3LegacyGetCommentsResponseAuthorObject2Avatar] instead of an object.
+	OfPaperV3LegacyGetCommentsResponseAuthorObject2AvatarArray []PaperV3LegacyGetCommentsResponseAuthorObject2Avatar `json:",inline"`
+	JSON                                                       struct {
+		OfPaperV3LegacyGetCommentsResponseAuthorObjectAvatarArray  respjson.Field
+		OfPaperV3LegacyGetCommentsResponseAuthorObject2AvatarArray respjson.Field
+		raw                                                        string
+	} `json:"-"`
+}
+
+func (r *PaperV3LegacyGetCommentsResponseAuthorUnionAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetCommentsResponseAuthorObject struct {
+	ID               string                                               `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3LegacyGetCommentsResponseAuthorObjectAvatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                               `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                               `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                               `json:"googleScholarId" api:"required"`
+	Institution      string                                               `json:"institution" api:"required"`
+	LinkedinUsername string                                               `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                               `json:"orcidId" api:"required"`
+	PublicEmail      string                                               `json:"publicEmail" api:"required"`
+	RealName         string                                               `json:"realName" api:"required"`
+	Reputation       float64                                              `json:"reputation" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -789,12 +1285,12 @@ type PaperV3LegacyGetCommentsResponseAuthor struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r PaperV3LegacyGetCommentsResponseAuthor) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LegacyGetCommentsResponseAuthor) UnmarshalJSON(data []byte) error {
+func (r PaperV3LegacyGetCommentsResponseAuthorObject) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetCommentsResponseAuthorObject) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3LegacyGetCommentsResponseAuthorAvatar struct {
+type PaperV3LegacyGetCommentsResponseAuthorObjectAvatar struct {
 	// Any of "full_size", "thumbnail".
 	Type string `json:"type" api:"required"`
 	URL  string `json:"url" api:"required"`
@@ -808,8 +1304,74 @@ type PaperV3LegacyGetCommentsResponseAuthorAvatar struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r PaperV3LegacyGetCommentsResponseAuthorAvatar) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LegacyGetCommentsResponseAuthorAvatar) UnmarshalJSON(data []byte) error {
+func (r PaperV3LegacyGetCommentsResponseAuthorObjectAvatar) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetCommentsResponseAuthorObjectAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetCommentsResponseAuthorObject2 struct {
+	ID               any                                                   `json:"id" api:"required"`
+	Avatar           []PaperV3LegacyGetCommentsResponseAuthorObject2Avatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                                `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                                `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                                `json:"googleScholarId" api:"required"`
+	Institution      string                                                `json:"institution" api:"required"`
+	LinkedinUsername string                                                `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                                `json:"orcidId" api:"required"`
+	PublicEmail      string                                                `json:"publicEmail" api:"required"`
+	RealName         string                                                `json:"realName" api:"required"`
+	Reputation       float64                                               `json:"reputation" api:"required"`
+	// Any of "user", "reviewer", "admin", "bot".
+	Role             string  `json:"role" api:"required"`
+	Username         string  `json:"username" api:"required"`
+	Verified         bool    `json:"verified" api:"required"`
+	WeeklyReputation float64 `json:"weeklyReputation" api:"required"`
+	XUsername        string  `json:"xUsername" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3LegacyGetCommentsResponseAuthorObject2) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetCommentsResponseAuthorObject2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetCommentsResponseAuthorObject2Avatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3LegacyGetCommentsResponseAuthorObject2Avatar) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetCommentsResponseAuthorObject2Avatar) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -834,7 +1396,7 @@ func (r *PaperV3LegacyGetCommentsResponseEndorsement) UnmarshalJSON(data []byte)
 type PaperV3LegacyGetCommentsResponseResponse struct {
 	ID              string                                                `json:"id" api:"required" format:"uuid"`
 	Annotation      PaperV3LegacyGetCommentsResponseResponseAnnotation    `json:"annotation" api:"required"`
-	Author          PaperV3LegacyGetCommentsResponseResponseAuthor        `json:"author" api:"required"`
+	Author          PaperV3LegacyGetCommentsResponseResponseAuthorUnion   `json:"author" api:"required"`
 	AuthorResponded bool                                                  `json:"authorResponded" api:"required"`
 	Body            string                                                `json:"body" api:"required"`
 	Date            string                                                `json:"date" api:"required"`
@@ -998,18 +1560,141 @@ func (r *PaperV3LegacyGetCommentsResponseResponseAnnotationHighlightRectRect) Un
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3LegacyGetCommentsResponseResponseAuthor struct {
-	ID               string                                                 `json:"id" api:"required" format:"uuid"`
-	Avatar           []PaperV3LegacyGetCommentsResponseResponseAuthorAvatar `json:"avatar" api:"required"`
-	BlueskyUsername  string                                                 `json:"blueskyUsername" api:"required"`
-	GitHubUsername   string                                                 `json:"githubUsername" api:"required"`
-	GoogleScholarID  string                                                 `json:"googleScholarId" api:"required"`
-	Institution      string                                                 `json:"institution" api:"required"`
-	LinkedinUsername string                                                 `json:"linkedinUsername" api:"required"`
-	OrcidID          string                                                 `json:"orcidId" api:"required"`
-	PublicEmail      string                                                 `json:"publicEmail" api:"required"`
-	RealName         string                                                 `json:"realName" api:"required"`
-	Reputation       float64                                                `json:"reputation" api:"required"`
+// PaperV3LegacyGetCommentsResponseResponseAuthorUnion contains all possible
+// properties and values from
+// [PaperV3LegacyGetCommentsResponseResponseAuthorObject],
+// [PaperV3LegacyGetCommentsResponseResponseAuthorObject2].
+//
+// Use the methods beginning with 'As' to cast the union to one of its variants.
+type PaperV3LegacyGetCommentsResponseResponseAuthorUnion struct {
+	// This field is a union of [string], [any]
+	ID PaperV3LegacyGetCommentsResponseResponseAuthorUnionID `json:"id"`
+	// This field is a union of
+	// [[]PaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatar],
+	// [[]PaperV3LegacyGetCommentsResponseResponseAuthorObject2Avatar]
+	Avatar           PaperV3LegacyGetCommentsResponseResponseAuthorUnionAvatar `json:"avatar"`
+	BlueskyUsername  string                                                    `json:"blueskyUsername"`
+	GitHubUsername   string                                                    `json:"githubUsername"`
+	GoogleScholarID  string                                                    `json:"googleScholarId"`
+	Institution      string                                                    `json:"institution"`
+	LinkedinUsername string                                                    `json:"linkedinUsername"`
+	OrcidID          string                                                    `json:"orcidId"`
+	PublicEmail      string                                                    `json:"publicEmail"`
+	RealName         string                                                    `json:"realName"`
+	Reputation       float64                                                   `json:"reputation"`
+	Role             string                                                    `json:"role"`
+	Username         string                                                    `json:"username"`
+	Verified         bool                                                      `json:"verified"`
+	WeeklyReputation float64                                                   `json:"weeklyReputation"`
+	XUsername        string                                                    `json:"xUsername"`
+	JSON             struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+func (u PaperV3LegacyGetCommentsResponseResponseAuthorUnion) AsPaperV3LegacyGetCommentsResponseResponseAuthorObject() (v PaperV3LegacyGetCommentsResponseResponseAuthorObject) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3LegacyGetCommentsResponseResponseAuthorUnion) AsPaperV3LegacyGetCommentsResponseResponseAuthorObject2() (v PaperV3LegacyGetCommentsResponseResponseAuthorObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+// Returns the unmodified JSON received from the API
+func (u PaperV3LegacyGetCommentsResponseResponseAuthorUnion) RawJSON() string { return u.JSON.raw }
+
+func (r *PaperV3LegacyGetCommentsResponseResponseAuthorUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// PaperV3LegacyGetCommentsResponseResponseAuthorUnionID is an implicit subunion of
+// [PaperV3LegacyGetCommentsResponseResponseAuthorUnion].
+// PaperV3LegacyGetCommentsResponseResponseAuthorUnionID provides convenient access
+// to the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [PaperV3LegacyGetCommentsResponseResponseAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfString
+// OfPaperV3LegacyGetCommentsResponseResponseAuthorObject2ID]
+type PaperV3LegacyGetCommentsResponseResponseAuthorUnionID struct {
+	// This field will be present if the value is a [string] instead of an object.
+	OfString string `json:",inline"`
+	// This field will be present if the value is a [any] instead of an object.
+	OfPaperV3LegacyGetCommentsResponseResponseAuthorObject2ID any `json:",inline"`
+	JSON                                                      struct {
+		OfString                                                  respjson.Field
+		OfPaperV3LegacyGetCommentsResponseResponseAuthorObject2ID respjson.Field
+		raw                                                       string
+	} `json:"-"`
+}
+
+func (r *PaperV3LegacyGetCommentsResponseResponseAuthorUnionID) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// PaperV3LegacyGetCommentsResponseResponseAuthorUnionAvatar is an implicit
+// subunion of [PaperV3LegacyGetCommentsResponseResponseAuthorUnion].
+// PaperV3LegacyGetCommentsResponseResponseAuthorUnionAvatar provides convenient
+// access to the sub-properties of the union.
+//
+// For type safety it is recommended to directly use a variant of the
+// [PaperV3LegacyGetCommentsResponseResponseAuthorUnion].
+//
+// If the underlying value is not a json object, one of the following properties
+// will be valid: OfPaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatarArray
+// OfPaperV3LegacyGetCommentsResponseResponseAuthorObject2AvatarArray]
+type PaperV3LegacyGetCommentsResponseResponseAuthorUnionAvatar struct {
+	// This field will be present if the value is a
+	// [[]PaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatar] instead of an
+	// object.
+	OfPaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatarArray []PaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatar `json:",inline"`
+	// This field will be present if the value is a
+	// [[]PaperV3LegacyGetCommentsResponseResponseAuthorObject2Avatar] instead of an
+	// object.
+	OfPaperV3LegacyGetCommentsResponseResponseAuthorObject2AvatarArray []PaperV3LegacyGetCommentsResponseResponseAuthorObject2Avatar `json:",inline"`
+	JSON                                                               struct {
+		OfPaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatarArray  respjson.Field
+		OfPaperV3LegacyGetCommentsResponseResponseAuthorObject2AvatarArray respjson.Field
+		raw                                                                string
+	} `json:"-"`
+}
+
+func (r *PaperV3LegacyGetCommentsResponseResponseAuthorUnionAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetCommentsResponseResponseAuthorObject struct {
+	ID               string                                                       `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                                       `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                                       `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                                       `json:"googleScholarId" api:"required"`
+	Institution      string                                                       `json:"institution" api:"required"`
+	LinkedinUsername string                                                       `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                                       `json:"orcidId" api:"required"`
+	PublicEmail      string                                                       `json:"publicEmail" api:"required"`
+	RealName         string                                                       `json:"realName" api:"required"`
+	Reputation       float64                                                      `json:"reputation" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -1040,12 +1725,12 @@ type PaperV3LegacyGetCommentsResponseResponseAuthor struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r PaperV3LegacyGetCommentsResponseResponseAuthor) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LegacyGetCommentsResponseResponseAuthor) UnmarshalJSON(data []byte) error {
+func (r PaperV3LegacyGetCommentsResponseResponseAuthorObject) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetCommentsResponseResponseAuthorObject) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3LegacyGetCommentsResponseResponseAuthorAvatar struct {
+type PaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatar struct {
 	// Any of "full_size", "thumbnail".
 	Type string `json:"type" api:"required"`
 	URL  string `json:"url" api:"required"`
@@ -1059,8 +1744,78 @@ type PaperV3LegacyGetCommentsResponseResponseAuthorAvatar struct {
 }
 
 // Returns the unmodified JSON received from the API
-func (r PaperV3LegacyGetCommentsResponseResponseAuthorAvatar) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3LegacyGetCommentsResponseResponseAuthorAvatar) UnmarshalJSON(data []byte) error {
+func (r PaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3LegacyGetCommentsResponseResponseAuthorObjectAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetCommentsResponseResponseAuthorObject2 struct {
+	ID               any                                                           `json:"id" api:"required"`
+	Avatar           []PaperV3LegacyGetCommentsResponseResponseAuthorObject2Avatar `json:"avatar" api:"required"`
+	BlueskyUsername  string                                                        `json:"blueskyUsername" api:"required"`
+	GitHubUsername   string                                                        `json:"githubUsername" api:"required"`
+	GoogleScholarID  string                                                        `json:"googleScholarId" api:"required"`
+	Institution      string                                                        `json:"institution" api:"required"`
+	LinkedinUsername string                                                        `json:"linkedinUsername" api:"required"`
+	OrcidID          string                                                        `json:"orcidId" api:"required"`
+	PublicEmail      string                                                        `json:"publicEmail" api:"required"`
+	RealName         string                                                        `json:"realName" api:"required"`
+	Reputation       float64                                                       `json:"reputation" api:"required"`
+	// Any of "user", "reviewer", "admin", "bot".
+	Role             string  `json:"role" api:"required"`
+	Username         string  `json:"username" api:"required"`
+	Verified         bool    `json:"verified" api:"required"`
+	WeeklyReputation float64 `json:"weeklyReputation" api:"required"`
+	XUsername        string  `json:"xUsername" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		BlueskyUsername  respjson.Field
+		GitHubUsername   respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		LinkedinUsername respjson.Field
+		OrcidID          respjson.Field
+		PublicEmail      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Role             respjson.Field
+		Username         respjson.Field
+		Verified         respjson.Field
+		WeeklyReputation respjson.Field
+		XUsername        respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3LegacyGetCommentsResponseResponseAuthorObject2) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3LegacyGetCommentsResponseResponseAuthorObject2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3LegacyGetCommentsResponseResponseAuthorObject2Avatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3LegacyGetCommentsResponseResponseAuthorObject2Avatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3LegacyGetCommentsResponseResponseAuthorObject2Avatar) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

@@ -48,7 +48,8 @@ func NewPaperV3Service(opts ...option.RequestOption) (r PaperV3Service) {
 
 // Retrieve paper version metadata. Fetches from ArXiv if needed.
 //
-// Source file: `api-server/src/controllers/papers/v3/get-paper.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-paper.controller.ts`
 func (r *PaperV3Service) Get(ctx context.Context, unresolved string, opts ...option.RequestOption) (res *PaperV3GetResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if unresolved == "" {
@@ -62,7 +63,8 @@ func (r *PaperV3Service) Get(ctx context.Context, unresolved string, opts ...opt
 
 // Create a public comment or private note on a paper.
 //
-// Source file: `api-server/src/controllers/papers/v3/post-comment.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/post-comment.controller.ts`
 func (r *PaperV3Service) Comment(ctx context.Context, version string, body PaperV3CommentParams, opts ...option.RequestOption) (res *PaperV3CommentResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if version == "" {
@@ -77,7 +79,7 @@ func (r *PaperV3Service) Comment(ctx context.Context, version string, body Paper
 // Remove votes from many papers at once
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/remove-vote-batch.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/remove-vote-batch.controller.ts`
 func (r *PaperV3Service) DeleteVotes(ctx context.Context, body PaperV3DeleteVotesParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -89,7 +91,7 @@ func (r *PaperV3Service) DeleteVotes(ctx context.Context, body PaperV3DeleteVote
 // Create or update an implementation for a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/create-or-update-implementation.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/create-or-update-implementation.controller.ts`
 func (r *PaperV3Service) Implementation(ctx context.Context, paperGroupID string, body PaperV3ImplementationParams, opts ...option.RequestOption) (res *PaperV3ImplementationResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperGroupID == "" {
@@ -104,7 +106,7 @@ func (r *PaperV3Service) Implementation(ctx context.Context, paperGroupID string
 // Kickoff paper countries processing for hot papers
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/kickoff-paper-countries.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/kickoff-paper-countries.controller.ts`
 func (r *PaperV3Service) KickoffPaperCountries(ctx context.Context, body PaperV3KickoffPaperCountriesParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -113,22 +115,10 @@ func (r *PaperV3Service) KickoffPaperCountries(ctx context.Context, body PaperV3
 	return err
 }
 
-// Kickoff paper full text processing for recent papers
-//
-// Source file:
-// `api-server/src/controllers/papers/v3/kickoff-paper-full-text.controller.ts`
-func (r *PaperV3Service) KickoffPaperFullText(ctx context.Context, body PaperV3KickoffPaperFullTextParams, opts ...option.RequestOption) (err error) {
-	opts = slices.Concat(r.options, opts)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
-	path := "papers/v3/kickoff-paper-full-text"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, nil, opts...)
-	return err
-}
-
 // Kickoff paper podcasts on Uptash for a subset of paper groups
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/kickoff-paper-podcasts.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/kickoff-paper-podcasts.controller.ts`
 func (r *PaperV3Service) KickoffPaperPodcasts(ctx context.Context, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -137,35 +127,25 @@ func (r *PaperV3Service) KickoffPaperPodcasts(ctx context.Context, opts ...optio
 	return err
 }
 
-// Kickoff background job to generate thumbnails for trending papers
+// Set your like status on a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/kickoff-thumbnails-trending-papers.controller.ts`
-func (r *PaperV3Service) KickoffThumbnailsTrendingPapers(ctx context.Context, opts ...option.RequestOption) (res *PaperV3KickoffThumbnailsTrendingPapersResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "papers/v3/kickoff-thumbnails-trending-papers"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return res, err
-}
-
-// Toggle your like status on a paper group
-//
-// Source file: `api-server/src/controllers/papers/v3/like-paper.controller.ts`
-func (r *PaperV3Service) Like(ctx context.Context, group string, opts ...option.RequestOption) (res *PaperV3LikeResponse, err error) {
+// `api-server/file:/app/api-server/src/controllers/papers/v3/like-paper.controller.ts`
+func (r *PaperV3Service) Like(ctx context.Context, group string, body PaperV3LikeParams, opts ...option.RequestOption) (res *PaperV3LikeResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if group == "" {
 		err = errors.New("missing required group parameter")
 		return nil, err
 	}
 	path := fmt.Sprintf("papers/v3/%s/like", group)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return res, err
 }
 
 // Generates a podcast for a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/generate-paper-podcast.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/generate-paper-podcast.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperV3Service) Podcast(ctx context.Context, paperGroupID string, opts ...option.RequestOption) (err error) {
@@ -182,7 +162,8 @@ func (r *PaperV3Service) Podcast(ctx context.Context, paperGroupID string, opts 
 
 // Generates AI overviews for a paper version
 //
-// Source file: `api-server/src/controllers/papers/v3/process-ai.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/process-ai.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperV3Service) ProcessAI(ctx context.Context, paperVersionID string, body PaperV3ProcessAIParams, opts ...option.RequestOption) (err error) {
@@ -201,7 +182,7 @@ func (r *PaperV3Service) ProcessAI(ctx context.Context, paperVersionID string, b
 // affiliations
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/process-countries.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/process-countries.controller.ts`
 //
 // Deprecated: deprecated
 func (r *PaperV3Service) ProcessCountries(ctx context.Context, body PaperV3ProcessCountriesParams, opts ...option.RequestOption) (err error) {
@@ -212,37 +193,10 @@ func (r *PaperV3Service) ProcessCountries(ctx context.Context, body PaperV3Proce
 	return err
 }
 
-// Processes and extracts full text from paper PDFs for indexing and search
-//
-// Source file:
-// `api-server/src/controllers/papers/v3/process-full-text.controller.ts`
-//
-// Deprecated: deprecated
-func (r *PaperV3Service) ProcessFullText(ctx context.Context, body PaperV3ProcessFullTextParams, opts ...option.RequestOption) (err error) {
-	opts = slices.Concat(r.options, opts)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
-	path := "papers/v3/process-full-text"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, nil, opts...)
-	return err
-}
-
-// Clear 'is_last_X_days' flags from paper embeddings that have become too old
-//
-// Source file:
-// `api-server/src/controllers/papers/v3/prune-embeddings-by-date.controller.ts`
-//
-// Deprecated: deprecated
-func (r *PaperV3Service) PruneEmbeddingsByDate(ctx context.Context, opts ...option.RequestOption) (res *PaperV3PruneEmbeddingsByDateResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "papers/v3/prune-embeddings-by-date"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return res, err
-}
-
 // Toggle your implementation request status on a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/request-paper-implementation.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/request-paper-implementation.controller.ts`
 func (r *PaperV3Service) RequestImplementation(ctx context.Context, group string, body PaperV3RequestImplementationParams, opts ...option.RequestOption) (res *PaperV3RequestImplementationResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if group == "" {
@@ -257,7 +211,7 @@ func (r *PaperV3Service) RequestImplementation(ctx context.Context, group string
 // Request podcast generation for a paper group
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/request-podcast.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/request-podcast.controller.ts`
 func (r *PaperV3Service) RequestPodcast(ctx context.Context, paperGroupID string, opts ...option.RequestOption) (res *PaperV3RequestPodcastResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperGroupID == "" {
@@ -271,7 +225,8 @@ func (r *PaperV3Service) RequestPodcast(ctx context.Context, paperGroupID string
 
 // Get all paper universal IDs sorted by most recent publication date
 //
-// Source file: `api-server/src/controllers/papers/v3/get-all-papers.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-all-papers.controller.ts`
 func (r *PaperV3Service) GetAll(ctx context.Context, query PaperV3GetAllParams, opts ...option.RequestOption) (res *PaperV3GetAllResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/all"
@@ -281,7 +236,8 @@ func (r *PaperV3Service) GetAll(ctx context.Context, query PaperV3GetAllParams, 
 
 // Get an initial batch of diverse papers on the given topics for recommendations
 //
-// Source file: `api-server/src/controllers/papers/v3/diverse-papers.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/diverse-papers.controller.ts`
 func (r *PaperV3Service) GetDiversePapers(ctx context.Context, query PaperV3GetDiversePapersParams, opts ...option.RequestOption) (res *[]PaperV3GetDiversePapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/diverse-papers"
@@ -291,7 +247,8 @@ func (r *PaperV3Service) GetDiversePapers(ctx context.Context, query PaperV3GetD
 
 // Get an optionally filtered list of papers for the main feed
 //
-// Source file: `api-server/src/controllers/papers/v3/feed.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/feed.controller.ts`
 func (r *PaperV3Service) GetFeed(ctx context.Context, query PaperV3GetFeedParams, opts ...option.RequestOption) (res *PaperV3GetFeedResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/feed"
@@ -302,7 +259,7 @@ func (r *PaperV3Service) GetFeed(ctx context.Context, query PaperV3GetFeedParams
 // Get list of figure URLs for a paper
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/get-paper-figures.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-paper-figures.controller.ts`
 func (r *PaperV3Service) GetFigures(ctx context.Context, paperGroupID string, opts ...option.RequestOption) (res *PaperV3GetFiguresResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperGroupID == "" {
@@ -316,7 +273,8 @@ func (r *PaperV3Service) GetFigures(ctx context.Context, paperGroupID string, op
 
 // Get the full extracted text of a paper, page by page
 //
-// Source file: `api-server/src/controllers/papers/v3/get-full-text.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-full-text.controller.ts`
 func (r *PaperV3Service) GetFullText(ctx context.Context, paperVersion string, opts ...option.RequestOption) (res *PaperV3GetFullTextResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if paperVersion == "" {
@@ -330,7 +288,8 @@ func (r *PaperV3Service) GetFullText(ctx context.Context, paperVersion string, o
 
 // Retrieve metrics for a paper (comments count, upvotes, views)
 //
-// Source file: `api-server/src/controllers/papers/v3/get-metrics.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-metrics.controller.ts`
 func (r *PaperV3Service) GetMetrics(ctx context.Context, unresolved string, opts ...option.RequestOption) (res *PaperV3GetMetricsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if unresolved == "" {
@@ -345,7 +304,7 @@ func (r *PaperV3Service) GetMetrics(ctx context.Context, unresolved string, opts
 // Retrieve paper data for paper preview cards
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/get-paper-preview.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-paper-preview.controller.ts`
 func (r *PaperV3Service) GetPreview(ctx context.Context, id string, opts ...option.RequestOption) (res *PaperV3GetPreviewResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -360,7 +319,7 @@ func (r *PaperV3Service) GetPreview(ctx context.Context, id string, opts ...opti
 // Get papers semantically similar to the selected one
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/get-similar-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/get-similar-papers.controller.ts`
 func (r *PaperV3Service) GetSimilarPapers(ctx context.Context, id string, query PaperV3GetSimilarPapersParams, opts ...option.RequestOption) (res *[]PaperV3GetSimilarPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if id == "" {
@@ -375,7 +334,7 @@ func (r *PaperV3Service) GetSimilarPapers(ctx context.Context, id string, query 
 // Get some papers on the provided topics that are unrelated to the provided papers
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/unrelated-papers.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/unrelated-papers.controller.ts`
 func (r *PaperV3Service) GetUnrelated(ctx context.Context, query PaperV3GetUnrelatedParams, opts ...option.RequestOption) (res *[]PaperV3GetUnrelatedResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "papers/v3/unrelated"
@@ -386,7 +345,7 @@ func (r *PaperV3Service) GetUnrelated(ctx context.Context, query PaperV3GetUnrel
 // Track paper view event for analytics
 //
 // Source file:
-// `api-server/src/controllers/papers/v3/mark-paper-view.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/papers/v3/mark-paper-view.controller.ts`
 func (r *PaperV3Service) View(ctx context.Context, group string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -562,38 +521,6 @@ func (r *PaperV3ImplementationResponseImplementation) UnmarshalJSON(data []byte)
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3KickoffThumbnailsTrendingPapersResponse struct {
-	Data PaperV3KickoffThumbnailsTrendingPapersResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3KickoffThumbnailsTrendingPapersResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3KickoffThumbnailsTrendingPapersResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3KickoffThumbnailsTrendingPapersResponseData struct {
-	Message string `json:"message" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Message     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3KickoffThumbnailsTrendingPapersResponseData) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3KickoffThumbnailsTrendingPapersResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type PaperV3LikeResponse struct {
 	Liked bool `json:"liked" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -607,22 +534,6 @@ type PaperV3LikeResponse struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3LikeResponse) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3LikeResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type PaperV3PruneEmbeddingsByDateResponse struct {
-	RowsUpdated []float64 `json:"rowsUpdated" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		RowsUpdated respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r PaperV3PruneEmbeddingsByDateResponse) RawJSON() string { return r.JSON.raw }
-func (r *PaperV3PruneEmbeddingsByDateResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -644,9 +555,12 @@ func (r *PaperV3RequestImplementationResponse) UnmarshalJSON(data []byte) error 
 
 type PaperV3RequestPodcastResponse struct {
 	Message string `json:"message" api:"required"`
+	// Any of "queued", "generating", "done", "errored".
+	State PaperV3RequestPodcastResponseState `json:"state" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Message     respjson.Field
+		State       respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -657,6 +571,15 @@ func (r PaperV3RequestPodcastResponse) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3RequestPodcastResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
+
+type PaperV3RequestPodcastResponseState string
+
+const (
+	PaperV3RequestPodcastResponseStateQueued     PaperV3RequestPodcastResponseState = "queued"
+	PaperV3RequestPodcastResponseStateGenerating PaperV3RequestPodcastResponseState = "generating"
+	PaperV3RequestPodcastResponseStateDone       PaperV3RequestPodcastResponseState = "done"
+	PaperV3RequestPodcastResponseStateErrored    PaperV3RequestPodcastResponseState = "errored"
+)
 
 type PaperV3GetAllResponse struct {
 	Limit        float64  `json:"limit" api:"required"`
@@ -685,10 +608,12 @@ type PaperV3GetDiversePapersResponse struct {
 	Authors    []string                                    `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                            `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetDiversePapersResponseExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                            `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetDiversePapersResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                           `json:"github_stars" api:"required"`
 	GitHubURL            string                                            `json:"github_url" api:"required"`
+	HasRunReport         bool                                              `json:"has_run_report" api:"required"`
 	ImageURL             string                                            `json:"image_url" api:"required"`
 	Metrics              PaperV3GetDiversePapersResponseMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetDiversePapersResponseOrganizationInfo `json:"organization_info" api:"required"`
@@ -708,10 +633,12 @@ type PaperV3GetDiversePapersResponse struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -797,6 +724,22 @@ type PaperV3GetDiversePapersResponseAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetDiversePapersResponseAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetDiversePapersResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetDiversePapersResponseExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetDiversePapersResponseExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetDiversePapersResponseExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -927,10 +870,12 @@ type PaperV3GetFeedResponsePaper struct {
 	Authors    []string                                `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                        `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetFeedResponsePaperExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                        `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetFeedResponsePaperFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                       `json:"github_stars" api:"required"`
 	GitHubURL            string                                        `json:"github_url" api:"required"`
+	HasRunReport         bool                                          `json:"has_run_report" api:"required"`
 	ImageURL             string                                        `json:"image_url" api:"required"`
 	Metrics              PaperV3GetFeedResponsePaperMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetFeedResponsePaperOrganizationInfo `json:"organization_info" api:"required"`
@@ -950,10 +895,12 @@ type PaperV3GetFeedResponsePaper struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -1039,6 +986,22 @@ type PaperV3GetFeedResponsePaperAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetFeedResponsePaperAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetFeedResponsePaperAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetFeedResponsePaperExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetFeedResponsePaperExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetFeedResponsePaperExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1221,10 +1184,12 @@ type PaperV3GetPreviewResponse struct {
 	Authors    []string                              `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                      `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetPreviewResponseExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                      `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetPreviewResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                     `json:"github_stars" api:"required"`
 	GitHubURL            string                                      `json:"github_url" api:"required"`
+	HasRunReport         bool                                        `json:"has_run_report" api:"required"`
 	ImageURL             string                                      `json:"image_url" api:"required"`
 	Metrics              PaperV3GetPreviewResponseMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetPreviewResponseOrganizationInfo `json:"organization_info" api:"required"`
@@ -1244,10 +1209,12 @@ type PaperV3GetPreviewResponse struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -1333,6 +1300,22 @@ type PaperV3GetPreviewResponseAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetPreviewResponseAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetPreviewResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetPreviewResponseExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetPreviewResponseExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetPreviewResponseExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1445,10 +1428,12 @@ type PaperV3GetSimilarPapersResponse struct {
 	Authors    []string                                    `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                            `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetSimilarPapersResponseExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                            `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetSimilarPapersResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                           `json:"github_stars" api:"required"`
 	GitHubURL            string                                            `json:"github_url" api:"required"`
+	HasRunReport         bool                                              `json:"has_run_report" api:"required"`
 	ImageURL             string                                            `json:"image_url" api:"required"`
 	Metrics              PaperV3GetSimilarPapersResponseMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetSimilarPapersResponseOrganizationInfo `json:"organization_info" api:"required"`
@@ -1468,10 +1453,12 @@ type PaperV3GetSimilarPapersResponse struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -1557,6 +1544,22 @@ type PaperV3GetSimilarPapersResponseAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetSimilarPapersResponseAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetSimilarPapersResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetSimilarPapersResponseExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetSimilarPapersResponseExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetSimilarPapersResponseExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1669,10 +1672,12 @@ type PaperV3GetUnrelatedResponse struct {
 	Authors    []string                                `json:"authors" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID          string                                        `json:"canonical_id" api:"required"`
+	ExternalBlog         PaperV3GetUnrelatedResponseExternalBlog       `json:"external_blog" api:"required"`
 	FirstPublicationDate string                                        `json:"first_publication_date" api:"required"`
 	FullAuthors          []PaperV3GetUnrelatedResponseFullAuthor       `json:"full_authors" api:"required"`
 	GitHubStars          float64                                       `json:"github_stars" api:"required"`
 	GitHubURL            string                                        `json:"github_url" api:"required"`
+	HasRunReport         bool                                          `json:"has_run_report" api:"required"`
 	ImageURL             string                                        `json:"image_url" api:"required"`
 	Metrics              PaperV3GetUnrelatedResponseMetrics            `json:"metrics" api:"required"`
 	OrganizationInfo     []PaperV3GetUnrelatedResponseOrganizationInfo `json:"organization_info" api:"required"`
@@ -1692,10 +1697,12 @@ type PaperV3GetUnrelatedResponse struct {
 		AuthorInfo           respjson.Field
 		Authors              respjson.Field
 		CanonicalID          respjson.Field
+		ExternalBlog         respjson.Field
 		FirstPublicationDate respjson.Field
 		FullAuthors          respjson.Field
 		GitHubStars          respjson.Field
 		GitHubURL            respjson.Field
+		HasRunReport         respjson.Field
 		ImageURL             respjson.Field
 		Metrics              respjson.Field
 		OrganizationInfo     respjson.Field
@@ -1781,6 +1788,22 @@ type PaperV3GetUnrelatedResponseAuthorInfoAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetUnrelatedResponseAuthorInfoAvatar) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetUnrelatedResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetUnrelatedResponseExternalBlog struct {
+	BodyBlobID string `json:"body_blob_id" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		BodyBlobID  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetUnrelatedResponseExternalBlog) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetUnrelatedResponseExternalBlog) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1956,19 +1979,26 @@ func (r *PaperV3KickoffPaperCountriesParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3KickoffPaperFullTextParams struct {
-	// Maximum number of paper versions to process
-	MaxPapers param.Opt[float64] `json:"maxPapers,omitzero"`
+type PaperV3LikeParams struct {
+	// Any of "true", "false".
+	Liked PaperV3LikeParamsLiked `query:"liked,omitzero" api:"required" json:"-"`
 	paramObj
 }
 
-func (r PaperV3KickoffPaperFullTextParams) MarshalJSON() (data []byte, err error) {
-	type shadow PaperV3KickoffPaperFullTextParams
-	return param.MarshalObject(r, (*shadow)(&r))
+// URLQuery serializes [PaperV3LikeParams]'s query parameters as `url.Values`.
+func (r PaperV3LikeParams) URLQuery() (v url.Values, err error) {
+	return apiquery.MarshalWithSettings(r, apiquery.QuerySettings{
+		ArrayFormat:  apiquery.ArrayQueryFormatComma,
+		NestedFormat: apiquery.NestedQueryFormatBrackets,
+	})
 }
-func (r *PaperV3KickoffPaperFullTextParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
+
+type PaperV3LikeParamsLiked string
+
+const (
+	PaperV3LikeParamsLikedTrue  PaperV3LikeParamsLiked = "true"
+	PaperV3LikeParamsLikedFalse PaperV3LikeParamsLiked = "false"
+)
 
 type PaperV3ProcessAIParams struct {
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
@@ -2066,20 +2096,6 @@ func (r *PaperV3ProcessCountriesParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type PaperV3ProcessFullTextParams struct {
-	// Paper version ID to process for full text extraction
-	PaperVersionID string `json:"paperVersionId" api:"required"`
-	paramObj
-}
-
-func (r PaperV3ProcessFullTextParams) MarshalJSON() (data []byte, err error) {
-	type shadow PaperV3ProcessFullTextParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *PaperV3ProcessFullTextParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type PaperV3RequestImplementationParams struct {
 	PaperTitle       string            `json:"paperTitle" api:"required"`
 	UniversalPaperID string            `json:"universalPaperId" api:"required"`
@@ -2128,10 +2144,10 @@ type PaperV3GetFeedParams struct {
 	Interval PaperV3GetFeedParamsInterval `query:"interval,omitzero" api:"required" json:"-"`
 	PageNum  string                       `query:"pageNum" api:"required" json:"-"`
 	PageSize string                       `query:"pageSize" api:"required" json:"-"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended".
-	Sort          PaperV3GetFeedParamsSort `query:"sort,omitzero" api:"required" json:"-"`
-	Organizations param.Opt[string]        `query:"organizations,omitzero" json:"-"`
-	Topics        param.Opt[string]        `query:"topics,omitzero" json:"-"`
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
+	Sort                 PaperV3GetFeedParamsSort `query:"sort,omitzero" api:"required" json:"-"`
+	IncludeExternalBlogs param.Opt[string]        `query:"includeExternalBlogs,omitzero" json:"-"`
+	Topics               param.Opt[string]        `query:"topics,omitzero" json:"-"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	UniversalID param.Opt[string] `query:"universalId,omitzero" json:"-"`
 	// Any of "GitHub".
@@ -2166,6 +2182,7 @@ const (
 	PaperV3GetFeedParamsSortLikes       PaperV3GetFeedParamsSort = "Likes"
 	PaperV3GetFeedParamsSortGitHub      PaperV3GetFeedParamsSort = "GitHub"
 	PaperV3GetFeedParamsSortRecommended PaperV3GetFeedParamsSort = "Recommended"
+	PaperV3GetFeedParamsSortRecent      PaperV3GetFeedParamsSort = "Recent"
 )
 
 type PaperV3GetFeedParamsSource string

@@ -35,7 +35,8 @@ func NewMcpV1Service(opts ...option.RequestOption) (r McpV1Service) {
 
 // Establish SSE connection for server-to-client MCP messages
 //
-// Source file: `api-server/src/controllers/mcp/v1/get.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/mcp/v1/get.controller.ts`
 func (r *McpV1Service) EstablishConnectionStreaming(ctx context.Context, opts ...option.RequestOption) (stream *ssestream.Stream[McpV1EstablishConnectionResponse]) {
 	var (
 		raw *http.Response
@@ -50,7 +51,8 @@ func (r *McpV1Service) EstablishConnectionStreaming(ctx context.Context, opts ..
 
 // Send a message to the MCP server
 //
-// Source file: `api-server/src/controllers/mcp/v1/post.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/mcp/v1/post.controller.ts`
 func (r *McpV1Service) SendMessage(ctx context.Context, body McpV1SendMessageParams, opts ...option.RequestOption) (res *McpV1SendMessageResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "mcp/v1"
@@ -60,7 +62,8 @@ func (r *McpV1Service) SendMessage(ctx context.Context, body McpV1SendMessagePar
 
 // Terminate an MCP session
 //
-// Source file: `api-server/src/controllers/mcp/v1/delete.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/mcp/v1/delete.controller.ts`
 func (r *McpV1Service) TerminateSession(ctx context.Context, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)

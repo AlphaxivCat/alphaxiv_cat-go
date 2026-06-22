@@ -36,7 +36,7 @@ func NewAnalyticsPaperViewCountService(opts ...option.RequestOption) (r Analytic
 // Track a paper view event for analytics
 //
 // Source file:
-// `api-server/src/controllers/v1/analytics/ingest-paper-view-count-event.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/analytics/ingest-paper-view-count-event.controller.ts`
 //
 // Deprecated: deprecated
 func (r *AnalyticsPaperViewCountService) IngestEvent(ctx context.Context, body AnalyticsPaperViewCountIngestEventParams, opts ...option.RequestOption) (res *AnalyticsPaperViewCountIngestEventResponse, err error) {
@@ -49,7 +49,7 @@ func (r *AnalyticsPaperViewCountService) IngestEvent(ctx context.Context, body A
 // Kicks off a background job to aggregate paper view counts
 //
 // Source file:
-// `api-server/src/controllers/v1/analytics/kickoff-paper-view-count-aggregation-job.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/analytics/kickoff-paper-view-count-aggregation-job.controller.ts`
 func (r *AnalyticsPaperViewCountService) KickoffJob(ctx context.Context, body AnalyticsPaperViewCountKickoffJobParams, opts ...option.RequestOption) (res *AnalyticsPaperViewCountKickoffJobResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/analytics/paper-view-count/kickoff-job"
@@ -60,7 +60,7 @@ func (r *AnalyticsPaperViewCountService) KickoffJob(ctx context.Context, body An
 // Process view count aggregation for a specific paper
 //
 // Source file:
-// `api-server/src/controllers/v1/analytics/process-paper-view-count-aggregation-job.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/analytics/process-paper-view-count-aggregation-job.controller.ts`
 //
 // Deprecated: deprecated
 func (r *AnalyticsPaperViewCountService) ProcessJob(ctx context.Context, body AnalyticsPaperViewCountProcessJobParams, opts ...option.RequestOption) (res *AnalyticsPaperViewCountProcessJobResponse, err error) {

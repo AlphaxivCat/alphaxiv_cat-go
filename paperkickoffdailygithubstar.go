@@ -38,7 +38,7 @@ func NewPaperKickoffDailyGitHubStarService(opts ...option.RequestOption) (r Pape
 // Kickoff background job to update daily GitHub stars with max limit
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/kickoff-daily-github-stars-max.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-daily-github-stars-max.controller.ts`
 func (r *PaperKickoffDailyGitHubStarService) Update(ctx context.Context, max string, opts ...option.RequestOption) (res *PaperKickoffDailyGitHubStarUpdateResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if max == "" {
@@ -53,7 +53,7 @@ func (r *PaperKickoffDailyGitHubStarService) Update(ctx context.Context, max str
 // Kickoff background job to update daily GitHub stars
 //
 // Source file:
-// `api-server/src/controllers/v2/papers/kickoff-daily-github-stars.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v2/papers/kickoff-daily-github-stars.controller.ts`
 func (r *PaperKickoffDailyGitHubStarService) KickoffDailyGitHubStars(ctx context.Context, opts ...option.RequestOption) (res *PaperKickoffDailyGitHubStarKickoffDailyGitHubStarsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v2/papers/kickoff-daily-github-stars"

@@ -39,7 +39,8 @@ func NewFolderV3Service(opts ...option.RequestOption) (r FolderV3Service) {
 
 // Create a new folder for the current user
 //
-// Source file: `api-server/src/controllers/folders/v3/create-folder.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/folders/v3/create-folder.controller.ts`
 func (r *FolderV3Service) New(ctx context.Context, body FolderV3NewParams, opts ...option.RequestOption) (res *FolderV3NewResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "folders/v3"
@@ -49,7 +50,8 @@ func (r *FolderV3Service) New(ctx context.Context, body FolderV3NewParams, opts 
 
 // Get all folders for the current user
 //
-// Source file: `api-server/src/controllers/folders/v3/get-folders.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/folders/v3/get-folders.controller.ts`
 func (r *FolderV3Service) List(ctx context.Context, opts ...option.RequestOption) (res *[]FolderV3ListResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "folders/v3"
@@ -59,7 +61,8 @@ func (r *FolderV3Service) List(ctx context.Context, opts ...option.RequestOption
 
 // Delete a folder
 //
-// Source file: `api-server/src/controllers/folders/v3/delete-folder.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/folders/v3/delete-folder.controller.ts`
 func (r *FolderV3Service) Delete(ctx context.Context, folderID string, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -75,7 +78,7 @@ func (r *FolderV3Service) Delete(ctx context.Context, folderID string, opts ...o
 // Add papers to a folder (without removing from other folders)
 //
 // Source file:
-// `api-server/src/controllers/folders/v3/add-papers-to-folder.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/folders/v3/add-papers-to-folder.controller.ts`
 func (r *FolderV3Service) AddPapers(ctx context.Context, folderID string, body FolderV3AddPapersParams, opts ...option.RequestOption) (res *FolderV3AddPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if folderID == "" {
@@ -90,7 +93,7 @@ func (r *FolderV3Service) AddPapers(ctx context.Context, folderID string, body F
 // Move papers from source folder to destination folder
 //
 // Source file:
-// `api-server/src/controllers/folders/v3/move-papers-to-folder.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/folders/v3/move-papers-to-folder.controller.ts`
 func (r *FolderV3Service) MovePapers(ctx context.Context, folderID string, body FolderV3MovePapersParams, opts ...option.RequestOption) (res *FolderV3MovePapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if folderID == "" {
@@ -104,7 +107,8 @@ func (r *FolderV3Service) MovePapers(ctx context.Context, folderID string, body 
 
 // Remove papers from a specific folder
 //
-// Source file: `api-server/src/controllers/folders/v3/remove-papers.controller.ts`
+// Source file:
+// `api-server/file:/app/api-server/src/controllers/folders/v3/remove-papers.controller.ts`
 func (r *FolderV3Service) RemovePapers(ctx context.Context, folderID string, body FolderV3RemovePapersParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -120,7 +124,7 @@ func (r *FolderV3Service) RemovePapers(ctx context.Context, folderID string, bod
 // Toggle whether a folder and all its descendant folders are shared or not
 //
 // Source file:
-// `api-server/src/controllers/folders/v3/toggle-folder-sharing.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/folders/v3/toggle-folder-sharing.controller.ts`
 func (r *FolderV3Service) ToggleSharing(ctx context.Context, folderID string, body FolderV3ToggleSharingParams, opts ...option.RequestOption) (res *FolderV3ToggleSharingResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if folderID == "" {
@@ -135,7 +139,7 @@ func (r *FolderV3Service) ToggleSharing(ctx context.Context, folderID string, bo
 // Rename a folder
 //
 // Source file:
-// `api-server/src/controllers/folders/v3/update-folder-name.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/folders/v3/update-folder-name.controller.ts`
 func (r *FolderV3Service) UpdateName(ctx context.Context, folderID string, body FolderV3UpdateNameParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -151,7 +155,7 @@ func (r *FolderV3Service) UpdateName(ctx context.Context, folderID string, body 
 // Update a folder's parent (for nesting)
 //
 // Source file:
-// `api-server/src/controllers/folders/v3/update-folder-parent.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/folders/v3/update-folder-parent.controller.ts`
 func (r *FolderV3Service) UpdateParent(ctx context.Context, folderID string, body FolderV3UpdateParentParams, opts ...option.RequestOption) (err error) {
 	opts = slices.Concat(r.options, opts)
 	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
@@ -210,11 +214,12 @@ func (r *FolderV3ListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type FolderV3ListResponsePaper struct {
-	Abstract        string                                  `json:"abstract" api:"required"`
-	AddedAt         string                                  `json:"addedAt" api:"required"`
-	Authors         []FolderV3ListResponsePaperAuthor       `json:"authors" api:"required"`
+	Abstract string                            `json:"abstract" api:"required"`
+	AddedAt  string                            `json:"addedAt" api:"required"`
+	Authors  []FolderV3ListResponsePaperAuthor `json:"authors" api:"required"`
+	// A versioned paper ID (e.g. 1706.03762v1)
+	CanonicalID     string                                  `json:"canonicalId" api:"required"`
 	Citation        string                                  `json:"citation" api:"required"`
-	ImageURL        string                                  `json:"imageUrl" api:"required"`
 	Organizations   []FolderV3ListResponsePaperOrganization `json:"organizations" api:"required"`
 	PaperGroupID    string                                  `json:"paperGroupId" api:"required" format:"uuid"`
 	PublicationDate string                                  `json:"publicationDate" api:"required"`
@@ -229,8 +234,8 @@ type FolderV3ListResponsePaper struct {
 		Abstract         respjson.Field
 		AddedAt          respjson.Field
 		Authors          respjson.Field
+		CanonicalID      respjson.Field
 		Citation         respjson.Field
-		ImageURL         respjson.Field
 		Organizations    respjson.Field
 		PaperGroupID     respjson.Field
 		PublicationDate  respjson.Field

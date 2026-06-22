@@ -38,7 +38,7 @@ func NewSitemapService(opts ...option.RequestOption) (r SitemapService) {
 // Get paginated list of paper versions with AI overviews for sitemap generation
 //
 // Source file:
-// `api-server/src/controllers/v1/sitemaps/get-overviews-for-sitemap.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/sitemaps/get-overviews-for-sitemap.controller.ts`
 func (r *SitemapService) ListOverviews(ctx context.Context, query SitemapListOverviewsParams, opts ...option.RequestOption) (res *SitemapListOverviewsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/sitemaps/overviews"
@@ -50,7 +50,7 @@ func (r *SitemapService) ListOverviews(ctx context.Context, query SitemapListOve
 // for efficient deep pagination.
 //
 // Source file:
-// `api-server/src/controllers/v1/sitemaps/get-papers-for-sitemap.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/sitemaps/get-papers-for-sitemap.controller.ts`
 func (r *SitemapService) ListPapers(ctx context.Context, query SitemapListPapersParams, opts ...option.RequestOption) (res *SitemapListPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/sitemaps/papers"
@@ -61,7 +61,7 @@ func (r *SitemapService) ListPapers(ctx context.Context, query SitemapListPapers
 // Get paginated list of users for sitemap generation
 //
 // Source file:
-// `api-server/src/controllers/v1/sitemaps/get-users-for-sitemap.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/sitemaps/get-users-for-sitemap.controller.ts`
 func (r *SitemapService) ListUsers(ctx context.Context, query SitemapListUsersParams, opts ...option.RequestOption) (res *SitemapListUsersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/sitemaps/users"

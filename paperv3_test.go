@@ -149,31 +149,6 @@ func TestPaperV3KickoffPaperCountriesWithOptionalParams(t *testing.T) {
 	}
 }
 
-func TestPaperV3KickoffPaperFullTextWithOptionalParams(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	err := client.Papers.V3.KickoffPaperFullText(context.TODO(), alphaxivcat.PaperV3KickoffPaperFullTextParams{
-		MaxPapers: alphaxivcat.Float(1),
-	})
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
 func TestPaperV3KickoffPaperPodcasts(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
@@ -197,29 +172,6 @@ func TestPaperV3KickoffPaperPodcasts(t *testing.T) {
 	}
 }
 
-func TestPaperV3KickoffThumbnailsTrendingPapers(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Papers.V3.KickoffThumbnailsTrendingPapers(context.TODO())
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
 func TestPaperV3Like(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
@@ -233,7 +185,13 @@ func TestPaperV3Like(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	_, err := client.Papers.V3.Like(context.TODO(), "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e")
+	_, err := client.Papers.V3.Like(
+		context.TODO(),
+		"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+		alphaxivcat.PaperV3LikeParams{
+			Liked: alphaxivcat.PaperV3LikeParamsLikedTrue,
+		},
+	)
 	if err != nil {
 		var apierr *alphaxivcat.Error
 		if errors.As(err, &apierr) {
@@ -311,54 +269,6 @@ func TestPaperV3ProcessCountries(t *testing.T) {
 	err := client.Papers.V3.ProcessCountries(context.TODO(), alphaxivcat.PaperV3ProcessCountriesParams{
 		UniversalPaperIDs: []string{"string"},
 	})
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
-func TestPaperV3ProcessFullText(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	err := client.Papers.V3.ProcessFullText(context.TODO(), alphaxivcat.PaperV3ProcessFullTextParams{
-		PaperVersionID: "paperVersionId",
-	})
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
-func TestPaperV3PruneEmbeddingsByDate(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Papers.V3.PruneEmbeddingsByDate(context.TODO())
 	if err != nil {
 		var apierr *alphaxivcat.Error
 		if errors.As(err, &apierr) {
@@ -487,14 +397,14 @@ func TestPaperV3GetFeedWithOptionalParams(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Papers.V3.GetFeed(context.TODO(), alphaxivcat.PaperV3GetFeedParams{
-		Interval:      alphaxivcat.PaperV3GetFeedParamsInterval3Days,
-		PageNum:       "pageNum",
-		PageSize:      "pageSize",
-		Sort:          alphaxivcat.PaperV3GetFeedParamsSortHot,
-		Organizations: alphaxivcat.String("organizations"),
-		Source:        alphaxivcat.PaperV3GetFeedParamsSourceGitHub,
-		Topics:        alphaxivcat.String("topics"),
-		UniversalID:   alphaxivcat.String("universalId"),
+		Interval:             alphaxivcat.PaperV3GetFeedParamsInterval3Days,
+		PageNum:              "pageNum",
+		PageSize:             "pageSize",
+		Sort:                 alphaxivcat.PaperV3GetFeedParamsSortHot,
+		IncludeExternalBlogs: alphaxivcat.String("includeExternalBlogs"),
+		Source:               alphaxivcat.PaperV3GetFeedParamsSourceGitHub,
+		Topics:               alphaxivcat.String("topics"),
+		UniversalID:          alphaxivcat.String("universalId"),
 	})
 	if err != nil {
 		var apierr *alphaxivcat.Error

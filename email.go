@@ -39,7 +39,7 @@ func NewEmailService(opts ...option.RequestOption) (r EmailService) {
 // Receives bounce notifications from AWS SES via SNS
 //
 // Source file:
-// `api-server/src/controllers/v1/emails/capture-bounced-emails.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/emails/capture-bounced-emails.controller.ts`
 func (r *EmailService) CaptureBouncedEmails(ctx context.Context, body EmailCaptureBouncedEmailsParams, opts ...option.RequestOption) (res *EmailCaptureBouncedEmailsResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/emails/capture-bounced-emails"
@@ -50,7 +50,7 @@ func (r *EmailService) CaptureBouncedEmails(ctx context.Context, body EmailCaptu
 // Receives bounce notifications from Resend
 //
 // Source file:
-// `api-server/src/controllers/v1/emails/capture-resend-bounced-emails.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/emails/capture-resend-bounced-emails.controller.ts`
 func (r *EmailService) CaptureResendBouncedEmail(ctx context.Context, body EmailCaptureResendBouncedEmailParams, opts ...option.RequestOption) (res *EmailCaptureResendBouncedEmailResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/emails/capture-resend-bounced-email"
@@ -61,7 +61,7 @@ func (r *EmailService) CaptureResendBouncedEmail(ctx context.Context, body Email
 // Kicks off a background job to send comment digest emails to users
 //
 // Source file:
-// `api-server/src/controllers/v1/emails/kickoff-comment-updates.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/emails/kickoff-comment-updates.controller.ts`
 func (r *EmailService) KickoffCommentUpdate(ctx context.Context, custom EmailKickoffCommentUpdateParamsCustom, body EmailKickoffCommentUpdateParams, opts ...option.RequestOption) (res *EmailKickoffCommentUpdateResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if body.Role == "" {
@@ -80,7 +80,7 @@ func (r *EmailService) KickoffCommentUpdate(ctx context.Context, custom EmailKic
 // Kicks off a background job to send general digest emails to users
 //
 // Source file:
-// `api-server/src/controllers/v1/emails/kickoff-general-updates.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/emails/kickoff-general-updates.controller.ts`
 func (r *EmailService) KickoffGeneralUpdate(ctx context.Context, role string, opts ...option.RequestOption) (res *EmailKickoffGeneralUpdateResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	if role == "" {
@@ -95,7 +95,7 @@ func (r *EmailService) KickoffGeneralUpdate(ctx context.Context, role string, op
 // Process a bounced email and update user preferences
 //
 // Source file:
-// `api-server/src/controllers/v1/emails/process-bounced-email.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/emails/process-bounced-email.controller.ts`
 //
 // Deprecated: deprecated
 func (r *EmailService) ProcessBouncedEmail(ctx context.Context, body EmailProcessBouncedEmailParams, opts ...option.RequestOption) (res *EmailProcessBouncedEmailResponse, err error) {
@@ -108,7 +108,7 @@ func (r *EmailService) ProcessBouncedEmail(ctx context.Context, body EmailProces
 // Process comment digest email for a user
 //
 // Source file:
-// `api-server/src/controllers/v1/emails/process-user-comment-update.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/emails/process-user-comment-update.controller.ts`
 //
 // Deprecated: deprecated
 func (r *EmailService) ProcessCommentUpdate(ctx context.Context, body EmailProcessCommentUpdateParams, opts ...option.RequestOption) (res *EmailProcessCommentUpdateResponse, err error) {
@@ -121,7 +121,7 @@ func (r *EmailService) ProcessCommentUpdate(ctx context.Context, body EmailProce
 // Process general digest email for a user
 //
 // Source file:
-// `api-server/src/controllers/v1/emails/process-user-general-update.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/v1/emails/process-user-general-update.controller.ts`
 //
 // Deprecated: deprecated
 func (r *EmailService) ProcessGeneralUpdate(ctx context.Context, body EmailProcessGeneralUpdateParams, opts ...option.RequestOption) (res *EmailProcessGeneralUpdateResponse, err error) {
@@ -466,6 +466,7 @@ type EmailProcessCommentUpdateParamsCustomContentEvent struct {
 	Description  string            `json:"description" api:"required"`
 	Link         string            `json:"link" api:"required"`
 	Title        string            `json:"title" api:"required"`
+	CtaText      param.Opt[string] `json:"ctaText,omitzero"`
 	EndTimeRaw   param.Opt[string] `json:"endTimeRaw,omitzero"`
 	StartTimeRaw param.Opt[string] `json:"startTimeRaw,omitzero"`
 	paramObj

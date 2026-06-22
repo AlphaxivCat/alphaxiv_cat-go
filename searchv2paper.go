@@ -37,7 +37,7 @@ func NewSearchV2PaperService(opts ...option.RequestOption) (r SearchV2PaperServi
 // Search for public and optionally private papers
 //
 // Source file:
-// `api-server/src/controllers/search/v2/search-google-fast.controller.ts`
+// `api-server/file:/app/api-server/src/controllers/search/v2/search-google-fast.controller.ts`
 func (r *SearchV2PaperService) FastSearch(ctx context.Context, query SearchV2PaperFastSearchParams, opts ...option.RequestOption) (res *[]SearchV2PaperFastSearchResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "search/v2/paper/fast"
