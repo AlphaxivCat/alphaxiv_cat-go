@@ -402,6 +402,7 @@ func TestPaperV3GetFeedWithOptionalParams(t *testing.T) {
 		PageSize:             "pageSize",
 		Sort:                 alphaxivcat.PaperV3GetFeedParamsSortHot,
 		IncludeExternalBlogs: alphaxivcat.String("includeExternalBlogs"),
+		Runnable:             alphaxivcat.String("runnable"),
 		Source:               alphaxivcat.PaperV3GetFeedParamsSourceGitHub,
 		Topics:               alphaxivcat.String("topics"),
 		UniversalID:          alphaxivcat.String("universalId"),

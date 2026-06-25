@@ -120,6 +120,7 @@ type FolderV3SharedGetResponseChildFolderPaper struct {
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID     string                                                  `json:"canonicalId" api:"required"`
 	Citation        string                                                  `json:"citation" api:"required"`
+	IsExternalBlog  bool                                                    `json:"isExternalBlog" api:"required"`
 	Organizations   []FolderV3SharedGetResponseChildFolderPaperOrganization `json:"organizations" api:"required"`
 	PaperGroupID    string                                                  `json:"paperGroupId" api:"required" format:"uuid"`
 	PublicationDate string                                                  `json:"publicationDate" api:"required"`
@@ -136,6 +137,7 @@ type FolderV3SharedGetResponseChildFolderPaper struct {
 		Authors          respjson.Field
 		CanonicalID      respjson.Field
 		Citation         respjson.Field
+		IsExternalBlog   respjson.Field
 		Organizations    respjson.Field
 		PaperGroupID     respjson.Field
 		PublicationDate  respjson.Field
@@ -299,6 +301,7 @@ type FolderV3SharedGetResponseFolderPaper struct {
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID     string                                             `json:"canonicalId" api:"required"`
 	Citation        string                                             `json:"citation" api:"required"`
+	IsExternalBlog  bool                                               `json:"isExternalBlog" api:"required"`
 	Organizations   []FolderV3SharedGetResponseFolderPaperOrganization `json:"organizations" api:"required"`
 	PaperGroupID    string                                             `json:"paperGroupId" api:"required" format:"uuid"`
 	PublicationDate string                                             `json:"publicationDate" api:"required"`
@@ -315,6 +318,7 @@ type FolderV3SharedGetResponseFolderPaper struct {
 		Authors          respjson.Field
 		CanonicalID      respjson.Field
 		Citation         respjson.Field
+		IsExternalBlog   respjson.Field
 		Organizations    respjson.Field
 		PaperGroupID     respjson.Field
 		PublicationDate  respjson.Field

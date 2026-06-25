@@ -361,7 +361,6 @@ func TestUserV3UpdatePreferencesWithOptionalParams(t *testing.T) {
 			FeedSort:                         "Hot",
 			IsDarkModeEnabled:                alphaxivcat.Bool(true),
 			IsDebugModeEnabled:               alphaxivcat.Bool(true),
-			IsMembersSidebarVisible:          alphaxivcat.Bool(true),
 			PreferredLanguage:                "am",
 			PreferredLlmFollowLatestCategory: alphaxivcat.String("preferredLlmFollowLatestCategory"),
 			PreferredLlmModel:                alphaxivcat.String("preferredLlmModel"),
