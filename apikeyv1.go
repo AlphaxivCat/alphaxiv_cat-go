@@ -56,17 +56,6 @@ func (r *APIKeyV1Service) List(ctx context.Context, opts ...option.RequestOption
 	return res, err
 }
 
-// Create a new API key for the current user.
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/api-keys/v1/create-impersonation-api-key.controller.ts`
-func (r *APIKeyV1Service) NewImpersonation(ctx context.Context, body APIKeyV1NewImpersonationParams, opts ...option.RequestOption) (res *APIKeyV1NewImpersonationResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "api-keys/v1/impersonate"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return res, err
-}
-
 // Revoke an API key for the authenticated user. No-op if already revoked.
 //
 // Source file:
@@ -144,48 +133,6 @@ func (r *APIKeyV1ListResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type APIKeyV1NewImpersonationResponse struct {
-	APIKey APIKeyV1NewImpersonationResponseAPIKey `json:"apiKey" api:"required"`
-	Secret string                                 `json:"secret" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		APIKey      respjson.Field
-		Secret      respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r APIKeyV1NewImpersonationResponse) RawJSON() string { return r.JSON.raw }
-func (r *APIKeyV1NewImpersonationResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type APIKeyV1NewImpersonationResponseAPIKey struct {
-	ID         string `json:"id" api:"required" format:"uuid"`
-	Label      string `json:"label" api:"required"`
-	LastUsedAt string `json:"lastUsedAt" api:"required"`
-	Prefix     string `json:"prefix" api:"required"`
-	RevokedAt  string `json:"revokedAt" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		Label       respjson.Field
-		LastUsedAt  respjson.Field
-		Prefix      respjson.Field
-		RevokedAt   respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r APIKeyV1NewImpersonationResponseAPIKey) RawJSON() string { return r.JSON.raw }
-func (r *APIKeyV1NewImpersonationResponseAPIKey) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type APIKeyV1RevokeResponse struct {
 	ID         string `json:"id" api:"required" format:"uuid"`
 	Label      string `json:"label" api:"required"`
@@ -220,19 +167,6 @@ func (r APIKeyV1NewParams) MarshalJSON() (data []byte, err error) {
 	return param.MarshalObject(r, (*shadow)(&r))
 }
 func (r *APIKeyV1NewParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type APIKeyV1NewImpersonationParams struct {
-	User string `json:"user" api:"required" format:"uuid"`
-	paramObj
-}
-
-func (r APIKeyV1NewImpersonationParams) MarshalJSON() (data []byte, err error) {
-	type shadow APIKeyV1NewImpersonationParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *APIKeyV1NewImpersonationParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

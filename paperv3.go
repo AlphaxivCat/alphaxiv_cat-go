@@ -2147,6 +2147,7 @@ type PaperV3GetFeedParams struct {
 	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
 	Sort                 PaperV3GetFeedParamsSort `query:"sort,omitzero" api:"required" json:"-"`
 	IncludeExternalBlogs param.Opt[string]        `query:"includeExternalBlogs,omitzero" json:"-"`
+	Runnable             param.Opt[string]        `query:"runnable,omitzero" json:"-"`
 	Topics               param.Opt[string]        `query:"topics,omitzero" json:"-"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	UniversalID param.Opt[string] `query:"universalId,omitzero" json:"-"`

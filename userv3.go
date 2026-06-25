@@ -728,6 +728,7 @@ type UserV3GetClaimedPapersResponse struct {
 	CanonicalID      string  `json:"canonicalId" api:"required"`
 	Citations        float64 `json:"citations" api:"required"`
 	GoogleCitationID string  `json:"google_citation_id" api:"required"`
+	IsExternalBlog   bool    `json:"isExternalBlog" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paper_id" api:"required"`
 	PublicTotalVotes float64  `json:"public_total_votes" api:"required"`
@@ -742,6 +743,7 @@ type UserV3GetClaimedPapersResponse struct {
 		CanonicalID      respjson.Field
 		Citations        respjson.Field
 		GoogleCitationID respjson.Field
+		IsExternalBlog   respjson.Field
 		PaperID          respjson.Field
 		PublicTotalVotes respjson.Field
 		PublicationDate  respjson.Field
@@ -829,10 +831,9 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
 	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
-	FeedSort                string `json:"feedSort" api:"required"`
-	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
-	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
-	IsMembersSidebarVisible bool   `json:"isMembersSidebarVisible" api:"required"`
+	FeedSort           string `json:"feedSort" api:"required"`
+	IsDarkModeEnabled  bool   `json:"isDarkModeEnabled" api:"required"`
+	IsDebugModeEnabled bool   `json:"isDebugModeEnabled" api:"required"`
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
 	// "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja",
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
@@ -856,7 +857,6 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 		FeedSort                         respjson.Field
 		IsDarkModeEnabled                respjson.Field
 		IsDebugModeEnabled               respjson.Field
-		IsMembersSidebarVisible          respjson.Field
 		PreferredLanguage                respjson.Field
 		PreferredLlmFollowLatestCategory respjson.Field
 		PreferredLlmModel                respjson.Field
@@ -942,7 +942,6 @@ type UserV3GetCurrentUserResponseUser struct {
 	Biography                string                                      `json:"biography" api:"required"`
 	BlueskyUsername          string                                      `json:"blueskyUsername" api:"required"`
 	Email                    string                                      `json:"email" api:"required"`
-	FirstLogin               bool                                        `json:"firstLogin" api:"required"`
 	FollowerCount            float64                                     `json:"followerCount" api:"required"`
 	FollowingCount           float64                                     `json:"followingCount" api:"required"`
 	FollowingTopics          []string                                    `json:"followingTopics" api:"required"`
@@ -975,7 +974,6 @@ type UserV3GetCurrentUserResponseUser struct {
 		Biography                respjson.Field
 		BlueskyUsername          respjson.Field
 		Email                    respjson.Field
-		FirstLogin               respjson.Field
 		FollowerCount            respjson.Field
 		FollowingCount           respjson.Field
 		FollowingTopics          respjson.Field
@@ -1083,10 +1081,9 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
 	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
-	FeedSort                string `json:"feedSort" api:"required"`
-	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
-	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
-	IsMembersSidebarVisible bool   `json:"isMembersSidebarVisible" api:"required"`
+	FeedSort           string `json:"feedSort" api:"required"`
+	IsDarkModeEnabled  bool   `json:"isDarkModeEnabled" api:"required"`
+	IsDebugModeEnabled bool   `json:"isDebugModeEnabled" api:"required"`
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
 	// "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja",
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
@@ -1110,7 +1107,6 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 		FeedSort                         respjson.Field
 		IsDarkModeEnabled                respjson.Field
 		IsDebugModeEnabled               respjson.Field
-		IsMembersSidebarVisible          respjson.Field
 		PreferredLanguage                respjson.Field
 		PreferredLlmFollowLatestCategory respjson.Field
 		PreferredLlmModel                respjson.Field
@@ -1591,8 +1587,6 @@ type UserV3GetUserByUuidResponse struct {
 	Avatar               []UserV3GetUserByUuidResponseAvatar `json:"avatar" api:"required"`
 	Biography            string                              `json:"biography" api:"required"`
 	BlueskyUsername      string                              `json:"blueskyUsername" api:"required"`
-	Email                string                              `json:"email" api:"required"`
-	FirstLogin           bool                                `json:"firstLogin" api:"required"`
 	FollowerCount        float64                             `json:"followerCount" api:"required"`
 	FollowingCount       float64                             `json:"followingCount" api:"required"`
 	FollowingTopicsCount float64                             `json:"followingTopicsCount" api:"required"`
@@ -1620,8 +1614,6 @@ type UserV3GetUserByUuidResponse struct {
 		Avatar                 respjson.Field
 		Biography              respjson.Field
 		BlueskyUsername        respjson.Field
-		Email                  respjson.Field
-		FirstLogin             respjson.Field
 		FollowerCount          respjson.Field
 		FollowingCount         respjson.Field
 		FollowingTopicsCount   respjson.Field
@@ -1732,7 +1724,8 @@ type UserV3GetViewedHistoryResponse struct {
 	ID       string `json:"id" api:"required" format:"uuid"`
 	Abstract string `json:"abstract" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
-	CanonicalID string `json:"canonicalId" api:"required"`
+	CanonicalID    string `json:"canonicalId" api:"required"`
+	IsExternalBlog bool   `json:"isExternalBlog" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paperId" api:"required"`
 	PublicationDate  string   `json:"publicationDate" api:"required"`
@@ -1745,6 +1738,7 @@ type UserV3GetViewedHistoryResponse struct {
 		ID               respjson.Field
 		Abstract         respjson.Field
 		CanonicalID      respjson.Field
+		IsExternalBlog   respjson.Field
 		PaperID          respjson.Field
 		PublicationDate  respjson.Field
 		PublicTotalVotes respjson.Field
@@ -1914,10 +1908,9 @@ type UserV3UpdatePreferencesResponseBase struct {
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
 	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
-	FeedSort                string `json:"feedSort" api:"required"`
-	IsDarkModeEnabled       bool   `json:"isDarkModeEnabled" api:"required"`
-	IsDebugModeEnabled      bool   `json:"isDebugModeEnabled" api:"required"`
-	IsMembersSidebarVisible bool   `json:"isMembersSidebarVisible" api:"required"`
+	FeedSort           string `json:"feedSort" api:"required"`
+	IsDarkModeEnabled  bool   `json:"isDarkModeEnabled" api:"required"`
+	IsDebugModeEnabled bool   `json:"isDebugModeEnabled" api:"required"`
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
 	// "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja",
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
@@ -1941,7 +1934,6 @@ type UserV3UpdatePreferencesResponseBase struct {
 		FeedSort                         respjson.Field
 		IsDarkModeEnabled                respjson.Field
 		IsDebugModeEnabled               respjson.Field
-		IsMembersSidebarVisible          respjson.Field
 		PreferredLanguage                respjson.Field
 		PreferredLlmFollowLatestCategory respjson.Field
 		PreferredLlmModel                respjson.Field
@@ -2024,8 +2016,6 @@ type UserV3UpdateProfileResponse struct {
 	Avatar               []UserV3UpdateProfileResponseAvatar `json:"avatar" api:"required"`
 	Biography            string                              `json:"biography" api:"required"`
 	BlueskyUsername      string                              `json:"blueskyUsername" api:"required"`
-	Email                string                              `json:"email" api:"required"`
-	FirstLogin           bool                                `json:"firstLogin" api:"required"`
 	FollowerCount        float64                             `json:"followerCount" api:"required"`
 	FollowingCount       float64                             `json:"followingCount" api:"required"`
 	FollowingTopicsCount float64                             `json:"followingTopicsCount" api:"required"`
@@ -2053,8 +2043,6 @@ type UserV3UpdateProfileResponse struct {
 		Avatar                 respjson.Field
 		Biography              respjson.Field
 		BlueskyUsername        respjson.Field
-		Email                  respjson.Field
-		FirstLogin             respjson.Field
 		FollowerCount          respjson.Field
 		FollowingCount         respjson.Field
 		FollowingTopicsCount   respjson.Field
@@ -2314,7 +2302,6 @@ type UserV3UpdatePreferencesParamsBase struct {
 	ToolingPaneWidth                 param.Opt[float64] `json:"toolingPaneWidth,omitzero"`
 	IsDarkModeEnabled                param.Opt[bool]    `json:"isDarkModeEnabled,omitzero"`
 	IsDebugModeEnabled               param.Opt[bool]    `json:"isDebugModeEnabled,omitzero"`
-	IsMembersSidebarVisible          param.Opt[bool]    `json:"isMembersSidebarVisible,omitzero"`
 	ReadingModeEnabled               param.Opt[bool]    `json:"readingModeEnabled,omitzero"`
 	ShowModelThinking                param.Opt[bool]    `json:"showModelThinking,omitzero"`
 	// Any of "assistant", "notes", "similar".
