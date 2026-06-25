@@ -581,6 +581,7 @@ type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
 	CanonicalID      string  `json:"canonicalId" api:"required"`
 	Citations        float64 `json:"citations" api:"required"`
 	GoogleCitationID string  `json:"google_citation_id" api:"required"`
+	IsExternalBlog   bool    `json:"isExternalBlog" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paper_id" api:"required"`
 	PublicTotalVotes float64  `json:"public_total_votes" api:"required"`
@@ -595,6 +596,7 @@ type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
 		CanonicalID      respjson.Field
 		Citations        respjson.Field
 		GoogleCitationID respjson.Field
+		IsExternalBlog   respjson.Field
 		PaperID          respjson.Field
 		PublicTotalVotes respjson.Field
 		PublicationDate  respjson.Field
@@ -797,8 +799,6 @@ type UserV3ByUsernameGetProfilePageResponseUser struct {
 	Avatar               []UserV3ByUsernameGetProfilePageResponseUserAvatar `json:"avatar" api:"required"`
 	Biography            string                                             `json:"biography" api:"required"`
 	BlueskyUsername      string                                             `json:"blueskyUsername" api:"required"`
-	Email                string                                             `json:"email" api:"required"`
-	FirstLogin           bool                                               `json:"firstLogin" api:"required"`
 	FollowerCount        float64                                            `json:"followerCount" api:"required"`
 	FollowingCount       float64                                            `json:"followingCount" api:"required"`
 	FollowingTopicsCount float64                                            `json:"followingTopicsCount" api:"required"`
@@ -826,8 +826,6 @@ type UserV3ByUsernameGetProfilePageResponseUser struct {
 		Avatar                 respjson.Field
 		Biography              respjson.Field
 		BlueskyUsername        respjson.Field
-		Email                  respjson.Field
-		FirstLogin             respjson.Field
 		FollowerCount          respjson.Field
 		FollowingCount         respjson.Field
 		FollowingTopicsCount   respjson.Field
@@ -932,8 +930,6 @@ type UserV3ByUsernameGetUserResponse struct {
 	Avatar               []UserV3ByUsernameGetUserResponseAvatar `json:"avatar" api:"required"`
 	Biography            string                                  `json:"biography" api:"required"`
 	BlueskyUsername      string                                  `json:"blueskyUsername" api:"required"`
-	Email                string                                  `json:"email" api:"required"`
-	FirstLogin           bool                                    `json:"firstLogin" api:"required"`
 	FollowerCount        float64                                 `json:"followerCount" api:"required"`
 	FollowingCount       float64                                 `json:"followingCount" api:"required"`
 	FollowingTopicsCount float64                                 `json:"followingTopicsCount" api:"required"`
@@ -961,8 +957,6 @@ type UserV3ByUsernameGetUserResponse struct {
 		Avatar                 respjson.Field
 		Biography              respjson.Field
 		BlueskyUsername        respjson.Field
-		Email                  respjson.Field
-		FirstLogin             respjson.Field
 		FollowerCount          respjson.Field
 		FollowingCount         respjson.Field
 		FollowingTopicsCount   respjson.Field
