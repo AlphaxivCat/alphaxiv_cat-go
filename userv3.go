@@ -727,6 +727,7 @@ type UserV3GetClaimedPapersResponse struct {
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID      string  `json:"canonicalId" api:"required"`
 	Citations        float64 `json:"citations" api:"required"`
+	CoverBlobID      string  `json:"coverBlobId" api:"required" format:"uuid"`
 	GoogleCitationID string  `json:"google_citation_id" api:"required"`
 	IsExternalBlog   bool    `json:"isExternalBlog" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
@@ -742,6 +743,7 @@ type UserV3GetClaimedPapersResponse struct {
 		Authors          respjson.Field
 		CanonicalID      respjson.Field
 		Citations        respjson.Field
+		CoverBlobID      respjson.Field
 		GoogleCitationID respjson.Field
 		IsExternalBlog   respjson.Field
 		PaperID          respjson.Field
@@ -839,13 +841,15 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
 	// "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th",
 	// "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh".
-	PreferredLanguage                string  `json:"preferredLanguage" api:"required"`
-	PreferredLlmFollowLatestCategory string  `json:"preferredLlmFollowLatestCategory" api:"required"`
-	PreferredLlmModel                string  `json:"preferredLlmModel" api:"required"`
-	PreferredLlmThinking             string  `json:"preferredLlmThinking" api:"required"`
-	ReadingModeEnabled               bool    `json:"readingModeEnabled" api:"required"`
-	ShowModelThinking                bool    `json:"showModelThinking" api:"required"`
-	ToolingPaneWidth                 float64 `json:"toolingPaneWidth" api:"required"`
+	PreferredLanguage                string `json:"preferredLanguage" api:"required"`
+	PreferredLlmFollowLatestCategory string `json:"preferredLlmFollowLatestCategory" api:"required"`
+	PreferredLlmModel                string `json:"preferredLlmModel" api:"required"`
+	PreferredLlmThinking             string `json:"preferredLlmThinking" api:"required"`
+	ReadingModeEnabled               bool   `json:"readingModeEnabled" api:"required"`
+	ShowModelThinking                bool   `json:"showModelThinking" api:"required"`
+	// Any of "light", "dark", "system".
+	Theme            string  `json:"theme" api:"required"`
+	ToolingPaneWidth float64 `json:"toolingPaneWidth" api:"required"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -863,6 +867,7 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 		PreferredLlmThinking             respjson.Field
 		ReadingModeEnabled               respjson.Field
 		ShowModelThinking                respjson.Field
+		Theme                            respjson.Field
 		ToolingPaneWidth                 respjson.Field
 		WebSearch                        respjson.Field
 		ExtraFields                      map[string]respjson.Field
@@ -1089,13 +1094,15 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
 	// "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th",
 	// "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh".
-	PreferredLanguage                string  `json:"preferredLanguage" api:"required"`
-	PreferredLlmFollowLatestCategory string  `json:"preferredLlmFollowLatestCategory" api:"required"`
-	PreferredLlmModel                string  `json:"preferredLlmModel" api:"required"`
-	PreferredLlmThinking             string  `json:"preferredLlmThinking" api:"required"`
-	ReadingModeEnabled               bool    `json:"readingModeEnabled" api:"required"`
-	ShowModelThinking                bool    `json:"showModelThinking" api:"required"`
-	ToolingPaneWidth                 float64 `json:"toolingPaneWidth" api:"required"`
+	PreferredLanguage                string `json:"preferredLanguage" api:"required"`
+	PreferredLlmFollowLatestCategory string `json:"preferredLlmFollowLatestCategory" api:"required"`
+	PreferredLlmModel                string `json:"preferredLlmModel" api:"required"`
+	PreferredLlmThinking             string `json:"preferredLlmThinking" api:"required"`
+	ReadingModeEnabled               bool   `json:"readingModeEnabled" api:"required"`
+	ShowModelThinking                bool   `json:"showModelThinking" api:"required"`
+	// Any of "light", "dark", "system".
+	Theme            string  `json:"theme" api:"required"`
+	ToolingPaneWidth float64 `json:"toolingPaneWidth" api:"required"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -1113,6 +1120,7 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 		PreferredLlmThinking             respjson.Field
 		ReadingModeEnabled               respjson.Field
 		ShowModelThinking                respjson.Field
+		Theme                            respjson.Field
 		ToolingPaneWidth                 respjson.Field
 		WebSearch                        respjson.Field
 		ExtraFields                      map[string]respjson.Field
@@ -1725,6 +1733,7 @@ type UserV3GetViewedHistoryResponse struct {
 	Abstract string `json:"abstract" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID    string `json:"canonicalId" api:"required"`
+	CoverBlobID    string `json:"coverBlobId" api:"required" format:"uuid"`
 	IsExternalBlog bool   `json:"isExternalBlog" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
 	PaperID          string   `json:"paperId" api:"required"`
@@ -1738,6 +1747,7 @@ type UserV3GetViewedHistoryResponse struct {
 		ID               respjson.Field
 		Abstract         respjson.Field
 		CanonicalID      respjson.Field
+		CoverBlobID      respjson.Field
 		IsExternalBlog   respjson.Field
 		PaperID          respjson.Field
 		PublicationDate  respjson.Field
@@ -1916,13 +1926,15 @@ type UserV3UpdatePreferencesResponseBase struct {
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
 	// "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th",
 	// "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh".
-	PreferredLanguage                string  `json:"preferredLanguage" api:"required"`
-	PreferredLlmFollowLatestCategory string  `json:"preferredLlmFollowLatestCategory" api:"required"`
-	PreferredLlmModel                string  `json:"preferredLlmModel" api:"required"`
-	PreferredLlmThinking             string  `json:"preferredLlmThinking" api:"required"`
-	ReadingModeEnabled               bool    `json:"readingModeEnabled" api:"required"`
-	ShowModelThinking                bool    `json:"showModelThinking" api:"required"`
-	ToolingPaneWidth                 float64 `json:"toolingPaneWidth" api:"required"`
+	PreferredLanguage                string `json:"preferredLanguage" api:"required"`
+	PreferredLlmFollowLatestCategory string `json:"preferredLlmFollowLatestCategory" api:"required"`
+	PreferredLlmModel                string `json:"preferredLlmModel" api:"required"`
+	PreferredLlmThinking             string `json:"preferredLlmThinking" api:"required"`
+	ReadingModeEnabled               bool   `json:"readingModeEnabled" api:"required"`
+	ShowModelThinking                bool   `json:"showModelThinking" api:"required"`
+	// Any of "light", "dark", "system".
+	Theme            string  `json:"theme" api:"required"`
+	ToolingPaneWidth float64 `json:"toolingPaneWidth" api:"required"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -1940,6 +1952,7 @@ type UserV3UpdatePreferencesResponseBase struct {
 		PreferredLlmThinking             respjson.Field
 		ReadingModeEnabled               respjson.Field
 		ShowModelThinking                respjson.Field
+		Theme                            respjson.Field
 		ToolingPaneWidth                 respjson.Field
 		WebSearch                        respjson.Field
 		ExtraFields                      map[string]respjson.Field
@@ -2313,7 +2326,9 @@ type UserV3UpdatePreferencesParamsBase struct {
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
 	// "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th",
 	// "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh".
-	PreferredLanguage       string                                                  `json:"preferredLanguage,omitzero"`
+	PreferredLanguage string `json:"preferredLanguage,omitzero"`
+	// Any of "light", "dark", "system".
+	Theme                   string                                                  `json:"theme,omitzero"`
 	AssistantCustomStyles   []UserV3UpdatePreferencesParamsBaseAssistantCustomStyle `json:"assistantCustomStyles,omitzero"`
 	AssistantStyleSelection string                                                  `json:"assistantStyleSelection,omitzero"`
 	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
@@ -2343,6 +2358,9 @@ func init() {
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
 		"preferredLanguage", "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es", "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja", "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa", "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh",
+	)
+	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
+		"theme", "light", "dark", "system",
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
 		"webSearch", "off", "full",

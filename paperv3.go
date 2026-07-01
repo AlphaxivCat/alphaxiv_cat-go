@@ -728,10 +728,12 @@ func (r *PaperV3GetDiversePapersResponseAuthorInfoAvatar) UnmarshalJSON(data []b
 }
 
 type PaperV3GetDiversePapersResponseExternalBlog struct {
-	BodyBlobID string `json:"body_blob_id" api:"required"`
+	BodyBlobID  string `json:"body_blob_id" api:"required" format:"uuid"`
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		BodyBlobID  respjson.Field
+		CoverBlobID respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -990,10 +992,12 @@ func (r *PaperV3GetFeedResponsePaperAuthorInfoAvatar) UnmarshalJSON(data []byte)
 }
 
 type PaperV3GetFeedResponsePaperExternalBlog struct {
-	BodyBlobID string `json:"body_blob_id" api:"required"`
+	BodyBlobID  string `json:"body_blob_id" api:"required" format:"uuid"`
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		BodyBlobID  respjson.Field
+		CoverBlobID respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -1304,10 +1308,12 @@ func (r *PaperV3GetPreviewResponseAuthorInfoAvatar) UnmarshalJSON(data []byte) e
 }
 
 type PaperV3GetPreviewResponseExternalBlog struct {
-	BodyBlobID string `json:"body_blob_id" api:"required"`
+	BodyBlobID  string `json:"body_blob_id" api:"required" format:"uuid"`
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		BodyBlobID  respjson.Field
+		CoverBlobID respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -1548,10 +1554,12 @@ func (r *PaperV3GetSimilarPapersResponseAuthorInfoAvatar) UnmarshalJSON(data []b
 }
 
 type PaperV3GetSimilarPapersResponseExternalBlog struct {
-	BodyBlobID string `json:"body_blob_id" api:"required"`
+	BodyBlobID  string `json:"body_blob_id" api:"required" format:"uuid"`
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		BodyBlobID  respjson.Field
+		CoverBlobID respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -1792,10 +1800,12 @@ func (r *PaperV3GetUnrelatedResponseAuthorInfoAvatar) UnmarshalJSON(data []byte)
 }
 
 type PaperV3GetUnrelatedResponseExternalBlog struct {
-	BodyBlobID string `json:"body_blob_id" api:"required"`
+	BodyBlobID  string `json:"body_blob_id" api:"required" format:"uuid"`
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		BodyBlobID  respjson.Field
+		CoverBlobID respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
