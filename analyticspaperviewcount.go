@@ -57,19 +57,6 @@ func (r *AnalyticsPaperViewCountService) KickoffJob(ctx context.Context, body An
 	return res, err
 }
 
-// Process view count aggregation for a specific paper
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v1/analytics/process-paper-view-count-aggregation-job.controller.ts`
-//
-// Deprecated: deprecated
-func (r *AnalyticsPaperViewCountService) ProcessJob(ctx context.Context, body AnalyticsPaperViewCountProcessJobParams, opts ...option.RequestOption) (res *AnalyticsPaperViewCountProcessJobResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "v1/analytics/paper-view-count/process-job"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return res, err
-}
-
 type AnalyticsPaperViewCountIngestEventResponse struct {
 	Data AnalyticsPaperViewCountIngestEventResponseData `json:"data" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -134,38 +121,6 @@ func (r *AnalyticsPaperViewCountKickoffJobResponseData) UnmarshalJSON(data []byt
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type AnalyticsPaperViewCountProcessJobResponse struct {
-	Data AnalyticsPaperViewCountProcessJobResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r AnalyticsPaperViewCountProcessJobResponse) RawJSON() string { return r.JSON.raw }
-func (r *AnalyticsPaperViewCountProcessJobResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type AnalyticsPaperViewCountProcessJobResponseData struct {
-	ProcessedPaper string `json:"processedPaper" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ProcessedPaper respjson.Field
-		ExtraFields    map[string]respjson.Field
-		raw            string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r AnalyticsPaperViewCountProcessJobResponseData) RawJSON() string { return r.JSON.raw }
-func (r *AnalyticsPaperViewCountProcessJobResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type AnalyticsPaperViewCountIngestEventParams struct {
 	// Paper ID to track view for
 	PaperID string `json:"paperId" api:"required"`
@@ -197,23 +152,5 @@ func (r AnalyticsPaperViewCountKickoffJobParams) MarshalJSON() (data []byte, err
 	return param.MarshalObject(r, (*shadow)(&r))
 }
 func (r *AnalyticsPaperViewCountKickoffJobParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type AnalyticsPaperViewCountProcessJobParams struct {
-	// Paper ID to process view counts for
-	PaperID string `json:"paperId" api:"required"`
-	// Publication date for age decay calculation
-	PublicationDate string `json:"publicationDate" api:"required"`
-	// Whether to add noise to votes
-	Like param.Opt[bool] `json:"like,omitzero"`
-	paramObj
-}
-
-func (r AnalyticsPaperViewCountProcessJobParams) MarshalJSON() (data []byte, err error) {
-	type shadow AnalyticsPaperViewCountProcessJobParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *AnalyticsPaperViewCountProcessJobParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
