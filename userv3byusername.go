@@ -580,6 +580,7 @@ type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID      string  `json:"canonicalId" api:"required"`
 	Citations        float64 `json:"citations" api:"required"`
+	CoverBlobID      string  `json:"coverBlobId" api:"required" format:"uuid"`
 	GoogleCitationID string  `json:"google_citation_id" api:"required"`
 	IsExternalBlog   bool    `json:"isExternalBlog" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
@@ -595,6 +596,7 @@ type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
 		Authors          respjson.Field
 		CanonicalID      respjson.Field
 		Citations        respjson.Field
+		CoverBlobID      respjson.Field
 		GoogleCitationID respjson.Field
 		IsExternalBlog   respjson.Field
 		PaperID          respjson.Field

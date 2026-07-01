@@ -220,6 +220,7 @@ type FolderV3ListResponsePaper struct {
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID     string                                  `json:"canonicalId" api:"required"`
 	Citation        string                                  `json:"citation" api:"required"`
+	CoverBlobID     string                                  `json:"coverBlobId" api:"required" format:"uuid"`
 	IsExternalBlog  bool                                    `json:"isExternalBlog" api:"required"`
 	Organizations   []FolderV3ListResponsePaperOrganization `json:"organizations" api:"required"`
 	PaperGroupID    string                                  `json:"paperGroupId" api:"required" format:"uuid"`
@@ -237,6 +238,7 @@ type FolderV3ListResponsePaper struct {
 		Authors          respjson.Field
 		CanonicalID      respjson.Field
 		Citation         respjson.Field
+		CoverBlobID      respjson.Field
 		IsExternalBlog   respjson.Field
 		Organizations    respjson.Field
 		PaperGroupID     respjson.Field

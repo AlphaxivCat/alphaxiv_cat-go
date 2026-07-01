@@ -367,6 +367,7 @@ func TestUserV3UpdatePreferencesWithOptionalParams(t *testing.T) {
 			PreferredLlmThinking:             alphaxivcat.String("preferredLlmThinking"),
 			ReadingModeEnabled:               alphaxivcat.Bool(true),
 			ShowModelThinking:                alphaxivcat.Bool(true),
+			Theme:                            "light",
 			ToolingPaneWidth:                 alphaxivcat.Float(0),
 			WebSearch:                        "off",
 		},
