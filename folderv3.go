@@ -214,9 +214,10 @@ func (r *FolderV3ListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type FolderV3ListResponsePaper struct {
-	Abstract string                            `json:"abstract" api:"required"`
-	AddedAt  string                            `json:"addedAt" api:"required"`
-	Authors  []FolderV3ListResponsePaperAuthor `json:"authors" api:"required"`
+	Abstract  string                               `json:"abstract" api:"required"`
+	AddedAt   string                               `json:"addedAt" api:"required"`
+	Authors   []FolderV3ListResponsePaperAuthor    `json:"authors" api:"required"`
+	AuthorsV2 []FolderV3ListResponsePaperAuthorsV2 `json:"authors_v2" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID     string                                  `json:"canonicalId" api:"required"`
 	Citation        string                                  `json:"citation" api:"required"`
@@ -236,6 +237,7 @@ type FolderV3ListResponsePaper struct {
 		Abstract         respjson.Field
 		AddedAt          respjson.Field
 		Authors          respjson.Field
+		AuthorsV2        respjson.Field
 		CanonicalID      respjson.Field
 		Citation         respjson.Field
 		CoverBlobID      respjson.Field
@@ -278,6 +280,84 @@ type FolderV3ListResponsePaperAuthor struct {
 // Returns the unmodified JSON received from the API
 func (r FolderV3ListResponsePaperAuthor) RawJSON() string { return r.JSON.raw }
 func (r *FolderV3ListResponsePaperAuthor) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3ListResponsePaperAuthorsV2 struct {
+	FullName   string                                       `json:"full_name" api:"required"`
+	Researcher FolderV3ListResponsePaperAuthorsV2Researcher `json:"researcher" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		FullName    respjson.Field
+		Researcher  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3ListResponsePaperAuthorsV2) RawJSON() string { return r.JSON.raw }
+func (r *FolderV3ListResponsePaperAuthorsV2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3ListResponsePaperAuthorsV2Researcher struct {
+	Affiliation   string                                            `json:"affiliation" api:"required"`
+	Bio           string                                            `json:"bio" api:"required"`
+	Citations     float64                                           `json:"citations" api:"required"`
+	Headline      string                                            `json:"headline" api:"required"`
+	HIndex        float64                                           `json:"hIndex" api:"required"`
+	Links         FolderV3ListResponsePaperAuthorsV2ResearcherLinks `json:"links" api:"required"`
+	Name          string                                            `json:"name" api:"required"`
+	PhotoURL      string                                            `json:"photoUrl" api:"required"`
+	ResearchAreas []string                                          `json:"researchAreas" api:"required"`
+	Slug          string                                            `json:"slug" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Affiliation   respjson.Field
+		Bio           respjson.Field
+		Citations     respjson.Field
+		Headline      respjson.Field
+		HIndex        respjson.Field
+		Links         respjson.Field
+		Name          respjson.Field
+		PhotoURL      respjson.Field
+		ResearchAreas respjson.Field
+		Slug          respjson.Field
+		ExtraFields   map[string]respjson.Field
+		raw           string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3ListResponsePaperAuthorsV2Researcher) RawJSON() string { return r.JSON.raw }
+func (r *FolderV3ListResponsePaperAuthorsV2Researcher) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3ListResponsePaperAuthorsV2ResearcherLinks struct {
+	Email        string `json:"email" api:"required"`
+	GitHub       string `json:"github" api:"required"`
+	Linkedin     string `json:"linkedin" api:"required"`
+	PersonalSite string `json:"personalSite" api:"required"`
+	Scholar      string `json:"scholar" api:"required"`
+	Twitter      string `json:"twitter" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Email        respjson.Field
+		GitHub       respjson.Field
+		Linkedin     respjson.Field
+		PersonalSite respjson.Field
+		Scholar      respjson.Field
+		Twitter      respjson.Field
+		ExtraFields  map[string]respjson.Field
+		raw          string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3ListResponsePaperAuthorsV2ResearcherLinks) RawJSON() string { return r.JSON.raw }
+func (r *FolderV3ListResponsePaperAuthorsV2ResearcherLinks) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
