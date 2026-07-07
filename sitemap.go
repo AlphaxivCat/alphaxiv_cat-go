@@ -46,25 +46,14 @@ func (r *SitemapService) ListOverviews(ctx context.Context, query SitemapListOve
 	return res, err
 }
 
-// Get paginated list of public papers for sitemap generation. Uses cursor caching
-// for efficient deep pagination.
+// Get paginated list of original (non-arXiv, non-blog) public papers for sitemap
+// generation. Uses cursor caching for efficient deep pagination.
 //
 // Source file:
 // `api-server/file:/app/api-server/src/controllers/v1/sitemaps/get-papers-for-sitemap.controller.ts`
 func (r *SitemapService) ListPapers(ctx context.Context, query SitemapListPapersParams, opts ...option.RequestOption) (res *SitemapListPapersResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/sitemaps/papers"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return res, err
-}
-
-// Get paginated list of users for sitemap generation
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v1/sitemaps/get-users-for-sitemap.controller.ts`
-func (r *SitemapService) ListUsers(ctx context.Context, query SitemapListUsersParams, opts ...option.RequestOption) (res *SitemapListUsersResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "v1/sitemaps/users"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return res, err
 }
@@ -221,78 +210,6 @@ func (r *SitemapListPapersResponseDataPaper) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type SitemapListUsersResponse struct {
-	Data SitemapListUsersResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r SitemapListUsersResponse) RawJSON() string { return r.JSON.raw }
-func (r *SitemapListUsersResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type SitemapListUsersResponseData struct {
-	Pagination SitemapListUsersResponseDataPagination `json:"pagination" api:"required"`
-	Users      []SitemapListUsersResponseDataUser     `json:"users" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Pagination  respjson.Field
-		Users       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r SitemapListUsersResponseData) RawJSON() string { return r.JSON.raw }
-func (r *SitemapListUsersResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type SitemapListUsersResponseDataPagination struct {
-	Total float64 `json:"total" api:"required"`
-	Limit float64 `json:"limit"`
-	Page  float64 `json:"page"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Total       respjson.Field
-		Limit       respjson.Field
-		Page        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r SitemapListUsersResponseDataPagination) RawJSON() string { return r.JSON.raw }
-func (r *SitemapListUsersResponseDataPagination) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type SitemapListUsersResponseDataUser struct {
-	ID       string `json:"id" api:"required" format:"uuid"`
-	Username string `json:"username" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		Username    respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r SitemapListUsersResponseDataUser) RawJSON() string { return r.JSON.raw }
-func (r *SitemapListUsersResponseDataUser) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type SitemapListOverviewsParams struct {
 	Limit param.Opt[string] `query:"limit,omitzero" json:"-"`
 	Page  param.Opt[string] `query:"page,omitzero" json:"-"`
@@ -317,20 +234,6 @@ type SitemapListPapersParams struct {
 // URLQuery serializes [SitemapListPapersParams]'s query parameters as
 // `url.Values`.
 func (r SitemapListPapersParams) URLQuery() (v url.Values, err error) {
-	return apiquery.MarshalWithSettings(r, apiquery.QuerySettings{
-		ArrayFormat:  apiquery.ArrayQueryFormatComma,
-		NestedFormat: apiquery.NestedQueryFormatBrackets,
-	})
-}
-
-type SitemapListUsersParams struct {
-	Limit param.Opt[string] `query:"limit,omitzero" json:"-"`
-	Page  param.Opt[string] `query:"page,omitzero" json:"-"`
-	paramObj
-}
-
-// URLQuery serializes [SitemapListUsersParams]'s query parameters as `url.Values`.
-func (r SitemapListUsersParams) URLQuery() (v url.Values, err error) {
 	return apiquery.MarshalWithSettings(r, apiquery.QuerySettings{
 		ArrayFormat:  apiquery.ArrayQueryFormatComma,
 		NestedFormat: apiquery.NestedQueryFormatBrackets,
