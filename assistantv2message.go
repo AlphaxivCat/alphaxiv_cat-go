@@ -151,7 +151,7 @@ const (
 
 type AssistantV2MessageListResponseToolUseActivity struct {
 	// Any of "paper", "page", "webpage", "repository", "file", "organization",
-	// "source", "multi".
+	// "source", "researcher", "multi".
 	ReadKind       string                                                      `json:"readKind" api:"required"`
 	ReadSubjects   []string                                                    `json:"readSubjects" api:"required"`
 	SearchCounters AssistantV2MessageListResponseToolUseActivitySearchCounters `json:"searchCounters" api:"required"`

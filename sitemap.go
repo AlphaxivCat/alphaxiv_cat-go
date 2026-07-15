@@ -113,15 +113,17 @@ func (r *SitemapListOverviewsResponseDataPagination) UnmarshalJSON(data []byte) 
 }
 
 type SitemapListOverviewsResponseDataPaper struct {
-	ID               string  `json:"id" api:"required" format:"uuid"`
-	Language         string  `json:"language" api:"required"`
-	UniversalPaperID string  `json:"universal_paper_id" api:"required"`
-	UpdatedAt        string  `json:"updated_at" api:"required"`
-	VersionOrder     float64 `json:"version_order" api:"required"`
+	ID               string   `json:"id" api:"required" format:"uuid"`
+	Language         string   `json:"language" api:"required"`
+	Languages        []string `json:"languages" api:"required"`
+	UniversalPaperID string   `json:"universal_paper_id" api:"required"`
+	UpdatedAt        string   `json:"updated_at" api:"required"`
+	VersionOrder     float64  `json:"version_order" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID               respjson.Field
 		Language         respjson.Field
+		Languages        respjson.Field
 		UniversalPaperID respjson.Field
 		UpdatedAt        respjson.Field
 		VersionOrder     respjson.Field
