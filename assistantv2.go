@@ -163,6 +163,7 @@ type AssistantV2ChatParams struct {
 	// Any of "off", "full".
 	WebSearch AssistantV2ChatParamsWebSearch `json:"webSearch,omitzero" api:"required"`
 	Model     param.Opt[string]              `json:"model,omitzero"`
+	Protocol  param.Opt[int64]               `json:"protocol,omitzero"`
 	Signature param.Opt[string]              `json:"signature,omitzero"`
 	// Any of "homepage", "paper", "landing".
 	AssistantVariant AssistantV2ChatParamsAssistantVariant `json:"assistantVariant,omitzero"`
