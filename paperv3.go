@@ -824,20 +824,34 @@ func (r *PaperV3GetDiversePapersResponseFullAuthorsV2Researcher) UnmarshalJSON(d
 }
 
 type PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherLinks struct {
+	Bluesky      string `json:"bluesky" api:"required"`
+	Cv           string `json:"cv" api:"required"`
+	Dblp         string `json:"dblp" api:"required"`
 	Email        string `json:"email" api:"required"`
 	GitHub       string `json:"github" api:"required"`
+	Huggingface  string `json:"huggingface" api:"required"`
 	Linkedin     string `json:"linkedin" api:"required"`
+	Openreview   string `json:"openreview" api:"required"`
+	Orcid        string `json:"orcid" api:"required"`
 	PersonalSite string `json:"personalSite" api:"required"`
 	Scholar      string `json:"scholar" api:"required"`
 	Twitter      string `json:"twitter" api:"required"`
+	Wikipedia    string `json:"wikipedia" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
+		Bluesky      respjson.Field
+		Cv           respjson.Field
+		Dblp         respjson.Field
 		Email        respjson.Field
 		GitHub       respjson.Field
+		Huggingface  respjson.Field
 		Linkedin     respjson.Field
+		Openreview   respjson.Field
+		Orcid        respjson.Field
 		PersonalSite respjson.Field
 		Scholar      respjson.Field
 		Twitter      respjson.Field
+		Wikipedia    respjson.Field
 		ExtraFields  map[string]respjson.Field
 		raw          string
 	} `json:"-"`
@@ -1172,20 +1186,34 @@ func (r *PaperV3GetFeedResponsePaperFullAuthorsV2Researcher) UnmarshalJSON(data 
 }
 
 type PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherLinks struct {
+	Bluesky      string `json:"bluesky" api:"required"`
+	Cv           string `json:"cv" api:"required"`
+	Dblp         string `json:"dblp" api:"required"`
 	Email        string `json:"email" api:"required"`
 	GitHub       string `json:"github" api:"required"`
+	Huggingface  string `json:"huggingface" api:"required"`
 	Linkedin     string `json:"linkedin" api:"required"`
+	Openreview   string `json:"openreview" api:"required"`
+	Orcid        string `json:"orcid" api:"required"`
 	PersonalSite string `json:"personalSite" api:"required"`
 	Scholar      string `json:"scholar" api:"required"`
 	Twitter      string `json:"twitter" api:"required"`
+	Wikipedia    string `json:"wikipedia" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
+		Bluesky      respjson.Field
+		Cv           respjson.Field
+		Dblp         respjson.Field
 		Email        respjson.Field
 		GitHub       respjson.Field
+		Huggingface  respjson.Field
 		Linkedin     respjson.Field
+		Openreview   respjson.Field
+		Orcid        respjson.Field
 		PersonalSite respjson.Field
 		Scholar      respjson.Field
 		Twitter      respjson.Field
+		Wikipedia    respjson.Field
 		ExtraFields  map[string]respjson.Field
 		raw          string
 	} `json:"-"`
@@ -1570,20 +1598,34 @@ func (r *PaperV3GetPreviewResponseFullAuthorsV2Researcher) UnmarshalJSON(data []
 }
 
 type PaperV3GetPreviewResponseFullAuthorsV2ResearcherLinks struct {
+	Bluesky      string `json:"bluesky" api:"required"`
+	Cv           string `json:"cv" api:"required"`
+	Dblp         string `json:"dblp" api:"required"`
 	Email        string `json:"email" api:"required"`
 	GitHub       string `json:"github" api:"required"`
+	Huggingface  string `json:"huggingface" api:"required"`
 	Linkedin     string `json:"linkedin" api:"required"`
+	Openreview   string `json:"openreview" api:"required"`
+	Orcid        string `json:"orcid" api:"required"`
 	PersonalSite string `json:"personalSite" api:"required"`
 	Scholar      string `json:"scholar" api:"required"`
 	Twitter      string `json:"twitter" api:"required"`
+	Wikipedia    string `json:"wikipedia" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
+		Bluesky      respjson.Field
+		Cv           respjson.Field
+		Dblp         respjson.Field
 		Email        respjson.Field
 		GitHub       respjson.Field
+		Huggingface  respjson.Field
 		Linkedin     respjson.Field
+		Openreview   respjson.Field
+		Orcid        respjson.Field
 		PersonalSite respjson.Field
 		Scholar      respjson.Field
 		Twitter      respjson.Field
+		Wikipedia    respjson.Field
 		ExtraFields  map[string]respjson.Field
 		raw          string
 	} `json:"-"`
@@ -1898,20 +1940,34 @@ func (r *PaperV3GetSimilarPapersResponseFullAuthorsV2Researcher) UnmarshalJSON(d
 }
 
 type PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherLinks struct {
+	Bluesky      string `json:"bluesky" api:"required"`
+	Cv           string `json:"cv" api:"required"`
+	Dblp         string `json:"dblp" api:"required"`
 	Email        string `json:"email" api:"required"`
 	GitHub       string `json:"github" api:"required"`
+	Huggingface  string `json:"huggingface" api:"required"`
 	Linkedin     string `json:"linkedin" api:"required"`
+	Openreview   string `json:"openreview" api:"required"`
+	Orcid        string `json:"orcid" api:"required"`
 	PersonalSite string `json:"personalSite" api:"required"`
 	Scholar      string `json:"scholar" api:"required"`
 	Twitter      string `json:"twitter" api:"required"`
+	Wikipedia    string `json:"wikipedia" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
+		Bluesky      respjson.Field
+		Cv           respjson.Field
+		Dblp         respjson.Field
 		Email        respjson.Field
 		GitHub       respjson.Field
+		Huggingface  respjson.Field
 		Linkedin     respjson.Field
+		Openreview   respjson.Field
+		Orcid        respjson.Field
 		PersonalSite respjson.Field
 		Scholar      respjson.Field
 		Twitter      respjson.Field
+		Wikipedia    respjson.Field
 		ExtraFields  map[string]respjson.Field
 		raw          string
 	} `json:"-"`
@@ -2228,20 +2284,34 @@ func (r *PaperV3GetUnrelatedResponseFullAuthorsV2Researcher) UnmarshalJSON(data 
 }
 
 type PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherLinks struct {
+	Bluesky      string `json:"bluesky" api:"required"`
+	Cv           string `json:"cv" api:"required"`
+	Dblp         string `json:"dblp" api:"required"`
 	Email        string `json:"email" api:"required"`
 	GitHub       string `json:"github" api:"required"`
+	Huggingface  string `json:"huggingface" api:"required"`
 	Linkedin     string `json:"linkedin" api:"required"`
+	Openreview   string `json:"openreview" api:"required"`
+	Orcid        string `json:"orcid" api:"required"`
 	PersonalSite string `json:"personalSite" api:"required"`
 	Scholar      string `json:"scholar" api:"required"`
 	Twitter      string `json:"twitter" api:"required"`
+	Wikipedia    string `json:"wikipedia" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
+		Bluesky      respjson.Field
+		Cv           respjson.Field
+		Dblp         respjson.Field
 		Email        respjson.Field
 		GitHub       respjson.Field
+		Huggingface  respjson.Field
 		Linkedin     respjson.Field
+		Openreview   respjson.Field
+		Orcid        respjson.Field
 		PersonalSite respjson.Field
 		Scholar      respjson.Field
 		Twitter      respjson.Field
+		Wikipedia    respjson.Field
 		ExtraFields  map[string]respjson.Field
 		raw          string
 	} `json:"-"`
