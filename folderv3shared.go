@@ -202,16 +202,17 @@ func (r *FolderV3SharedGetResponseChildFolderPaperAuthorsV2) UnmarshalJSON(data 
 }
 
 type FolderV3SharedGetResponseChildFolderPaperAuthorsV2Researcher struct {
-	Affiliation   string                                                            `json:"affiliation" api:"required"`
-	Bio           string                                                            `json:"bio" api:"required"`
-	Citations     float64                                                           `json:"citations" api:"required"`
-	Headline      string                                                            `json:"headline" api:"required"`
-	HIndex        float64                                                           `json:"hIndex" api:"required"`
-	Links         FolderV3SharedGetResponseChildFolderPaperAuthorsV2ResearcherLinks `json:"links" api:"required"`
-	Name          string                                                            `json:"name" api:"required"`
-	PhotoURL      string                                                            `json:"photoUrl" api:"required"`
-	ResearchAreas []string                                                          `json:"researchAreas" api:"required"`
-	Slug          string                                                            `json:"slug" api:"required"`
+	Affiliation   string                                                                 `json:"affiliation" api:"required"`
+	Bio           string                                                                 `json:"bio" api:"required"`
+	Citations     float64                                                                `json:"citations" api:"required"`
+	Headline      string                                                                 `json:"headline" api:"required"`
+	HIndex        float64                                                                `json:"hIndex" api:"required"`
+	LinkedUser    FolderV3SharedGetResponseChildFolderPaperAuthorsV2ResearcherLinkedUser `json:"linkedUser" api:"required"`
+	Links         FolderV3SharedGetResponseChildFolderPaperAuthorsV2ResearcherLinks      `json:"links" api:"required"`
+	Name          string                                                                 `json:"name" api:"required"`
+	PhotoURL      string                                                                 `json:"photoUrl" api:"required"`
+	ResearchAreas []string                                                               `json:"researchAreas" api:"required"`
+	Slug          string                                                                 `json:"slug" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Affiliation   respjson.Field
@@ -219,6 +220,7 @@ type FolderV3SharedGetResponseChildFolderPaperAuthorsV2Researcher struct {
 		Citations     respjson.Field
 		Headline      respjson.Field
 		HIndex        respjson.Field
+		LinkedUser    respjson.Field
 		Links         respjson.Field
 		Name          respjson.Field
 		PhotoURL      respjson.Field
@@ -234,6 +236,26 @@ func (r FolderV3SharedGetResponseChildFolderPaperAuthorsV2Researcher) RawJSON() 
 	return r.JSON.raw
 }
 func (r *FolderV3SharedGetResponseChildFolderPaperAuthorsV2Researcher) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3SharedGetResponseChildFolderPaperAuthorsV2ResearcherLinkedUser struct {
+	Name     string `json:"name" api:"required"`
+	Username string `json:"username" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Name        respjson.Field
+		Username    respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3SharedGetResponseChildFolderPaperAuthorsV2ResearcherLinkedUser) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *FolderV3SharedGetResponseChildFolderPaperAuthorsV2ResearcherLinkedUser) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -483,16 +505,17 @@ func (r *FolderV3SharedGetResponseFolderPaperAuthorsV2) UnmarshalJSON(data []byt
 }
 
 type FolderV3SharedGetResponseFolderPaperAuthorsV2Researcher struct {
-	Affiliation   string                                                       `json:"affiliation" api:"required"`
-	Bio           string                                                       `json:"bio" api:"required"`
-	Citations     float64                                                      `json:"citations" api:"required"`
-	Headline      string                                                       `json:"headline" api:"required"`
-	HIndex        float64                                                      `json:"hIndex" api:"required"`
-	Links         FolderV3SharedGetResponseFolderPaperAuthorsV2ResearcherLinks `json:"links" api:"required"`
-	Name          string                                                       `json:"name" api:"required"`
-	PhotoURL      string                                                       `json:"photoUrl" api:"required"`
-	ResearchAreas []string                                                     `json:"researchAreas" api:"required"`
-	Slug          string                                                       `json:"slug" api:"required"`
+	Affiliation   string                                                            `json:"affiliation" api:"required"`
+	Bio           string                                                            `json:"bio" api:"required"`
+	Citations     float64                                                           `json:"citations" api:"required"`
+	Headline      string                                                            `json:"headline" api:"required"`
+	HIndex        float64                                                           `json:"hIndex" api:"required"`
+	LinkedUser    FolderV3SharedGetResponseFolderPaperAuthorsV2ResearcherLinkedUser `json:"linkedUser" api:"required"`
+	Links         FolderV3SharedGetResponseFolderPaperAuthorsV2ResearcherLinks      `json:"links" api:"required"`
+	Name          string                                                            `json:"name" api:"required"`
+	PhotoURL      string                                                            `json:"photoUrl" api:"required"`
+	ResearchAreas []string                                                          `json:"researchAreas" api:"required"`
+	Slug          string                                                            `json:"slug" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Affiliation   respjson.Field
@@ -500,6 +523,7 @@ type FolderV3SharedGetResponseFolderPaperAuthorsV2Researcher struct {
 		Citations     respjson.Field
 		Headline      respjson.Field
 		HIndex        respjson.Field
+		LinkedUser    respjson.Field
 		Links         respjson.Field
 		Name          respjson.Field
 		PhotoURL      respjson.Field
@@ -513,6 +537,26 @@ type FolderV3SharedGetResponseFolderPaperAuthorsV2Researcher struct {
 // Returns the unmodified JSON received from the API
 func (r FolderV3SharedGetResponseFolderPaperAuthorsV2Researcher) RawJSON() string { return r.JSON.raw }
 func (r *FolderV3SharedGetResponseFolderPaperAuthorsV2Researcher) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3SharedGetResponseFolderPaperAuthorsV2ResearcherLinkedUser struct {
+	Name     string `json:"name" api:"required"`
+	Username string `json:"username" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Name        respjson.Field
+		Username    respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3SharedGetResponseFolderPaperAuthorsV2ResearcherLinkedUser) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *FolderV3SharedGetResponseFolderPaperAuthorsV2ResearcherLinkedUser) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

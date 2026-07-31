@@ -736,6 +736,7 @@ type UserV3GetClaimedPapersResponse struct {
 	PublicationDate  string   `json:"publication_date" api:"required"`
 	Title            string   `json:"title" api:"required"`
 	Topics           []string `json:"topics" api:"required"`
+	Views            float64  `json:"views" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID               respjson.Field
@@ -751,6 +752,7 @@ type UserV3GetClaimedPapersResponse struct {
 		PublicationDate  respjson.Field
 		Title            respjson.Field
 		Topics           respjson.Field
+		Views            respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`
@@ -832,10 +834,13 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
-	FeedSort           string `json:"feedSort" api:"required"`
-	IsDarkModeEnabled  bool   `json:"isDarkModeEnabled" api:"required"`
-	IsDebugModeEnabled bool   `json:"isDebugModeEnabled" api:"required"`
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "ForYou",
+	// "Recent".
+	FeedSort                    string `json:"feedSort" api:"required"`
+	HasSeenForYouOnboarding     bool   `json:"hasSeenForYouOnboarding" api:"required"`
+	HasSeenResearcherOnboarding bool   `json:"hasSeenResearcherOnboarding" api:"required"`
+	IsDarkModeEnabled           bool   `json:"isDarkModeEnabled" api:"required"`
+	IsDebugModeEnabled          bool   `json:"isDebugModeEnabled" api:"required"`
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
 	// "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja",
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
@@ -846,6 +851,7 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 	PreferredLlmModel                string `json:"preferredLlmModel" api:"required"`
 	PreferredLlmThinking             string `json:"preferredLlmThinking" api:"required"`
 	ReadingModeEnabled               bool   `json:"readingModeEnabled" api:"required"`
+	ShowLikedPapersPublicly          bool   `json:"showLikedPapersPublicly" api:"required"`
 	ShowModelThinking                bool   `json:"showModelThinking" api:"required"`
 	// Any of "light", "dark", "system".
 	Theme            string  `json:"theme" api:"required"`
@@ -859,6 +865,8 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 		DefaultPrivatePaperSidebarTab    respjson.Field
 		DefaultPublicPaperSidebarTab     respjson.Field
 		FeedSort                         respjson.Field
+		HasSeenForYouOnboarding          respjson.Field
+		HasSeenResearcherOnboarding      respjson.Field
 		IsDarkModeEnabled                respjson.Field
 		IsDebugModeEnabled               respjson.Field
 		PreferredLanguage                respjson.Field
@@ -866,6 +874,7 @@ type UserV3GetCurrentUserResponsePreferencesBase struct {
 		PreferredLlmModel                respjson.Field
 		PreferredLlmThinking             respjson.Field
 		ReadingModeEnabled               respjson.Field
+		ShowLikedPapersPublicly          respjson.Field
 		ShowModelThinking                respjson.Field
 		Theme                            respjson.Field
 		ToolingPaneWidth                 respjson.Field
@@ -1085,10 +1094,13 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
-	FeedSort           string `json:"feedSort" api:"required"`
-	IsDarkModeEnabled  bool   `json:"isDarkModeEnabled" api:"required"`
-	IsDebugModeEnabled bool   `json:"isDebugModeEnabled" api:"required"`
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "ForYou",
+	// "Recent".
+	FeedSort                    string `json:"feedSort" api:"required"`
+	HasSeenForYouOnboarding     bool   `json:"hasSeenForYouOnboarding" api:"required"`
+	HasSeenResearcherOnboarding bool   `json:"hasSeenResearcherOnboarding" api:"required"`
+	IsDarkModeEnabled           bool   `json:"isDarkModeEnabled" api:"required"`
+	IsDebugModeEnabled          bool   `json:"isDebugModeEnabled" api:"required"`
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
 	// "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja",
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
@@ -1099,6 +1111,7 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 	PreferredLlmModel                string `json:"preferredLlmModel" api:"required"`
 	PreferredLlmThinking             string `json:"preferredLlmThinking" api:"required"`
 	ReadingModeEnabled               bool   `json:"readingModeEnabled" api:"required"`
+	ShowLikedPapersPublicly          bool   `json:"showLikedPapersPublicly" api:"required"`
 	ShowModelThinking                bool   `json:"showModelThinking" api:"required"`
 	// Any of "light", "dark", "system".
 	Theme            string  `json:"theme" api:"required"`
@@ -1112,6 +1125,8 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 		DefaultPrivatePaperSidebarTab    respjson.Field
 		DefaultPublicPaperSidebarTab     respjson.Field
 		FeedSort                         respjson.Field
+		HasSeenForYouOnboarding          respjson.Field
+		HasSeenResearcherOnboarding      respjson.Field
 		IsDarkModeEnabled                respjson.Field
 		IsDebugModeEnabled               respjson.Field
 		PreferredLanguage                respjson.Field
@@ -1119,6 +1134,7 @@ type UserV3GetCurrentUserResponseUserPreferencesBase struct {
 		PreferredLlmModel                respjson.Field
 		PreferredLlmThinking             respjson.Field
 		ReadingModeEnabled               respjson.Field
+		ShowLikedPapersPublicly          respjson.Field
 		ShowModelThinking                respjson.Field
 		Theme                            respjson.Field
 		ToolingPaneWidth                 respjson.Field
@@ -1917,10 +1933,13 @@ type UserV3UpdatePreferencesResponseBase struct {
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab" api:"required"`
 	// Any of "comments", "assistant", "similar", "notes".
 	DefaultPublicPaperSidebarTab string `json:"defaultPublicPaperSidebarTab" api:"required"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
-	FeedSort           string `json:"feedSort" api:"required"`
-	IsDarkModeEnabled  bool   `json:"isDarkModeEnabled" api:"required"`
-	IsDebugModeEnabled bool   `json:"isDebugModeEnabled" api:"required"`
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "ForYou",
+	// "Recent".
+	FeedSort                    string `json:"feedSort" api:"required"`
+	HasSeenForYouOnboarding     bool   `json:"hasSeenForYouOnboarding" api:"required"`
+	HasSeenResearcherOnboarding bool   `json:"hasSeenResearcherOnboarding" api:"required"`
+	IsDarkModeEnabled           bool   `json:"isDarkModeEnabled" api:"required"`
+	IsDebugModeEnabled          bool   `json:"isDebugModeEnabled" api:"required"`
 	// Any of "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es",
 	// "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja",
 	// "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa",
@@ -1931,6 +1950,7 @@ type UserV3UpdatePreferencesResponseBase struct {
 	PreferredLlmModel                string `json:"preferredLlmModel" api:"required"`
 	PreferredLlmThinking             string `json:"preferredLlmThinking" api:"required"`
 	ReadingModeEnabled               bool   `json:"readingModeEnabled" api:"required"`
+	ShowLikedPapersPublicly          bool   `json:"showLikedPapersPublicly" api:"required"`
 	ShowModelThinking                bool   `json:"showModelThinking" api:"required"`
 	// Any of "light", "dark", "system".
 	Theme            string  `json:"theme" api:"required"`
@@ -1944,6 +1964,8 @@ type UserV3UpdatePreferencesResponseBase struct {
 		DefaultPrivatePaperSidebarTab    respjson.Field
 		DefaultPublicPaperSidebarTab     respjson.Field
 		FeedSort                         respjson.Field
+		HasSeenForYouOnboarding          respjson.Field
+		HasSeenResearcherOnboarding      respjson.Field
 		IsDarkModeEnabled                respjson.Field
 		IsDebugModeEnabled               respjson.Field
 		PreferredLanguage                respjson.Field
@@ -1951,6 +1973,7 @@ type UserV3UpdatePreferencesResponseBase struct {
 		PreferredLlmModel                respjson.Field
 		PreferredLlmThinking             respjson.Field
 		ReadingModeEnabled               respjson.Field
+		ShowLikedPapersPublicly          respjson.Field
 		ShowModelThinking                respjson.Field
 		Theme                            respjson.Field
 		ToolingPaneWidth                 respjson.Field
@@ -2313,9 +2336,12 @@ type UserV3UpdatePreferencesParamsBase struct {
 	PreferredLlmModel                param.Opt[string]  `json:"preferredLlmModel,omitzero"`
 	PreferredLlmThinking             param.Opt[string]  `json:"preferredLlmThinking,omitzero"`
 	ToolingPaneWidth                 param.Opt[float64] `json:"toolingPaneWidth,omitzero"`
+	HasSeenForYouOnboarding          param.Opt[bool]    `json:"hasSeenForYouOnboarding,omitzero"`
+	HasSeenResearcherOnboarding      param.Opt[bool]    `json:"hasSeenResearcherOnboarding,omitzero"`
 	IsDarkModeEnabled                param.Opt[bool]    `json:"isDarkModeEnabled,omitzero"`
 	IsDebugModeEnabled               param.Opt[bool]    `json:"isDebugModeEnabled,omitzero"`
 	ReadingModeEnabled               param.Opt[bool]    `json:"readingModeEnabled,omitzero"`
+	ShowLikedPapersPublicly          param.Opt[bool]    `json:"showLikedPapersPublicly,omitzero"`
 	ShowModelThinking                param.Opt[bool]    `json:"showModelThinking,omitzero"`
 	// Any of "assistant", "notes", "similar".
 	DefaultPrivatePaperSidebarTab string `json:"defaultPrivatePaperSidebarTab,omitzero"`
@@ -2331,7 +2357,8 @@ type UserV3UpdatePreferencesParamsBase struct {
 	Theme                   string                                                  `json:"theme,omitzero"`
 	AssistantCustomStyles   []UserV3UpdatePreferencesParamsBaseAssistantCustomStyle `json:"assistantCustomStyles,omitzero"`
 	AssistantStyleSelection string                                                  `json:"assistantStyleSelection,omitzero"`
-	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent".
+	// Any of "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "ForYou",
+	// "Recent".
 	FeedSort string `json:"feedSort,omitzero"`
 	// Any of "off", "full".
 	WebSearch string `json:"webSearch,omitzero"`
@@ -2354,7 +2381,7 @@ func init() {
 		"defaultPublicPaperSidebarTab", "comments", "assistant", "similar", "notes",
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
-		"feedSort", "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "Recent",
+		"feedSort", "Hot", "Comments", "Views", "Likes", "GitHub", "Recommended", "ForYou", "Recent",
 	)
 	apijson.RegisterFieldValidator[UserV3UpdatePreferencesParamsBase](
 		"preferredLanguage", "am", "ar", "az", "bg", "bn", "ca", "cs", "da", "de", "el", "en", "es", "et", "fa", "fi", "fr", "gu", "ha", "he", "hi", "hr", "hu", "id", "it", "ja", "ka", "kn", "ko", "lt", "lv", "ml", "mr", "ms", "my", "ne", "nl", "no", "pa", "pl", "pt", "ro", "ru", "si", "sk", "sl", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "ur", "uz", "vi", "yo", "zh",
