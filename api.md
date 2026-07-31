@@ -560,18 +560,6 @@ Methods:
 
 ## V1
 
-Response Types:
-
-- <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1NewResponse">APIKeyV1NewResponse</a>
-- <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1ListResponse">APIKeyV1ListResponse</a>
-- <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1RevokeResponse">APIKeyV1RevokeResponse</a>
-
-Methods:
-
-- <code title="post /api-keys/v1">client.APIKeys.V1.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1Service.New">New</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, body <a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1NewParams">APIKeyV1NewParams</a>) (\*<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1NewResponse">APIKeyV1NewResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
-- <code title="get /api-keys/v1">client.APIKeys.V1.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1Service.List">List</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>) (\*[]<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1ListResponse">APIKeyV1ListResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
-- <code title="post /api-keys/v1/{apiKeyId}/revoke">client.APIKeys.V1.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1Service.Revoke">Revoke</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, apiKeyID APIKeyV1RevokeParamsAPIKeyID) (\*<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go">alphaxivcat</a>.<a href="https://pkg.go.dev/github.com/AlphaxivCat/alphaxiv_cat-go#APIKeyV1RevokeResponse">APIKeyV1RevokeResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
-
 # Admin
 
 ## V1

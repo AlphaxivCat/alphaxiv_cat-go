@@ -67,18 +67,20 @@ func (r *UserV3ByUsernameService) GetUser(ctx context.Context, username string, 
 }
 
 type UserV3ByUsernameGetProfilePageResponse struct {
-	Activity      []UserV3ByUsernameGetProfilePageResponseActivity      `json:"activity" api:"required"`
-	ClaimedPapers []UserV3ByUsernameGetProfilePageResponseClaimedPaper  `json:"claimedPapers" api:"required"`
-	Featured      []UserV3ByUsernameGetProfilePageResponseFeaturedUnion `json:"featured" api:"required"`
-	User          UserV3ByUsernameGetProfilePageResponseUser            `json:"user" api:"required"`
+	Activity                []UserV3ByUsernameGetProfilePageResponseActivity      `json:"activity" api:"required"`
+	ClaimedPapers           []UserV3ByUsernameGetProfilePageResponseClaimedPaper  `json:"claimedPapers" api:"required"`
+	Featured                []UserV3ByUsernameGetProfilePageResponseFeaturedUnion `json:"featured" api:"required"`
+	ShowLikedPapersPublicly bool                                                  `json:"showLikedPapersPublicly" api:"required"`
+	User                    UserV3ByUsernameGetProfilePageResponseUser            `json:"user" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Activity      respjson.Field
-		ClaimedPapers respjson.Field
-		Featured      respjson.Field
-		User          respjson.Field
-		ExtraFields   map[string]respjson.Field
-		raw           string
+		Activity                respjson.Field
+		ClaimedPapers           respjson.Field
+		Featured                respjson.Field
+		ShowLikedPapersPublicly respjson.Field
+		User                    respjson.Field
+		ExtraFields             map[string]respjson.Field
+		raw                     string
 	} `json:"-"`
 }
 
@@ -589,6 +591,7 @@ type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
 	PublicationDate  string   `json:"publication_date" api:"required"`
 	Title            string   `json:"title" api:"required"`
 	Topics           []string `json:"topics" api:"required"`
+	Views            float64  `json:"views" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID               respjson.Field
@@ -604,6 +607,7 @@ type UserV3ByUsernameGetProfilePageResponseClaimedPaper struct {
 		PublicationDate  respjson.Field
 		Title            respjson.Field
 		Topics           respjson.Field
+		Views            respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`
