@@ -627,37 +627,39 @@ type PaperV3GetDiversePapersResponse struct {
 	Title                string                                            `json:"title" api:"required"`
 	Topics               []string                                          `json:"topics" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
-	UniversalPaperID string `json:"universal_paper_id" api:"required"`
-	UpdatedAt        string `json:"updated_at" api:"required"`
-	VersionID        string `json:"version_id" api:"required" format:"uuid"`
+	UniversalPaperID      string                                               `json:"universal_paper_id" api:"required"`
+	UpdatedAt             string                                               `json:"updated_at" api:"required"`
+	VersionID             string                                               `json:"version_id" api:"required" format:"uuid"`
+	RecommendationContext PaperV3GetDiversePapersResponseRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                   respjson.Field
-		Abstract             respjson.Field
-		AuthorInfo           respjson.Field
-		Authors              respjson.Field
-		CanonicalID          respjson.Field
-		ExternalBlog         respjson.Field
-		FirstPublicationDate respjson.Field
-		FullAuthors          respjson.Field
-		FullAuthorsV2        respjson.Field
-		GitHubStars          respjson.Field
-		GitHubURL            respjson.Field
-		HasRunReport         respjson.Field
-		ImageURL             respjson.Field
-		Metrics              respjson.Field
-		OrganizationInfo     respjson.Field
-		PaperGroupID         respjson.Field
-		PaperSummary         respjson.Field
-		PdfOnly              respjson.Field
-		PublicationDate      respjson.Field
-		Title                respjson.Field
-		Topics               respjson.Field
-		UniversalPaperID     respjson.Field
-		UpdatedAt            respjson.Field
-		VersionID            respjson.Field
-		ExtraFields          map[string]respjson.Field
-		raw                  string
+		ID                    respjson.Field
+		Abstract              respjson.Field
+		AuthorInfo            respjson.Field
+		Authors               respjson.Field
+		CanonicalID           respjson.Field
+		ExternalBlog          respjson.Field
+		FirstPublicationDate  respjson.Field
+		FullAuthors           respjson.Field
+		FullAuthorsV2         respjson.Field
+		GitHubStars           respjson.Field
+		GitHubURL             respjson.Field
+		HasRunReport          respjson.Field
+		ImageURL              respjson.Field
+		Metrics               respjson.Field
+		OrganizationInfo      respjson.Field
+		PaperGroupID          respjson.Field
+		PaperSummary          respjson.Field
+		PdfOnly               respjson.Field
+		PublicationDate       respjson.Field
+		Title                 respjson.Field
+		Topics                respjson.Field
+		UniversalPaperID      respjson.Field
+		UpdatedAt             respjson.Field
+		VersionID             respjson.Field
+		RecommendationContext respjson.Field
+		ExtraFields           map[string]respjson.Field
+		raw                   string
 	} `json:"-"`
 }
 
@@ -975,6 +977,77 @@ func (r *PaperV3GetDiversePapersResponsePaperSummary) UnmarshalJSON(data []byte)
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetDiversePapersResponseRecommendationContext struct {
+	FollowedLikers []PaperV3GetDiversePapersResponseRecommendationContextFollowedLiker `json:"followed_likers"`
+	Hot            bool                                                                `json:"hot"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		FollowedLikers respjson.Field
+		Hot            respjson.Field
+		ExtraFields    map[string]respjson.Field
+		raw            string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetDiversePapersResponseRecommendationContext) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetDiversePapersResponseRecommendationContext) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetDiversePapersResponseRecommendationContextFollowedLiker struct {
+	ID               string                                                                    `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3GetDiversePapersResponseRecommendationContextFollowedLikerAvatar `json:"avatar" api:"required"`
+	GoogleScholarID  string                                                                    `json:"googleScholarId" api:"required"`
+	Institution      string                                                                    `json:"institution" api:"required"`
+	RealName         string                                                                    `json:"realName" api:"required"`
+	Reputation       float64                                                                   `json:"reputation" api:"required"`
+	Username         string                                                                    `json:"username" api:"required"`
+	WeeklyReputation float64                                                                   `json:"weeklyReputation" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Username         respjson.Field
+		WeeklyReputation respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetDiversePapersResponseRecommendationContextFollowedLiker) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetDiversePapersResponseRecommendationContextFollowedLiker) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetDiversePapersResponseRecommendationContextFollowedLikerAvatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetDiversePapersResponseRecommendationContextFollowedLikerAvatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetDiversePapersResponseRecommendationContextFollowedLikerAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetFeedResponse struct {
 	Page   float64                       `json:"page" api:"required"`
 	Papers []PaperV3GetFeedResponsePaper `json:"papers" api:"required"`
@@ -1017,37 +1090,39 @@ type PaperV3GetFeedResponsePaper struct {
 	Title                string                                        `json:"title" api:"required"`
 	Topics               []string                                      `json:"topics" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
-	UniversalPaperID string `json:"universal_paper_id" api:"required"`
-	UpdatedAt        string `json:"updated_at" api:"required"`
-	VersionID        string `json:"version_id" api:"required" format:"uuid"`
+	UniversalPaperID      string                                           `json:"universal_paper_id" api:"required"`
+	UpdatedAt             string                                           `json:"updated_at" api:"required"`
+	VersionID             string                                           `json:"version_id" api:"required" format:"uuid"`
+	RecommendationContext PaperV3GetFeedResponsePaperRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                   respjson.Field
-		Abstract             respjson.Field
-		AuthorInfo           respjson.Field
-		Authors              respjson.Field
-		CanonicalID          respjson.Field
-		ExternalBlog         respjson.Field
-		FirstPublicationDate respjson.Field
-		FullAuthors          respjson.Field
-		FullAuthorsV2        respjson.Field
-		GitHubStars          respjson.Field
-		GitHubURL            respjson.Field
-		HasRunReport         respjson.Field
-		ImageURL             respjson.Field
-		Metrics              respjson.Field
-		OrganizationInfo     respjson.Field
-		PaperGroupID         respjson.Field
-		PaperSummary         respjson.Field
-		PdfOnly              respjson.Field
-		PublicationDate      respjson.Field
-		Title                respjson.Field
-		Topics               respjson.Field
-		UniversalPaperID     respjson.Field
-		UpdatedAt            respjson.Field
-		VersionID            respjson.Field
-		ExtraFields          map[string]respjson.Field
-		raw                  string
+		ID                    respjson.Field
+		Abstract              respjson.Field
+		AuthorInfo            respjson.Field
+		Authors               respjson.Field
+		CanonicalID           respjson.Field
+		ExternalBlog          respjson.Field
+		FirstPublicationDate  respjson.Field
+		FullAuthors           respjson.Field
+		FullAuthorsV2         respjson.Field
+		GitHubStars           respjson.Field
+		GitHubURL             respjson.Field
+		HasRunReport          respjson.Field
+		ImageURL              respjson.Field
+		Metrics               respjson.Field
+		OrganizationInfo      respjson.Field
+		PaperGroupID          respjson.Field
+		PaperSummary          respjson.Field
+		PdfOnly               respjson.Field
+		PublicationDate       respjson.Field
+		Title                 respjson.Field
+		Topics                respjson.Field
+		UniversalPaperID      respjson.Field
+		UpdatedAt             respjson.Field
+		VersionID             respjson.Field
+		RecommendationContext respjson.Field
+		ExtraFields           map[string]respjson.Field
+		raw                   string
 	} `json:"-"`
 }
 
@@ -1363,6 +1438,77 @@ func (r *PaperV3GetFeedResponsePaperPaperSummary) UnmarshalJSON(data []byte) err
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetFeedResponsePaperRecommendationContext struct {
+	FollowedLikers []PaperV3GetFeedResponsePaperRecommendationContextFollowedLiker `json:"followed_likers"`
+	Hot            bool                                                            `json:"hot"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		FollowedLikers respjson.Field
+		Hot            respjson.Field
+		ExtraFields    map[string]respjson.Field
+		raw            string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetFeedResponsePaperRecommendationContext) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetFeedResponsePaperRecommendationContext) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetFeedResponsePaperRecommendationContextFollowedLiker struct {
+	ID               string                                                                `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3GetFeedResponsePaperRecommendationContextFollowedLikerAvatar `json:"avatar" api:"required"`
+	GoogleScholarID  string                                                                `json:"googleScholarId" api:"required"`
+	Institution      string                                                                `json:"institution" api:"required"`
+	RealName         string                                                                `json:"realName" api:"required"`
+	Reputation       float64                                                               `json:"reputation" api:"required"`
+	Username         string                                                                `json:"username" api:"required"`
+	WeeklyReputation float64                                                               `json:"weeklyReputation" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Username         respjson.Field
+		WeeklyReputation respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetFeedResponsePaperRecommendationContextFollowedLiker) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetFeedResponsePaperRecommendationContextFollowedLiker) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetFeedResponsePaperRecommendationContextFollowedLikerAvatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetFeedResponsePaperRecommendationContextFollowedLikerAvatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetFeedResponsePaperRecommendationContextFollowedLikerAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetFiguresResponse struct {
 	Figures []string `json:"figures" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -1457,37 +1603,39 @@ type PaperV3GetPreviewResponse struct {
 	Title                string                                      `json:"title" api:"required"`
 	Topics               []string                                    `json:"topics" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
-	UniversalPaperID string `json:"universal_paper_id" api:"required"`
-	UpdatedAt        string `json:"updated_at" api:"required"`
-	VersionID        string `json:"version_id" api:"required" format:"uuid"`
+	UniversalPaperID      string                                         `json:"universal_paper_id" api:"required"`
+	UpdatedAt             string                                         `json:"updated_at" api:"required"`
+	VersionID             string                                         `json:"version_id" api:"required" format:"uuid"`
+	RecommendationContext PaperV3GetPreviewResponseRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                   respjson.Field
-		Abstract             respjson.Field
-		AuthorInfo           respjson.Field
-		Authors              respjson.Field
-		CanonicalID          respjson.Field
-		ExternalBlog         respjson.Field
-		FirstPublicationDate respjson.Field
-		FullAuthors          respjson.Field
-		FullAuthorsV2        respjson.Field
-		GitHubStars          respjson.Field
-		GitHubURL            respjson.Field
-		HasRunReport         respjson.Field
-		ImageURL             respjson.Field
-		Metrics              respjson.Field
-		OrganizationInfo     respjson.Field
-		PaperGroupID         respjson.Field
-		PaperSummary         respjson.Field
-		PdfOnly              respjson.Field
-		PublicationDate      respjson.Field
-		Title                respjson.Field
-		Topics               respjson.Field
-		UniversalPaperID     respjson.Field
-		UpdatedAt            respjson.Field
-		VersionID            respjson.Field
-		ExtraFields          map[string]respjson.Field
-		raw                  string
+		ID                    respjson.Field
+		Abstract              respjson.Field
+		AuthorInfo            respjson.Field
+		Authors               respjson.Field
+		CanonicalID           respjson.Field
+		ExternalBlog          respjson.Field
+		FirstPublicationDate  respjson.Field
+		FullAuthors           respjson.Field
+		FullAuthorsV2         respjson.Field
+		GitHubStars           respjson.Field
+		GitHubURL             respjson.Field
+		HasRunReport          respjson.Field
+		ImageURL              respjson.Field
+		Metrics               respjson.Field
+		OrganizationInfo      respjson.Field
+		PaperGroupID          respjson.Field
+		PaperSummary          respjson.Field
+		PdfOnly               respjson.Field
+		PublicationDate       respjson.Field
+		Title                 respjson.Field
+		Topics                respjson.Field
+		UniversalPaperID      respjson.Field
+		UpdatedAt             respjson.Field
+		VersionID             respjson.Field
+		RecommendationContext respjson.Field
+		ExtraFields           map[string]respjson.Field
+		raw                   string
 	} `json:"-"`
 }
 
@@ -1803,6 +1951,77 @@ func (r *PaperV3GetPreviewResponsePaperSummary) UnmarshalJSON(data []byte) error
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetPreviewResponseRecommendationContext struct {
+	FollowedLikers []PaperV3GetPreviewResponseRecommendationContextFollowedLiker `json:"followed_likers"`
+	Hot            bool                                                          `json:"hot"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		FollowedLikers respjson.Field
+		Hot            respjson.Field
+		ExtraFields    map[string]respjson.Field
+		raw            string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetPreviewResponseRecommendationContext) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetPreviewResponseRecommendationContext) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetPreviewResponseRecommendationContextFollowedLiker struct {
+	ID               string                                                              `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3GetPreviewResponseRecommendationContextFollowedLikerAvatar `json:"avatar" api:"required"`
+	GoogleScholarID  string                                                              `json:"googleScholarId" api:"required"`
+	Institution      string                                                              `json:"institution" api:"required"`
+	RealName         string                                                              `json:"realName" api:"required"`
+	Reputation       float64                                                             `json:"reputation" api:"required"`
+	Username         string                                                              `json:"username" api:"required"`
+	WeeklyReputation float64                                                             `json:"weeklyReputation" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Username         respjson.Field
+		WeeklyReputation respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetPreviewResponseRecommendationContextFollowedLiker) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetPreviewResponseRecommendationContextFollowedLiker) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetPreviewResponseRecommendationContextFollowedLikerAvatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetPreviewResponseRecommendationContextFollowedLikerAvatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetPreviewResponseRecommendationContextFollowedLikerAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetSimilarPapersResponse struct {
 	ID         string                                      `json:"id" api:"required" format:"uuid"`
 	Abstract   string                                      `json:"abstract" api:"required"`
@@ -1827,37 +2046,39 @@ type PaperV3GetSimilarPapersResponse struct {
 	Title                string                                            `json:"title" api:"required"`
 	Topics               []string                                          `json:"topics" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
-	UniversalPaperID string `json:"universal_paper_id" api:"required"`
-	UpdatedAt        string `json:"updated_at" api:"required"`
-	VersionID        string `json:"version_id" api:"required" format:"uuid"`
+	UniversalPaperID      string                                               `json:"universal_paper_id" api:"required"`
+	UpdatedAt             string                                               `json:"updated_at" api:"required"`
+	VersionID             string                                               `json:"version_id" api:"required" format:"uuid"`
+	RecommendationContext PaperV3GetSimilarPapersResponseRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                   respjson.Field
-		Abstract             respjson.Field
-		AuthorInfo           respjson.Field
-		Authors              respjson.Field
-		CanonicalID          respjson.Field
-		ExternalBlog         respjson.Field
-		FirstPublicationDate respjson.Field
-		FullAuthors          respjson.Field
-		FullAuthorsV2        respjson.Field
-		GitHubStars          respjson.Field
-		GitHubURL            respjson.Field
-		HasRunReport         respjson.Field
-		ImageURL             respjson.Field
-		Metrics              respjson.Field
-		OrganizationInfo     respjson.Field
-		PaperGroupID         respjson.Field
-		PaperSummary         respjson.Field
-		PdfOnly              respjson.Field
-		PublicationDate      respjson.Field
-		Title                respjson.Field
-		Topics               respjson.Field
-		UniversalPaperID     respjson.Field
-		UpdatedAt            respjson.Field
-		VersionID            respjson.Field
-		ExtraFields          map[string]respjson.Field
-		raw                  string
+		ID                    respjson.Field
+		Abstract              respjson.Field
+		AuthorInfo            respjson.Field
+		Authors               respjson.Field
+		CanonicalID           respjson.Field
+		ExternalBlog          respjson.Field
+		FirstPublicationDate  respjson.Field
+		FullAuthors           respjson.Field
+		FullAuthorsV2         respjson.Field
+		GitHubStars           respjson.Field
+		GitHubURL             respjson.Field
+		HasRunReport          respjson.Field
+		ImageURL              respjson.Field
+		Metrics               respjson.Field
+		OrganizationInfo      respjson.Field
+		PaperGroupID          respjson.Field
+		PaperSummary          respjson.Field
+		PdfOnly               respjson.Field
+		PublicationDate       respjson.Field
+		Title                 respjson.Field
+		Topics                respjson.Field
+		UniversalPaperID      respjson.Field
+		UpdatedAt             respjson.Field
+		VersionID             respjson.Field
+		RecommendationContext respjson.Field
+		ExtraFields           map[string]respjson.Field
+		raw                   string
 	} `json:"-"`
 }
 
@@ -2175,6 +2396,77 @@ func (r *PaperV3GetSimilarPapersResponsePaperSummary) UnmarshalJSON(data []byte)
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetSimilarPapersResponseRecommendationContext struct {
+	FollowedLikers []PaperV3GetSimilarPapersResponseRecommendationContextFollowedLiker `json:"followed_likers"`
+	Hot            bool                                                                `json:"hot"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		FollowedLikers respjson.Field
+		Hot            respjson.Field
+		ExtraFields    map[string]respjson.Field
+		raw            string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetSimilarPapersResponseRecommendationContext) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetSimilarPapersResponseRecommendationContext) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetSimilarPapersResponseRecommendationContextFollowedLiker struct {
+	ID               string                                                                    `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3GetSimilarPapersResponseRecommendationContextFollowedLikerAvatar `json:"avatar" api:"required"`
+	GoogleScholarID  string                                                                    `json:"googleScholarId" api:"required"`
+	Institution      string                                                                    `json:"institution" api:"required"`
+	RealName         string                                                                    `json:"realName" api:"required"`
+	Reputation       float64                                                                   `json:"reputation" api:"required"`
+	Username         string                                                                    `json:"username" api:"required"`
+	WeeklyReputation float64                                                                   `json:"weeklyReputation" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Username         respjson.Field
+		WeeklyReputation respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetSimilarPapersResponseRecommendationContextFollowedLiker) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetSimilarPapersResponseRecommendationContextFollowedLiker) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetSimilarPapersResponseRecommendationContextFollowedLikerAvatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetSimilarPapersResponseRecommendationContextFollowedLikerAvatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetSimilarPapersResponseRecommendationContextFollowedLikerAvatar) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetUnrelatedResponse struct {
 	ID         string                                  `json:"id" api:"required" format:"uuid"`
 	Abstract   string                                  `json:"abstract" api:"required"`
@@ -2199,37 +2491,39 @@ type PaperV3GetUnrelatedResponse struct {
 	Title                string                                        `json:"title" api:"required"`
 	Topics               []string                                      `json:"topics" api:"required"`
 	// A versionless universal paper ID (e.g. 1706.03762)
-	UniversalPaperID string `json:"universal_paper_id" api:"required"`
-	UpdatedAt        string `json:"updated_at" api:"required"`
-	VersionID        string `json:"version_id" api:"required" format:"uuid"`
+	UniversalPaperID      string                                           `json:"universal_paper_id" api:"required"`
+	UpdatedAt             string                                           `json:"updated_at" api:"required"`
+	VersionID             string                                           `json:"version_id" api:"required" format:"uuid"`
+	RecommendationContext PaperV3GetUnrelatedResponseRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                   respjson.Field
-		Abstract             respjson.Field
-		AuthorInfo           respjson.Field
-		Authors              respjson.Field
-		CanonicalID          respjson.Field
-		ExternalBlog         respjson.Field
-		FirstPublicationDate respjson.Field
-		FullAuthors          respjson.Field
-		FullAuthorsV2        respjson.Field
-		GitHubStars          respjson.Field
-		GitHubURL            respjson.Field
-		HasRunReport         respjson.Field
-		ImageURL             respjson.Field
-		Metrics              respjson.Field
-		OrganizationInfo     respjson.Field
-		PaperGroupID         respjson.Field
-		PaperSummary         respjson.Field
-		PdfOnly              respjson.Field
-		PublicationDate      respjson.Field
-		Title                respjson.Field
-		Topics               respjson.Field
-		UniversalPaperID     respjson.Field
-		UpdatedAt            respjson.Field
-		VersionID            respjson.Field
-		ExtraFields          map[string]respjson.Field
-		raw                  string
+		ID                    respjson.Field
+		Abstract              respjson.Field
+		AuthorInfo            respjson.Field
+		Authors               respjson.Field
+		CanonicalID           respjson.Field
+		ExternalBlog          respjson.Field
+		FirstPublicationDate  respjson.Field
+		FullAuthors           respjson.Field
+		FullAuthorsV2         respjson.Field
+		GitHubStars           respjson.Field
+		GitHubURL             respjson.Field
+		HasRunReport          respjson.Field
+		ImageURL              respjson.Field
+		Metrics               respjson.Field
+		OrganizationInfo      respjson.Field
+		PaperGroupID          respjson.Field
+		PaperSummary          respjson.Field
+		PdfOnly               respjson.Field
+		PublicationDate       respjson.Field
+		Title                 respjson.Field
+		Topics                respjson.Field
+		UniversalPaperID      respjson.Field
+		UpdatedAt             respjson.Field
+		VersionID             respjson.Field
+		RecommendationContext respjson.Field
+		ExtraFields           map[string]respjson.Field
+		raw                   string
 	} `json:"-"`
 }
 
@@ -2542,6 +2836,77 @@ type PaperV3GetUnrelatedResponsePaperSummary struct {
 // Returns the unmodified JSON received from the API
 func (r PaperV3GetUnrelatedResponsePaperSummary) RawJSON() string { return r.JSON.raw }
 func (r *PaperV3GetUnrelatedResponsePaperSummary) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetUnrelatedResponseRecommendationContext struct {
+	FollowedLikers []PaperV3GetUnrelatedResponseRecommendationContextFollowedLiker `json:"followed_likers"`
+	Hot            bool                                                            `json:"hot"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		FollowedLikers respjson.Field
+		Hot            respjson.Field
+		ExtraFields    map[string]respjson.Field
+		raw            string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetUnrelatedResponseRecommendationContext) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetUnrelatedResponseRecommendationContext) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetUnrelatedResponseRecommendationContextFollowedLiker struct {
+	ID               string                                                                `json:"id" api:"required" format:"uuid"`
+	Avatar           []PaperV3GetUnrelatedResponseRecommendationContextFollowedLikerAvatar `json:"avatar" api:"required"`
+	GoogleScholarID  string                                                                `json:"googleScholarId" api:"required"`
+	Institution      string                                                                `json:"institution" api:"required"`
+	RealName         string                                                                `json:"realName" api:"required"`
+	Reputation       float64                                                               `json:"reputation" api:"required"`
+	Username         string                                                                `json:"username" api:"required"`
+	WeeklyReputation float64                                                               `json:"weeklyReputation" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		ID               respjson.Field
+		Avatar           respjson.Field
+		GoogleScholarID  respjson.Field
+		Institution      respjson.Field
+		RealName         respjson.Field
+		Reputation       respjson.Field
+		Username         respjson.Field
+		WeeklyReputation respjson.Field
+		ExtraFields      map[string]respjson.Field
+		raw              string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetUnrelatedResponseRecommendationContextFollowedLiker) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetUnrelatedResponseRecommendationContextFollowedLiker) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetUnrelatedResponseRecommendationContextFollowedLikerAvatar struct {
+	// Any of "full_size", "thumbnail".
+	Type string `json:"type" api:"required"`
+	URL  string `json:"url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Type        respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetUnrelatedResponseRecommendationContextFollowedLikerAvatar) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetUnrelatedResponseRecommendationContextFollowedLikerAvatar) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
