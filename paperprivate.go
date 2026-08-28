@@ -109,6 +109,7 @@ type PaperPrivateNewParams struct {
 	File        string            `json:"file" api:"required"`
 	Filename    string            `json:"filename" api:"required"`
 	ContentType param.Opt[string] `json:"contentType,omitzero"`
+	FolderID    param.Opt[string] `json:"folderId,omitzero" format:"uuid"`
 	paramObj
 }
 

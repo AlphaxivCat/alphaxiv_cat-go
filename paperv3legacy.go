@@ -270,6 +270,7 @@ type PaperV3LegacyGetResponseCommentAuthorUnion struct {
 	PublicEmail      string                                           `json:"publicEmail"`
 	RealName         string                                           `json:"realName"`
 	Reputation       float64                                          `json:"reputation"`
+	ResearcherSlug   string                                           `json:"researcherSlug"`
 	Role             string                                           `json:"role"`
 	Username         string                                           `json:"username"`
 	Verified         bool                                             `json:"verified"`
@@ -287,6 +288,7 @@ type PaperV3LegacyGetResponseCommentAuthorUnion struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -380,6 +382,7 @@ type PaperV3LegacyGetResponseCommentAuthorObject struct {
 	PublicEmail      string                                              `json:"publicEmail" api:"required"`
 	RealName         string                                              `json:"realName" api:"required"`
 	Reputation       float64                                             `json:"reputation" api:"required"`
+	ResearcherSlug   string                                              `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -399,6 +402,7 @@ type PaperV3LegacyGetResponseCommentAuthorObject struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -446,6 +450,7 @@ type PaperV3LegacyGetResponseCommentAuthorObject2 struct {
 	PublicEmail      string                                               `json:"publicEmail" api:"required"`
 	RealName         string                                               `json:"realName" api:"required"`
 	Reputation       float64                                              `json:"reputation" api:"required"`
+	ResearcherSlug   string                                               `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -465,6 +470,7 @@ type PaperV3LegacyGetResponseCommentAuthorObject2 struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -707,6 +713,7 @@ type PaperV3LegacyGetResponseCommentResponseAuthorUnion struct {
 	PublicEmail      string                                                   `json:"publicEmail"`
 	RealName         string                                                   `json:"realName"`
 	Reputation       float64                                                  `json:"reputation"`
+	ResearcherSlug   string                                                   `json:"researcherSlug"`
 	Role             string                                                   `json:"role"`
 	Username         string                                                   `json:"username"`
 	Verified         bool                                                     `json:"verified"`
@@ -724,6 +731,7 @@ type PaperV3LegacyGetResponseCommentResponseAuthorUnion struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -820,6 +828,7 @@ type PaperV3LegacyGetResponseCommentResponseAuthorObject struct {
 	PublicEmail      string                                                      `json:"publicEmail" api:"required"`
 	RealName         string                                                      `json:"realName" api:"required"`
 	Reputation       float64                                                     `json:"reputation" api:"required"`
+	ResearcherSlug   string                                                      `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -839,6 +848,7 @@ type PaperV3LegacyGetResponseCommentResponseAuthorObject struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -888,6 +898,7 @@ type PaperV3LegacyGetResponseCommentResponseAuthorObject2 struct {
 	PublicEmail      string                                                       `json:"publicEmail" api:"required"`
 	RealName         string                                                       `json:"realName" api:"required"`
 	Reputation       float64                                                      `json:"reputation" api:"required"`
+	ResearcherSlug   string                                                       `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -907,6 +918,7 @@ type PaperV3LegacyGetResponseCommentResponseAuthorObject2 struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -1145,6 +1157,7 @@ type PaperV3LegacyGetCommentsResponseAuthorUnion struct {
 	PublicEmail      string                                            `json:"publicEmail"`
 	RealName         string                                            `json:"realName"`
 	Reputation       float64                                           `json:"reputation"`
+	ResearcherSlug   string                                            `json:"researcherSlug"`
 	Role             string                                            `json:"role"`
 	Username         string                                            `json:"username"`
 	Verified         bool                                              `json:"verified"`
@@ -1162,6 +1175,7 @@ type PaperV3LegacyGetCommentsResponseAuthorUnion struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -1255,6 +1269,7 @@ type PaperV3LegacyGetCommentsResponseAuthorObject struct {
 	PublicEmail      string                                               `json:"publicEmail" api:"required"`
 	RealName         string                                               `json:"realName" api:"required"`
 	Reputation       float64                                              `json:"reputation" api:"required"`
+	ResearcherSlug   string                                               `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -1274,6 +1289,7 @@ type PaperV3LegacyGetCommentsResponseAuthorObject struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -1321,6 +1337,7 @@ type PaperV3LegacyGetCommentsResponseAuthorObject2 struct {
 	PublicEmail      string                                                `json:"publicEmail" api:"required"`
 	RealName         string                                                `json:"realName" api:"required"`
 	Reputation       float64                                               `json:"reputation" api:"required"`
+	ResearcherSlug   string                                                `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -1340,6 +1357,7 @@ type PaperV3LegacyGetCommentsResponseAuthorObject2 struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -1582,6 +1600,7 @@ type PaperV3LegacyGetCommentsResponseResponseAuthorUnion struct {
 	PublicEmail      string                                                    `json:"publicEmail"`
 	RealName         string                                                    `json:"realName"`
 	Reputation       float64                                                   `json:"reputation"`
+	ResearcherSlug   string                                                    `json:"researcherSlug"`
 	Role             string                                                    `json:"role"`
 	Username         string                                                    `json:"username"`
 	Verified         bool                                                      `json:"verified"`
@@ -1599,6 +1618,7 @@ type PaperV3LegacyGetCommentsResponseResponseAuthorUnion struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -1695,6 +1715,7 @@ type PaperV3LegacyGetCommentsResponseResponseAuthorObject struct {
 	PublicEmail      string                                                       `json:"publicEmail" api:"required"`
 	RealName         string                                                       `json:"realName" api:"required"`
 	Reputation       float64                                                      `json:"reputation" api:"required"`
+	ResearcherSlug   string                                                       `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -1714,6 +1735,7 @@ type PaperV3LegacyGetCommentsResponseResponseAuthorObject struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -1763,6 +1785,7 @@ type PaperV3LegacyGetCommentsResponseResponseAuthorObject2 struct {
 	PublicEmail      string                                                        `json:"publicEmail" api:"required"`
 	RealName         string                                                        `json:"realName" api:"required"`
 	Reputation       float64                                                       `json:"reputation" api:"required"`
+	ResearcherSlug   string                                                        `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -1782,6 +1805,7 @@ type PaperV3LegacyGetCommentsResponseResponseAuthorObject2 struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field

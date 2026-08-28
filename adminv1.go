@@ -118,6 +118,7 @@ type AdminV1GetModeratorFeedResponseAuthorUnion struct {
 	PublicEmail      string                                           `json:"publicEmail"`
 	RealName         string                                           `json:"realName"`
 	Reputation       float64                                          `json:"reputation"`
+	ResearcherSlug   string                                           `json:"researcherSlug"`
 	Role             string                                           `json:"role"`
 	Username         string                                           `json:"username"`
 	Verified         bool                                             `json:"verified"`
@@ -135,6 +136,7 @@ type AdminV1GetModeratorFeedResponseAuthorUnion struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -228,6 +230,7 @@ type AdminV1GetModeratorFeedResponseAuthorObject struct {
 	PublicEmail      string                                              `json:"publicEmail" api:"required"`
 	RealName         string                                              `json:"realName" api:"required"`
 	Reputation       float64                                             `json:"reputation" api:"required"`
+	ResearcherSlug   string                                              `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -247,6 +250,7 @@ type AdminV1GetModeratorFeedResponseAuthorObject struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
@@ -294,6 +298,7 @@ type AdminV1GetModeratorFeedResponseAuthorObject2 struct {
 	PublicEmail      string                                               `json:"publicEmail" api:"required"`
 	RealName         string                                               `json:"realName" api:"required"`
 	Reputation       float64                                              `json:"reputation" api:"required"`
+	ResearcherSlug   string                                               `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -313,6 +318,7 @@ type AdminV1GetModeratorFeedResponseAuthorObject2 struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field
