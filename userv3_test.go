@@ -59,64 +59,6 @@ func TestUserV3DeleteOwnUser(t *testing.T) {
 	}
 }
 
-func TestUserV3GetActivityWithOptionalParams(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Users.V3.GetActivity(
-		context.TODO(),
-		"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-		alphaxivcat.UserV3GetActivityParams{
-			Sort: alphaxivcat.UserV3GetActivityParamsSortDate,
-		},
-	)
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
-func TestUserV3GetClaimedPapersWithOptionalParams(t *testing.T) {
-	t.Skip("Mock server tests are disabled")
-	baseURL := "http://localhost:4010"
-	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
-		baseURL = envURL
-	}
-	if !testutil.CheckTestServer(t, baseURL) {
-		return
-	}
-	client := alphaxivcat.NewClient(
-		option.WithBaseURL(baseURL),
-		option.WithAPIKey("My API Key"),
-	)
-	_, err := client.Users.V3.GetClaimedPapers(
-		context.TODO(),
-		"182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-		alphaxivcat.UserV3GetClaimedPapersParams{
-			Sort: alphaxivcat.UserV3GetClaimedPapersParamsSortDate,
-		},
-	)
-	if err != nil {
-		var apierr *alphaxivcat.Error
-		if errors.As(err, &apierr) {
-			t.Log(string(apierr.DumpRequest(true)))
-		}
-		t.Fatalf("err should be nil: %s", err.Error())
-	}
-}
-
 func TestUserV3GetCurrentUser(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
@@ -356,13 +298,21 @@ func TestUserV3UpdatePreferencesWithOptionalParams(t *testing.T) {
 				Name:         "x",
 			}},
 			AssistantStyleSelection:          "default",
+			DefaultPaperPage:                 "abstract",
 			DefaultPrivatePaperSidebarTab:    "assistant",
 			DefaultPublicPaperSidebarTab:     "comments",
 			FeedSort:                         "Hot",
+			FolderSort:                       "added",
+			FolderSortReversed:               alphaxivcat.Bool(true),
+			HasCompletedOnboarding:           alphaxivcat.Bool(true),
+			HasSeenAssistantIntro:            alphaxivcat.Bool(true),
 			HasSeenForYouOnboarding:          alphaxivcat.Bool(true),
 			HasSeenResearcherOnboarding:      alphaxivcat.Bool(true),
+			HidesHomeAssistantIntro:          alphaxivcat.Bool(true),
 			IsDarkModeEnabled:                alphaxivcat.Bool(true),
 			IsDebugModeEnabled:               alphaxivcat.Bool(true),
+			PaperSort:                        "added",
+			PaperSortReversed:                alphaxivcat.Bool(true),
 			PreferredLanguage:                "am",
 			PreferredLlmFollowLatestCategory: alphaxivcat.String("preferredLlmFollowLatestCategory"),
 			PreferredLlmModel:                alphaxivcat.String("preferredLlmModel"),

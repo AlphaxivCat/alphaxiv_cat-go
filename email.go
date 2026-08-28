@@ -4,10 +4,7 @@ package alphaxivcat
 
 import (
 	"context"
-	"errors"
-	"fmt"
 	"net/http"
-	"net/url"
 	"slices"
 
 	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apijson"
@@ -58,40 +55,6 @@ func (r *EmailService) CaptureResendBouncedEmail(ctx context.Context, body Email
 	return res, err
 }
 
-// Kicks off a background job to send comment digest emails to users
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v1/emails/kickoff-comment-updates.controller.ts`
-func (r *EmailService) KickoffCommentUpdate(ctx context.Context, custom EmailKickoffCommentUpdateParamsCustom, body EmailKickoffCommentUpdateParams, opts ...option.RequestOption) (res *EmailKickoffCommentUpdateResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	if body.Role == "" {
-		err = errors.New("missing required role parameter")
-		return nil, err
-	}
-	if body.Window == "" {
-		err = errors.New("missing required window parameter")
-		return nil, err
-	}
-	path := fmt.Sprintf("v1/emails/kickoff-comment-update/%s/%s/%v", url.PathEscape(body.Role), url.PathEscape(body.Window), custom)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return res, err
-}
-
-// Kicks off a background job to send general digest emails to users
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v1/emails/kickoff-general-updates.controller.ts`
-func (r *EmailService) KickoffGeneralUpdate(ctx context.Context, role string, opts ...option.RequestOption) (res *EmailKickoffGeneralUpdateResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	if role == "" {
-		err = errors.New("missing required role parameter")
-		return nil, err
-	}
-	path := fmt.Sprintf("v1/emails/kickoff-general-update/%s", url.PathEscape(role))
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
-	return res, err
-}
-
 // Process a bounced email and update user preferences
 //
 // Source file:
@@ -101,32 +64,6 @@ func (r *EmailService) KickoffGeneralUpdate(ctx context.Context, role string, op
 func (r *EmailService) ProcessBouncedEmail(ctx context.Context, body EmailProcessBouncedEmailParams, opts ...option.RequestOption) (res *EmailProcessBouncedEmailResponse, err error) {
 	opts = slices.Concat(r.options, opts)
 	path := "v1/emails/process-bounced-email"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return res, err
-}
-
-// Process comment digest email for a user
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v1/emails/process-user-comment-update.controller.ts`
-//
-// Deprecated: deprecated
-func (r *EmailService) ProcessCommentUpdate(ctx context.Context, body EmailProcessCommentUpdateParams, opts ...option.RequestOption) (res *EmailProcessCommentUpdateResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "v1/emails/process-comment-update"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return res, err
-}
-
-// Process general digest email for a user
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/v1/emails/process-user-general-update.controller.ts`
-//
-// Deprecated: deprecated
-func (r *EmailService) ProcessGeneralUpdate(ctx context.Context, body EmailProcessGeneralUpdateParams, opts ...option.RequestOption) (res *EmailProcessGeneralUpdateResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	path := "v1/emails/process-general-update"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return res, err
 }
@@ -195,70 +132,6 @@ func (r *EmailCaptureResendBouncedEmailResponseData) UnmarshalJSON(data []byte) 
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type EmailKickoffCommentUpdateResponse struct {
-	Data EmailKickoffCommentUpdateResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r EmailKickoffCommentUpdateResponse) RawJSON() string { return r.JSON.raw }
-func (r *EmailKickoffCommentUpdateResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailKickoffCommentUpdateResponseData struct {
-	Message string `json:"message" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Message     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r EmailKickoffCommentUpdateResponseData) RawJSON() string { return r.JSON.raw }
-func (r *EmailKickoffCommentUpdateResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailKickoffGeneralUpdateResponse struct {
-	Data EmailKickoffGeneralUpdateResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r EmailKickoffGeneralUpdateResponse) RawJSON() string { return r.JSON.raw }
-func (r *EmailKickoffGeneralUpdateResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailKickoffGeneralUpdateResponseData struct {
-	Message string `json:"message" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Message     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r EmailKickoffGeneralUpdateResponseData) RawJSON() string { return r.JSON.raw }
-func (r *EmailKickoffGeneralUpdateResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type EmailProcessBouncedEmailResponse struct {
 	Data EmailProcessBouncedEmailResponseData `json:"data" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -288,70 +161,6 @@ type EmailProcessBouncedEmailResponseData struct {
 // Returns the unmodified JSON received from the API
 func (r EmailProcessBouncedEmailResponseData) RawJSON() string { return r.JSON.raw }
 func (r *EmailProcessBouncedEmailResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailProcessCommentUpdateResponse struct {
-	Data EmailProcessCommentUpdateResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r EmailProcessCommentUpdateResponse) RawJSON() string { return r.JSON.raw }
-func (r *EmailProcessCommentUpdateResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailProcessCommentUpdateResponseData struct {
-	ProcessedUser string `json:"processedUser" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ProcessedUser respjson.Field
-		ExtraFields   map[string]respjson.Field
-		raw           string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r EmailProcessCommentUpdateResponseData) RawJSON() string { return r.JSON.raw }
-func (r *EmailProcessCommentUpdateResponseData) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailProcessGeneralUpdateResponse struct {
-	Data EmailProcessGeneralUpdateResponseData `json:"data" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Data        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r EmailProcessGeneralUpdateResponse) RawJSON() string { return r.JSON.raw }
-func (r *EmailProcessGeneralUpdateResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailProcessGeneralUpdateResponseData struct {
-	ProcessedUser string `json:"processedUser" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ProcessedUser respjson.Field
-		ExtraFields   map[string]respjson.Field
-		raw           string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r EmailProcessGeneralUpdateResponseData) RawJSON() string { return r.JSON.raw }
-func (r *EmailProcessGeneralUpdateResponseData) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -402,22 +211,6 @@ func (r *EmailCaptureResendBouncedEmailParamsData) UnmarshalJSON(data []byte) er
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type EmailKickoffCommentUpdateParams struct {
-	// User role to filter by
-	Role string `path:"role" api:"required" json:"-"`
-	// Time window in hours
-	Window string `path:"window" api:"required" json:"-"`
-	paramObj
-}
-
-// Whether to use custom digest
-type EmailKickoffCommentUpdateParamsCustom string
-
-const (
-	EmailKickoffCommentUpdateParamsCustomTrue  EmailKickoffCommentUpdateParamsCustom = "true"
-	EmailKickoffCommentUpdateParamsCustomFalse EmailKickoffCommentUpdateParamsCustom = "false"
-)
-
 type EmailProcessBouncedEmailParams struct {
 	Email string `json:"email" api:"required" format:"email"`
 	paramObj
@@ -428,67 +221,5 @@ func (r EmailProcessBouncedEmailParams) MarshalJSON() (data []byte, err error) {
 	return param.MarshalObject(r, (*shadow)(&r))
 }
 func (r *EmailProcessBouncedEmailParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailProcessCommentUpdateParams struct {
-	UserID        string                                       `json:"userId" api:"required" format:"uuid"`
-	CustomContent EmailProcessCommentUpdateParamsCustomContent `json:"customContent,omitzero"`
-	paramObj
-}
-
-func (r EmailProcessCommentUpdateParams) MarshalJSON() (data []byte, err error) {
-	type shadow EmailProcessCommentUpdateParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *EmailProcessCommentUpdateParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailProcessCommentUpdateParamsCustomContent struct {
-	IntroText param.Opt[string]                                   `json:"introText,omitzero"`
-	Subject   param.Opt[string]                                   `json:"subject,omitzero"`
-	Events    []EmailProcessCommentUpdateParamsCustomContentEvent `json:"events,omitzero"`
-	paramObj
-}
-
-func (r EmailProcessCommentUpdateParamsCustomContent) MarshalJSON() (data []byte, err error) {
-	type shadow EmailProcessCommentUpdateParamsCustomContent
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *EmailProcessCommentUpdateParamsCustomContent) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-// The properties Date, Description, Link, Title are required.
-type EmailProcessCommentUpdateParamsCustomContentEvent struct {
-	Date         string            `json:"date" api:"required"`
-	Description  string            `json:"description" api:"required"`
-	Link         string            `json:"link" api:"required"`
-	Title        string            `json:"title" api:"required"`
-	CtaText      param.Opt[string] `json:"ctaText,omitzero"`
-	EndTimeRaw   param.Opt[string] `json:"endTimeRaw,omitzero"`
-	StartTimeRaw param.Opt[string] `json:"startTimeRaw,omitzero"`
-	paramObj
-}
-
-func (r EmailProcessCommentUpdateParamsCustomContentEvent) MarshalJSON() (data []byte, err error) {
-	type shadow EmailProcessCommentUpdateParamsCustomContentEvent
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *EmailProcessCommentUpdateParamsCustomContentEvent) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type EmailProcessGeneralUpdateParams struct {
-	UserID string `json:"userId" api:"required" format:"uuid"`
-	paramObj
-}
-
-func (r EmailProcessGeneralUpdateParams) MarshalJSON() (data []byte, err error) {
-	type shadow EmailProcessGeneralUpdateParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *EmailProcessGeneralUpdateParams) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }

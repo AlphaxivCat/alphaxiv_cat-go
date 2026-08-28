@@ -76,6 +76,7 @@ type UserV3FollowingListResponseUser struct {
 	Institution      string                                  `json:"institution" api:"required"`
 	RealName         string                                  `json:"realName" api:"required"`
 	Reputation       float64                                 `json:"reputation" api:"required"`
+	ResearcherSlug   string                                  `json:"researcherSlug" api:"required"`
 	Username         string                                  `json:"username" api:"required"`
 	WeeklyReputation float64                                 `json:"weeklyReputation" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -86,6 +87,7 @@ type UserV3FollowingListResponseUser struct {
 		Institution      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Username         respjson.Field
 		WeeklyReputation respjson.Field
 		ExtraFields      map[string]respjson.Field
