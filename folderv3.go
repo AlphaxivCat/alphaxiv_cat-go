@@ -4,6 +4,7 @@ package alphaxivcat
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
@@ -228,10 +229,11 @@ type FolderV3ListResponsePaper struct {
 	PublicationDate string                                  `json:"publicationDate" api:"required"`
 	Title           string                                  `json:"title" api:"required"`
 	Topics          []string                                `json:"topics" api:"required"`
-	// Any of "private", "community", "public".
+	// Any of "private", "public".
 	Type             string                                `json:"type" api:"required"`
 	UniversalPaperID string                                `json:"universalPaperId" api:"required"`
 	UserAuthors      []FolderV3ListResponsePaperUserAuthor `json:"userAuthors" api:"required"`
+	Votes            float64                               `json:"votes" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Abstract         respjson.Field
@@ -250,6 +252,7 @@ type FolderV3ListResponsePaper struct {
 		Type             respjson.Field
 		UniversalPaperID respjson.Field
 		UserAuthors      respjson.Field
+		Votes            respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
 	} `json:"-"`
@@ -302,17 +305,18 @@ func (r *FolderV3ListResponsePaperAuthorsV2) UnmarshalJSON(data []byte) error {
 }
 
 type FolderV3ListResponsePaperAuthorsV2Researcher struct {
-	Affiliation   string                                                 `json:"affiliation" api:"required"`
-	Bio           string                                                 `json:"bio" api:"required"`
-	Citations     float64                                                `json:"citations" api:"required"`
-	Headline      string                                                 `json:"headline" api:"required"`
-	HIndex        float64                                                `json:"hIndex" api:"required"`
-	LinkedUser    FolderV3ListResponsePaperAuthorsV2ResearcherLinkedUser `json:"linkedUser" api:"required"`
-	Links         FolderV3ListResponsePaperAuthorsV2ResearcherLinks      `json:"links" api:"required"`
-	Name          string                                                 `json:"name" api:"required"`
-	PhotoURL      string                                                 `json:"photoUrl" api:"required"`
-	ResearchAreas []string                                               `json:"researchAreas" api:"required"`
-	Slug          string                                                 `json:"slug" api:"required"`
+	Affiliation   string                                                  `json:"affiliation" api:"required"`
+	Bio           string                                                  `json:"bio" api:"required"`
+	Citations     float64                                                 `json:"citations" api:"required"`
+	Headline      string                                                  `json:"headline" api:"required"`
+	HIndex        float64                                                 `json:"hIndex" api:"required"`
+	LinkedUser    FolderV3ListResponsePaperAuthorsV2ResearcherLinkedUser  `json:"linkedUser" api:"required"`
+	Links         FolderV3ListResponsePaperAuthorsV2ResearcherLinks       `json:"links" api:"required"`
+	Name          string                                                  `json:"name" api:"required"`
+	PhotoURL      string                                                  `json:"photoUrl" api:"required"`
+	ResearchAreas []string                                                `json:"researchAreas" api:"required"`
+	Slug          string                                                  `json:"slug" api:"required"`
+	Reason        FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion `json:"reason"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Affiliation   respjson.Field
@@ -326,6 +330,7 @@ type FolderV3ListResponsePaperAuthorsV2Researcher struct {
 		PhotoURL      respjson.Field
 		ResearchAreas respjson.Field
 		Slug          respjson.Field
+		Reason        respjson.Field
 		ExtraFields   map[string]respjson.Field
 		raw           string
 	} `json:"-"`
@@ -395,6 +400,134 @@ func (r *FolderV3ListResponsePaperAuthorsV2ResearcherLinks) UnmarshalJSON(data [
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion contains all possible
+// properties and values from
+// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject],
+// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonKind],
+// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2].
+//
+// Use the methods beginning with 'As' to cast the union to one of its variants.
+type FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion struct {
+	Kind string `json:"kind"`
+	// This field is from variant
+	// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject].
+	PaperTitle string `json:"paperTitle"`
+	// This field is from variant
+	// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2].
+	Count float64 `json:"count"`
+	// This field is from variant
+	// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2].
+	Followed FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2Followed `json:"followed"`
+	JSON     struct {
+		Kind       respjson.Field
+		PaperTitle respjson.Field
+		Count      respjson.Field
+		Followed   respjson.Field
+		raw        string
+	} `json:"-"`
+}
+
+func (u FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion) AsFolderV3ListResponsePaperAuthorsV2ResearcherReasonObject() (v FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion) AsFolderV3ListResponsePaperAuthorsV2ResearcherReasonKind() (v FolderV3ListResponsePaperAuthorsV2ResearcherReasonKind) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion) AsFolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2() (v FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+// Returns the unmodified JSON received from the API
+func (u FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion) RawJSON() string { return u.JSON.raw }
+
+func (r *FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject struct {
+	// Any of "interest".
+	Kind       string `json:"kind" api:"required"`
+	PaperTitle string `json:"paperTitle"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Kind        respjson.Field
+		PaperTitle  respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject) RawJSON() string { return r.JSON.raw }
+func (r *FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3ListResponsePaperAuthorsV2ResearcherReasonKind struct {
+	// Any of "read".
+	Kind string `json:"kind" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Kind        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3ListResponsePaperAuthorsV2ResearcherReasonKind) RawJSON() string { return r.JSON.raw }
+func (r *FolderV3ListResponsePaperAuthorsV2ResearcherReasonKind) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2 struct {
+	Count float64 `json:"count" api:"required"`
+	// Any of "coauthor".
+	Kind     string                                                            `json:"kind" api:"required"`
+	Followed FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2Followed `json:"followed"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Count       respjson.Field
+		Kind        respjson.Field
+		Followed    respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2Followed struct {
+	Name string `json:"name" api:"required"`
+	Slug string `json:"slug" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Name        respjson.Field
+		Slug        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2Followed) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2Followed) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type FolderV3ListResponsePaperOrganization struct {
 	Image string `json:"image" api:"required"`
 	Name  string `json:"name" api:"required"`
@@ -425,6 +558,7 @@ type FolderV3ListResponsePaperUserAuthor struct {
 	PublicEmail      string                                      `json:"publicEmail" api:"required"`
 	RealName         string                                      `json:"realName" api:"required"`
 	Reputation       float64                                     `json:"reputation" api:"required"`
+	ResearcherSlug   string                                      `json:"researcherSlug" api:"required"`
 	// Any of "user", "reviewer", "admin", "bot".
 	Role             string  `json:"role" api:"required"`
 	Username         string  `json:"username" api:"required"`
@@ -444,6 +578,7 @@ type FolderV3ListResponsePaperUserAuthor struct {
 		PublicEmail      respjson.Field
 		RealName         respjson.Field
 		Reputation       respjson.Field
+		ResearcherSlug   respjson.Field
 		Role             respjson.Field
 		Username         respjson.Field
 		Verified         respjson.Field

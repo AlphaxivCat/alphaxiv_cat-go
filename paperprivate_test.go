@@ -30,6 +30,7 @@ func TestPaperPrivateNewWithOptionalParams(t *testing.T) {
 		File:        "x",
 		Filename:    "x",
 		ContentType: alphaxivcat.String("contentType"),
+		FolderID:    alphaxivcat.String("182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"),
 	})
 	if err != nil {
 		var apierr *alphaxivcat.Error
