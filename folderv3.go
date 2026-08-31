@@ -404,17 +404,16 @@ func (r *FolderV3ListResponsePaperAuthorsV2ResearcherLinks) UnmarshalJSON(data [
 // properties and values from
 // [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject],
 // [FolderV3ListResponsePaperAuthorsV2ResearcherReasonKind],
-// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2].
+// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2],
+// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject3].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion struct {
 	Kind string `json:"kind"`
 	// This field is from variant
 	// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject].
-	PaperTitle string `json:"paperTitle"`
-	// This field is from variant
-	// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2].
-	Count float64 `json:"count"`
+	PaperTitle string  `json:"paperTitle"`
+	Count      float64 `json:"count"`
 	// This field is from variant
 	// [FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2].
 	Followed FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2Followed `json:"followed"`
@@ -438,6 +437,11 @@ func (u FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion) AsFolderV3ListR
 }
 
 func (u FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion) AsFolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2() (v FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u FolderV3ListResponsePaperAuthorsV2ResearcherReasonUnion) AsFolderV3ListResponsePaperAuthorsV2ResearcherReasonObject3() (v FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject3) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -525,6 +529,27 @@ func (r FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2Followed) RawJS
 	return r.JSON.raw
 }
 func (r *FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject2Followed) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject3 struct {
+	Count float64 `json:"count" api:"required"`
+	// Any of "coauthored".
+	Kind string `json:"kind" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Count       respjson.Field
+		Kind        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject3) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *FolderV3ListResponsePaperAuthorsV2ResearcherReasonObject3) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

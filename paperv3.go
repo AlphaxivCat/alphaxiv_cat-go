@@ -909,17 +909,16 @@ func (r *PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherLinks) UnmarshalJ
 // possible properties and values from
 // [PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject],
 // [PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonKind],
-// [PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2].
+// [PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2],
+// [PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject3].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonUnion struct {
 	Kind string `json:"kind"`
 	// This field is from variant
 	// [PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject].
-	PaperTitle string `json:"paperTitle"`
-	// This field is from variant
-	// [PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2].
-	Count float64 `json:"count"`
+	PaperTitle string  `json:"paperTitle"`
+	Count      float64 `json:"count"`
 	// This field is from variant
 	// [PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2].
 	Followed PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2Followed `json:"followed"`
@@ -943,6 +942,11 @@ func (u PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonUnion) AsPap
 }
 
 func (u PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2() (v PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject3() (v PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject3) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -1036,6 +1040,27 @@ func (r PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2Follo
 	return r.JSON.raw
 }
 func (r *PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject2Followed) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject3 struct {
+	Count float64 `json:"count" api:"required"`
+	// Any of "coauthored".
+	Kind string `json:"kind" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Count       respjson.Field
+		Kind        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject3) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherReasonObject3) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -1540,17 +1565,16 @@ func (r *PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherLinks) UnmarshalJSON(
 // possible properties and values from
 // [PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject],
 // [PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonKind],
-// [PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2].
+// [PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2],
+// [PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject3].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonUnion struct {
 	Kind string `json:"kind"`
 	// This field is from variant
 	// [PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject].
-	PaperTitle string `json:"paperTitle"`
-	// This field is from variant
-	// [PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2].
-	Count float64 `json:"count"`
+	PaperTitle string  `json:"paperTitle"`
+	Count      float64 `json:"count"`
 	// This field is from variant
 	// [PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2].
 	Followed PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2Followed `json:"followed"`
@@ -1574,6 +1598,11 @@ func (u PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonUnion) AsPaperV3
 }
 
 func (u PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2() (v PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject3() (v PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject3) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -1667,6 +1696,27 @@ func (r PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2Followed)
 	return r.JSON.raw
 }
 func (r *PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject2Followed) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject3 struct {
+	Count float64 `json:"count" api:"required"`
+	// Any of "coauthored".
+	Kind string `json:"kind" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Count       respjson.Field
+		Kind        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject3) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherReasonObject3) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -2219,17 +2269,16 @@ func (r *PaperV3GetPreviewResponseFullAuthorsV2ResearcherLinks) UnmarshalJSON(da
 // possible properties and values from
 // [PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject],
 // [PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonKind],
-// [PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2].
+// [PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2],
+// [PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject3].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonUnion struct {
 	Kind string `json:"kind"`
 	// This field is from variant
 	// [PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject].
-	PaperTitle string `json:"paperTitle"`
-	// This field is from variant
-	// [PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2].
-	Count float64 `json:"count"`
+	PaperTitle string  `json:"paperTitle"`
+	Count      float64 `json:"count"`
 	// This field is from variant
 	// [PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2].
 	Followed PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2Followed `json:"followed"`
@@ -2253,6 +2302,11 @@ func (u PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3Ge
 }
 
 func (u PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2() (v PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject3() (v PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject3) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -2346,6 +2400,27 @@ func (r PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2Followed) R
 	return r.JSON.raw
 }
 func (r *PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject2Followed) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject3 struct {
+	Count float64 `json:"count" api:"required"`
+	// Any of "coauthored".
+	Kind string `json:"kind" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Count       respjson.Field
+		Kind        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject3) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetPreviewResponseFullAuthorsV2ResearcherReasonObject3) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -2830,17 +2905,16 @@ func (r *PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherLinks) UnmarshalJ
 // possible properties and values from
 // [PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject],
 // [PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonKind],
-// [PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2].
+// [PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2],
+// [PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject3].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonUnion struct {
 	Kind string `json:"kind"`
 	// This field is from variant
 	// [PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject].
-	PaperTitle string `json:"paperTitle"`
-	// This field is from variant
-	// [PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2].
-	Count float64 `json:"count"`
+	PaperTitle string  `json:"paperTitle"`
+	Count      float64 `json:"count"`
 	// This field is from variant
 	// [PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2].
 	Followed PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2Followed `json:"followed"`
@@ -2864,6 +2938,11 @@ func (u PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonUnion) AsPap
 }
 
 func (u PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2() (v PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject3() (v PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject3) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -2957,6 +3036,27 @@ func (r PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2Follo
 	return r.JSON.raw
 }
 func (r *PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject2Followed) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject3 struct {
+	Count float64 `json:"count" api:"required"`
+	// Any of "coauthored".
+	Kind string `json:"kind" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Count       respjson.Field
+		Kind        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject3) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherReasonObject3) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -3439,17 +3539,16 @@ func (r *PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherLinks) UnmarshalJSON(
 // possible properties and values from
 // [PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject],
 // [PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonKind],
-// [PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2].
+// [PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2],
+// [PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject3].
 //
 // Use the methods beginning with 'As' to cast the union to one of its variants.
 type PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonUnion struct {
 	Kind string `json:"kind"`
 	// This field is from variant
 	// [PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject].
-	PaperTitle string `json:"paperTitle"`
-	// This field is from variant
-	// [PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2].
-	Count float64 `json:"count"`
+	PaperTitle string  `json:"paperTitle"`
+	Count      float64 `json:"count"`
 	// This field is from variant
 	// [PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2].
 	Followed PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2Followed `json:"followed"`
@@ -3473,6 +3572,11 @@ func (u PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3
 }
 
 func (u PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2() (v PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2) {
+	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
+	return
+}
+
+func (u PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonUnion) AsPaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject3() (v PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject3) {
 	apijson.UnmarshalRoot(json.RawMessage(u.JSON.raw), &v)
 	return
 }
@@ -3566,6 +3670,27 @@ func (r PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2Followed)
 	return r.JSON.raw
 }
 func (r *PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject2Followed) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject3 struct {
+	Count float64 `json:"count" api:"required"`
+	// Any of "coauthored".
+	Kind string `json:"kind" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Count       respjson.Field
+		Kind        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject3) RawJSON() string {
+	return r.JSON.raw
+}
+func (r *PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherReasonObject3) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
