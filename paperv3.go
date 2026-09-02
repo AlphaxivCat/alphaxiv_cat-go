@@ -631,6 +631,7 @@ type PaperV3GetDiversePapersResponse struct {
 	UpdatedAt             string                                               `json:"updated_at" api:"required"`
 	VersionID             string                                               `json:"version_id" api:"required" format:"uuid"`
 	CardPreviewBlobID     string                                               `json:"card_preview_blob_id" api:"nullable" format:"uuid"`
+	ExternalLink          PaperV3GetDiversePapersResponseExternalLink          `json:"external_link" api:"nullable"`
 	NarrationAudioURL     string                                               `json:"narration_audio_url" api:"nullable"`
 	RecommendationContext PaperV3GetDiversePapersResponseRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -660,6 +661,7 @@ type PaperV3GetDiversePapersResponse struct {
 		UpdatedAt             respjson.Field
 		VersionID             respjson.Field
 		CardPreviewBlobID     respjson.Field
+		ExternalLink          respjson.Field
 		NarrationAudioURL     respjson.Field
 		RecommendationContext respjson.Field
 		ExtraFields           map[string]respjson.Field
@@ -1144,6 +1146,26 @@ func (r *PaperV3GetDiversePapersResponsePaperSummary) UnmarshalJSON(data []byte)
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetDiversePapersResponseExternalLink struct {
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
+	SourceName  string `json:"source_name" api:"required"`
+	SourceURL   string `json:"source_url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		CoverBlobID respjson.Field
+		SourceName  respjson.Field
+		SourceURL   respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetDiversePapersResponseExternalLink) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetDiversePapersResponseExternalLink) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetDiversePapersResponseRecommendationContext struct {
 	FollowedAuthors []PaperV3GetDiversePapersResponseRecommendationContextFollowedAuthor `json:"followed_authors"`
 	FollowedLikers  []PaperV3GetDiversePapersResponseRecommendationContextFollowedLiker  `json:"followed_likers"`
@@ -1289,6 +1311,7 @@ type PaperV3GetFeedResponsePaper struct {
 	UpdatedAt             string                                           `json:"updated_at" api:"required"`
 	VersionID             string                                           `json:"version_id" api:"required" format:"uuid"`
 	CardPreviewBlobID     string                                           `json:"card_preview_blob_id" api:"nullable" format:"uuid"`
+	ExternalLink          PaperV3GetFeedResponsePaperExternalLink          `json:"external_link" api:"nullable"`
 	NarrationAudioURL     string                                           `json:"narration_audio_url" api:"nullable"`
 	RecommendationContext PaperV3GetFeedResponsePaperRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -1318,6 +1341,7 @@ type PaperV3GetFeedResponsePaper struct {
 		UpdatedAt             respjson.Field
 		VersionID             respjson.Field
 		CardPreviewBlobID     respjson.Field
+		ExternalLink          respjson.Field
 		NarrationAudioURL     respjson.Field
 		RecommendationContext respjson.Field
 		ExtraFields           map[string]respjson.Field
@@ -1800,6 +1824,26 @@ func (r *PaperV3GetFeedResponsePaperPaperSummary) UnmarshalJSON(data []byte) err
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetFeedResponsePaperExternalLink struct {
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
+	SourceName  string `json:"source_name" api:"required"`
+	SourceURL   string `json:"source_url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		CoverBlobID respjson.Field
+		SourceName  respjson.Field
+		SourceURL   respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetFeedResponsePaperExternalLink) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetFeedResponsePaperExternalLink) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetFeedResponsePaperRecommendationContext struct {
 	FollowedAuthors []PaperV3GetFeedResponsePaperRecommendationContextFollowedAuthor `json:"followed_authors"`
 	FollowedLikers  []PaperV3GetFeedResponsePaperRecommendationContextFollowedLiker  `json:"followed_likers"`
@@ -1993,6 +2037,7 @@ type PaperV3GetPreviewResponse struct {
 	UpdatedAt             string                                         `json:"updated_at" api:"required"`
 	VersionID             string                                         `json:"version_id" api:"required" format:"uuid"`
 	CardPreviewBlobID     string                                         `json:"card_preview_blob_id" api:"nullable" format:"uuid"`
+	ExternalLink          PaperV3GetPreviewResponseExternalLink          `json:"external_link" api:"nullable"`
 	NarrationAudioURL     string                                         `json:"narration_audio_url" api:"nullable"`
 	RecommendationContext PaperV3GetPreviewResponseRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -2022,6 +2067,7 @@ type PaperV3GetPreviewResponse struct {
 		UpdatedAt             respjson.Field
 		VersionID             respjson.Field
 		CardPreviewBlobID     respjson.Field
+		ExternalLink          respjson.Field
 		NarrationAudioURL     respjson.Field
 		RecommendationContext respjson.Field
 		ExtraFields           map[string]respjson.Field
@@ -2504,6 +2550,26 @@ func (r *PaperV3GetPreviewResponsePaperSummary) UnmarshalJSON(data []byte) error
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetPreviewResponseExternalLink struct {
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
+	SourceName  string `json:"source_name" api:"required"`
+	SourceURL   string `json:"source_url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		CoverBlobID respjson.Field
+		SourceName  respjson.Field
+		SourceURL   respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetPreviewResponseExternalLink) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetPreviewResponseExternalLink) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetPreviewResponseRecommendationContext struct {
 	FollowedAuthors []PaperV3GetPreviewResponseRecommendationContextFollowedAuthor `json:"followed_authors"`
 	FollowedLikers  []PaperV3GetPreviewResponseRecommendationContextFollowedLiker  `json:"followed_likers"`
@@ -2627,6 +2693,7 @@ type PaperV3GetSimilarPapersResponse struct {
 	UpdatedAt             string                                               `json:"updated_at" api:"required"`
 	VersionID             string                                               `json:"version_id" api:"required" format:"uuid"`
 	CardPreviewBlobID     string                                               `json:"card_preview_blob_id" api:"nullable" format:"uuid"`
+	ExternalLink          PaperV3GetSimilarPapersResponseExternalLink          `json:"external_link" api:"nullable"`
 	NarrationAudioURL     string                                               `json:"narration_audio_url" api:"nullable"`
 	RecommendationContext PaperV3GetSimilarPapersResponseRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -2656,6 +2723,7 @@ type PaperV3GetSimilarPapersResponse struct {
 		UpdatedAt             respjson.Field
 		VersionID             respjson.Field
 		CardPreviewBlobID     respjson.Field
+		ExternalLink          respjson.Field
 		NarrationAudioURL     respjson.Field
 		RecommendationContext respjson.Field
 		ExtraFields           map[string]respjson.Field
@@ -3140,6 +3208,26 @@ func (r *PaperV3GetSimilarPapersResponsePaperSummary) UnmarshalJSON(data []byte)
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetSimilarPapersResponseExternalLink struct {
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
+	SourceName  string `json:"source_name" api:"required"`
+	SourceURL   string `json:"source_url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		CoverBlobID respjson.Field
+		SourceName  respjson.Field
+		SourceURL   respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetSimilarPapersResponseExternalLink) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetSimilarPapersResponseExternalLink) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetSimilarPapersResponseRecommendationContext struct {
 	FollowedAuthors []PaperV3GetSimilarPapersResponseRecommendationContextFollowedAuthor `json:"followed_authors"`
 	FollowedLikers  []PaperV3GetSimilarPapersResponseRecommendationContextFollowedLiker  `json:"followed_likers"`
@@ -3263,6 +3351,7 @@ type PaperV3GetUnrelatedResponse struct {
 	UpdatedAt             string                                           `json:"updated_at" api:"required"`
 	VersionID             string                                           `json:"version_id" api:"required" format:"uuid"`
 	CardPreviewBlobID     string                                           `json:"card_preview_blob_id" api:"nullable" format:"uuid"`
+	ExternalLink          PaperV3GetUnrelatedResponseExternalLink          `json:"external_link" api:"nullable"`
 	NarrationAudioURL     string                                           `json:"narration_audio_url" api:"nullable"`
 	RecommendationContext PaperV3GetUnrelatedResponseRecommendationContext `json:"recommendation_context"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -3292,6 +3381,7 @@ type PaperV3GetUnrelatedResponse struct {
 		UpdatedAt             respjson.Field
 		VersionID             respjson.Field
 		CardPreviewBlobID     respjson.Field
+		ExternalLink          respjson.Field
 		NarrationAudioURL     respjson.Field
 		RecommendationContext respjson.Field
 		ExtraFields           map[string]respjson.Field
@@ -3774,6 +3864,26 @@ func (r *PaperV3GetUnrelatedResponsePaperSummary) UnmarshalJSON(data []byte) err
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type PaperV3GetUnrelatedResponseExternalLink struct {
+	CoverBlobID string `json:"cover_blob_id" api:"required" format:"uuid"`
+	SourceName  string `json:"source_name" api:"required"`
+	SourceURL   string `json:"source_url" api:"required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		CoverBlobID respjson.Field
+		SourceName  respjson.Field
+		SourceURL   respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r PaperV3GetUnrelatedResponseExternalLink) RawJSON() string { return r.JSON.raw }
+func (r *PaperV3GetUnrelatedResponseExternalLink) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type PaperV3GetUnrelatedResponseRecommendationContext struct {
 	FollowedAuthors []PaperV3GetUnrelatedResponseRecommendationContextFollowedAuthor `json:"followed_authors"`
 	FollowedLikers  []PaperV3GetUnrelatedResponseRecommendationContextFollowedLiker  `json:"followed_likers"`
@@ -4086,7 +4196,8 @@ func (r PaperV3GetAllParams) URLQuery() (v url.Values, err error) {
 }
 
 type PaperV3GetDiversePapersParams struct {
-	Topics string `query:"topics" api:"required" json:"-"`
+	Topics    string            `query:"topics" api:"required" json:"-"`
+	LinkBlogs param.Opt[string] `query:"linkBlogs,omitzero" json:"-"`
 	paramObj
 }
 
@@ -4109,6 +4220,7 @@ type PaperV3GetFeedParams struct {
 	Sort                 PaperV3GetFeedParamsSort `query:"sort,omitzero" api:"required" json:"-"`
 	FeedCursor           param.Opt[string]        `query:"feedCursor,omitzero" json:"-"`
 	IncludeExternalBlogs param.Opt[string]        `query:"includeExternalBlogs,omitzero" json:"-"`
+	LinkBlogs            param.Opt[string]        `query:"linkBlogs,omitzero" json:"-"`
 	Runnable             param.Opt[string]        `query:"runnable,omitzero" json:"-"`
 	Topics               param.Opt[string]        `query:"topics,omitzero" json:"-"`
 	// A versionless universal paper ID (e.g. 1706.03762)
@@ -4156,8 +4268,9 @@ const (
 )
 
 type PaperV3GetSimilarPapersParams struct {
-	Exclude param.Opt[string] `query:"exclude,omitzero" json:"-"`
-	Limit   param.Opt[string] `query:"limit,omitzero" json:"-"`
+	Exclude   param.Opt[string] `query:"exclude,omitzero" json:"-"`
+	Limit     param.Opt[string] `query:"limit,omitzero" json:"-"`
+	LinkBlogs param.Opt[string] `query:"linkBlogs,omitzero" json:"-"`
 	// Any of "false", "true".
 	ExcludeLikes PaperV3GetSimilarPapersParamsExcludeLikes `query:"excludeLikes,omitzero" json:"-"`
 	// Any of "3 Days", "7 Days", "30 Days", "90 Days", "All time".
@@ -4192,9 +4305,10 @@ const (
 )
 
 type PaperV3GetUnrelatedParams struct {
-	Limit  string `query:"limit" api:"required" json:"-"`
-	Papers string `query:"papers" api:"required" json:"-"`
-	Topics string `query:"topics" api:"required" json:"-"`
+	Limit     string            `query:"limit" api:"required" json:"-"`
+	Papers    string            `query:"papers" api:"required" json:"-"`
+	Topics    string            `query:"topics" api:"required" json:"-"`
+	LinkBlogs param.Opt[string] `query:"linkBlogs,omitzero" json:"-"`
 	paramObj
 }
 

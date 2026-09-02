@@ -102,21 +102,6 @@ func (r *UserV3Service) GetFeaturedActivity(ctx context.Context, id string, opts
 	return res, err
 }
 
-// List the users following the specified user
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/users/v3/get-followers.controller.ts`
-func (r *UserV3Service) GetFollowers(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3GetFollowersResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	if id == "" {
-		err = errors.New("missing required id parameter")
-		return nil, err
-	}
-	path := fmt.Sprintf("users/v3/%s/followers", id)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return res, err
-}
-
 // Retrieve weekly and all-time leaderboards for users ranked by reputation
 //
 // Source file:
@@ -179,21 +164,6 @@ func (r *UserV3Service) Search(ctx context.Context, query UserV3SearchParams, op
 	opts = slices.Concat(r.options, opts)
 	path := "users/v3/search"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return res, err
-}
-
-// Follow or unfollow another user
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/users/v3/toggle-follow-user.controller.ts`
-func (r *UserV3Service) ToggleFollowUser(ctx context.Context, id string, opts ...option.RequestOption) (res *UserV3ToggleFollowUserResponse, err error) {
-	opts = slices.Concat(r.options, opts)
-	if id == "" {
-		err = errors.New("missing required id parameter")
-		return nil, err
-	}
-	path := fmt.Sprintf("users/v3/%s/follow", id)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, nil, &res, opts...)
 	return res, err
 }
 
@@ -931,73 +901,6 @@ func (r *UserV3GetFeaturedActivityResponseObject2Data) UnmarshalJSON(data []byte
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type UserV3GetFollowersResponse struct {
-	Followers []UserV3GetFollowersResponseFollower `json:"followers" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Followers   respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r UserV3GetFollowersResponse) RawJSON() string { return r.JSON.raw }
-func (r *UserV3GetFollowersResponse) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type UserV3GetFollowersResponseFollower struct {
-	ID               string                                     `json:"id" api:"required" format:"uuid"`
-	Avatar           []UserV3GetFollowersResponseFollowerAvatar `json:"avatar" api:"required"`
-	GoogleScholarID  string                                     `json:"googleScholarId" api:"required"`
-	Institution      string                                     `json:"institution" api:"required"`
-	RealName         string                                     `json:"realName" api:"required"`
-	Reputation       float64                                    `json:"reputation" api:"required"`
-	ResearcherSlug   string                                     `json:"researcherSlug" api:"required"`
-	Username         string                                     `json:"username" api:"required"`
-	WeeklyReputation float64                                    `json:"weeklyReputation" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID               respjson.Field
-		Avatar           respjson.Field
-		GoogleScholarID  respjson.Field
-		Institution      respjson.Field
-		RealName         respjson.Field
-		Reputation       respjson.Field
-		ResearcherSlug   respjson.Field
-		Username         respjson.Field
-		WeeklyReputation respjson.Field
-		ExtraFields      map[string]respjson.Field
-		raw              string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r UserV3GetFollowersResponseFollower) RawJSON() string { return r.JSON.raw }
-func (r *UserV3GetFollowersResponseFollower) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type UserV3GetFollowersResponseFollowerAvatar struct {
-	// Any of "full_size", "thumbnail".
-	Type string `json:"type" api:"required"`
-	URL  string `json:"url" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Type        respjson.Field
-		URL         respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r UserV3GetFollowersResponseFollowerAvatar) RawJSON() string { return r.JSON.raw }
-func (r *UserV3GetFollowersResponseFollowerAvatar) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type UserV3GetLeaderboardResponse struct {
 	AllTime []UserV3GetLeaderboardResponseAllTime `json:"allTime" api:"required"`
 	Weekly  []UserV3GetLeaderboardResponseWeekly  `json:"weekly" api:"required"`
@@ -1380,22 +1283,6 @@ type UserV3SearchResponseUserAvatar struct {
 // Returns the unmodified JSON received from the API
 func (r UserV3SearchResponseUserAvatar) RawJSON() string { return r.JSON.raw }
 func (r *UserV3SearchResponseUserAvatar) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type UserV3ToggleFollowUserResponse struct {
-	Following bool `json:"following" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Following   respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r UserV3ToggleFollowUserResponse) RawJSON() string { return r.JSON.raw }
-func (r *UserV3ToggleFollowUserResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
