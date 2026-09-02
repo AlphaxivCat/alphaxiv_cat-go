@@ -161,10 +161,11 @@ type AssistantV2ChatParams struct {
 	Files              []AssistantV2ChatParamsFile        `json:"files,omitzero" api:"required"`
 	Message            string                             `json:"message" api:"required"`
 	// Any of "off", "full".
-	WebSearch AssistantV2ChatParamsWebSearch `json:"webSearch,omitzero" api:"required"`
-	Model     param.Opt[string]              `json:"model,omitzero"`
-	Protocol  param.Opt[int64]               `json:"protocol,omitzero"`
-	Signature param.Opt[string]              `json:"signature,omitzero"`
+	WebSearch  AssistantV2ChatParamsWebSearch `json:"webSearch,omitzero" api:"required"`
+	Model      param.Opt[string]              `json:"model,omitzero"`
+	OverviewID param.Opt[string]              `json:"overviewId,omitzero" format:"uuid"`
+	Protocol   param.Opt[int64]               `json:"protocol,omitzero"`
+	Signature  param.Opt[string]              `json:"signature,omitzero"`
 	// Any of "homepage", "paper", "landing".
 	AssistantVariant AssistantV2ChatParamsAssistantVariant `json:"assistantVariant,omitzero"`
 	CustomFilter     AssistantV2ChatParamsCustomFilter     `json:"customFilter,omitzero"`
