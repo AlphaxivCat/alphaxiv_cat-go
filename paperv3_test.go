@@ -358,7 +358,7 @@ func TestPaperV3GetAllWithOptionalParams(t *testing.T) {
 	}
 }
 
-func TestPaperV3GetDiversePapers(t *testing.T) {
+func TestPaperV3GetDiversePapersWithOptionalParams(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -372,7 +372,8 @@ func TestPaperV3GetDiversePapers(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Papers.V3.GetDiversePapers(context.TODO(), alphaxivcat.PaperV3GetDiversePapersParams{
-		Topics: "topics",
+		Topics:    "topics",
+		LinkBlogs: alphaxivcat.String("linkBlogs"),
 	})
 	if err != nil {
 		var apierr *alphaxivcat.Error
@@ -403,6 +404,7 @@ func TestPaperV3GetFeedWithOptionalParams(t *testing.T) {
 		Sort:                 alphaxivcat.PaperV3GetFeedParamsSortHot,
 		FeedCursor:           alphaxivcat.String("feedCursor"),
 		IncludeExternalBlogs: alphaxivcat.String("includeExternalBlogs"),
+		LinkBlogs:            alphaxivcat.String("linkBlogs"),
 		Runnable:             alphaxivcat.String("runnable"),
 		Source:               alphaxivcat.PaperV3GetFeedParamsSourceGitHub,
 		Topics:               alphaxivcat.String("topics"),
@@ -530,6 +532,7 @@ func TestPaperV3GetSimilarPapersWithOptionalParams(t *testing.T) {
 			ExcludeLikes: alphaxivcat.PaperV3GetSimilarPapersParamsExcludeLikesFalse,
 			Interval:     alphaxivcat.PaperV3GetSimilarPapersParamsInterval3Days,
 			Limit:        alphaxivcat.String("limit"),
+			LinkBlogs:    alphaxivcat.String("linkBlogs"),
 		},
 	)
 	if err != nil {
@@ -541,7 +544,7 @@ func TestPaperV3GetSimilarPapersWithOptionalParams(t *testing.T) {
 	}
 }
 
-func TestPaperV3GetUnrelated(t *testing.T) {
+func TestPaperV3GetUnrelatedWithOptionalParams(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -555,9 +558,10 @@ func TestPaperV3GetUnrelated(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Papers.V3.GetUnrelated(context.TODO(), alphaxivcat.PaperV3GetUnrelatedParams{
-		Limit:  "limit",
-		Papers: "papers",
-		Topics: "topics",
+		Limit:     "limit",
+		Papers:    "papers",
+		Topics:    "topics",
+		LinkBlogs: alphaxivcat.String("linkBlogs"),
 	})
 	if err != nil {
 		var apierr *alphaxivcat.Error
