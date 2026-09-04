@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.10.0 (2026-09-04)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** api update ([b473aa3](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/b473aa3df832f6cb664cda18f64e4db8d747f7b6))
+* **api:** api update ([f06d61e](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/f06d61ed95b00248a1a63c8104ea2ae8eb4dcefb))
+* **api:** api update ([eb0872f](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/eb0872f7cec29c6d4678febcf1287baa4127ae91))
+* **api:** api update ([fd07579](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/fd0757979c222f91714d25c197021762fec4219c))
+* **api:** api update ([3170e70](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/3170e70a8ce9427ae0df08538af6ae3013961e0f))
+* **api:** api update ([9171776](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/9171776835e6319dc9115ec38456e40e666b6e2b))
+* **api:** api update ([5ac23a8](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/5ac23a857a6c2999e6786696d89b5d976df9d339))
+* **api:** api update ([b5d6395](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/b5d63954539643717dc83b7bac4f3ea443b3e5a7))
+* **api:** api update ([7865a2c](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/7865a2c2a4750c09e99fda8efc2a309715452a14))
+* **api:** api update ([f5f81cb](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/f5f81cbb59d4a8c835752550641eefea04d4fdb5))
+* **api:** api update ([df2fcf2](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/df2fcf26925d29b393b5f0a55598876bd47bbb20))
+* **api:** api update ([7fe2059](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/7fe20599e409ed162bcebe4bb0d686b11796bd40))
+* **api:** api update ([aea1aeb](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/aea1aeb13fe3958a0502a7288a3350e9717dfd1a))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([5490a29](https://github.com/AlphaxivCat/alphaxiv_cat-go/commit/5490a29e68d0058bbc066e15cbdc4c5ac7dd55dd))
+
 ## 0.9.0 (2026-06-17)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/AlphaxivCat/alphaxiv_cat-go/compare/v0.8.0...v0.9.0)

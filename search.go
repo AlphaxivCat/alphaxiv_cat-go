@@ -12,6 +12,7 @@ import (
 	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/apiquery"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/internal/requestconfig"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/option"
+	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/param"
 	"github.com/AlphaxivCat/alphaxiv_cat-go/packages/respjson"
 )
 
@@ -47,7 +48,7 @@ func (r *SearchService) ClosestTopic(ctx context.Context, query SearchClosestTop
 	return res, err
 }
 
-// Search for papers using Google and enrich results
+// Search for papers, fusing Google's ranking with built-in keyword search
 //
 // Source file:
 // `api-server/file:/app/api-server/src/controllers/v1/search/search-google.controller.ts`
@@ -93,7 +94,8 @@ func (r SearchClosestTopicParams) URLQuery() (v url.Values, err error) {
 
 type SearchGoogleSearchParams struct {
 	// Search query
-	Q string `query:"q" api:"required" json:"-"`
+	Q         string            `query:"q" api:"required" json:"-"`
+	LinkBlogs param.Opt[string] `query:"linkBlogs,omitzero" json:"-"`
 	paramObj
 }
 
