@@ -117,7 +117,7 @@ func (r *FolderV3SharedGetResponseChildFolder) UnmarshalJSON(data []byte) error 
 type FolderV3SharedGetResponseChildFolderPaper struct {
 	Abstract  string                                               `json:"abstract" api:"required"`
 	AddedAt   string                                               `json:"addedAt" api:"required"`
-	Authors   []FolderV3SharedGetResponseChildFolderPaperAuthor    `json:"authors" api:"required"`
+	Authors   []any                                                `json:"authors" api:"required"`
 	AuthorsV2 []FolderV3SharedGetResponseChildFolderPaperAuthorsV2 `json:"authors_v2" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID     string                                                  `json:"canonicalId" api:"required"`
@@ -161,28 +161,6 @@ type FolderV3SharedGetResponseChildFolderPaper struct {
 // Returns the unmodified JSON received from the API
 func (r FolderV3SharedGetResponseChildFolderPaper) RawJSON() string { return r.JSON.raw }
 func (r *FolderV3SharedGetResponseChildFolderPaper) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type FolderV3SharedGetResponseChildFolderPaperAuthor struct {
-	ID       string `json:"id" api:"required" format:"uuid"`
-	FullName string `json:"full_name" api:"required"`
-	UserID   string `json:"user_id" api:"required" format:"uuid"`
-	Username string `json:"username" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		FullName    respjson.Field
-		UserID      respjson.Field
-		Username    respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r FolderV3SharedGetResponseChildFolderPaperAuthor) RawJSON() string { return r.JSON.raw }
-func (r *FolderV3SharedGetResponseChildFolderPaperAuthor) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -585,7 +563,7 @@ func (r *FolderV3SharedGetResponseFolder) UnmarshalJSON(data []byte) error {
 type FolderV3SharedGetResponseFolderPaper struct {
 	Abstract  string                                          `json:"abstract" api:"required"`
 	AddedAt   string                                          `json:"addedAt" api:"required"`
-	Authors   []FolderV3SharedGetResponseFolderPaperAuthor    `json:"authors" api:"required"`
+	Authors   []any                                           `json:"authors" api:"required"`
 	AuthorsV2 []FolderV3SharedGetResponseFolderPaperAuthorsV2 `json:"authors_v2" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID     string                                             `json:"canonicalId" api:"required"`
@@ -629,28 +607,6 @@ type FolderV3SharedGetResponseFolderPaper struct {
 // Returns the unmodified JSON received from the API
 func (r FolderV3SharedGetResponseFolderPaper) RawJSON() string { return r.JSON.raw }
 func (r *FolderV3SharedGetResponseFolderPaper) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type FolderV3SharedGetResponseFolderPaperAuthor struct {
-	ID       string `json:"id" api:"required" format:"uuid"`
-	FullName string `json:"full_name" api:"required"`
-	UserID   string `json:"user_id" api:"required" format:"uuid"`
-	Username string `json:"username" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		FullName    respjson.Field
-		UserID      respjson.Field
-		Username    respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r FolderV3SharedGetResponseFolderPaperAuthor) RawJSON() string { return r.JSON.raw }
-func (r *FolderV3SharedGetResponseFolderPaperAuthor) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
