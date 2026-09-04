@@ -217,7 +217,7 @@ func (r *FolderV3ListResponse) UnmarshalJSON(data []byte) error {
 type FolderV3ListResponsePaper struct {
 	Abstract  string                               `json:"abstract" api:"required"`
 	AddedAt   string                               `json:"addedAt" api:"required"`
-	Authors   []FolderV3ListResponsePaperAuthor    `json:"authors" api:"required"`
+	Authors   []any                                `json:"authors" api:"required"`
 	AuthorsV2 []FolderV3ListResponsePaperAuthorsV2 `json:"authors_v2" api:"required"`
 	// A versioned paper ID (e.g. 1706.03762v1)
 	CanonicalID     string                                  `json:"canonicalId" api:"required"`
@@ -261,28 +261,6 @@ type FolderV3ListResponsePaper struct {
 // Returns the unmodified JSON received from the API
 func (r FolderV3ListResponsePaper) RawJSON() string { return r.JSON.raw }
 func (r *FolderV3ListResponsePaper) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type FolderV3ListResponsePaperAuthor struct {
-	ID       string `json:"id" api:"required" format:"uuid"`
-	FullName string `json:"full_name" api:"required"`
-	UserID   string `json:"user_id" api:"required" format:"uuid"`
-	Username string `json:"username" api:"required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ID          respjson.Field
-		FullName    respjson.Field
-		UserID      respjson.Field
-		Username    respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r FolderV3ListResponsePaperAuthor) RawJSON() string { return r.JSON.raw }
-func (r *FolderV3ListResponsePaperAuthor) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
