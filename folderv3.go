@@ -233,6 +233,7 @@ type FolderV3ListResponsePaper struct {
 	Type             string                                `json:"type" api:"required"`
 	UniversalPaperID string                                `json:"universalPaperId" api:"required"`
 	UserAuthors      []FolderV3ListResponsePaperUserAuthor `json:"userAuthors" api:"required"`
+	VersionID        string                                `json:"versionId" api:"required" format:"uuid"`
 	Votes            float64                               `json:"votes" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -252,6 +253,7 @@ type FolderV3ListResponsePaper struct {
 		Type             respjson.Field
 		UniversalPaperID respjson.Field
 		UserAuthors      respjson.Field
+		VersionID        respjson.Field
 		Votes            respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
@@ -286,6 +288,7 @@ type FolderV3ListResponsePaperAuthorsV2Researcher struct {
 	Affiliation   string                                                  `json:"affiliation" api:"required"`
 	Bio           string                                                  `json:"bio" api:"required"`
 	Citations     float64                                                 `json:"citations" api:"required"`
+	FollowerCount float64                                                 `json:"followerCount" api:"required"`
 	Headline      string                                                  `json:"headline" api:"required"`
 	HIndex        float64                                                 `json:"hIndex" api:"required"`
 	LinkedUser    FolderV3ListResponsePaperAuthorsV2ResearcherLinkedUser  `json:"linkedUser" api:"required"`
@@ -300,6 +303,7 @@ type FolderV3ListResponsePaperAuthorsV2Researcher struct {
 		Affiliation   respjson.Field
 		Bio           respjson.Field
 		Citations     respjson.Field
+		FollowerCount respjson.Field
 		Headline      respjson.Field
 		HIndex        respjson.Field
 		LinkedUser    respjson.Field
