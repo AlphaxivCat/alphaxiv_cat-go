@@ -1175,6 +1175,7 @@ type UserV3GetViewedHistoryResponse struct {
 	PublicTotalVotes float64  `json:"publicTotalVotes" api:"required"`
 	Title            string   `json:"title" api:"required"`
 	Topics           []string `json:"topics" api:"required"`
+	VersionID        string   `json:"versionId" api:"required" format:"uuid"`
 	ViewedAt         string   `json:"viewedAt" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -1189,6 +1190,7 @@ type UserV3GetViewedHistoryResponse struct {
 		PublicTotalVotes respjson.Field
 		Title            respjson.Field
 		Topics           respjson.Field
+		VersionID        respjson.Field
 		ViewedAt         respjson.Field
 		ExtraFields      map[string]respjson.Field
 		raw              string
