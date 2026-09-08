@@ -106,9 +106,10 @@ func (r *PaperPrivateNewResponseData) UnmarshalJSON(data []byte) error {
 }
 
 type PaperPrivateNewParams struct {
-	ContentType string `json:"contentType" api:"required"`
-	File        string `json:"file" api:"required"`
-	Filename    string `json:"filename" api:"required"`
+	File        string            `json:"file" api:"required"`
+	Filename    string            `json:"filename" api:"required"`
+	ContentType param.Opt[string] `json:"contentType,omitzero"`
+	FolderID    param.Opt[string] `json:"folderId,omitzero" format:"uuid"`
 	paramObj
 }
 

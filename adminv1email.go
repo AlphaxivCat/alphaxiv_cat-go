@@ -32,18 +32,6 @@ func NewAdminV1EmailService(opts ...option.RequestOption) (r AdminV1EmailService
 	return
 }
 
-// Queue monthly digest emails to users
-//
-// Source file:
-// `api-server/file:/app/api-server/src/controllers/admin/v1/emails/send-monthly-digest.controller.ts`
-func (r *AdminV1EmailService) SendMonthlyDigest(ctx context.Context, body AdminV1EmailSendMonthlyDigestParams, opts ...option.RequestOption) (err error) {
-	opts = slices.Concat(r.options, opts)
-	opts = append([]option.RequestOption{option.WithHeader("Accept", "*/*")}, opts...)
-	path := "admin/v1/emails/send-monthly-digest"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, nil, opts...)
-	return err
-}
-
 // Queue weekly digest emails to users
 //
 // Source file:
@@ -56,41 +44,21 @@ func (r *AdminV1EmailService) SendWeeklyDigest(ctx context.Context, body AdminV1
 	return err
 }
 
-type AdminV1EmailSendMonthlyDigestParams struct {
-	// Filter by user role
-	//
-	// Any of "admin", "user".
-	Role AdminV1EmailSendMonthlyDigestParamsRole `json:"role,omitzero"`
-	paramObj
-}
-
-func (r AdminV1EmailSendMonthlyDigestParams) MarshalJSON() (data []byte, err error) {
-	type shadow AdminV1EmailSendMonthlyDigestParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *AdminV1EmailSendMonthlyDigestParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-// Filter by user role
-type AdminV1EmailSendMonthlyDigestParamsRole string
-
-const (
-	AdminV1EmailSendMonthlyDigestParamsRoleAdmin AdminV1EmailSendMonthlyDigestParamsRole = "admin"
-	AdminV1EmailSendMonthlyDigestParamsRoleUser  AdminV1EmailSendMonthlyDigestParamsRole = "user"
-)
-
 type AdminV1EmailSendWeeklyDigestParams struct {
-	// Custom intro message
-	IntroText param.Opt[string] `json:"introText,omitzero"`
-	// Custom email subject
-	Subject param.Opt[string] `json:"subject,omitzero"`
-	// Custom events to include
+	// Test mode: page size override, to exercise batching
+	TestBatchSize param.Opt[int64] `json:"testBatchSize,omitzero"`
+	// Text overrides for copy variant A
+	A AdminV1EmailSendWeeklyDigestParamsA `json:"a,omitzero"`
+	// Text overrides for copy variant B
+	B AdminV1EmailSendWeeklyDigestParamsB `json:"b,omitzero"`
+	// Custom events to include, both variants
 	Events []AdminV1EmailSendWeeklyDigestParamsEvent `json:"events,omitzero"`
 	// Filter by user role
 	//
 	// Any of "admin", "user".
 	Role AdminV1EmailSendWeeklyDigestParamsRole `json:"role,omitzero"`
+	// Test mode: only these addresses can receive the digest
+	TestEmails []string `json:"testEmails,omitzero"`
 	paramObj
 }
 
@@ -99,6 +67,40 @@ func (r AdminV1EmailSendWeeklyDigestParams) MarshalJSON() (data []byte, err erro
 	return param.MarshalObject(r, (*shadow)(&r))
 }
 func (r *AdminV1EmailSendWeeklyDigestParams) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Text overrides for copy variant A
+type AdminV1EmailSendWeeklyDigestParamsA struct {
+	// Custom intro message
+	IntroText param.Opt[string] `json:"introText,omitzero"`
+	// Custom email subject
+	Subject param.Opt[string] `json:"subject,omitzero"`
+	paramObj
+}
+
+func (r AdminV1EmailSendWeeklyDigestParamsA) MarshalJSON() (data []byte, err error) {
+	type shadow AdminV1EmailSendWeeklyDigestParamsA
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *AdminV1EmailSendWeeklyDigestParamsA) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+// Text overrides for copy variant B
+type AdminV1EmailSendWeeklyDigestParamsB struct {
+	// Custom intro message
+	IntroText param.Opt[string] `json:"introText,omitzero"`
+	// Custom email subject
+	Subject param.Opt[string] `json:"subject,omitzero"`
+	paramObj
+}
+
+func (r AdminV1EmailSendWeeklyDigestParamsB) MarshalJSON() (data []byte, err error) {
+	type shadow AdminV1EmailSendWeeklyDigestParamsB
+	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *AdminV1EmailSendWeeklyDigestParamsB) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

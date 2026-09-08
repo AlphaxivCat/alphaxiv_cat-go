@@ -38,7 +38,7 @@ func TestSearchClosestTopic(t *testing.T) {
 	}
 }
 
-func TestSearchGoogleSearch(t *testing.T) {
+func TestSearchGoogleSearchWithOptionalParams(t *testing.T) {
 	t.Skip("Mock server tests are disabled")
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
@@ -52,7 +52,8 @@ func TestSearchGoogleSearch(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Search.GoogleSearch(context.TODO(), alphaxivcat.SearchGoogleSearchParams{
-		Q: "q",
+		Q:         "q",
+		LinkBlogs: alphaxivcat.String("linkBlogs"),
 	})
 	if err != nil {
 		var apierr *alphaxivcat.Error
