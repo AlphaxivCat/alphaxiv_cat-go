@@ -367,6 +367,8 @@ type PaperV3GetResponse struct {
 	GoogleCitationID     string                       `json:"googleCitationId" api:"required"`
 	GroupID              string                       `json:"groupId" api:"required" format:"uuid"`
 	License              string                       `json:"license" api:"required"`
+	PageHeightPt         float64                      `json:"pageHeightPt" api:"required"`
+	PageWidthPt          float64                      `json:"pageWidthPt" api:"required"`
 	PdfOnly              bool                         `json:"pdfOnly" api:"required"`
 	PublicationDate      float64                      `json:"publicationDate" api:"required"`
 	Resources            []PaperV3GetResponseResource `json:"resources" api:"required"`
@@ -390,6 +392,8 @@ type PaperV3GetResponse struct {
 		GoogleCitationID     respjson.Field
 		GroupID              respjson.Field
 		License              respjson.Field
+		PageHeightPt         respjson.Field
+		PageWidthPt          respjson.Field
 		PdfOnly              respjson.Field
 		PublicationDate      respjson.Field
 		Resources            respjson.Field
@@ -787,6 +791,7 @@ type PaperV3GetDiversePapersResponseFullAuthorsV2Researcher struct {
 	Affiliation   string                                                            `json:"affiliation" api:"required"`
 	Bio           string                                                            `json:"bio" api:"required"`
 	Citations     float64                                                           `json:"citations" api:"required"`
+	FollowerCount float64                                                           `json:"followerCount" api:"required"`
 	Headline      string                                                            `json:"headline" api:"required"`
 	HIndex        float64                                                           `json:"hIndex" api:"required"`
 	LinkedUser    PaperV3GetDiversePapersResponseFullAuthorsV2ResearcherLinkedUser  `json:"linkedUser" api:"required"`
@@ -801,6 +806,7 @@ type PaperV3GetDiversePapersResponseFullAuthorsV2Researcher struct {
 		Affiliation   respjson.Field
 		Bio           respjson.Field
 		Citations     respjson.Field
+		FollowerCount respjson.Field
 		Headline      respjson.Field
 		HIndex        respjson.Field
 		LinkedUser    respjson.Field
@@ -1443,6 +1449,7 @@ type PaperV3GetFeedResponsePaperFullAuthorsV2Researcher struct {
 	Affiliation   string                                                        `json:"affiliation" api:"required"`
 	Bio           string                                                        `json:"bio" api:"required"`
 	Citations     float64                                                       `json:"citations" api:"required"`
+	FollowerCount float64                                                       `json:"followerCount" api:"required"`
 	Headline      string                                                        `json:"headline" api:"required"`
 	HIndex        float64                                                       `json:"hIndex" api:"required"`
 	LinkedUser    PaperV3GetFeedResponsePaperFullAuthorsV2ResearcherLinkedUser  `json:"linkedUser" api:"required"`
@@ -1457,6 +1464,7 @@ type PaperV3GetFeedResponsePaperFullAuthorsV2Researcher struct {
 		Affiliation   respjson.Field
 		Bio           respjson.Field
 		Citations     respjson.Field
+		FollowerCount respjson.Field
 		Headline      respjson.Field
 		HIndex        respjson.Field
 		LinkedUser    respjson.Field
@@ -2145,6 +2153,7 @@ type PaperV3GetPreviewResponseFullAuthorsV2Researcher struct {
 	Affiliation   string                                                      `json:"affiliation" api:"required"`
 	Bio           string                                                      `json:"bio" api:"required"`
 	Citations     float64                                                     `json:"citations" api:"required"`
+	FollowerCount float64                                                     `json:"followerCount" api:"required"`
 	Headline      string                                                      `json:"headline" api:"required"`
 	HIndex        float64                                                     `json:"hIndex" api:"required"`
 	LinkedUser    PaperV3GetPreviewResponseFullAuthorsV2ResearcherLinkedUser  `json:"linkedUser" api:"required"`
@@ -2159,6 +2168,7 @@ type PaperV3GetPreviewResponseFullAuthorsV2Researcher struct {
 		Affiliation   respjson.Field
 		Bio           respjson.Field
 		Citations     respjson.Field
+		FollowerCount respjson.Field
 		Headline      respjson.Field
 		HIndex        respjson.Field
 		LinkedUser    respjson.Field
@@ -2777,6 +2787,7 @@ type PaperV3GetSimilarPapersResponseFullAuthorsV2Researcher struct {
 	Affiliation   string                                                            `json:"affiliation" api:"required"`
 	Bio           string                                                            `json:"bio" api:"required"`
 	Citations     float64                                                           `json:"citations" api:"required"`
+	FollowerCount float64                                                           `json:"followerCount" api:"required"`
 	Headline      string                                                            `json:"headline" api:"required"`
 	HIndex        float64                                                           `json:"hIndex" api:"required"`
 	LinkedUser    PaperV3GetSimilarPapersResponseFullAuthorsV2ResearcherLinkedUser  `json:"linkedUser" api:"required"`
@@ -2791,6 +2802,7 @@ type PaperV3GetSimilarPapersResponseFullAuthorsV2Researcher struct {
 		Affiliation   respjson.Field
 		Bio           respjson.Field
 		Citations     respjson.Field
+		FollowerCount respjson.Field
 		Headline      respjson.Field
 		HIndex        respjson.Field
 		LinkedUser    respjson.Field
@@ -3411,6 +3423,7 @@ type PaperV3GetUnrelatedResponseFullAuthorsV2Researcher struct {
 	Affiliation   string                                                        `json:"affiliation" api:"required"`
 	Bio           string                                                        `json:"bio" api:"required"`
 	Citations     float64                                                       `json:"citations" api:"required"`
+	FollowerCount float64                                                       `json:"followerCount" api:"required"`
 	Headline      string                                                        `json:"headline" api:"required"`
 	HIndex        float64                                                       `json:"hIndex" api:"required"`
 	LinkedUser    PaperV3GetUnrelatedResponseFullAuthorsV2ResearcherLinkedUser  `json:"linkedUser" api:"required"`
@@ -3425,6 +3438,7 @@ type PaperV3GetUnrelatedResponseFullAuthorsV2Researcher struct {
 		Affiliation   respjson.Field
 		Bio           respjson.Field
 		Citations     respjson.Field
+		FollowerCount respjson.Field
 		Headline      respjson.Field
 		HIndex        respjson.Field
 		LinkedUser    respjson.Field
